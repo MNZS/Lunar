@@ -16,7 +16,7 @@ USAGE
     /usr/local/apache/bin/apachectl startssl
 
   You will be prompted for either one or two passwords. The first phrase
-  is 'motion'. The second is 'Madeline1933'
+  is 'motion'. The second is ''
 
   ** Adding a new client **********************************************
   A client added to the apache config should be followed by the
