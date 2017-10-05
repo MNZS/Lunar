@@ -1,0 +1,310 @@
+head	1.5;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.5
+date	2001.11.27.16.43.38;	author root;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2001.11.27.01.26.16;	author root;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2001.11.27.01.24.59;	author root;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2001.11.26.22.09.47;	author root;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2001.11.26.22.07.20;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@ssi script to add a date to a web page
+@
+
+
+1.5
+log
+@removed newline after printing date
+@
+text
+@#!/usr/bin/perl -w
+
+# $Id: date.cgi,v 1.4 2001/11/27 01:26:16 root Exp root $
+
+use strict;
+use POSIX qw(strftime);
+
+## cgi.pm param
+use CGI;
+$CGI::DISABLE_UPLOADS = 1;
+$CGI::POST_MAX = 1024;
+my $query = new CGI;
+$query = CGI->new();
+
+my %formdata;
+my @@formfields = $query->param;
+
+for my $field(@@formfields) {
+  $formdata{$field} = $query->param($field);
+}
+
+## taint environmentals
+delete @@ENV{qw(IFS CDPATH ENV BASH_ENV)};
+$ENV{'PATH'} = "/usr/local/jail";
+
+## select style of date representation
+
+my $date;
+
+## 26 November 2001
+if ($formdata{style} == "1") {
+  $date = strftime("%e %B %Y", localtime);
+
+## November 2001
+} elsif ($formdata{style} == "2") {
+  $date = strftime("%B %Y", localtime);
+
+## November 26
+} elsif ($formdata{style} == "3") {
+  $date = strftime("%B %e", localtime);
+
+## 26 November
+} elsif ($formdata{style} == "4") {
+  $date = strftime("%e %B", localtime);
+
+## Nov 26, 2001
+} elsif ($formdata{style} == "5") {
+  $date = strftime("%b %e, %Y", localtime);
+
+## 26 Nov, 2001
+} elsif ($formdata{style} == "6") {
+  $date = strftime("%e %b, %Y", localtime);
+
+## Nov 2001
+} elsif ($formdata{style} == "7") {
+  $date = strftime("%b %Y", localtime);
+
+## Nov 16
+} elsif ($formdata{style} == "8") {
+  $date = strftime("%b %e", localtime);
+
+## November
+} elsif ($formdata{style} == "9") {
+  $date = strftime("%B", localtime);
+
+## Nov
+} elsif ($formdata{style} == "10") {
+  $date = strftime("%b", localtime);
+
+## 26 Nov
+} elsif ($formdata{style} == "11") {
+  $date = strftime("%e %b", localtime);
+
+## 11/26/2001
+} elsif ($formdata{style} == "12") {
+  $date = strftime("%m/%e/%Y", localtime);
+
+## 11/26/01
+} elsif ($formdata{style} == "13") {
+  $date = strftime("%m/%e/%y", localtime);
+
+## 11/26
+} elsif ($formdata{style} == "14") {
+  $date = strftime("%m/%e", localtime);
+
+## 11/2001
+} elsif ($formdata{style} == "15") {
+  $date = strftime("%m/%Y", localtime);
+
+## 26/11/2001
+} elsif ($formdata{style} == "16") {
+  $date = strftime("%e/%m/%Y", localtime);
+ 
+## 26/11/01
+} elsif ($formdata{style} == "17") {
+  $date = strftime("%e/%m/%y", localtime);
+
+## 26/11
+} elsif ($formdata{style} == "18") {
+  $date = strftime("%e/%m", localtime);
+
+## 2001
+} elsif ($formdata{style} == "19") {
+  $date = strftime("%Y", localtime);
+
+## 2001/11/26
+} elsif ($formdata{style} == "20") {
+  $date = strftime("%Y/%m/%e", localtime);
+
+## 2001/11
+} elsif ($formdata{style} == "21") {
+  $date = strftime("%Y/%m", localtime);
+
+## 20011126
+} elsif ($formdata{style} == "22") {
+  $date = strftime("%Y%m%d", localtime);
+
+## 200111 
+} elsif ($formdata{style} == "23") {
+  $date = strftime("%Y%m", localtime);
+
+## Monday, Tuesday, etc...
+} elsif ($formdata{style} == "24") {
+  $date = strftime("%A", localtime);
+
+## Mon, Tue, etc...
+} elsif ($formdata{style} == "25") {
+  $date = strftime("%a", localtime);
+
+## end of if loop
+} else {
+  $date = strftime("%B %e, %Y", localtime);
+
+}
+
+print "Content-type: text/html\n\n";
+print $date;
+@
+
+
+1.4
+log
+@added rcs tag
+@
+text
+@d3 1
+a3 1
+# $Id:$
+d137 1
+a137 1
+print "$date\n";
+@
+
+
+1.3
+log
+@updated to run as cgi from #include
+@
+text
+@d3 2
+@
+
+
+1.2
+log
+@jailed the path
+@
+text
+@d5 14
+a18 1
+use Getopt::Long;
+a23 4
+## set up opts
+my $style = "1";
+GetOptions (    'style=s'        => \$style, );
+
+a27 4
+## November 26, 2001
+if ($style == "1") {
+  $date = strftime("%B %e, %Y", localtime);
+
+d29 1
+a29 1
+} elsif ($style == "2") {
+d33 1
+a33 1
+} elsif ($style == "3") {
+d37 1
+a37 1
+} elsif ($style == "4") {
+d41 1
+a41 1
+} elsif ($style == "5") {
+d45 1
+a45 1
+} elsif ($style == "6") {
+d49 1
+a49 1
+} elsif ($style == "7") {
+d53 1
+a53 1
+} elsif ($style == "8") {
+d57 1
+a57 1
+} elsif ($style == "9") {
+d61 1
+a61 1
+} elsif ($style == "10") {
+d65 1
+a65 1
+} elsif ($style == "11") {
+d69 1
+a69 1
+} elsif ($style == "12") {
+d73 1
+a73 1
+} elsif ($style == "13") {
+d77 1
+a77 1
+} elsif ($style == "14") {
+d81 1
+a81 1
+} elsif ($style == "15") {
+d85 1
+a85 1
+} elsif ($style == "16") {
+d89 1
+a89 1
+} elsif ($style == "17") {
+d93 1
+a93 1
+} elsif ($style == "18") {
+d97 1
+a97 1
+} elsif ($style == "19") {
+d101 1
+a101 1
+} elsif ($style == "20") {
+d105 1
+a105 1
+} elsif ($style == "21") {
+d109 1
+a109 1
+} elsif ($style == "22") {
+d113 1
+a113 1
+} elsif ($style == "23") {
+d117 1
+a117 1
+} elsif ($style == "24") {
+d121 1
+a121 1
+} elsif ($style == "25") {
+d125 1
+a125 1
+} elsif ($style == "26") {
+d129 3
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d7 4
+@

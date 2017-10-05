@@ -1,0 +1,5 @@
+AuthUserFile /www/lunarhosting.net/options/passwd/tmp-lunarhosting.net
+AuthName "Administration"
+AuthType Basic
+require valid-user
+

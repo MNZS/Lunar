@@ -1,0 +1,16 @@
+<html>
+<head>
+	<title>Web E-Mail</title>
+<link rel="stylesheet" type="text/css" href="%%css%%">
+	<link rel="stylesheet" href="text.css">
+</head>
+
+<body background="%%imageshttp%%/portalback.gif"  vlink="%%vlink%%" link="%%link%%" alink="%%alink%%" %%onload%% leftmargin="0" topmargin="0" rightmargin="0" bottommargin="0" marginwidth="0" marginheight="0"">
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+	<td width="100%" align="left"><img src="%%imageshttp%%/trans2.gif" alt="Web Mail" width="2" height="2" border="0"><br><img src="%%imageshttp%%/trans2.gif" alt="Web Mail" width="2" height="2" border="0"><br><img src="%%imageshttp%%/trans2.gif" alt="Web Mail" width="2" height="2" border="0"><br><img src="%%imageshttp%%/trans2.gif" alt="Web Mail" width="2" height="2" border="0"><br><img src="%%imageshttp%%/trans2.gif" alt="Web Mail" width="2" height="2" border="0"><br><img src="%%imageshttp%%/trans2.gif" alt="Web Mail" width="2" height="2" border="0"><br><img src="%%imageshttp%%/trans2.gif" alt="Web Mail" width="2" height="2" border="0"><br><img src="%%imageshttp%%/trans2.gif" alt="Web Mail" width="2" height="2" border="0"><br><img src="%%imageshttp%%/trans2.gif" alt="Web Mail" width="2" height="2" border="0"><br><img src="%%imageshttp%%/trans2.gif" alt="Web Mail" width="2" height="2" border="0"><br><img src="%%imageshttp%%/webemailheader.gif" alt="Web Mail" width="135" height="25" border="0"><br><img src="%%imageshttp%%/trans2.gif" alt="Web Mail" width="2" height="2" border="0"><br><img src="%%imageshttp%%/trans2.gif" alt="Web Mail" width="2" height="2" border="0"><br><img src="%%imageshttp%%/trans2.gif" alt="Web Mail" width="2" height="2" border="0"><br><img src="%%imageshttp%%/trans2.gif" alt="Web Mail" width="2" height="2" border="0"><br></td>
+</tr>
+<tr ><td>
+
+</table>

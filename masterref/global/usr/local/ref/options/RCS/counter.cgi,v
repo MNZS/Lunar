@@ -1,0 +1,102 @@
+head	1.4;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.4
+date	2001.11.20.14.41.31;	author root;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2001.10.18.08.09.51;	author root;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2001.10.17.23.21.22;	author root;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2001.10.17.15.45.06;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@new counter script
+@
+
+
+1.4
+log
+@added Content-type
+@
+text
+@#!/usr/bin/perl -w
+
+use strict;
+
+my $countfile = "/www/HOSTING_DOMAIN/options/counter.txt";
+
+#################################################
+
+## get the current count
+open(FH, "$countfile")
+  or die "Cant open counter file : $!\n";
+  my $current = <FH>;
+close(FH);
+
+## increment the number by one
+$current++;
+
+## write the new number back to the count file
+open(FH, ">$countfile")
+  or die "Cant open counter file : $!\n";
+  print FH $current;
+close(FH);
+
+## display the new number
+print "Content-type: text/html\n\n";
+print "$current\n";
+@
+
+
+1.3
+log
+@changed path to count.txt file
+@
+text
+@d25 1
+@
+
+
+1.2
+log
+@*** empty log message ***
+@
+text
+@d5 1
+a5 1
+my $countfile = "/www/HOSTING_DOMAIN/counter/HTML_FILENAME";
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d5 1
+a5 1
+my $directory = "/www/HOSTING_DOMAIN/logs/counter";
+d10 1
+a10 1
+open(FH, "$directory/count.txt")
+d19 1
+a19 1
+open(FH, ">$directory/count.txt")
+@

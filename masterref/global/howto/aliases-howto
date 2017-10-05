@@ -1,0 +1,14 @@
+$Id: aliases-howto,v 1.1 2003/06/05 16:15:14 root Exp $
+
+The /etc/aliases file should not be edited by hand. This file is built
+via the 'mkmail' script from include files held within 
+
+  /etc/mail/include/aliases/*
+
+These include files should seldomly be edited by hand, but may be in 
+cases where administrative intervention is necessary. Each domain has
+their own alias.DOMAIN file within this directory. These files should
+be owned by 'nobody' to allow for editing through the control panel.
+
+If one of these files is edited, mkmail should be ran immediately after
+to put the change into effect.

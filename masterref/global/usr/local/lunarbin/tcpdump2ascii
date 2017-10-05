@@ -1,0 +1,106 @@
+#!/usr/bin/perl
+##
+## takes tcpdump -x output and turns it into ASCII
+##
+## usage: tcpdump -l -x | tcpdump2ascii
+##
+## written by codex@bogus.net 1999
+
+$version="1.00 9/9/99 codex\@bogus.net";
+
+$DEBUG=1;
+
+if(!$DEBUG) {$llength=76;$count=$llength;}
+
+if($ARGV[0] eq "-h") {
+    print "tcpdump2ascii, version $version\n";
+    print "usage: tcpdump -l -x ... | tcpdump2ascii\n";
+    print "       tcpdump2ascii [-h | -v] <filename>\n";
+    print "       also try setting the value \$DEBUG to 0 within the program!\n";
+    exit(0);
+}
+
+if($ARGV[0] eq "-v") {
+    print "tcpdump2ascii, version $version\n";
+    exit(0);
+}
+
+## read from stdin
+##
+
+while(<>){
+    my @q;
+
+    ## print the tcpdump information
+    ##
+
+    ($info)=/^(\d\d:\d\d:\d\d\.\d+ .*)/;
+
+    if($info) {
+	print "\n\n$info\n";
+	$count=$llength;
+    } else {
+
+	## grab hex information
+	##
+
+	$i=0;
+	while(/([a-f0-9]+)/g) {
+	    $q[$i]=$1;
+	    $i++;
+	}
+    }
+
+    if($q[0]) {
+
+	## print hex info if in debug mode
+	##
+
+	if($DEBUG) {
+	    for($i=0;$i<8;$i++) {
+		if(length($q[$i])==4) {
+		    print "$q[$i] ";
+		} elsif(length($q[$i])==2) {
+		    print "$q[$i]-- ";
+		} else {
+		    print "---- ";
+		}
+	    }
+	    print " |  ";
+	}
+
+	## do the conversion & print
+	##
+
+	for($i=0;$i<8;$i++) {
+	    $_=$q[$i];
+	    ($h[0],$h[1])=/(\S\S)(\S\S)/;
+	    for($x=0;$x<2;$x++) {
+		if(hex($h[$x])>31 && hex($h[$x])<123) {
+		    $h[$x]=chr(hex($h[$x]));
+		} else {
+		    $h[$x]=".";
+		}
+		if($DEBUG) {
+		    print "$h[$x] ";
+		} else {
+		    print "$h[$x]";
+		}
+		$count--;
+		if($count==0) {print "\n";$count=$llength;}
+	    }
+	}
+	if($DEBUG) {
+	    print "\n";
+	}
+    }
+    for($i=0;$i<8;$i++) {$q[$i]=0;}
+    $info="";
+}
+
+
+
+
+
+
+

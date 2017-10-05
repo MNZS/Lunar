@@ -1,0 +1,82 @@
+# $Id: apache_start-howto,v 1.2 2003/09/30 17:47:27 root Exp $
+
+SYNOPSIS
+  This document covers how to start and stop the apache server
+
+USAGE
+  The command used by apache to handle starting/stopping of the daemon
+  is as follows:
+
+    /usr/local/apache/bin/apachectl <option>
+
+  ** When a server is rebooted ****************************************
+  The apache server does not start by default on a server reload. You 
+  will need to do so manually
+
+    /usr/local/apache/bin/apachectl startssl
+
+  You will be prompted for either one or two passwords. The first phrase
+  is 'motion'. The second is 'Madeline1933'
+
+  ** Adding a new client **********************************************
+  A client added to the apache config should be followed by the
+  following syntax:
+
+    /usr/local/apache/bin/apachectl configtest
+
+  If this returns an 'OK' response, then it should be followed by:
+
+    /usr/local/apache/bin/apachectl stop
+    /usr/local/apache/bin/apachectl startssl
+
+  The start keyword will prompt you to enter the passphrases associated
+  with the domain certificates. The first passphrase is 'motion'. The
+  second passphrase is 'Madeline1933'.
+
+  ** Changing the config of an existing client ************************
+  A change made to an existing client's configuration will not be made
+  active until the server is forced to re-read the configuration files.
+  This can be done without interrupting traffic by:
+
+    /usr/local/apache/bin/apachectl configtest
+
+  If this returns an 'OK' response, then it should be followed by:
+
+    /usr/local/apache/bin/apachectl graceful
+
+  ** Summary of commands **********************************************
+  To start, stop and test the apache server the following commands
+  summarize the key options:
+
+    startssl 	- this will start the server with ssl support. you 
+                  should ALWAYS use this method to start the server.
+                  Do NOT, and I mean NEVER use "start". This will
+                  start the server without SSL support, which would
+                  be a very bad thing.
+
+                  when starting the server, you will be prompted for
+                  a certificate password. this password is "motion"
+
+    start	- do NOT use this command! it only starts the server on
+		  port 80 and does enable ssl support.
+
+    stop 	- this will stop the server forcibly. this should ONLY
+           	  be used when you are enabling a brand new customer!
+
+    graceful 	- use this to restart the server when a change has
+               	  been made in the config but a new client has NOT 
+               	  been added
+
+    configtest 	- use this to check the current apache config to 
+                  see whether there is a syntax error. always do
+                  this before starting/stopping apache
+
+KNOWN BUGS
+  There are a couple of gotchas with starting and stopping apache.
+  The configtest is a good method for checking to see if a configuration
+  file is in good syntax, but it doesnt check ssl certificate keys.
+  If a key has an incorrect passphrase the server will crash and the
+  error would not be found with configtest.
+
+AUTHOR
+  cmenzes@lunarhosting.net

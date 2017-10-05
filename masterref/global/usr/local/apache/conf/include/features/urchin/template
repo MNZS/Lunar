@@ -1,0 +1,6 @@
+## urchin statistics
+Alias /stats /www/DOMAIN/urchin
+<Directory /www/DOMAIN/urchin>
+  AllowOverride All
+  Options ExecCGI Includes FollowSymLinks
+</Directory>

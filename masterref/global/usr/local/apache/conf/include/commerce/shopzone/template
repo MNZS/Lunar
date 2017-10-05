@@ -1,0 +1,13 @@
+## DOMAIN
+
+  ## directory where shopzone executable will live
+  ScriptAlias /shopzone/ /www/DOMAIN/pub/shopzone/
+
+  ## set authorization/authentication as enabled
+  <Directory /www/DOMAIN/pub/private_html>
+    AllowOverride All
+  </Directory>
+
+  <Directory /www/DOMAIN/pub/public_html/_webc>
+    AllowOverride All
+  </Directory>

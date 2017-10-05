@@ -1,0 +1,107 @@
+head	1.3;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.3
+date	2004.01.20.22.07.20;	author root;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2004.01.20.22.01.38;	author root;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2003.06.05.16.15.14;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.3
+log
+@*** empty log message ***
+@
+text
+@To enable MySQL support for a customer several items must be completed:
+
+1. Add a new database
+  - As root, or with sudo privelages type 'mysql' on the commandline of the
+    host where the domain is located.
+  - type 'create database DOMAIN1;'
+    make sure to substitute the domain for DOMAIN1. leave off the tld portion
+    of the domain. for example, to create the database for lunarhosting.net
+    you would type: 'create database lunarhosting1;'
+  - create a user to administrate the database
+    type the following on the mysql> commandline
+    'grant all on DOMAIN1.* to USER@@host1.lunarhosting.net identified by PASS;'
+    make sure that DOMAIN1 is substituted for the real database name.
+    USER can be anything that you would like it to be as long as it is unique
+    in the mysql database. i generally take the domain name and add 'sql' to
+    the beginning of it, or 'admin' to the end. for example, for the admin of
+    the lunarhosting.net database, the user would be 'sqllunarhosting'. You
+    may want to try and keep the user to 8 characters. So, perhaps 'sqllunar'
+    would be a better choice.
+    The PASS can be substituted with any 8 characters.
+  - Create a authentication file for the tool:
+    # cp /www/DOMAIN/controlpanel/.htaccess /www/DOMAIN/options/mysql
+  - Make sure to write down the database name, user name and password. Put
+    this info in a file called 'mysql' held in the following directory:
+      /etc/hosting-options/DOMAIN.COM/
+    This info should be passed along to the client so they may be able to 
+    access the database through their scripts.
+
+2. Enable phpMyAdmin
+   This tool allows for client to admin their database using a web front end.
+ - Copy the phpMyAdmin files to the client's directory structure
+    # cp -a /ref/options/mysql /www/DOMAIN/options/
+ - Change into the new directory
+    # cd /www/DOMAIN/options/mysql
+ - Edit the config.inc.php file
+   Look for the following keywords in the file and change them to the correct
+   parameters: DOMAIN USERNAME PASSWORD
+ - Enable phpMyAdmin in apache
+   # cd /usr/local/apache/conf/include/features/global
+   Edit the https.DOMAIN file for the client
+   Uncomment the Include line for mysql
+ - Create the Apache MySQL include
+   # cd /usr/local/apache/conf/include/features/mysql/
+   # cp template sql.DOMAIN
+   Edit the sql.DOMAIN file
+   Replace the DOMAIN words in the file with the correct domain
+ - Gracefully restart apache. See the apache-howto file on the procedure.
+ - Try to reach the mysqladmin page:
+    https://www.DOMAIN/sqladmin/
+@
+
+
+1.2
+log
+@*** empty log message ***
+@
+text
+@d21 2
+d48 2
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 1
+d3 43
+a45 4
+o Add a new database
+  1. run mysql from the commandline
+  2. type 'create database DOMAIN1';
+  3. grant all on DOMAIN1.* to USER@@host1.lunarhosting.net identified by PASS;
+@

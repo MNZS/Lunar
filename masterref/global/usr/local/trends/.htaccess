@@ -1,0 +1,4 @@
+AuthUserFile /www/lunarhosting.net/options/passwd/adm-lunarhosting.net
+AuthName "CPU Load Trending"
+AuthType Basic
+require valid-user

@@ -1,0 +1,121 @@
+head	1.2;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.2
+date	2003.08.06.22.50.07;	author root;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2003.01.04.16.24.13;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.2
+log
+@removed serveralias and changed servername to fqdn
+@
+text
+@## $Id: template,v 1.1 2003/01/04 16:24:13 root Exp root $
+
+<VirtualHost www.DOMAIN:80>
+
+  ## global settings
+  ServerAdmin hosting@@lunarhosting.net
+  DocumentRoot /www/DOMAIN/pub/public_html/
+  ServerName www.DOMAIN
+
+  ## cgi-bin
+  ScriptAlias /cgi-bin/ /www/DOMAIN/cgi-bin/
+
+  ## logging parameters
+  CustomLog /var/log/www/www-xfer.DOMAIN combined
+  ErrorLog /var/log/www/www-error.DOMAIN
+
+  ## miscellaneous bug fixes
+  Include "/usr/local/apache/conf/include/bugfix/http"
+
+  ## include non-ssl features
+  Include "/usr/local/apache/conf/include/features/global/http.DOMAIN"
+
+</VirtualHost>
+
+## begin secure DOMAIN 
+<IfDefine SSL>
+
+<VirtualHost www.DOMAIN:443>
+
+  ## global settings
+  ServerAdmin hosting@@lunarhosting.net
+  DocumentRoot /www/DOMAIN/pub/public_html/
+  ServerName www.DOMAIN
+
+  ## cgi-bin
+  ScriptAlias /cgi-bin/ /www/DOMAIN/cgi-bin/
+
+  ## ssl parameters
+  SSLEngine on
+  SSLCipherSuite ALL:!ADH:!EXPORT56:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP:+eNULL
+  SSLCertificateKeyFile /usr/local/apache/conf/ssl.key/www.DOMAIN.key
+  SSLVerifyDepth 10
+  SSLCACertificateFile /usr/local/apache/conf/ssl.crt/ca-bundle.crt
+  SSLCACertificatePath /usr/local/apache/conf/ssl.crt
+
+  ## enabled setting ssloptions on cgi directories
+  <Directory "/www/DOMAIN/cgi-bin">
+    SSLOptions +StdEnvVars
+  </Directory>
+
+  ## certificate configurations
+
+    ## private certificate
+    SSLCertificateFile /usr/local/apache/conf/ssl.crt/www.DOMAIN.cert-priv
+
+    ## universal ca backed certificate (thawte, verisign, etc..)
+    #SSLCertificateFile /usr/local/apache/conf/ssl.crt/www.DOMAIN.cert
+
+  ## end certificate configuration
+
+  ## logging parameters
+  CustomLog /var/log/www/www-xfer.DOMAIN combined 
+  ErrorLog /var/log/www/www-error.DOMAIN
+
+  ## miscellaneous bug fixes
+  Include "/usr/local/apache/conf/include/bugfix/https"
+
+  ## include ssl features
+  Include "/usr/local/apache/conf/include/features/global/https.DOMAIN"
+
+## end secure DOMAIN
+</VirtualHost>
+
+</IfDefine>
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 1
+a1 1
+## $Id: template,v 1.21 2002/08/01 13:45:04 root Exp $
+d8 1
+a8 2
+  ServerName DOMAIN
+  ServerAlias www.DOMAIN
+d33 1
+a33 2
+  ServerName DOMAIN
+  ServerAlias www.DOMAIN
+@

@@ -1,0 +1,13 @@
+$Id: virtuser-howto,v 1.1 2003/06/05 16:15:14 root Exp $
+
+The /etc/mail/virtuser file should seldomly be edited by hand. It is built
+via the mkmail script from the virtuser include files located in
+
+  /etc/mail/include/virtuser/virt.*
+
+These include files may be edited by hand, but only in circumstances that
+demand administrative intervention. These files should be owned by 'nobody'
+to allow for editing throught the control panel.
+
+If a file is edited, mkmail should be ran immediately after to put the 
+change into effect.

@@ -1,0 +1,119 @@
+head	1.4;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.4
+date	2003.08.11.05.47.37;	author root;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2003.08.11.05.42.46;	author root;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2003.08.11.05.31.12;	author root;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2003.08.11.05.26.23;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.4
+log
+@*** empty log message ***
+@
+text
+@package Lunar::Restrict;
+
+## $Id: Restrict.pm,v 1.3 2003/08/11 05:42:46 root Exp root $
+
+use strict;
+use warnings;
+use Sys::Hostname;
+
+BEGIN {
+  use Exporter ();
+  our ($VERSION, @@ISA, @@EXPORT, @@EXPORT_OK, %EXPORT_TAGS);
+
+  # set the version for version checking
+  $VERSION     = 1.00;
+
+  @@ISA         = qw(Exporter);
+  @@EXPORT      = qw(
+			&limitHost
+  );
+
+  %EXPORT_TAGS = ( );
+
+  @@EXPORT_OK   = @@EXPORT;
+
+}
+
+##
+sub limitHost {
+  my $regex = shift;
+
+  if (hostname() !~ /$regex/) {
+    exit 1;
+  }
+}
+
+## needed for module completion
+1; 
+@
+
+
+1.3
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+## $Id: Restrict.pm,v 1.2 2003/08/11 05:31:12 root Exp root $
+a31 1
+    print "I'm sorry, this script will not run on this machine\n\n";
+@
+
+
+1.2
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+## $Id: Restrict.pm,v 1.1 2003/08/11 05:26:23 root Exp root $
+d18 1
+a18 1
+			&limitHost;
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d3 1
+a3 1
+## $Id: Template.pm,v 1.1 2003/08/11 05:23:02 root Exp $
+d18 1
+a18 1
+			&limitHosts;
+d28 1
+a28 1
+sub limitHosts {
+@

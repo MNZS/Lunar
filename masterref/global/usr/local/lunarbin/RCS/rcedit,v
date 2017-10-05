@@ -1,0 +1,191 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.1
+date	2003.04.02.19.08.41;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.1
+log
+@initial checkin
+@
+text
+@#!/usr/bin/perl
+#
+# a script that checks a file out, edits it, and checks it back in
+#
+
+use File::CheckTree;
+use Cwd;
+use POSIX;
+
+$CO = `which co`;
+chomp $CO;
+$CI = `which ci`;
+chomp $CI;
+
+if (&check_sudo) {
+	$editor = "/bin/vi";
+}
+else {
+	#$editor = $ENV{EDITOR};
+	$editor = "/bin/vi";
+}
+
+$ORIGFILE = shift;
+
+if ($ORIGFILE eq ""){
+    &usage("nofile");
+}
+
+$curdir = cwd();
+
+# if the filename isn't absolute, we need to absolutize it 
+# before checking it and such, because in the SUDO context, 
+# the secure PATH variable is extremely limited and the 
+# current directory *certainly* isn't in it.
+ 
+if ( $ORIGFILE !~ /^\/.+/ )
+{
+	$newpath = $curdir . "/" . $ORIGFILE;	
+	$FILE = $newpath;
+}
+else {
+	$ORIGFILE =~ /^(.+)\/(.+)/;
+	$curdir = $1;
+	$FILE = $ORIGFILE;
+	$ORIGFILE = $2;	
+}
+
+print STDERR "(debug) file is: $FILE\n";
+
+@@finfo = POSIX::stat( $FILE );
+
+# root can't use the normal file test operator for file mode, 'cause
+# to root every file looks editable...
+
+if (!-e "$FILE"){
+    
+    print "
+File \"$FILE\" does not exist. Would you like to create a new file,
+edit it, and then check it in when you are finished? [y]n: ";
+
+    $input = &get_input;
+    
+} elsif (!-e "$FILE,v" && !-e "$curdir/RCS/$ORIGFILE,v"){
+    
+    print "
+File \"$FILE\" does exist but is not in RCS. Would you like to edit this file,
+and then check it in to RCS when you are finished? [y]n: ";
+    
+    $input = &get_input;
+    
+} elsif ( $finfo[ 2 ] & (&POSIX::S_IWUSR) ){
+
+    
+    die "ERROR: \"$FILE\" is writeable and may be checked out.\n";
+    
+}
+
+
+if ($new ne "true"){
+    &co_file($FILE);
+}
+
+&edit_file($FILE);
+
+&ci_file($FILE);
+
+########################################################
+# subroutines below here
+########################################################
+
+
+
+########################################################
+sub co_file {
+
+   system ("$CO -l $FILE");
+   
+}
+
+
+########################################################
+sub edit_file{
+
+    system ("$editor $FILE");
+
+}
+
+
+########################################################
+sub ci_file {
+
+   system ("$CI -u $FILE");
+
+}
+
+
+########################################################
+sub usage {
+
+ ($reason) = @@_;
+ 
+if ($reason eq "nofile"){
+    print "No file name specified.\n\tusage: rcedit filename\n";
+    exit;
+ } else {
+   print "usage: rcedit filename\n";
+   exit;
+ } 
+    
+}
+
+########################################################
+sub get_input{
+
+
+    $input = <STDIN>;
+    chomp $input;
+    $input =~ tr/A-Z/a-z/;
+        
+    if ($input eq "y"){
+	$new = "true";
+    } else {
+	exit;
+    }
+
+    return ($input);    
+    
+}
+
+###########################################################
+#we need to verify whether or not this program is being sudo'd.
+
+sub check_sudo {
+
+
+        my $user;
+
+	#we're going to check to see if this is sudo'd.
+	#start with the environment variable SUDO_USER
+        if ($ENV{SUDO_USER}) {
+		return 1;
+        }
+
+	return;
+
+}
+
+
+@

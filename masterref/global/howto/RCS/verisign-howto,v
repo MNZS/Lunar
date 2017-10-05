@@ -1,0 +1,32 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.1
+date	2003.06.05.16.15.14;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@Crypt Password - L7i#f3O@@ (hostmaster@@lunarmedia.net)
+
+sandman.lunarmedia.net - SANDM2-HST
+
+ns1.lunarmedia.net - NSG2835-HST
+ns2.lunarmedia.net - NSC7991-HST
+
+ns1.lunarhosting.net - NSZ8151-HST
+ns2.lunarhosting.net - NSM8145-HST
+@

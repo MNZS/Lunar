@@ -1,0 +1,306 @@
+head	1.7;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.7
+date	2003.08.12.15.56.31;	author root;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2003.08.12.15.54.52;	author root;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2003.08.11.19.40.47;	author root;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2003.08.11.19.33.28;	author root;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2003.08.11.05.41.52;	author root;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2003.08.11.05.32.53;	author root;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2003.08.11.05.31.40;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.7
+log
+@*** empty log message ***
+@
+text
+@#!/usr/bin/perl -w
+
+# $Id: snmpDiskUsage.pl,v 1.6 2003/08/12 15:54:52 root Exp root $
+
+use strict;
+use Net::SNMP;
+use POSIX qw(strftime);
+use Lunar::Hosts;
+#use Lunar::Notify;
+use Lunar::Restrict;
+
+# Poll a remote server for a list of disk partitions and the amount
+# of space used. If a partition is over a set threshold, page the
+# appropriate administrator
+
+&limitHost('^name');
+
+my %nodes = &getHosts('linux');
+
+my %snmpMIB = (
+	type	=> '.1.3.6.1.2.1.25.2.3.1.2',
+	desc	=> '.1.3.6.1.2.1.25.2.3.1.3',
+	unit	=> '.1.3.6.1.2.1.25.2.3.1.4',
+	size	=> '.1.3.6.1.2.1.25.2.3.1.5',
+	used	=> '.1.3.6.1.2.1.25.2.3.1.6',
+);
+
+my %diskTable;
+
+for my $node(keys %nodes) {
+  my $index = 1;
+  while($index) {
+    ## Find our path statement
+    my $snmp = Net::SNMP->session(
+	-hostname	=> $node,
+	-version	=> 1,
+	-community	=> $nodes{$node}{'community'}, );
+    my $mib = $snmpMIB{desc} . ".$index";
+    my $query =  $snmp->get_request( -varbindlist => [$mib] );
+    if ($snmp->error) {
+      undef $index;
+      next;
+    }
+    my $desc = $query->{$mib};
+    $snmp->close;
+    if ($desc) {
+      $diskTable{$node}{$index}{'path'} = $desc;
+      &getUnit($node,$index);
+      &getSize($node,$index);
+      &getUsed($node,$index);
+      &getPrct($node,$index);
+      $index++;
+    } else {
+      exit;
+    }
+  }
+  &genHTML($node);
+}
+
+####
+
+sub getImage {
+  my $percent = shift;
+  my $image;
+  if ($percent > 79) {
+    $image = 'alarm.jpg';
+  } elsif ($percent > 64) {
+    $image = 'warn.jpg';
+  } else {
+    $image = 'safe.jpg';
+  }
+  $image = '<img src="images/' . $image . '">';
+  return $image;
+}
+
+sub genHTML {
+  my $node = shift;
+  open (HTML,">/usr/local/mrtg/$node.disk.html")
+    or die "Can't open HTML doc for writing : $!\n"; 
+  print HTML "<html>\n";
+  print HTML "  <head>\n";
+  print HTML "    <title>Disk Utilization</title>\n";
+  print HTML "    <body>\n";
+  my $time = strftime("%X %D",localtime); 
+  print HTML uc($node) . ".LUNARHOSTING.NET<br>Last updated: $time<p>\n";
+  for my $j(keys %{$diskTable{$node}}) {
+    my $image = &getImage($diskTable{$node}{$j}{'prct'});
+    print HTML "&nbsp;&nbsp;PATH: $diskTable{$node}{$j}{'path'} ";
+    print HTML "($diskTable{$node}{$j}{'prct'}% utilized)&nbsp;$image<br>\n";
+    print HTML "&nbsp;&nbsp;USED/CAPACITY: $diskTable{$node}{$j}{'used'}/$diskTable{$node}{$j}{'size'}<br>\n";
+    print HTML "<p>";
+  }
+  print HTML "  </body>\n</html>";
+}
+
+sub getUnit {
+  my $node = shift;
+  my $index = shift;
+  my $snmp = Net::SNMP->session(
+	-hostname       => $node,
+	-version        => 1,
+	-community      => $nodes{$node}{'community'}, );
+  my $mib = $snmpMIB{unit} . ".$index";
+  my $query =  $snmp->get_request( -varbindlist => [$mib] );
+  my $result = $query->{$mib};
+  $result = substr($result,0,1); 
+  $diskTable{$node}{$index}{'unit'} = $result;
+
+}
+
+sub getSize {
+  my $node = shift;
+  my $index = shift;
+  my $snmp = Net::SNMP->session(
+        -hostname       => $node,
+        -version        => 1,
+        -community      => $nodes{$node}{'community'}, );
+  my $mib = $snmpMIB{size} . ".$index";
+  my $query =  $snmp->get_request( -varbindlist => [$mib] );
+  my $result = $query->{$mib};
+  $diskTable{$node}{$index}{'size'} = $result * $diskTable{$node}{$index}{'unit'};
+}
+
+sub getUsed {
+  my $node = shift;
+  my $index = shift;
+  my $snmp = Net::SNMP->session(
+        -hostname       => $node,
+        -version        => 1,
+        -community      => $nodes{$node}{'community'}, );
+  my $mib = $snmpMIB{used} . ".$index";
+  my $query =  $snmp->get_request( -varbindlist => [$mib] );
+  my $result = $query->{$mib};
+  $diskTable{$node}{$index}{'used'} = $result * $diskTable{$node}{$index}{'unit'};
+}
+
+sub getPrct {
+  my $node = shift;
+  my $index = shift;
+  if ( ($diskTable{$node}{$index}{'used'} == 0) ||
+       ($diskTable{$node}{$index}{'size'} == 0) ) {
+    $diskTable{$node}{$index}{'prct'} = 0;
+  } else {
+    $diskTable{$node}{$index}{'prct'} = $diskTable{$node}{$index}{'used'} / $diskTable{$node}{$index}{'size'};
+    if ($diskTable{$node}{$index}{'prct'} =~ /^0\.\d+/) {
+      $diskTable{$node}{$index}{'prct'} =~ /^0\.(\d{2}).+$/;
+      $diskTable{$node}{$index}{'prct'} = $1;
+      $diskTable{$node}{$index}{'prct'} = 0
+        if $1 == '00';
+    } elsif ($diskTable{$node}{$index}{'prct'} =~ /^1/) {
+      $diskTable{$node}{$index}{'prct'} = '100';
+    }
+  }
+}
+@
+
+
+1.6
+log
+@new getHosts syntax
+@
+text
+@d3 1
+a3 1
+# $Id: snmpDiskUsage.pl,v 1.5 2003/08/11 19:40:47 root Exp root $
+d9 1
+a9 1
+use Lunar::Notify;
+@
+
+
+1.5
+log
+@added last updated time
+@
+text
+@d3 1
+a3 1
+# $Id: snmpDiskUsage.pl,v 1.4 2003/08/11 19:33:28 root Exp root $
+d18 1
+a18 1
+my %nodes = &getHosts;
+@
+
+
+1.4
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+# $Id: snmpDiskUsage.pl,v 1.3 2003/08/11 05:41:52 root Exp $
+d7 1
+d16 1
+a16 1
+&limitHost('name2');
+d84 2
+a85 1
+  print HTML uc($node) . ".LUNARHOSTING.NET<p>\n";
+@
+
+
+1.3
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+# $Id: snmpDiskUsage.pl,v 1.2 2003/08/11 05:32:53 root Exp root $
+d15 1
+a15 1
+&limitHost('host3');
+d19 8
+d29 64
+a92 1
+my $index = 1;
+d94 40
+a133 1
+while($index) {
+d135 17
+@
+
+
+1.2
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+# $Id: snmpDiskUsage.pl,v 1.1 2003/08/11 05:31:40 root Exp root $
+d9 1
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d3 1
+a3 1
+# $Id:$
+d14 2
+d18 6
+a23 2
+for my $i (keys %nodes) {
+  print "$i\n";
+a24 2
+
+&notifyAdmins('another test message');
+@

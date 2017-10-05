@@ -1,0 +1,182 @@
+#!/usr/bin/perl
+
+# $Id: nouseradd,v 1.4 2003/07/05 18:07:30 root Exp $
+
+## universal modules
+use strict;
+use POSIX qw(strftime);
+use File::Copy;
+use Getopt::Long;
+use String::Random;
+use Passwd::Linux qw(modpwinfo mgetpwnam);
+
+## define our getopts flags
+my $webuser;
+my $add;
+my $remove;
+my $username;
+my $comment;
+my $passwd;
+my $domain;
+my $ftp;
+my $admin;
+my $help;
+
+GetOptions (    
+		'webuser=s'     => \$webuser,
+
+		'add'		=> \$add,
+		'remove'	=> \$remove,
+
+  		'username=s'	=> \$username,
+		'passwd=s'	=> \$passwd,
+		'comment=s'	=> \$comment,
+		'domain=s'	=> \$domain,
+
+		'ftp'		=> \$ftp,
+		'admin'		=> \$admin,
+
+                'help'          => \$help,
+           );
+
+## logging
+my $logfile = '/var/log/nouseradd';
+my $date = strftime("%Y%m%d-%H:%M:%S",localtime);
+
+## clean variables to expected format
+&clean_vars;
+my $ERR = &check_vars;
+
+if ($add) {
+  &add_user;
+} elsif ($remove) {
+  &del_user;
+} else {
+
+}
+
+## add a user
+sub add_user {
+  ## encrypt our password
+  my $crypt = &find_passwd;
+
+  ## define shell
+  my $shell = q|/bin/false|;
+
+  ## define the home directory
+  my $home = &find_homedir;
+
+  ## define group settings
+  my $group = &find_group;
+
+  ## build the useradd command line
+  my @cli = ( "-s", $shell,
+              "-d", $home,
+              "-G", $group,
+	      "-c", $comment,
+              "-p", $crypt,
+              $username );
+
+  ## add the user
+  system("/usr/sbin/useradd", @cli);
+
+  &log_action('added');
+}
+
+sub del_user {
+  my @cli = ( "-r", $username );
+  system("/usr/sbin/userdel", @cli);
+  &log_action('removed');
+}
+
+## take cleartext password and encrypt it
+sub find_passwd {
+  ## generate random characters
+  my $random = new String::Random;
+  ## salt the passwd
+  my $salt = $random->randpattern("ss");
+  ## encrypt the password
+  my $crypt = crypt($passwd, $salt);
+  return $crypt;
+}
+
+## cleanse the home directory value
+sub find_homedir {
+  my $home = qq|/home/clients/$domain/$username|;
+  $home =~ /^(\/home\/clients\/(?:[\w\-]+\.)(?:\w{2,3}\.)?(?:\w{2,6})\/[A-Za-z0-9]{1,32})$/;
+  $home = $1;
+  return $home;
+}
+
+sub find_group {
+  my $default_group = $domain;
+  chomp $default_group;
+  $default_group =~ s/^([\w\-]+)(?:\.\w{2,3})?\.\w{2,6}$/$1/;
+
+  ## get the GID. if its undesired. exit
+  my $gid = getgrnam("$default_group");
+
+  if ($gid < 500) {
+    print "Trying to use GID=$gid\n";
+    exit 1;
+  }
+
+  my $group = qq|hosting,$default_group|;
+  $group =~ /^(hosting\,[\w\-]+)$/;
+  $group = $1;
+
+  if ($admin) {
+    $group = $group . ",adm_$default_group";
+  }
+
+  if ($ftp) {
+    $group = $group . ",ftp_$default_group";
+  }
+
+  return $group;
+}
+
+sub clean_vars {
+  if ($add) {
+    ## clean domain
+    chomp $domain;
+    $domain =~ tr/A-Z/a-z/;
+    $domain =~ s/ //g;
+    ## clean up the password
+    chomp $passwd;
+    $passwd =~ s/^(.{1,32}).*/$1/;
+    ## clean up the comment
+    chomp $comment;
+    $comment =~ s/[^a-zA-Z\ \,\.\-\_0-9]//g;
+    $comment =~ s/^(.{1,32}).*/$1/;
+    $comment =~ s/^(.*)$/\"$1\"/;
+  }
+  ## clean up username
+  $username =~ tr/A-Z/a-z/;
+  $username =~ s/[^a-z0-9]//g;
+  $username =~ s/ //g;
+  $username =~ s/^(a-z0-9){4,32}.*/$1/g;
+}
+
+sub log_action {
+  my $action = shift;
+  open(FH, ">>$logfile")
+    or die "Can't open log file! : $!\n";
+  flock(FH,2);
+  seek(FH,0,0);
+  print FH "$date - $username $action by $webuser for $domain\n";
+  flock(FH,8);
+  close(FH);
+}
+
+sub check_vars {
+  ## check for bogus info
+  my $uid = getpwnam($username);
+  if ($add) {
+    return "1" if (defined $uid);
+  } elsif ($remove) {
+    return "1" if ($username eq "root");
+    return "1" if (!$uid);
+    return "1" if ($uid < 503);
+  }
+}

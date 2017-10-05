@@ -1,0 +1,11 @@
+## $Id: unique,v 1.2 2003/08/04 16:56:03 root Exp $
+
+## ABTA
+Alias /video /www/abta.org/pub/video
+
+## TEST WEBMAIL
+Alias /testmail /usr/share/squirrelmail
+<Directory "/usr/share/squirrelmail">
+  AddType application/x-httpd-php .php
+</Directory>
+

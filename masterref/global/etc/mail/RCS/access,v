@@ -1,0 +1,99 @@
+head	1.4;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.4
+date	2003.03.27.19.45.21;	author root;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2003.01.21.00.22.06;	author root;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2003.01.15.14.49.54;	author root;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2003.01.04.15.50.14;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.4
+log
+@added anna and flashfire
+@
+text
+@# $Id: access,v 1.3 2003/01/21 00:22:06 root Exp root $
+
+# Check the /usr/share/doc/sendmail-8.11.6/README.cf file for a description
+# of the format of this file. (search for access_db in that file)
+# The /usr/share/doc/sendmail-8.11.6/README.cf is part of the sendmail-doc
+# package.
+#
+# http://www.sendmail.org/m4/anti-spam.html
+
+localhost.localdomain	RELAY
+localhost		RELAY
+127.0.0.1		RELAY
+
+# fastmonster networks
+208.16.140		RELAY
+65.172.1		RELAY
+
+# known bad
+big@@boss.com			550	Your mail has been rejected.
+@@websalesjet.com		550	Your mail has been rejected.
+anonymous@@flashfire.bgci.net	550	Your mail has been rejected.
+anna@@4realswingers.com		550	Your mail has been rejected.
+@
+
+
+1.3
+log
+@added websalesjet.com
+@
+text
+@d1 1
+a1 1
+# $Id: access,v 1.2 2003/01/15 14:49:54 root Exp root $
+d19 4
+a22 2
+big@@boss.com		550	Your mail has been rejected.
+@@websalesjet.com	550	Your mail has been rejected.
+@
+
+
+1.2
+log
+@added boss.com
+@
+text
+@d1 1
+a1 1
+# $Id: access,v 1.1 2003/01/04 15:50:14 root Exp root $
+d20 1
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 1
+a1 1
+# $Id:$
+d17 3
+@

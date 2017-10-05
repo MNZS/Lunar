@@ -1,0 +1,36 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.1
+date	2003.04.02.19.08.41;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.1
+log
+@initial checkin
+@
+text
+@#!/usr/bin/perl -w
+
+# MasterRef
+# $Id: urchin_run.pl,v 1.2 2003/01/28 11:01:46 root Exp $
+
+use strict;
+use Sys::Hostname;
+
+if (hostname() !~ /^host/) {
+  exit 1;
+}
+
+system("/usr/local/urchin/urchin -q");
+@

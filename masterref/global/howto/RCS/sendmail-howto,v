@@ -1,0 +1,32 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.1
+date	2003.06.05.16.15.14;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@$Id: sendmail-howto,v 1.1 2002/10/07 11:40:32 root Exp $
+
+This file will server as a TOC for all sendmail related files
+
+ aliases-howto
+ autoresponders-howto
+ mailgroup-howto
+ mkmail-howto
+ virtuser-howto
+@

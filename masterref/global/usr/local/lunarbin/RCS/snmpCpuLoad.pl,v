@@ -1,0 +1,760 @@
+head	1.24;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.24
+date	2003.06.05.04.54.45;	author root;	state Exp;
+branches;
+next	1.23;
+
+1.23
+date	2003.04.15.15.59.37;	author root;	state Exp;
+branches;
+next	1.22;
+
+1.22
+date	2003.04.15.15.42.25;	author root;	state Exp;
+branches;
+next	1.21;
+
+1.21
+date	2003.04.15.15.41.53;	author root;	state Exp;
+branches;
+next	1.20;
+
+1.20
+date	2003.04.15.15.41.06;	author root;	state Exp;
+branches;
+next	1.19;
+
+1.19
+date	2003.04.15.15.40.34;	author root;	state Exp;
+branches;
+next	1.18;
+
+1.18
+date	2003.04.15.15.39.49;	author root;	state Exp;
+branches;
+next	1.17;
+
+1.17
+date	2003.04.15.15.37.35;	author root;	state Exp;
+branches;
+next	1.16;
+
+1.16
+date	2003.04.15.15.32.39;	author root;	state Exp;
+branches;
+next	1.15;
+
+1.15
+date	2003.04.15.15.28.56;	author root;	state Exp;
+branches;
+next	1.14;
+
+1.14
+date	2003.04.15.15.08.12;	author root;	state Exp;
+branches;
+next	1.13;
+
+1.13
+date	2003.04.15.15.07.49;	author root;	state Exp;
+branches;
+next	1.12;
+
+1.12
+date	2003.04.15.15.07.20;	author root;	state Exp;
+branches;
+next	1.11;
+
+1.11
+date	2003.04.15.15.06.27;	author root;	state Exp;
+branches;
+next	1.10;
+
+1.10
+date	2003.04.15.15.05.50;	author root;	state Exp;
+branches;
+next	1.9;
+
+1.9
+date	2003.04.15.14.41.44;	author root;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	2003.04.15.13.58.57;	author root;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2003.04.15.13.58.39;	author root;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2003.04.15.13.58.13;	author root;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2003.04.15.13.57.30;	author root;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2003.04.15.13.56.44;	author root;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2003.04.15.13.49.12;	author root;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2003.04.15.13.48.16;	author root;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2003.04.15.12.55.07;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.24
+log
+@added backbone
+ls
+@
+text
+@#!/usr/bin/perl -w
+
+# $Id: snmpCpuLoad.pl,v 1.23 2003/04/15 15:59:37 root Exp root $
+
+# This script polls a remote server using SNMP for the machine's
+# 5 minute CPU load average and adds the value to an RRD database.
+# Then graphs the last 8 hours of 5 minute averages as well as
+# the last 24 hour period.
+
+# This script requires that you have the RRDtool installed
+# on your system as well as the RRDtool perl modules compiled.
+# Read the RRD documentation on how to install.
+
+# The RRDTool and all of its installation directions are found at:
+# http://people.ee.ethz.ch/~oetiker/webtools/rrdtool/index.html
+
+# The images created are in the .GIF format. 
+# 8 Hour graph is created as sysload-8.gif
+# 24 Hour graph is created as sysload-24.gif
+
+use strict;
+use RRDs;
+use Sys::Hostname;
+use Net::SNMP;
+
+## only run on name1 and name2
+if (hostname() !~ /^name/) {
+  exit 1;
+}
+
+my $serverCommunity = 'Wl7d0w%!';
+my $routerCommunity = 'monitor';
+my $serverOid = '.1.3.6.1.4.1.2021.10.1.3.2';
+my $routerOid = '.1.3.6.1.4.1.9.2.1.58.0';
+
+## define our remote hosts
+my %nodes = ( 
+	'host1' => {
+		'hardware' => 'servers',
+		'oid' => "$serverOid",
+  		'community' => "$serverCommunity",
+		},
+	'host2' => {
+                'hardware' => 'servers',
+                'oid' => "$serverOid",
+                'community' => "$serverCommunity",
+                },
+	'name1' => {
+                'hardware' => 'servers',
+                'oid' => "$serverOid",
+                'community' => "$serverCommunity",
+                },
+	'name2' => {
+                'hardware' => 'servers',
+                'oid' => "$serverOid",
+                'community' => "$serverCommunity",
+                },
+	'gateway' => {
+                'hardware' => 'routers',
+                'oid' => "$routerOid",
+                'community' => "$routerCommunity",
+                },
+        'backbone' => {
+                'hardware' => 'switches',
+                'oid' => "$routerOid",
+                'community' => "$routerCommunity",
+                },
+);
+
+#            NO FURTHER EDITING SHOULD BE REQUIRED            #
+###############################################################
+
+my $rrd = 'cpu_trend.rrd';
+my $end = time();
+
+for my $host(keys %nodes) {
+  ## define the working directory
+  ## this should be the area where your .rrd file exists
+  ## it should be an absolute path begining with a /
+  my $rrd_dir = "/usr/local/mrtg/$nodes{$host}->{hardware}/$host/cpu";
+
+  ## define the image directory
+  ## this should be your web accessible directory 
+  ## it should be an absolute path begining with a /
+  my $img_dir = $rrd_dir;
+
+  &test_if_complete($rrd_dir);
+
+  my $avg = &get_latest_avg($host);
+
+  &update_rrd($rrd_dir,$avg);
+
+  &make_graph('8',$host,$rrd_dir);
+
+  &make_graph('24',$host,$rrd_dir);
+
+}
+
+#                       SUB-ROUTINES			      #
+###############################################################
+
+sub test_if_complete {
+
+  my $dir = shift;
+
+if ( !$dir ) {
+
+print <<RRD;
+
+You need to define your RRD repository!
+This is the directory on your server where
+your .rrd database will reside. It should
+be outside of web accessible space.
+
+You can define this value by editing the
+\$rrd_dir variable in this script.
+This value should be an absolute path but
+not include a trailing slash.
+
+RRD
+
+exit 1;
+
+} elsif ( !$dir ) {
+
+print <<IMG;
+
+You need to define your Image repository!
+This should be a directory that is accesible
+via the web.
+
+You can define this value by editing the 
+\$img_dir variable in this script.
+This value should be an absolute path but
+not include a trailing slash.
+
+IMG
+
+exit 1;
+
+} elsif ( ! -e "$dir/$rrd" ) {
+
+print <<CREATE;
+
+Hang on, your RRD database is being created!
+This will only need to be done once, so you
+shouldn't see this messsage again.
+
+CREATE
+
+RRDs::create("$dir/$rrd",
+             "DS:sysload:GAUGE:600:U:U",
+             "RRA:AVERAGE:0.5:1:288" );
+my $ERR=RRDs::error;
+die "ERROR while creating $dir/$rrd: $ERR\n" if $ERR;
+
+print <<DONE;
+
+Congratulations! Your RRD database has been
+created! You should now be able to start 
+adding data and creating graphs. 
+Try running this script by hand now to make
+sure that no errors occur.
+To automate data collection, you can add an
+entry to your crontab that should look something
+like this
+
+*/5 * * * *	/path/to/this/script >/dev/null 2>&1
+
+DONE
+
+exit 0;
+
+}
+
+## end of subroutine
+}
+
+sub get_latest_avg {
+  my $host = shift;
+
+  my $snmp = Net::SNMP->session(
+		-hostname	=> $host,
+		-version	=> '1',
+		-community	=> $nodes{$host}->{community}, );
+
+  my $num = $snmp->get_request( -varbindlist => [$nodes{$host}->{oid}] );
+
+  my $avg = $num->{$nodes{$host}->{oid}};
+
+  return $avg;
+
+}
+
+sub update_rrd {
+
+  my $dir = shift;
+  my $avg = shift;
+
+  RRDs::update("$dir/$rrd","N:$avg");
+  my $ERR=RRDs::error;
+  die "ERROR while updating $rrd: $ERR\n" if $ERR;
+}
+
+sub make_graph {
+
+  my $interval = shift;
+  my $hostname = shift;
+  my $dir = shift;
+
+  my $print_hour = $interval / 8;
+
+  my $start = $end - ($interval * 3600);
+
+  RRDs::graph("$dir/sysload-$interval.gif",
+              "--start","$start",
+              "--end","$end",
+              "--title","System Load for $hostname over past $interval hours",
+              "--vertical-label","5 Minute Average",
+              "-x","MINUTE:60:HOUR:$print_hour:HOUR:$print_hour:0:%k",
+              "-l","0",
+              "--units-exponent","0",
+              "DEF:mycpu=$dir/cpu_trend.rrd:sysload:AVERAGE",
+              "AREA:mycpu#999999:5 Minute Average", );
+#              "HRULE:1#FF3300:Threshold", );
+
+  my $ERR=RRDs::error;
+  die "ERROR while graphing $rrd: $ERR\n" if $ERR;
+
+}
+
+exit 0;
+@
+
+
+1.23
+log
+@removed threshold
+@
+text
+@d3 1
+a3 1
+# $Id: snmpCpuLoad.pl,v 1.22 2003/04/15 15:42:25 root Exp root $
+d63 5
+@
+
+
+1.22
+log
+@fixed all errors and now polls routers and servers
+@
+text
+@d3 1
+a3 1
+# $Id: snmpCpuLoad.pl,v 1.21 2003/04/15 15:41:53 root Exp root $
+d219 3
+a221 2
+              "AREA:mycpu#999999:5 Minute Average",
+              "HRULE:1#FF3300:Threshold", );
+@
+
+
+1.21
+log
+@wrong oid for gateway
+@
+text
+@d3 1
+a3 1
+# $Id: snmpCpuLoad.pl,v 1.20 2003/04/15 15:41:06 root Exp root $
+a185 1
+  print "$avg for $host\n";
+@
+
+
+1.20
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+# $Id: snmpCpuLoad.pl,v 1.19 2003/04/15 15:40:34 root Exp root $
+d60 1
+a60 1
+                'oid' => "$serverOid",
+@
+
+
+1.19
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+# $Id: snmpCpuLoad.pl,v 1.18 2003/04/15 15:39:49 root Exp root $
+d186 1
+a188 2
+  print "$avg for $host\n";
+
+@
+
+
+1.18
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+# $Id: snmpCpuLoad.pl,v 1.17 2003/04/15 15:37:35 root Exp root $
+a181 4
+  my $err = $snmp->error;
+ 
+  print "error : $err for $host\n";
+
+d188 2
+@
+
+
+1.17
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+# $Id: snmpCpuLoad.pl,v 1.16 2003/04/15 15:32:39 root Exp root $
+a139 1
+print "mkaing it for gateway\n";
+d182 4
+a198 2
+  print "$dir/$rrd $avg\n";
+
+@
+
+
+1.16
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+# $Id: snmpCpuLoad.pl,v 1.15 2003/04/15 15:28:56 root Exp root $
+d140 1
+@
+
+
+1.15
+log
+@ready to add router support for snmp polling
+@
+text
+@d3 1
+a3 1
+# $Id: snmpCpuLoad.pl,v 1.14 2003/04/15 15:08:12 root Exp root $
+d195 2
+@
+
+
+1.14
+log
+@s/x/s
+@
+text
+@d3 1
+a3 1
+# $Id: snmpCpuLoad.pl,v 1.13 2003/04/15 15:07:49 root Exp root $
+d34 1
+a34 1
+my $routerOid = '';
+@
+
+
+1.13
+log
+@missing {
+@
+text
+@d3 1
+a3 1
+# $Id: snmpCpuLoad.pl,v 1.12 2003/04/15 15:07:20 root Exp root $
+d182 1
+a182 1
+  my $num = $snmp->get_request( -varbindlist => [$nodex{$host}->{oid}] );
+d184 1
+a184 1
+  my $avg = $num->{$nodex{$host}->{oid}};
+@
+
+
+1.12
+log
+@missing $
+@
+text
+@d3 1
+a3 1
+# $Id: snmpCpuLoad.pl,v 1.11 2003/04/15 15:06:27 root Exp root $
+d43 1
+a43 1
+	'host2' => 
+d48 1
+a48 1
+	'name1' =>
+d53 1
+a53 1
+	'name2' =>
+d58 1
+a58 1
+	'gateway' =>
+@
+
+
+1.11
+log
+@missing commas
+@
+text
+@d3 1
+a3 1
+# $Id: snmpCpuLoad.pl,v 1.10 2003/04/15 15:05:50 root Exp root $
+d31 4
+a34 4
+my serverCommunity = 'Wl7d0w%!';
+my routerCommunity = 'monitor';
+my serverOid = '.1.3.6.1.4.1.2021.10.1.3.2';
+my routerOid = '';
+@
+
+
+1.10
+log
+@prepping for router inclusion
+@
+text
+@d3 1
+a3 1
+# $Id: snmpCpuLoad.pl,v 1.9 2003/04/15 14:41:44 root Exp root $
+d42 1
+a42 1
+		}
+d47 1
+a47 1
+                }
+d52 1
+a52 1
+                }
+d57 1
+a57 1
+                }
+d62 1
+a62 1
+                }
+@
+
+
+1.9
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+# $Id: snmpCpuLoad.pl,v 1.8 2003/04/15 13:58:57 root Exp root $
+d31 5
+d37 27
+a63 5
+my %nodes = ( host1.lunarhosting.net 	=> 'servers',
+	      host2.lunarhosting.net 	=> 'servers',
+	      name1.lunarhosting.net 	=> 'servers',
+              name2.lunarhosting.net 	=> 'servers',
+	      gateway.lunarhosting.net 	=> 'routers' );
+a67 2
+my $community = 'Wl7d0w%!';
+my $oid = '.1.3.6.1.4.1.2021.10.1.3.2';
+d71 1
+a71 4
+for my $host(@@servers) {
+  ## define our hostname and format as we would like it
+  $host = (split(/\./,$host))[0];
+
+d75 1
+a75 1
+  my $rrd_dir = "/usr/local/mrtg/servers/$host/cpu";
+d180 1
+a180 1
+		-community	=> $community, );
+d182 1
+a182 1
+  my $num = $snmp->get_request( -varbindlist => [$oid] );
+d184 1
+a184 1
+  my $avg = $num->{$oid};
+@
+
+
+1.8
+log
+@corrected problem where $avg was being returned as a hash ratheual value
+@
+text
+@d3 1
+a3 1
+# $Id: snmpCpuLoad.pl,v 1.7 2003/04/15 13:58:39 root Exp root $
+d32 5
+a36 6
+my @@servers = qw(	host1.lunarhosting.net
+			host2.lunarhosting.net
+			name1.lunarhosting.net
+			name2.lunarhosting.net );
+
+my $VERSION = '1.0';
+@
+
+
+1.7
+log
+@testing
+@
+text
+@d3 1
+a3 1
+# $Id: snmpCpuLoad.pl,v 1.6 2003/04/15 13:58:13 root Exp root $
+d165 1
+a165 2
+  print "$avg\n";
+  return $avg
+@
+
+
+1.6
+log
+@testing.
+@
+text
+@d3 1
+a3 1
+# $Id: snmpCpuLoad.pl,v 1.5 2003/04/15 13:57:30 root Exp root $
+d163 1
+a163 1
+  my $avg = $num->{$oid} . "\n";
+@
+
+
+1.5
+log
+@testing
+@
+text
+@d3 1
+a3 1
+# $Id: snmpCpuLoad.pl,v 1.4 2003/04/15 13:56:44 root Exp root $
+d161 1
+a161 1
+  my $avg = $snmp->get_request( -varbindlist => [$oid] );
+d163 1
+a163 1
+  my $num = $avg->{$oid} . "\n";
+d165 2
+a166 2
+  print $num;
+  return $avg;
+@
+
+
+1.4
+log
+@testing
+@
+text
+@d3 1
+a3 1
+# $Id: snmpCpuLoad.pl,v 1.3 2003/04/15 13:49:12 root Exp root $
+d163 1
+a163 1
+  my $num = $avg->{$oid};
+@
+
+
+1.3
+log
+@testing
+@
+text
+@d3 1
+a3 1
+# $Id: snmpCpuLoad.pl,v 1.2 2003/04/15 13:48:16 root Exp root $
+d163 3
+a165 2
+  print $avg;
+ 
+a174 2
+  print "$dir/$rrd $avg\n";
+
+@
+
+
+1.2
+log
+@testing
+@
+text
+@d3 1
+a3 1
+# $Id: snmpCpuLoad.pl,v 1.1 2003/04/15 12:55:07 root Exp root $
+d162 2
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d3 1
+a3 1
+# $Id: rrd_cpuload.pl,v 1.1 2003/04/04 13:19:56 root Exp $
+d172 2
+@

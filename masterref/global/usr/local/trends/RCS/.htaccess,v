@@ -1,0 +1,27 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.1
+date	2003.01.06.03.07.39;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@AuthUserFile /www/lunarhosting.net/options/passwd/adm-lunarhosting.net
+AuthName "CPU Load Trending"
+AuthType Basic
+require valid-user
+@

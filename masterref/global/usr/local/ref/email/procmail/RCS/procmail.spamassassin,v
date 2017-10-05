@@ -1,0 +1,26 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.1
+date	2003.08.20.00.40.03;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@## $Id:$
+:0fw: spamassassin.lock
+| /usr/bin/spamassassin
+@

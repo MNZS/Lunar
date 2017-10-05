@@ -1,0 +1,335 @@
+head	1.12;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.12
+date	2003.08.11.19.47.02;	author root;	state Exp;
+branches;
+next	1.11;
+
+1.11
+date	2003.08.11.19.31.18;	author root;	state Exp;
+branches;
+next	1.10;
+
+1.10
+date	2003.08.08.20.03.11;	author root;	state Exp;
+branches;
+next	1.9;
+
+1.9
+date	2003.06.25.19.57.22;	author root;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	2003.06.05.15.10.31;	author root;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2003.06.05.14.37.47;	author root;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2003.05.25.23.52.48;	author root;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2003.05.25.23.49.51;	author root;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2003.04.15.18.16.03;	author root;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2003.04.15.18.12.16;	author root;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2003.04.15.14.28.20;	author root;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2003.04.15.14.26.55;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.12
+log
+@*** empty log message ***
+@
+text
+@<html>
+ <!-- $Id: left.html,v 1.11 2003/08/11 19:31:18 root Exp root $ -->
+ <body>
+
+  Gateway (2620)<br>
+  &nbsp;&nbsp;<a href="gateway.cpu.html" target="right">CPU</a><br>
+  &nbsp;&nbsp;<a href="gateway.bandwidth.html" target="right">Bandwidth</a><p>
+  Backbone (2924XL)<br>
+  &nbsp;&nbsp;<a href="backbone.cpu.html" target="right">CPU</a><br>
+  &nbsp;&nbsp;<a href="backbone.bandwidth.html" target="right">Bandwidth</a><p>
+  Host1 (Linux)<br>
+  &nbsp;&nbsp;<a href="host1.cpu.html" target="right">CPU</a><br>
+  &nbsp;&nbsp;<a href="host1.disk.html" target="right">Disk</a><br>
+  &nbsp;&nbsp;<a href="host1.mem.html" target="right">Memory</a><br>
+  &nbsp;&nbsp;<a href="host1.spam.html" target="right">Spam</a><br>
+  <p>
+  Host2 (Linux)<br>
+  &nbsp;&nbsp;<a href="host2.cpu.html" target="right">CPU</a><br>
+  &nbsp;&nbsp;<a href="host2.disk.html" target="right">Disk</a><br>
+  &nbsp;&nbsp;<a href="host2.mem.html" target="right">Memory</a><br>
+  &nbsp;&nbsp;<a href="host2.spam.html" target="right">Spam</a><br>
+  <p>
+  Name1 (Linux)<br>
+  &nbsp;&nbsp;<a href="name1.cpu.html" target="right">CPU</a><br>
+  &nbsp;&nbsp;<a href="name1.disk.html" target="right">Disk</a><br>
+  &nbsp;&nbsp;<a href="name1.mem.html" target="right">Memory</a><br>
+  <p>
+  Name2 (Linux)<br>
+  &nbsp;&nbsp;<a href="name2.cpu.html" target="right">CPU</a><br>
+  &nbsp;&nbsp;<a href="name2.disk.html" target="right">Disk</a><br>
+  &nbsp;&nbsp;<a href="name2.mem.html" target="right">Memory</a><br>
+  <p>
+
+ </body>
+
+</html>
+@
+
+
+1.11
+log
+@added disk
+@
+text
+@d2 1
+a2 1
+ <!-- $Id: left.html,v 1.10 2003/08/08 20:03:11 root Exp root $ -->
+d30 1
+a30 1
+  &nbsp;&nbsp;<a href="name2.cpu.html" target="right">Disk</a><br>
+@
+
+
+1.10
+log
+@added memory graphing
+@
+text
+@d2 1
+a2 1
+ <!-- $Id: left.html,v 1.9 2003/06/25 19:57:22 root Exp root $ -->
+d13 1
+d19 1
+d25 1
+d30 1
+@
+
+
+1.9
+log
+@added spam
+@
+text
+@d2 1
+a2 1
+ <!-- $Id: left.html,v 1.8 2003/06/05 15:10:31 root Exp root $ -->
+d13 1
+d18 1
+d23 1
+d27 1
+@
+
+
+1.8
+log
+@*** empty log message ***
+@
+text
+@d2 1
+a2 1
+ <!-- $Id: left.html,v 1.7 2003/06/05 14:37:47 root Exp root $ -->
+d13 1
+d17 1
+@
+
+
+1.7
+log
+@added backbone and descriptions
+@
+text
+@d2 1
+a2 1
+ <!-- $Id: left.html,v 1.6 2003/05/25 23:52:48 root Exp root $ -->
+d5 1
+a5 1
+  Gateway (Cisco 2620)<br>
+d8 1
+a8 1
+  Backbone (Cisco 2924XL)<br>
+@
+
+
+1.6
+log
+@added <p> tags
+@
+text
+@d2 1
+a2 1
+ <!-- $Id: left.html,v 1.5 2003/05/25 23:49:51 root Exp root $ -->
+d5 1
+a5 1
+  Gateway<br>
+d8 4
+a11 1
+  Host1<br>
+d14 1
+a14 1
+  Host2<br>
+d17 1
+a17 1
+  Name1<br>
+d20 1
+a20 1
+  Name2<br>
+@
+
+
+1.5
+log
+@removed bandwidth for linux hosts
+@
+text
+@d2 1
+a2 1
+ <!-- $Id: left.html,v 1.4 2003/04/15 18:16:03 root Exp root $ -->
+d10 1
+d13 1
+d16 1
+d19 1
+@
+
+
+1.4
+log
+@removed extra >
+@
+text
+@d2 1
+a2 1
+ <!-- $Id: left.html,v 1.3 2003/04/15 18:12:16 root Exp root $ -->
+a9 1
+  &nbsp;&nbsp;<a href="host1.bandwidth.html" target="right">Bandwidth</a><p>
+a11 1
+  &nbsp;&nbsp;<a href="host2.bandwidth.html" target="right">Bandwidth</a><p>
+a13 1
+  &nbsp;&nbsp;<a href="name1.bandwidth.html" target="right">Bandwidth</a><p>
+a15 1
+  &nbsp;&nbsp;<a href="name2.bandwidth.html" target="right">Bandwidth</a><p>
+@
+
+
+1.3
+log
+@added frame tags
+@
+text
+@d2 1
+a2 1
+ <!-- $Id: left.html,v 1.2 2003/04/15 14:28:20 root Exp root $ -->
+d7 1
+a7 1
+  &nbsp;&nbsp;<a href="gateway.bandwidth.html" target="right">>Bandwidth</a><p>
+d9 2
+a10 2
+  &nbsp;&nbsp;<a href="host1.cpu.html" target="right">>CPU</a><br>
+  &nbsp;&nbsp;<a href="host1.bandwidth.html" target="right">>Bandwidth</a><p>
+d12 2
+a13 2
+  &nbsp;&nbsp;<a href="host2.cpu.html" target="right">>CPU</a><br>
+  &nbsp;&nbsp;<a href="host2.bandwidth.html" target="right">>Bandwidth</a><p>
+d15 2
+a16 2
+  &nbsp;&nbsp;<a href="name1.cpu.html" target="right">>CPU</a><br>
+  &nbsp;&nbsp;<a href="name1.bandwidth.html" target="right">>Bandwidth</a><p>
+d18 2
+a19 2
+  &nbsp;&nbsp;<a href="name2.cpu.html" target="right">>CPU</a><br>
+  &nbsp;&nbsp;<a href="name2.bandwidth.html" target="right">>Bandwidth</a><p>
+@
+
+
+1.2
+log
+@*** empty log message ***
+@
+text
+@d2 1
+a2 1
+ <!-- $Id:$ -->
+d6 2
+a7 2
+  &nbsp;&nbsp;<a href="gateway.cpu.html">CPU</a><br>
+  &nbsp;&nbsp;<a href="gateway.bandwidth.html">Bandwidth</a><p>
+d9 2
+a10 2
+  &nbsp;&nbsp;<a href="host1.cpu.html">CPU</a><br>
+  &nbsp;&nbsp;<a href="host1.bandwidth.html">Bandwidth</a><p>
+d12 2
+a13 2
+  &nbsp;&nbsp;<a href="host2.cpu.html">CPU</a><br>
+  &nbsp;&nbsp;<a href="host2.bandwidth.html">Bandwidth</a><p>
+d15 2
+a16 2
+  &nbsp;&nbsp;<a href="name1.cpu.html">CPU</a><br>
+  &nbsp;&nbsp;<a href="name1.bandwidth.html">Bandwidth</a><p>
+d18 2
+a19 2
+  &nbsp;&nbsp;<a href="name2.cpu.html">CPU</a><br>
+  &nbsp;&nbsp;<a href="name2.bandwidth.html">Bandwidth</a><p>
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d2 2
+d5 17
+a21 15
+Gateway<br>
+&nbsp;&nbsp;<a href="gateway.cpu.html">CPU</a><br>
+&nbsp;&nbsp;<a href="gateway.bandwidth.html">Bandwidth</a><p>
+Host1<br>
+&nbsp;&nbsp;<a href="host1.cpu.html">CPU</a><br>
+&nbsp;&nbsp;<a href="host1.bandwidth.html">Bandwidth</a><p>
+Host2<br>
+&nbsp;&nbsp;<a href="host2.cpu.html">CPU</a><br>
+&nbsp;&nbsp;<a href="host2.bandwidth.html">Bandwidth</a><p>
+Name1<br>
+&nbsp;&nbsp;<a href="name1.cpu.html">CPU</a><br>
+&nbsp;&nbsp;<a href="name1.bandwidth.html">Bandwidth</a><p>
+Name2<br>
+&nbsp;&nbsp;<a href="name2.cpu.html">CPU</a><br>
+&nbsp;&nbsp;<a href="name2.bandwidth.html">Bandwidth</a><p>
+@

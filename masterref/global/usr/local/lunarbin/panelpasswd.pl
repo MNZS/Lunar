@@ -1,0 +1,278 @@
+#!/usr/bin/perl -w
+
+use strict;
+use Sys::Hostname;
+
+# this script break out the 4 groups for each domain
+# into corresponding .htpasswd files. it also appends
+# lunarhosting admins to each passwd file and if a 
+# domain is reseller owned, it appends the reseller
+# managers to the file.
+
+&make_hosting()
+  if (hostname() =~ /^host/);
+
+&add_users();
+
+## subroutines
+
+sub make_hosting {
+
+  my @users;
+
+  open(GRP,"/etc/group");
+
+  while(my $line = <GRP>) {
+    if ( (split(/:/,$line))[0] eq 'hosting' ) {
+      @users = split(/,/,(split(/:/,$line))[3]);
+    }
+  }
+
+  close(GRP);
+
+  open(PW,"/etc/shadow");
+  my @pw = <PW>;
+  close(PW);
+
+  open(OUT,">/etc/htsec/hosting.ht");
+ 
+  for my $user(@users) {
+    chomp $user;
+    for my $line(@pw) { 
+      if ( $user eq (split(/:/,$line))[0] ) {
+        print OUT $line 
+      }
+    }
+  }
+
+  close(PW);
+  close(OUT);
+
+}
+
+sub add_users {
+
+  chdir('/www');
+
+  my @domains = glob('*');
+
+  for my $fqdn(@domains) {
+
+    next if ( -l "/www/$fqdn" );
+    next if ( $fqdn eq 'lost+found' );
+
+    ## reduce $fqdn to the group name
+    my $base = $fqdn;
+    $base =~ s/^([a-z0-9\-]+)(?:\w{2,3})?\.\w{2,8}$/$1/;
+
+    open(GRP,"/etc/group");
+
+    my %adm_users;
+    my %pop_users;
+    my %sql_users;
+    my %ftp_users;
+    my %tmp_users;
+
+    ## build hashes of users and group names
+    while( my $i = <GRP> ) {
+
+      my @group_line = split(/:/,$i);
+
+      if ( $group_line[0] eq "adm_$base" ) {
+
+        $adm_users{$base} = [ split(/,/, $group_line[3]) ];
+      }
+
+      if ( $group_line[0] eq "$base" ) {
+
+        $pop_users{$base} = [ split(/,/, $group_line[3]) ];
+      }
+
+      if ( $group_line[0] eq "sql_$base" ) {
+
+        $sql_users{$base} = [ split(/,/, $group_line[3]) ];
+      }
+
+      if ( $group_line[0] eq "ftp_$base" ) {
+
+        $ftp_users{$base} = [ split(/,/, $group_line[3]) ];
+      }
+
+      if ( $group_line[0] eq "tmp_$base" ) {
+ 
+        $tmp_users{$base} = [ split(/,/, $group_line[3]) ];
+
+      }
+
+    }
+
+    close(GRP);
+
+    open(PW,"/etc/shadow");
+
+    my @pwfile = <PW>;
+
+    close(PW);
+
+    ## open our password files
+    open(ADM,">/www/$fqdn/options/passwd/adm-$fqdn");
+    open(POP,">/www/$fqdn/options/passwd/pop-$fqdn");
+    open(SQL,">/www/$fqdn/options/passwd/sql-$fqdn");
+    open(FTP,">/www/$fqdn/options/passwd/ftp-$fqdn");
+    open(TMP,">/www/$fqdn/options/passwd/tmp-$fqdn");
+
+    ##
+    for my $i(@pwfile) {
+
+      my @password = split(/:/,$i);
+
+      for my $user(@{$adm_users{$base}}) {
+        chomp $user;
+        print ADM $i
+          if ($user eq $password[0]);
+      }
+
+      for my $user(@{$pop_users{$base}}) {
+        chomp $user;
+        print POP $i
+          if ($user eq $password[0]);
+      }
+
+      for my $user(@{$sql_users{$base}}) {
+        chomp $user;
+        print SQL $i
+          if ($user eq $password[0]);
+      }
+
+      for my $user(@{$ftp_users{$base}}) {
+        chomp $user;
+        print FTP $i
+          if ($user eq $password[0]);
+      }
+
+      for my $user(@{$tmp_users{$base}}) {
+        chomp $user;
+        print TMP $i
+          if ($user eq $password[0]);
+      }
+    }
+
+    close(SQL);
+    close(POP);
+    close(ADM);
+    close(FTP);
+    close(TMP);
+
+    &add_lunar("$fqdn");
+
+    &add_reseller("$fqdn");
+ 
+  }
+
+}
+
+sub add_lunar {
+
+  my $fqdn = shift;
+
+  my $base = $fqdn;
+  $base =~ s/^([a-z0-9\-]+)(?:\w{2,3})?\.\w{2,8}$/$1/;
+
+  my @admin = qw(cmenzes craig scott);
+
+  open(PW,"/etc/shadow");
+
+  ## open our password files
+  open(ADM,">>/www/$fqdn/options/passwd/adm-$fqdn");
+  open(POP,">>/www/$fqdn/options/passwd/pop-$fqdn");
+  open(SQL,">>/www/$fqdn/options/passwd/sql-$fqdn");
+  open(FTP,">>/www/$fqdn/options/passwd/ftp-$fqdn");
+  open(TMP,">>/www/$fqdn/options/passwd/tmp-$fqdn");
+
+  while (my $i = <PW>) {
+
+    for my $lunar(@admin) {
+
+      if ($lunar eq (split(/:/,$i))[0]) {
+
+        print SQL $i;
+        print ADM $i;
+        print POP $i;
+        print FTP $i;
+        print TMP $i;
+
+      }
+    }
+  }
+
+  close(SQL);
+  close(POP);
+  close(ADM);
+  close(FTP);
+  close(TMP);
+
+  close(PW);
+
+}
+  
+sub add_reseller {
+
+  my $fqdn = shift;
+
+  if (!-e "/etc/hosting-options/$fqdn/reseller") {
+
+    return 1;
+
+  } else {
+
+    my $base = $fqdn;
+    $base =~ s/^([a-z0-9\-]+)(?:\w{2,3})?\.\w{2,8}$/$1/;
+
+    open(FH,"/etc/hosting-options/$fqdn/reseller");
+
+    my $reseller = <FH>; chomp $reseller;
+
+    close(FH);
+
+    open(GF,"/etc/group");
+
+    my @admins;
+    while (my $i = <GF>) {
+
+      if ((split(/:/,$i))[0] eq "adm_$reseller") {
+
+        @admins = split(/,/,(split(/:/,$i))[3]);
+
+      }
+
+    }
+
+    close(GF);
+
+    open(PW,"/etc/shadow");
+ 
+    ## open our password files
+    open(ADM,">>/www/$fqdn/options/passwd/adm-$fqdn");
+    open(POP,">>/www/$fqdn/options/passwd/pop-$fqdn");
+    open(SQL,">>/www/$fqdn/options/passwd/sql-$fqdn");
+    open(FTP,">>/www/$fqdn/options/passwd/ftp-$fqdn");
+
+    while( my $i = <PW> ) {
+
+      for my $admin(@admins) {
+        
+        chomp $admin;
+
+        if ( $admin eq (split(/:/,$i))[0] ) {
+ 
+          print ADM $i;
+          print SQL $i;
+          print FTP $i;
+          print POP $i;
+
+        }
+      }
+    }
+  }
+}
+

@@ -1,0 +1,60 @@
+head	1.2;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.2
+date	2003.06.05.16.20.33;	author root;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2003.06.05.16.17.10;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.2
+log
+@*** empty log message ***
+@
+text
+@$Id: restore-howto,v 1.1 2003/06/05 16:17:10 root Exp root $
+
+In a disaster situation, there is no easy method of pushing backup files
+to a remote host. You must restore the files from the backup directory
+to the remote host using scp. You may scp the files directly from name2 
+to the remote machine or you may first tar up the files needed and then
+scp them to the remote host.
+
+Since our servers run SSH on an alternate port, you will need to use the
+-P flag with scp to specify the port:
+
+  scp -P 8228 <origin> <destination>
+
+To scp a file to a remote machine, an example would be:
+
+  scp -P 8228 sendmail.cf host1:/etc/mail/sendmail.cf
+
+This will be changed in the future to use a frontend script.
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 1
+a1 1
+$Id:$
+d3 16
+a18 1
+In a disaster situation
+@

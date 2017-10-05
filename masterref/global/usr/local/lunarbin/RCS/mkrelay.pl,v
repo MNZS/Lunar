@@ -1,0 +1,466 @@
+head	1.18;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.18
+date	2003.08.27.19.02.25;	author root;	state Exp;
+branches;
+next	1.17;
+
+1.17
+date	2003.08.27.19.01.49;	author root;	state Exp;
+branches;
+next	1.16;
+
+1.16
+date	2003.08.27.19.01.31;	author root;	state Exp;
+branches;
+next	1.15;
+
+1.15
+date	2003.05.07.10.47.57;	author root;	state Exp;
+branches;
+next	1.14;
+
+1.14
+date	2003.05.07.10.42.17;	author root;	state Exp;
+branches;
+next	1.13;
+
+1.13
+date	2003.05.07.04.21.01;	author root;	state Exp;
+branches;
+next	1.12;
+
+1.12
+date	2003.05.07.04.17.39;	author root;	state Exp;
+branches;
+next	1.11;
+
+1.11
+date	2003.05.07.04.08.26;	author root;	state Exp;
+branches;
+next	1.10;
+
+1.10
+date	2003.05.07.00.18.56;	author root;	state Exp;
+branches;
+next	1.9;
+
+1.9
+date	2003.04.30.18.25.04;	author root;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	2003.04.28.19.37.07;	author root;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2003.04.19.16.26.26;	author root;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2003.04.19.16.24.44;	author root;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2003.04.19.16.24.06;	author root;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2003.04.19.16.23.07;	author root;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2003.04.17.23.06.42;	author root;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2003.04.17.23.06.08;	author root;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2003.04.17.23.05.28;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.18
+log
+@Added named.partners to the list of zones
+@
+text
+@#!/usr/bin/perl -w
+
+# $Id: mkrelay.pl,v 1.17 2003/08/27 19:01:49 root Exp root $
+
+use strict;
+use Sys::Hostname;
+use Rcs;
+
+# run only on nameservers
+if (hostname() !~ /^name/) {
+  exit 1;
+}
+
+&makeRelayFile;
+
+## SubRoutines ########################################
+
+sub makeRelayFile {
+  my $accessFile = '/etc/mail/access';
+  my $accessGlobal = '/etc/mail/include/access/global-config';
+  my @@zoneFiles = glob('/var/named/host*');
+  push @@zoneFiles, '/var/named/named.partners'; # 3rd party sites
+  my @@domainList;
+  my $restart = '/usr/local/lunarbin/mkmail.pl';
+
+  # collect list of our customer domains
+  for my $file(@@zoneFiles) {
+    open(FH,"$file") or die "Can't open $file : $!\n";
+    while (my $line = <FH>) {
+      next unless ($line =~ /^zone/);
+      chomp $line;
+      # |zone "wilsonparkfuneralhome.com" in {|
+      $line =~ s/^zone.+\"([\w\.\-]+)\".+{$/$1/g;
+      next if ($line =~ /in-addr.arpa$/);
+      push @@domainList, $line;
+    }
+    close(FH);
+  }
+
+  # be redundant for other hosts as well as domains
+  push @@domainList, "host1.lunarhosting.net";
+  push @@domainList, "host2.lunarhosting.net";
+  if (hostname() =~ /^name1/) {
+    push @@domainList, "name2.lunarhosting.net";
+  } elsif (hostname() =~ /^name2/) {
+    push @@domainList, "name1.lunarhosting.net";
+  } else {
+    print "\nThis doesn't appear to be running on either nameserver!\n\n";
+    exit;
+  }
+
+
+  # check out /etc/mail/access from rcs
+  # print new list of domains
+  # check in /etc/mail/access to rcs
+  # restart sendmail
+  my $rcs = Rcs->new;
+  $rcs->file('access');
+  $rcs->workdir('/etc/mail');
+  $rcs->rcsdir('/etc/mail/RCS');
+  $rcs->bindir('/usr/bin');
+  $rcs->co('-l');
+  open(FH,">$accessFile") or die "Can't open $accessFile : $!\n";
+  # print global params
+  open(GLOBAL,"$accessGlobal") or die "Can't open $accessGlobal : $!\n";
+  my @@global = <GLOBAL>;
+  close(GLOBAL);
+  for my $line(@@global) {
+    print FH $line;
+  }
+  # print per domain params
+  for my $domain(sort @@domainList) {
+    print FH "$domain\tRELAY\n";
+  }
+  close(FH);
+  $rcs->ci('-u','-mDomain Management');
+  
+
+  system("$restart");
+
+}
+@
+
+
+1.17
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+# $Id: mkrelay.pl,v 1.16 2003/08/27 19:01:31 root Exp root $
+d22 1
+a22 1
+  push @@zoneFiles, '/var/named/named.partners';
+@
+
+
+1.16
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+# $Id: mkrelay.pl,v 1.15 2003/05/07 10:47:57 root Exp root $
+d22 1
+a22 1
+  push @@zoneFiles '/var/named/named.partners';
+@
+
+
+1.15
+log
+@changed named to global-config rather than global-confg
+@
+text
+@d3 1
+a3 1
+# $Id: mkrelay.pl,v 1.14 2003/05/07 10:42:17 root Exp root $
+d22 1
+@
+
+
+1.14
+log
+@removed goFile needs
+@
+text
+@d3 1
+a3 1
+# $Id: mkrelay.pl,v 1.13 2003/05/07 04:21:01 root Exp root $
+d20 1
+a20 1
+  my $accessGlobal = '/etc/mail/include/access/global-confg';
+@
+
+
+1.13
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+# $Id: mkrelay.pl,v 1.12 2003/05/07 04:17:39 root Exp root $
+d14 1
+a14 4
+my $goFile = '/var/named/run/relay.go';
+
+# check for go file
+&checkGoFile;
+a17 8
+sub checkGoFile {
+  if (-e "$goFile") {
+    &makeRelayFile;
+  } else {
+    exit;
+  }
+}
+
+a79 2
+  unlink("$goFile")
+    or die "Can't unlink $goFile : $!\n";
+@
+
+
+1.12
+log
+@changed global config filename
+@
+text
+@d3 1
+a3 1
+# $Id: mkrelay.pl,v 1.11 2003/05/07 04:08:26 root Exp root $
+d69 1
+a69 1
+  $rcs->workdir('/etc/mail/');
+@
+
+
+1.11
+log
+@working on new method
+@
+text
+@d3 1
+a3 1
+# $Id: mkrelay.pl,v 1.10 2003/05/07 00:18:56 root Exp root $
+d31 1
+a31 1
+  my $accessGlobal = '/etc/mail/include/access/global';
+@
+
+
+1.10
+log
+@moving towards a new method of relay control using /etc/mail/access
+rather than a flat file
+@
+text
+@d3 1
+a3 1
+# $Id: mkrelay.pl,v 1.9 2003/04/30 18:25:04 root Exp root $
+d63 1
+a63 1
+  # check out /etc/mail/relay-domains from rcs
+d65 1
+a65 1
+  # check in /etc/mail/relay-domains to rcs
+d75 6
+a80 1
+  
+@
+
+
+1.9
+log
+@put the unlink of the gofile back into production
+@
+text
+@d3 1
+a3 1
+# $Id: mkrelay.pl,v 1.8 2003/04/28 19:37:07 root Exp root $
+d30 2
+a31 1
+  my $relayDomains = '/etc/mail/relay-domains';
+d68 1
+a68 1
+  $rcs->file('relay-domains');
+d73 4
+a76 1
+  open(FH,">$relayDomains") or die "Can't open $relayDomains : $!\n";
+d78 1
+a78 1
+    print FH "$domain\n";
+@
+
+
+1.8
+log
+@put relay.go file into production
+@
+text
+@d3 1
+a3 1
+# $Id: mkrelay.pl,v 1.7 2003/04/19 16:26:26 root Exp root $
+d82 2
+a83 2
+  #unlink("$goFile")
+  #  or die "Can't unlink $goFile : $!\n";
+@
+
+
+1.7
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+# $Id: mkrelay.pl,v 1.6 2003/04/19 16:24:44 root Exp root $
+d17 1
+a17 4
+#&checkGoFile;
+
+# until zoneupdate is rewritten, just run.
+&makeRelayFile;
+@
+
+
+1.6
+log
+@missing ;
+@
+text
+@d3 1
+a3 1
+# $Id: mkrelay.pl,v 1.5 2003/04/19 16:24:06 root Exp root $
+a47 10
+      push @@domainList, "host1.lunarhosting.net";
+      push @@domainList, "host2.lunarhosting.net";
+      if (hostname() =~ /^name1/) {
+        push @@domainList, "name2.lunarhosting.net";
+      } elsif (hostname() =~ /^name2/) {
+        push @@domainList, "name1.lunarhosting.net";
+      } else {
+        print "\nThis doesn't appear to be running on either nameserver!\n\n";
+        exit;
+      }
+d52 13
+@
+
+
+1.5
+log
+@added host servers to list
+@
+text
+@d3 1
+a3 1
+# $Id: mkrelay.pl,v 1.4 2003/04/19 16:23:07 root Exp root $
+d47 1
+a47 1
+      push @@domainList, $line
+@
+
+
+1.4
+log
+@added name1 and name2 redundant for their each other's mail
+@
+text
+@d3 1
+a3 1
+# $Id: mkrelay.pl,v 1.3 2003/04/17 23:06:42 root Exp root $
+d48 2
+@
+
+
+1.3
+log
+@commented out unlink
+@
+text
+@d3 1
+a3 1
+# $Id: mkrelay.pl,v 1.2 2003/04/17 23:06:08 root Exp root $
+d48 8
+@
+
+
+1.2
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+# $Id: mkrelay.pl,v 1.1 2003/04/17 23:05:28 root Exp root $
+d72 2
+a73 2
+  unlink("$goFile")
+    or die "Can't unlink $goFile : $!\n";
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d3 1
+a3 1
+# $Id:$
+d17 4
+a20 1
+&checkGoFile;
+@

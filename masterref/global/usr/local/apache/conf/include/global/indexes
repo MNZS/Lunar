@@ -1,0 +1,15 @@
+## directory index
+<IfModule mod_dir.c>
+  DirectoryIndex \
+    index.html \
+    index.htm \
+    index.shtml \
+    index.cgi \
+    index.php \
+    default.htm \
+    default.html \
+    default.asp \
+    home.htm \
+    home.html \
+    merchant.mv
+</IfModule>

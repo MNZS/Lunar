@@ -1,0 +1,79 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.1
+date	2003.06.05.16.15.14;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@$Id: masterref-howto,v 1.1 2003/01/01 00:23:31 root Exp $
+
+The Reference System allows for a repository of files to be maintained
+as master copies which are then copied to multiple locations to be used
+by various applications. This will allow for a change in a single copy 
+to be immediately propogated across applications using it. 
+
+The Reference System is a Local system and used to copy files on a single
+machine. The Reference System repository is located in /usr/local/ref.
+Files held in this directory are copied to various locations on the server
+for use by applications. Some examples would be 
+
+ phpMyAdmin
+ Miva 
+ Control Panel
+ Hosting cgi-bin
+
+Typically these files are propogated to their respective areas through a
+script which automates the procedure and limits the possibility of typos
+and other mistakes. Some of these scripts are
+
+ ref.pl
+ newclient.pl
+
+In a multiple server environment, the challenge is escalated to keep a
+consistency in files that are identical on several hosts. For this purpose
+the Master Reference System is used. The Master Reference System is held
+on masterref.lunarhosting.net. The file repository is held in the directory
+/usr/local/masterref.
+The Master Reference System hold a number of files and directories which
+are essentially identical across all Lunar Hosting servers. They are held
+in their pristine state in the file repository. Once a change is made to a
+file or a file added/removed, the change must then be propogated to all
+servers in the network. This is achieved via the script
+
+ /usr/local/masterbin/masterref.pl
+
+The masterref.pl script read in a finite list of files and directories which
+are to be copied across all servers. This list is called the sources file 
+and can be found at
+
+ /usr/local/masterbin/sources
+
+This file is extremely important and should be edited carefully! Details on
+the file syntax are held within the file itself.
+
+In all cases where a file can be made globally identical across servers, it
+should be held in the Master Reference System.
+
+
+With multiple servers, there are certain files that will be identical
+across each host. When a change is made to one of these files, it 
+becomes tedious to maintain consistency. In times of emergency, a file
+needing to be updated immediately to all hosts, will need to be manually
+copied. 
+
+@

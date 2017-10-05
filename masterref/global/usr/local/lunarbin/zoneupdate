@@ -1,0 +1,66 @@
+#!/usr/bin/perl -w
+
+# $Id: zoneupdate,v 1.8 2003/05/07 10:43:45 root Exp $
+
+use strict;
+use Net::SSH::Perl;
+use Sys::Hostname;
+use POSIX qw(strftime);
+
+# This script is used to copy a newly created dns slave configuration file
+# to a slave server in order for that server to pull the updated zone list
+
+my $today   = strftime("%Y%m%d-%H:%M:%S",localtime);
+my $srchost = hostname();
+my @dsthost = qw(name1.lunarhosting.net name2.lunarhosting.net);
+my $srcfile = "/var/named/slave_$srchost";
+my $dstfile = "/var/named/$srchost";
+my $backup  = "/var/named/systems/archives/$srchost-$today";
+my $copy    = "/bin/cp -f $dstfile $backup";
+my $user    = "dnsupdate";
+my $phrase  = 'I%2xl5-?Ql8';
+my $makego  = "echo \"  $srchost-$today\" >> /var/named/run/named.go";
+
+&backup_files();
+
+&copy_files();
+
+&create_go_file();
+
+sub backup_files {
+
+  for my $dsthost(@dsthost) {
+
+    my %params = ( port     => '9490', );
+    my $ssh = Net::SSH::Perl->new($dsthost, %params);
+    $ssh->login($user,$phrase);
+    $ssh->cmd($copy);
+    $ssh->cmd('logout');
+
+  }
+
+}
+
+sub copy_files {
+
+  for my $dsthost (@dsthost) {
+ 
+    system("scp -P 9490 $srcfile dnsupdate\@$dsthost:$dstfile");
+
+  }
+
+}
+
+sub create_go_file {
+
+  for my $dsthost (@dsthost) {
+
+    my %params = ( port => '9490', );
+    my $ssh = Net::SSH::Perl->new($dsthost, %params);
+    $ssh->login($user,$phrase);
+    $ssh->cmd($makego);
+    $ssh->cmd('logout');
+
+  }
+
+}

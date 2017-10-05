@@ -1,0 +1,47 @@
+$Id: TROUBLE-FAQ,v 1.1 2003/06/06 17:09:09 root Exp $
+
+This file is meant as a repository of problems that have come up which
+have caused customers major problems and have not had an obvious fix:
+
+
+*** SHOPZONE **************
+Q. Shopzone refuses to pull up any shopping cart pages. The error
+   coming up shows 'internal error'
+
+A. The access log for the site has become corrupted
+   1. cd /www/DOMAIN/pub/private_html/db/
+   2. Look for *.bad files. If they exist remove them using 'rm -f'
+   3. If they do not exist, rename the ACCESSLOG.cdx and ACCESSLOG.dbf
+      files. 'mv ACCESSLOG.cdx ACCESSLOG.cdx-bad'
+   4. Test to ensure that the website is running properly.
+
+
+
+*** PHP **************
+Q. Customer is passing variables from an html form to a PHP script and 
+   the variables do not appear to reach the script.
+
+A. As of PHP 4.2.x the engine variable 'register_globals' has been set to
+   'off' by default. This means that in order to use the variables passed
+   to the php script, the variables need to be localized. 
+   The customer *should* change their script to accomodate this feature
+   since it was turned off for security purposes. The following web page
+   discusses the matter further:
+   
+   http://us2.php.net/register_globals
+
+   If the client does not want to do this, or needs for the scripts to 
+   work immediately, you can enable this feature on a per website basis.
+
+   1. cd /usr/local/apache/conf/include/features/global/
+   2. vi http.DOMAIN and https.DOMAIN for the client's website
+   3. uncomment the line that enables the ICB include
+   4. cd /usr/local/apache/conf/include/features/icb/
+   5. create or edit http.DOMAIN and https.DOMAIN for the clients website
+   6. add the following to the file
+        php_flag register_globals on
+   7. gracefully restart apache
+   8. tail the /apachelog file to ensure it restarts correctly
+   9. test the clients script.
+
+   

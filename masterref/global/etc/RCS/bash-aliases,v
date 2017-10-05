@@ -1,0 +1,449 @@
+head	1.15;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.15
+date	2003.07.30.20.38.48;	author root;	state Exp;
+branches;
+next	1.14;
+
+1.14
+date	2003.07.30.20.31.04;	author root;	state Exp;
+branches;
+next	1.13;
+
+1.13
+date	2003.07.24.00.01.57;	author root;	state Exp;
+branches;
+next	1.12;
+
+1.12
+date	2003.07.23.15.57.15;	author root;	state Exp;
+branches;
+next	1.11;
+
+1.11
+date	2003.07.23.15.54.39;	author root;	state Exp;
+branches;
+next	1.10;
+
+1.10
+date	2003.05.14.20.32.43;	author root;	state Exp;
+branches;
+next	1.9;
+
+1.9
+date	2003.04.10.22.50.35;	author root;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	2003.04.08.17.49.47;	author root;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2003.03.06.18.40.33;	author root;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2003.03.06.16.40.07;	author root;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2003.03.05.08.07.24;	author root;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2003.03.05.08.04.52;	author root;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2003.03.05.08.02.06;	author root;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2003.03.05.08.00.08;	author root;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2003.03.05.07.53.17;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.15
+log
+@*** empty log message ***
+@
+text
+@## $Id: bash-aliases,v 1.14 2003/07/30 20:31:04 root Exp root $
+
+alias h='history 20'
+alias j='jobs -l'
+alias more='less'
+alias su='su -m'
+alias z='suspend'
+alias x='exit'
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+alias i='pine -i'
+alias c='clear'
+alias ls='ls -F --color=auto'
+
+alias t='whoami'
+
+if [ $UID -gt 499 ]; then
+  alias q='exit'
+else
+  alias q='echo "I am the sky."'
+fi 
+
+## server check
+alias ntcp='netstat -na | grep -i listen'
+alias nudp='netstat -na | grep -i udp'
+
+## lunarhosting servers
+alias h1='ssh -p9490 host1.lunarhosting.net'
+alias rh1='ssh -p9490 -l root host1.lunarhosting.net'
+alias h2='ssh -p9490 host2.lunarhosting.net'
+alias rh2='ssh -p9490 -l root host2.lunarhosting.net'
+alias n1='ssh -p9490 name1.lunarhosting.net'
+alias rn1='ssh -p9490 -l root name1.lunarhosting.net'
+alias n2='ssh -p9490 name2.lunarhosting.net'
+alias rn2='ssh -p9490 -l root name2.lunarhosting.net'
+
+## public route servers
+alias oregon='telnet route-views.oregon-ix.net'
+alias cerf='telnet route-server.cerf.net'
+alias att='telnet route-server.ip.att.net'
+alias bbn='telnet ner-routes.bbnplanet.net'
+alias exodus='telnet route-server.exodus.net'
+alias gblx='telnet route-server.gblx.net'
+alias bbn='telnet ner-routes.bbnplanet.net'
+
+## remote queries
+radb ()
+{
+        whois $1@@whois.radb.net
+}
+
+cwrr ()
+{
+        whois $1@@rr.cw.net
+}
+
+arin ()
+{
+        whois "$*"@@whois.arin.net
+}
+
+## tracing to providers
+function nsptrace { # traceroute to a given nsp - nsptrace <nsp>
+        case $1 in
+              att) traceroute www.att.net;;
+               uu) traceroute www.uu.net;;
+           sprint) traceroute www.sprint.net;;
+            verio) traceroute www.verio.net;;
+           netcom) traceroute www.icg.net;;
+               cw) traceroute www.cw.net;;
+              bbn) traceroute www.bbnplanet.com;;
+              psi) traceroute www.psi.net;;
+              fgc) traceroute www.gblx.net;;
+            qwest) traceroute www.qwest.net;;
+            digex) traceroute www.digex.net;;
+                *) echo "nsptrace <nsp>"; \
+                   echo -n "<nsp> = att, uu, sprint, verio, netcom, cw, "; \
+                   echo "bbn, psi, fgc, qwest, digex";;
+        esac
+}
+@
+
+
+1.14
+log
+@added stty erase line
+@
+text
+@d1 1
+a1 1
+## $Id: bash-aliases,v 1.13 2003/07/24 00:01:57 root Exp root $
+a81 2
+
+stty erase ^?
+@
+
+
+1.13
+log
+@added a whoami alias
+@
+text
+@d1 1
+a1 1
+## $Id: bash-aliases,v 1.12 2003/07/23 15:57:15 root Exp root $
+d82 2
+@
+
+
+1.12
+log
+@missing end quote
+@
+text
+@d1 1
+a1 1
+## $Id: bash-aliases,v 1.11 2003/07/23 15:54:39 root Exp root $
+d16 2
+@
+
+
+1.11
+log
+@*** empty log message ***
+@
+text
+@d1 1
+a1 1
+## $Id: bash-aliases,v 1.10 2003/05/14 20:32:43 root Exp root $
+d19 1
+a19 1
+  alias q='echo "I am the sky."
+@
+
+
+1.10
+log
+@added a check on uid for q=exit
+@
+text
+@d1 1
+a1 1
+## $Id: bash-aliases,v 1.9 2003/04/10 22:50:35 root Exp root $
+d18 3
+a20 1
+fi
+@
+
+
+1.9
+log
+@added netstat commands
+@
+text
+@d1 1
+a1 1
+## $Id: bash-aliases,v 1.8 2003/04/08 17:49:47 root Exp root $
+d15 4
+a18 1
+alias q='exit'
+@
+
+
+1.8
+log
+@changed ssh port
+@
+text
+@d1 1
+a1 1
+## $Id: bash-aliases,v 1.7 2003/03/06 18:40:33 root Exp root $
+d17 4
+@
+
+
+1.7
+log
+@removed the -l from h1 h2 n1 n2 since its no longer necessary
+@
+text
+@d1 1
+a1 1
+## $Id: bash-aliases,v 1.6 2003/03/06 16:40:07 root Exp root $
+d18 8
+a25 8
+alias h1='ssh -p8228 host1.lunarhosting.net'
+alias rh1='ssh -p8228 -l root host1.lunarhosting.net'
+alias h2='ssh -p8228 host2.lunarhosting.net'
+alias rh2='ssh -p8228 -l root host2.lunarhosting.net'
+alias n1='ssh -p8228 name1.lunarhosting.net'
+alias rn1='ssh -p8228 -l root name1.lunarhosting.net'
+alias n2='ssh -p8228 name2.lunarhosting.net'
+alias rn2='ssh -p8228 -l root name2.lunarhosting.net'
+@
+
+
+1.6
+log
+@*** empty log message ***
+@
+text
+@d1 1
+a1 1
+## $Id: bash-aliases,v 1.5 2003/03/05 08:07:24 root Exp root $
+d18 1
+a18 1
+alias h1='ssh -p8228 -l  host1.lunarhosting.net'
+d20 1
+a20 1
+alias h2='ssh -p8228 -l  host2.lunarhosting.net'
+d22 1
+a22 1
+alias n1='ssh -p8228 -l  name1.lunarhosting.net'
+d24 1
+a24 1
+alias n2='ssh -p8228 -l  name2.lunarhosting.net'
+@
+
+
+1.5
+log
+@added route servers
+@
+text
+@d1 1
+a1 1
+## $Id: bash-aliases,v 1.4 2003/03/05 08:04:52 root Exp root $
+d16 2
+d26 2
+d35 36
+@
+
+
+1.4
+log
+@removed cmenzes
+@
+text
+@d1 1
+a1 1
+## $Id: bash-aliases,v 1.3 2003/03/05 08:02:06 root Exp root $
+d24 7
+@
+
+
+1.3
+log
+@*** empty log message ***
+@
+text
+@d1 1
+a1 1
+## $Id: bash-aliases,v 1.2 2003/03/05 08:00:08 root Exp root $
+d16 1
+a16 1
+alias h1='ssh -p8228 -l cmenzes host1.lunarhosting.net'
+d18 1
+a18 1
+alias h2='ssh -p8228 -l cmenzes host2.lunarhosting.net'
+d20 1
+a20 1
+alias n1='ssh -p8228 -l cmenzes name1.lunarhosting.net'
+d22 1
+a22 1
+alias n2='ssh -p8228 -l cmenzes name2.lunarhosting.net'
+@
+
+
+1.2
+log
+@*** empty log message ***
+@
+text
+@d1 1
+a1 3
+## $Id: bash-aliases,v 1.1 2003/03/05 07:53:17 root Exp root $
+
+## Common list of aliases and functions
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 1
+a1 1
+## $Id:$
+a25 65
+
+# general functions
+#
+function cleancontrols { # strip all control chars
+        tr -d '\00-\011'< "$*" | tr -d '\013-\037';
+        }
+
+# queries with registrars and network admin
+#
+wis ()
+{
+        whois $1@@whois.networksolutions.com | more
+}
+
+radb ()
+{
+        whois $1@@whois.radb.net
+}
+
+cwrr ()
+{
+        whois $1@@rr.cw.net
+}
+
+arin ()
+{
+        whois "$*"@@whois.arin.net
+}
+
+# traceroute to nsps
+function nsptrace { # traceroute to a given nsp - nsptrace <nsp>
+        case $1 in
+              att) traceroute www.att.net;;
+               uu) traceroute www.uu.net;;
+           sprint) traceroute www.sprint.net;;
+            verio) traceroute www.verio.net;;
+           netcom) traceroute www.icg.net;;
+               cw) traceroute www.cw.net;;
+              bbn) traceroute www.bbnplanet.com;;
+              psi) traceroute www.psi.net;;
+              fgc) traceroute www.gblx.net;;
+            qwest) traceroute www.qwest.net;;
+            digex) traceroute www.digex.net;;
+                *) echo "nsptrace <nsp>"; \
+                   echo -n "<nsp> = att, uu, sprint, verio, netcom, cw, "; \
+                   echo "bbn, psi, fgc, qwest, digex";;
+        esac
+}
+
+# route servers
+alias oregon='telnet route-views.oregon-ix.net'
+alias cerf='telnet route-server.cerf.net'
+alias att='telnet route-server.ip.att.net'
+alias bbn='telnet ner-routes.bbnplanet.net'
+alias exodus='telnet route-server.exodus.net'
+alias icg='ssh -linternap netcom.netcom.com' # pass:admin1
+alias gblx='telnet route-server.gblx.net'
+alias bbn='telnet ner-routes.bbnplanet.net '
+alias genuity='telnet -l guest guest.bbnplanet.com' #pass:c6327638
+alias verio='ssh -l internap blaze.accessone.com' #pass:pnap123
+alias qwest='ssh -l gos goz.qwest.net' #pass:abt1m3
+alias icg='ssh -l internap netcom.netcom.com' #pass:admin1
+
+## for delete
+stty erase ^?
+@

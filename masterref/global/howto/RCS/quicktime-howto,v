@@ -1,0 +1,31 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.1
+date	2003.06.05.16.15.14;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@$Id: quicktime-howto,v 1.2 2003/01/28 04:59:29 root Exp $
+
+DSS Administrator Username : qtadmin
+DSS Administrator Password : dyq4o3w
+
+MP3 Streaming Server Password : j3ha3w
+
+
+@

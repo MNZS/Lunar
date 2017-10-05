@@ -1,0 +1,6 @@
+## webpublisher
+Alias /webpublisher /www/DOMAIN/webpublisher
+<Directory /www/DOMAIN/webpublisher>
+  AllowOverride All
+  Options +ExecCGI FollowSymLinks
+</Directory>

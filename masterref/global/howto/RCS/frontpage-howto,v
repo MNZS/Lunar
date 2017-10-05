@@ -1,0 +1,117 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.1
+date	2003.06.05.16.15.14;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@$Id: frontpage-howto,v 1.1 2002/10/06 14:36:23 charles Exp $
+
+This document covers how to install, upgrade and troubleshoot frontpage
+server extensions for the apache webserver on the Lunar Hosting webservers.
+
+Apache Frontpage Server Extensions are developed by a company called 
+Ready to Run Software. Their homepage can be found at www.rtr.com. Although
+this company created the extensions for Apache, they did a poor job at
+documenting them. There is an FAQ and a bulletin board on the website that
+do provide some information, however it is mediocre at best.
+
+* Installation
+To enable frontpage extensions for a brand new website, the 'mkfp' script
+was created. This script is meant to be used as a method for installing 
+frontpage extensions on a BRAND NEW website, and NOT meant to be used to
+re-install extensions on a website. The syntax is as follows
+
+  mkfp --install DOMAIN.COM
+
+Substitute the actual customer's domain WITHOUT the 'www' for the DOMAIN.COM
+portion of the command line. An example would be
+
+  mkfp --install lunarhosting.net
+
+This script makes several changes to the customer's website directory as
+well as to the httpd configuration files. Run this script carefully!
+
+During the script's run, you will be prompted for a Frontpage Username and
+Password. Enter them at the prompt when you are requested. Once you have 
+completed entering both items, the site will be installed. You should not
+see any error messages.
+
+The webserver does NOT need to be restarted. The frontpage extensions should
+be immediately available.
+
+* Upgrade
+From time to time, a site may need to be upgraded. This may need to be done
+when a new version of frontpage extensions becomes available, or at times
+for an unknown reason, apache fails to recognize the frontpage extensions and
+the site will need an upgrade to correct the issue. The command to perform
+this is 
+
+  mkfp --upgrade DOMAIN.COM
+
+* Change the Password for an Apache Frontpage site.
+Another option which may need to be edited on an Apache Frontpage Site is the
+Frontpage Username or Password used to administrate the web. This must be 
+done from the command line and uses the standard 'htpasswd' syntax. 
+The password file for the site resides in
+
+ /www/DOMAIN/pub/public_html/_vti_pvt/service.pwd
+
+This file will contain two items, a comment noting the file is Frontpage 
+owned, and the entry for the username. An example would be:
+
+ # -FrontPage-
+ des:R6mPzCGFOl0ls
+
+To change the password for the existing username, change directory in the 
+'_vti_pvt' for the domain you would like to effect. Issue the command
+
+ htpasswd service.pwd USER
+
+Substitute the actual username for USER. You will be prompted to enter the
+new password and then confirm it by typing it again. Once you have done so,
+the new password should be immediately available.
+
+* Change the Username for an Apache Frontpage site.
+In the event that the username for administrating an Apache Frontpage site
+needs to be changed, the following steps should be followed.
+
+ 1. change diretory to /www/DOMAIN/pub/public_html/_vti_pvt for the domain
+    you would like to effect
+
+ 2. edit the service.pwd file and remove the line that contains the current
+    username. In the example above, you would remove the following line:
+
+     des:R6mPzCGFOl0ls
+
+ 3. Run the htpasswd command using the new user's name.
+
+      htpasswd service.pwd USER
+
+ 4. Look in the service.pwd file to verify that there is an entry for the
+    new username.
+
+ 5. Next edit the service.grp file. Replace the old username with the new.
+    An example of the file would be:
+
+     # -FrontPage-
+     administrators: des
+     authors:
+
+The change should be immediate.
+@

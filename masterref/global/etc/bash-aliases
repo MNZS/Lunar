@@ -1,0 +1,81 @@
+## $Id: bash-aliases,v 1.15 2003/07/30 20:38:48 root Exp $
+
+alias h='history 20'
+alias j='jobs -l'
+alias more='less'
+alias su='su -m'
+alias z='suspend'
+alias x='exit'
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+alias i='pine -i'
+alias c='clear'
+alias ls='ls -F --color=auto'
+
+alias t='whoami'
+
+if [ $UID -gt 499 ]; then
+  alias q='exit'
+else
+  alias q='echo "I am the sky."'
+fi 
+
+## server check
+alias ntcp='netstat -na | grep -i listen'
+alias nudp='netstat -na | grep -i udp'
+
+## lunarhosting servers
+alias h1='ssh -p9490 host1.lunarhosting.net'
+alias rh1='ssh -p9490 -l root host1.lunarhosting.net'
+alias h2='ssh -p9490 host2.lunarhosting.net'
+alias rh2='ssh -p9490 -l root host2.lunarhosting.net'
+alias n1='ssh -p9490 name1.lunarhosting.net'
+alias rn1='ssh -p9490 -l root name1.lunarhosting.net'
+alias n2='ssh -p9490 name2.lunarhosting.net'
+alias rn2='ssh -p9490 -l root name2.lunarhosting.net'
+
+## public route servers
+alias oregon='telnet route-views.oregon-ix.net'
+alias cerf='telnet route-server.cerf.net'
+alias att='telnet route-server.ip.att.net'
+alias bbn='telnet ner-routes.bbnplanet.net'
+alias exodus='telnet route-server.exodus.net'
+alias gblx='telnet route-server.gblx.net'
+alias bbn='telnet ner-routes.bbnplanet.net'
+
+## remote queries
+radb ()
+{
+        whois $1@whois.radb.net
+}
+
+cwrr ()
+{
+        whois $1@rr.cw.net
+}
+
+arin ()
+{
+        whois "$*"@whois.arin.net
+}
+
+## tracing to providers
+function nsptrace { # traceroute to a given nsp - nsptrace <nsp>
+        case $1 in
+              att) traceroute www.att.net;;
+               uu) traceroute www.uu.net;;
+           sprint) traceroute www.sprint.net;;
+            verio) traceroute www.verio.net;;
+           netcom) traceroute www.icg.net;;
+               cw) traceroute www.cw.net;;
+              bbn) traceroute www.bbnplanet.com;;
+              psi) traceroute www.psi.net;;
+              fgc) traceroute www.gblx.net;;
+            qwest) traceroute www.qwest.net;;
+            digex) traceroute www.digex.net;;
+                *) echo "nsptrace <nsp>"; \
+                   echo -n "<nsp> = att, uu, sprint, verio, netcom, cw, "; \
+                   echo "bbn, psi, fgc, qwest, digex";;
+        esac
+}

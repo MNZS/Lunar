@@ -1,0 +1,91 @@
+  <IfModule mod_mime.c>
+    TypesConfig /usr/local/apache/conf/mime.types
+  </IfModule>
+
+  DefaultType text/plain
+
+  <IfModule mod_mime_magic.c>
+    MIMEMagicFile /usr/local/apache/conf/magic
+  </IfModule>
+
+  <IfModule mod_mime.c>
+
+    AddEncoding x-compress Z
+    AddEncoding x-gzip gz tgz
+
+    AddLanguage da .dk
+    AddLanguage nl .nl
+    AddLanguage en .en
+    AddLanguage et .ee
+    AddLanguage fr .fr
+    AddLanguage de .de
+    AddLanguage el .el
+    AddLanguage he .he
+    AddCharset ISO-8859-8 .iso8859-8
+    AddLanguage it .it
+    AddLanguage ja .ja
+    AddCharset ISO-2022-JP .jis
+    AddLanguage kr .kr
+    AddCharset ISO-2022-KR .iso-kr
+    AddLanguage nn .nn
+    AddLanguage no .no
+    AddLanguage pl .po
+    AddCharset ISO-8859-2 .iso-pl
+    AddLanguage pt .pt
+    AddLanguage pt-br .pt-br
+    AddLanguage ltz .lu
+    AddLanguage ca .ca
+    AddLanguage es .es
+    AddLanguage sv .se
+    AddLanguage cz .cz
+    AddLanguage ru .ru
+    AddLanguage zh-tw .tw
+    AddLanguage tw .tw
+    AddCharset Big5         .Big5    .big5
+    AddCharset WINDOWS-1251 .cp-1251
+    AddCharset CP866        .cp866
+    AddCharset ISO-8859-5   .iso-ru
+    AddCharset KOI8-R       .koi8-r
+    AddCharset UCS-2        .ucs2
+    AddCharset UCS-4        .ucs4
+    AddCharset UTF-8        .utf8
+
+    <IfModule mod_negotiation.c>
+        LanguagePriority en da nl et fr de el it ja kr no pl pt pt-br ru ltz ca es sv tw
+    </IfModule>
+
+    #
+    # For example, the PHP 3.x module (not part of the Apache distribution - see
+    # http://www.php.net) will typically use:
+    #
+    #AddType application/x-httpd-php3 .php3
+    #AddType application/x-httpd-php3-source .phps
+    #
+    # And for PHP 4.x, use:
+    #
+    #AddType application/x-httpd-php .php
+    #AddType application/x-httpd-php-source .phps
+
+    AddType application/x-tar .tgz
+
+    AddHandler cgi-script .cgi
+
+    AddType text/html .shtml
+    AddHandler server-parsed .shtml
+
+
+  </IfModule>
+  # End of document types.
+
+  # Customize behaviour based on the browser
+  <IfModule mod_setenvif.c>
+
+    BrowserMatch "Mozilla/2" nokeepalive
+    BrowserMatch "MSIE 4\.0b2;" nokeepalive downgrade-1.0 force-response-1.0
+
+    BrowserMatch "RealPlayer 4\.0" force-response-1.0
+    BrowserMatch "Java/1\.0" force-response-1.0
+    BrowserMatch "JDK/1\.0" force-response-1.0
+
+  </IfModule>
+  # End of browser customization directives

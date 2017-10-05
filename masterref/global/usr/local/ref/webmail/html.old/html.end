@@ -1,0 +1,14 @@
+	</td>
+</tr>
+<tr bgcolor="#FFFFFF"><td><img src="%%imageshttp%%/dot_clear.gif" width="1" height="16"></td></tr>
+<tr height="5" bgcolor="%%bgcolor%%"><td background="%%imageshttp%%/line_bottom.gif"><img src="%%imageshttp%%/dot_clear.gif" width="1" height="5"></td></tr>
+<tr bgcolor="%%bgcolor%%">
+	<td align="right"><img src="%%imageshttp%%/dot_clear.gif" width="1" height="5" border="0"></td>
+</tr>
+<tr bgcolor="%%bgcolor%%">
+	<td align="right"><a href="http://www.cascadesoft.com/"><img src="%%imageshttp%%/footer.gif" width="58" height="14" border="0" alt="W3Mail 1.0.5"></a></td>
+</tr>
+</table>
+
+</body>
+</html>

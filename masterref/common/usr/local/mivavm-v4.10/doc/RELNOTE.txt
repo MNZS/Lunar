@@ -1,0 +1,34 @@
+Miva Virtual Machine 4.10
+Release Notes
+
+The Miva Virtual Machine 4.10, released August 2003, includes the following:
+
+Bug Fixes
+---------
+
+o  LinkPoint commerce libraries now entity encode text such as company 
+   names and other billing information, to enable customers with characters
+   such as "&" in their names to work correctly.
+
+o  If the LinkPoint commerce library is not explicitly passed 
+   req_addrnum field, the req_baddr1 field MUST contain a digit
+   or list of contiguous digits, or an "Invalid billing address 
+   information"
+
+o  If the req_addrnum field is explicitly passed to the LinkPoint
+   commerce library, it cannot be blank or zero.
+
+
+New Features
+------------
+
+o  Support for FreeBSD4 with pthreads.
+
+o  MvCONFIG_FLAGS_REDIRECTONLY, if set (to any value) will cause the
+   environment based config to do a redirect-check and refuse to run if not
+   running under Apache redirect.
+
+o  MvCONFIG_VALIDEXTENSIONS, if set, contains a comma-separated list of
+   extensions that are allowed.
+
+

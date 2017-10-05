@@ -1,0 +1,72 @@
+head	1.4;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.4
+date	2003.06.21.12.40.30;	author root;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2003.01.23.20.47.12;	author root;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2003.01.23.20.43.03;	author root;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2003.01.05.05.34.49;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.4
+log
+@*** empty log message ***
+@
+text
+@cmenzes@@name2.lunarhosting.net
+@
+
+
+1.3
+log
+@*** empty log message ***
+@
+text
+@d1 1
+a1 1
+nospam
+@
+
+
+1.2
+log
+@sent to nospam
+@
+text
+@d1 1
+a1 1
+nospam@@lunarhosting.net
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 1
+a1 1
+admin@@lunarhosting.net
+@

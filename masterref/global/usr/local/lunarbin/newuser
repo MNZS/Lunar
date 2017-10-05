@@ -1,0 +1,247 @@
+#!/usr/bin/perl -w
+
+# $Id: newuser,v 1.1 2003/04/02 19:08:41 root Exp $
+
+# script used to add a user for a hosting client and assign them to the
+# appropriate group
+
+use strict;
+use Passwd::Linux qw(modpwinfo mgetpwnam);
+use String::Random;
+use Term::ReadKey;
+
+my $shell = "/bin/false";
+
+## request the domain name
+print "\nWhat is the domain this user will be associated with?\n";
+print "(This should be in the format of \"domain.com\")\n";
+my $domain = <STDIN>;
+
+## clean up submitted domain name
+chomp $domain; ## get rid of trailing newline
+$domain =~ tr/A-Z/a-z/; ## get rid of any capital letters
+$domain =~ s/ //g; ## get rid of any spaces;
+$domain =~ s/[^a-z\-\0-9]//g; ## get rid of any illegal characters
+
+## if client users dir does not exist, exit
+if ( !-e "/home/clients/$domain" ) {
+
+  print "\nThe directory /home/clients/$domain does not exist!\n";
+  print "Are you sure you typed in the correct domain?\n\n";
+
+  exit 1;
+}
+
+my $group = $domain;
+
+## clean up the group name so it matches the standard
+$group =~ s/^(?:www\.)?([\w\-]+)(?:\.\w{2,3})(?:\.\w{2})?$/$1/;
+
+## show the user the group name and domain so they can approve it
+print "\n";
+print "Users added will be authoritative for : www.$domain\n";
+print "Users added with belong to the group : $group\n\n";
+
+print "Is this correct?(y/N) ";
+
+## grab user response
+my $answer = <STDIN>;
+
+## clean up the response
+$answer =~ tr/A-Z/a-z/;
+$answer =~ s/ //g;
+$answer = (substr($answer,0,1,0));
+
+if ($answer eq "y") {
+
+  &add_user;
+
+} else {
+
+  print "\nNo changes were made...\n\n";
+
+  exit 0;
+
+}
+
+### subroutines ###
+
+## gather info for new user
+sub add_user {
+
+  ## prompt for username and info
+  print "\nUsername: ";
+  my $username = <STDIN>;
+
+  chomp $username;
+
+  ## check if user exists
+  my $err = &check_for_user("$username");
+
+  die "I'm sorry, $username already exists on the system.\n\n"
+    if $err;
+
+  ## set home directory information
+  my $home = "/home/clients/$domain/$username";
+
+  ## prompt for GECOS info
+  print "\n";
+  print "Real Name: ";
+  my $gecos = <STDIN>;
+
+  chomp $gecos;
+
+  ## prompt for password
+  my $password = &get_passwd;
+
+  ## set up some variables for the useradd command flags
+  my $gid = "hosting,$group";
+
+  ## check to see if the user is an admin
+  print "\nWill the user need Admin Powers?(y/N) ";
+
+  ## grab user response
+  my $adm_answer = <STDIN>;
+
+  ## clean up the response
+  $adm_answer =~ tr/A-Z/a-z/;
+  $adm_answer =~ s/ //g;
+  $adm_answer = (substr($adm_answer,0,1,0));
+
+  if ($adm_answer eq "y") {
+
+      $gid = $gid . ",adm_$group";
+
+  }
+
+  ## check to see if the user needs ftp right
+  print "Will the user need FTP Access?(y/N) ";
+
+  ## grab user response
+  my $ftp_answer = <STDIN>;
+
+  ## clean up the response
+  $ftp_answer =~ tr/A-Z/a-z/;
+  $ftp_answer =~ s/ //g;
+  $ftp_answer = (substr($ftp_answer,0,1,0));
+
+  if ($ftp_answer eq "y") {
+
+    $gid = $gid . ",ftp_$group";
+
+  }
+
+
+  ## add user
+  system("/usr/sbin/useradd -c \"$gecos\" -d \"$home\" -G \"$gid\" -s \"$shell\" -p \"$password\" $username");
+
+  ## show successful output
+  print "\nSuccess! " . uc($username) . " added to the system!\n";
+
+  ## add to the pop3 users file
+  &add_to_pop($username);
+
+  ## prompt if they will add another user
+  &request_another;
+
+}
+
+sub check_for_user {
+
+  my $username = shift;
+  chomp $username;
+
+  my $check = mgetpwnam("$username");
+
+  return 1 if ($check);
+ 
+}
+
+sub request_another {
+
+  print "\nAdd another?(Y/n) ";
+
+  ## grab user response
+  my $answer = <STDIN>;
+
+  ## clean up the response
+  $answer =~ tr/A-Z/a-z/;
+  $answer =~ s/ //g;
+  $answer = (substr($answer,0,1,0));
+
+  if ($answer eq "y") {
+
+    &add_user;
+
+  } else {
+
+    exit 0;
+  
+  }
+}
+
+sub get_passwd {
+
+  ## prompt for password
+  print "\n";
+  print "Password should be 4-8 characters long\n";
+  print "Password: ";
+
+  ## turn off echo
+  ReadMode('noecho');
+  my $first_pass = <STDIN>;
+  ## turn on echo
+  ReadMode('restore');
+
+  chomp $first_pass;
+  
+  ## repeat password
+  print "\n";
+  print "Repeat Password: ";
+  
+  ## turn off echo
+  ReadMode('noecho');
+  my $sec_pass = <STDIN>;
+  ## turn on echo
+  ReadMode('restore');
+  chomp $sec_pass;
+
+  ## if the passwords match
+  if ($first_pass eq $sec_pass) {
+
+    ## generate random characters
+    my $random = new String::Random;
+    
+    ## salt the passwd
+    my $salt = $random->randpattern("ss"); 
+
+    ## encrypt the password
+    my $crypt = crypt($first_pass, $salt);
+
+    ## return encrypted password to root routine
+    return ($crypt);
+
+  ## if the passwords do not match
+  } else {
+
+    print "\nThe passwords you entered do NOT match!\n";
+    print "Please try again.\n\n";
+
+    &get_passwd unless ($first_pass eq $sec_pass);
+
+  }
+  
+}
+
+sub add_to_pop {
+
+  my $user = shift;
+
+  open(FH,">>/etc/hosting-options/$domain/pop3")
+    or die "Cant open POP file! : /etc/hosting-clients/$domain/pop3 : $!\n";
+
+  print FH "$user\n";
+
+  close(FH);
+
+}

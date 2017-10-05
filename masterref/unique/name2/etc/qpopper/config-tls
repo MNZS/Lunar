@@ -1,0 +1,7 @@
+set tls-support = alternate-port
+set tls-private-key-file = /etc/mail/certs/name2.lunarhosting.net.pem
+set tls-server-cert-file = /etc/mail/certs/name2.lunarhosting.net.pem
+set downcase-user
+set trim-domain
+set reverse-lookup
+set statistics

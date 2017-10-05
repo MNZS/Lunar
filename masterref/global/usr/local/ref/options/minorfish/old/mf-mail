@@ -1,0 +1,277 @@
+#!/usr/bin/perl
+# Mail management interface for Minorfish
+#
+# Jakob 'sparky' Kaivo <jkaivo@nodomainname.net>
+# Dan Debertin <airboss@nodewarrior.org>
+#
+# $Id: mf-mail,v 1.13 2001/11/19 01:29:26 airboss Exp $
+
+use strict;
+use IPC::Run;
+
+use MF qw( &listconf &configure &listlists &compose
+	   &sendmsg &getfile &get_header &getaddress
+	   &issub &genconf &listsubs &log $version
+	   &subscribe &unsubscribe $configfile           );
+
+my %config = %{&configure($configfile, ())};
+
+my $message = '';
+while(<STDIN>) {
+    $message .= $_;
+}
+my $who = &get_header($message, 'from');
+$who = lc(&getaddress($who));
+
+my $subj = lc &get_header ($message, 'subject');
+$subj =~ s/\s/ /gs;
+$subj =~ s/ +/ /g;
+$subj =~ s/^re: //gi;
+my ($action, $list, $address) = split (/ /, $subj);
+$list ||= '';
+$address ||= $who;
+%config = %{&listconf ($list, \%config)};
+
+# perform housekeeping on the confirm directory
+if (-d "$config{libdir}/.confirm")
+{
+    opendir CONF, "$config{libdir}/.confirm";
+    my @files = readdir CONF;
+    closedir CONF;
+    foreach my $file (@files)
+    {
+	my @s = stat ("$config{libdir}/.confirm/$file");
+	unlink "$config{libdir}/.confirm/$file" if
+	    ($s[10] < (time - (60 * 60 * 24 * 30)));
+    }
+}
+
+if ($list && $action eq 'subscribe' || $action eq 'unsubscribe')
+{
+    my $msg = '';
+    my @nosubs = split(/ /, $config{nosub_lists});
+    if ($action eq 'subscribe' && &issub ($list, $address, \%config))
+    {
+	$msg = &getfile ($list, 'already-sub', \%config);
+	$subj = "Re: $subj";
+	&log("s_error", "Sent already-sub message for $list to $address", $list, \%config);
+    }
+    elsif($action eq 'subscribe' && (grep(/$list/, @nosubs) ||
+				     grep(/\*/, @nosubs))) {
+	$msg = &getfile($list, 'nosub', \%config);
+	$subj = "Re: $subj";
+	&log("s_error", "Sent nosub message for $list to $address", $list, \%config);
+    }
+    elsif ($action eq 'unsubscribe' && !&issub ($list, $address, \%config))
+    {
+	$msg = &getfile ($list, 'already-un', \%config);
+	$subj = "Re: $subj";
+	&log("s_error", "Sent already-un message for $list to $address", $list, \%config);
+    }
+    elsif (! -d "$config{confdir}/$list")
+    {
+	$msg = &getfile ($list, 'nolist', \%config);
+	$subj = "Re: $subj";
+	&log("s_error", "No such list $list, sender $address, $list, \%config");
+    }
+    else
+    {
+
+	# generate confirmation message
+	my $conf = &genconf ($action, $list, $address, \%config);
+	$msg = &getfile ($list, "confirm-$action", \%config);
+	$subj = "confirm $conf";
+	&log("event", "Sent subscription confirmation for $list to $address", $list, \%config);
+    }
+    my $mail = &compose ("$config{self}\@$config{domain}", $subj,
+			 $msg, ($address));
+    &sendmsg($config{server}, $mail, "$config{self}\@$config{domain}",
+	     ($address));
+    exit 0;
+}
+elsif ($list && $action eq 'confirm')
+{
+    if (! -f "$config{libdir}/.confirm/$list")
+    {
+	my $msg = &getfile ('', 'invalid-num', \%config);
+	my $mail = &compose ("$config{self}\@$config{domain}",
+			     "Re: $subj", $msg, ($address));
+	&sendmsg($config{server}, $mail, "$config{self}\@$config{domain}",
+		 ($address));
+	&log("s_error", "Invalid confirmation number $list for $address", "", \%config);
+    }
+    else
+    {
+	open CONF, "<$config{libdir}/.confirm/$list";
+	my ($c, $l, $a) = split (/ /, <CONF>);
+	close CONF;
+	%config = %{&listconf ($l, \%config)};
+	my $msg = '';
+	mkdir "$config{libdir}/$l", 0755
+	    if (! -d "$config{libdir}/$l");
+	if ($c eq 'subscribe')
+	{
+	    my @modsub = split(/ /, $config{modsub_lists});
+	    if(grep(/$l/, @modsub) ||
+	       grep(/\*/, @modsub)) {
+		if($config{moderator} eq "") {
+		    &log("h_error", "$l is a moderated-subscribe list, but no moderator is set", $l, \%config);
+		}
+		$msg = &getfile($l, 'mod-sub-sender', \%config);
+		
+		my $num = &genconf('modsub-approve', $l, $a, \%config);
+		my $mmsg = &getfile($l, 'mod-sub-moderator', \%config);
+		$mmsg .= "\n\n%\n";
+		$mmsg .= $a . "\n";
+		$mmsg .= "%\n";
+		my $mmail = &compose("$config{self}\@$config{domain}",
+				     "confirm $num",
+				     $mmsg, ($a));
+		&sendmsg($config{server}, $mmail, "$config{self}\@$config{domain}",
+			 ($config{moderator}));
+		&log("event", "Received subscribe request from $a for moderated-subscription list $l", $l, \%config);
+	    }
+	    else {
+		&subscribe($l, &getaddress($a), \%config);
+		$msg = &getfile ($l, 'good-subscribe', \%config);
+		&log("event", "Good subscription confirmation number for $l, from $a", $l, \%config);
+	    }
+	}
+	elsif ($c eq 'unsubscribe')
+	{
+	    &unsubscribe($l, &getaddress($a), \%config);
+	    $msg = &getfile ($l, 'good-unsubscribe', \%config);
+	    &log("event", "Good unsubscription confirmation number for $l, from $a", $l, \%config);
+	}
+	elsif($c eq 'mod-post') {
+	    if($who ne $config{moderator}) {
+		&log("s_error", "Received approval number $list for list $l from non-moderator address $who", $l, \%config);
+		exit 0;
+	    }
+	    my $modmsg = '';
+	    eval {
+		open(MSG, "$config{libdir}/$l/mod/$list") or die "$@";
+		while(<MSG>) {
+		    $modmsg .= $_;
+		}
+		close(MSG);
+		unlink "$config{libdir}/$l/mod/$list";
+	    };
+	    if($@) {
+		&log("h_error", "Unable to open/confirm moderated post number $list", $l, \%config);
+		exit 1;
+	    }
+	    if( ! -x $config{deliver} || $config{deliver} eq "" ) {
+		&log("h_error", "Unable to open path to mf-deliver. Make sure it is set.", "", \%config);
+		exit 1;
+	    }
+       	    my $h;
+	    eval {
+		my @cmd = ($config{deliver}, $l, "confirm");
+		$h = IPC::Run::start(\@cmd, "<pipe", \*I,
+				     ">pipe", \*O,
+				     "2>pipe", \*O );
+		print I $modmsg;
+		close(I);
+		my $err = "";
+		while(<O>) {
+		    $err .= $_;
+		}
+		if($err ne "") {
+		    &log("s_error", "pipe to $config{deliver} produced this output: $err", "", \%config);
+		}
+	    };
+	    if($@) {
+		&log("h_error", "Failed to pipe to $config{deliver} because: $@", "", \%config);
+		exit 1;
+	    }
+	    
+	  IPC::Run::finish($h);
+	}
+	elsif($c eq 'modsub-approve') {
+	    if($who ne $config{moderator}) {
+		&log("s_error", "Received approval number $list for list $l from non-moderator address $who", $l, \%config);
+		exit 0;
+	    }
+	    &subscribe($l, &getaddress($a), \%config);
+	    $msg = &getfile($l, 'good-subscribe', \%config);
+	    &log("event", "Good moderated subscribe for $l, from $a", $l, \%config);
+	}
+	else
+	{
+	    $msg = &getfile ($l, 'invalid-cmd', \%config);
+	    $subj = "$c $l $a";
+	    &log("s_error", "Invalid confirmation request $l from $a", "", \%config);
+	}
+	if($msg) {
+	    my $mail = &compose ("$config{self}\@$config{domain}",
+				 "Re: $subj", $msg, ($a));
+	    &sendmsg($config{server}, $mail, "$config{self}\@$config{domain}",
+		     ($a));
+	}
+	unlink "$config{libdir}/.confirm/$list";
+    }
+    exit 0;
+}
+elsif ($action eq 'info')
+{
+    my $msg = &getfile ($list, 'info', \%config);
+    my $mail = &compose ("$config{self}\@$config{domain}",
+			 "Re: $subj", $msg, ($address));
+    &sendmsg($config{server}, $mail, "$config{self}\@$config{domain}",
+	     ($address));
+    &log("event", "Sent info for $list to $address", $list, \%config);
+    exit 0;
+}
+elsif ($action eq 'listsubs') {
+    my $sender = lc &get_header ($message, 'from');
+    $sender =~ s/.* \<(.*)\>/$1/i;
+    if(&issub($list, $sender, \%config)) {
+	my $msg = "Mailing list $list has the following subscribers:\n\n";
+	my @subs = &listsubs($list, \%config);
+	foreach my $sub (@subs) {
+	    $msg .= "$sub\n";
+	}
+	my $mail = &compose("$config{self}\@$config{domain}",
+			    "Re: $subj", $msg, ($address));
+	&sendmsg($config{server}, $mail, "$config{self}\@$config{domain}",
+		 ($address));
+	&log("event", "Sent subscriber list for $list to $address", $list, \%config);
+	exit 0;
+    }
+    else {
+	my $msg = "You aren't a member of list $list.\n";
+	my $mail = &compose("$config{self}\@$config{domain}",
+			    "Re: $subj", $msg, ($address));
+	&sendmsg($config{server}, $mail, "$config{self}\@$config{domain}",
+		 ($address));
+	&log("s_error", "Non-subscribed address $address requested subscriber list for $list", $list, \%config);
+	exit 0;
+    }
+}
+elsif ($action eq 'listlists') {
+    my $msg = "This server hosts the following mailing lists:\n\n";
+    my @lists = &listlists($config{confdir});
+    foreach my $list (@lists) {
+	my $n = &configure("$config{confdir}/$list/conf", \%config);
+	$n->{brief} = "No description" if ($n->{brief} eq "");
+	$msg .= "$list: $n->{brief}\n";
+    }
+    my $mail = &compose("$config{self}\@$config{domain}",
+			"Re: $subj", $msg, ($address));
+    &sendmsg($config{server}, $mail, "$config{self}\@$config{domain}",
+	     ($address));
+    &log("event", "List listing sent to $address", "", \%config);
+    exit 0;
+}
+
+else
+{
+    my $msg = &getfile ($list, 'invalid-cmd', \%config);
+    my $mail = &compose ("$config{self}\@$config{domain}",
+			 "Re: $subj", $msg, ($address));
+    &sendmsg($config{server}, $mail, "$config{self}\@$config{domain}",
+	     ($address));
+    &log("s_error", "Received invalid command $action from $address", "", \%config);
+    exit 0;
+}

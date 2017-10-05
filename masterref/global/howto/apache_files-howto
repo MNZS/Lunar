@@ -1,0 +1,43 @@
+# $Id: apache_files-howto,v 1.1 2003/06/05 16:15:14 root Exp $
+
+SYNOPSIS
+  A summary of the apache directory and file structure
+
+USAGE
+  The apache server is set up with a root directory of
+
+    /usr/local/apache/
+
+  Within this directory, only a single directory is of importance
+  with regards to configuration management.
+
+    /conf/
+
+  In the configuration directory, there are three two files that will
+  seldom be manually configured, but should be discussed:
+
+    httpd.conf
+    domains.conf
+
+  Th httpd.conf file is the main server configuration and also holds
+  the configuration for the lunarhosting 80 and 443 sites. This file 
+  will seldomly be touched and should only be done so by an admin who
+  is very familiar with how apache works and how our specific configuration
+  calls other files.
+
+  The domains.conf file is list of "Include" statements which call the
+  site specific configurations. Some statements are commented out. These
+  are typically either Frontpage enabled websites or sites that have 
+  been temporarily taken out of production for one reason or another.
+
+  Frontpage websites are the only exception to the rule when it comes to
+  website configurations that reside in the main 'httpd.conf' file. The
+  Frontpage Server extensions application requires that these configs 
+  be present in the main httpd.conf file. Therefore any frontpage domains
+  will be commented out in the domains.conf file.
+
+BUGS
+
+AUTHOR
+  charles@lunarmedia.net
+

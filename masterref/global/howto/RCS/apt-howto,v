@@ -1,0 +1,91 @@
+head	1.2;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.2
+date	2003.09.24.18.30.44;	author root;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2003.06.05.16.15.14;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.2
+log
+@*** empty log message ***
+@
+text
+@$Id: apt-howto,v 1.1 2003/06/05 16:15:14 root Exp root $
+
+Apt-get is now used in place of Red Hat's up2date utility for keeping 
+the system's packages current with the most recent available as related
+through RedHat's FTP site (or in our case, a mirror).
+
+Upgrading packages on the server is a two step process. The first being
+a dry run of the upgrade allowing you to view what packages would be 
+upgraded on a production run of the script.
+
+  # first update our system with a new list of packages from the 
+  # remote server
+  apt-get update
+
+  # run the upgrade script with a -S flag for a 'dry-run'
+  apt-get -s upgrade
+
+This should display a summary of what changes *would* be made to the server
+if apt-get were to be ran in production. If any of the proposed changes are
+not to your liking, you can add the package to be skipped to the list of 
+"hold" packages in the /etc/apt/apt.conf file. An example would be:
+
+  HoldPkgs {"^php*"; "^mod_jk*"; };
+
+Make sure that you edit the apt.conf file using the 'rcedit' script!
+Fields can be either a regular expression or a full package name. Once the
+package has been added to the HoldPkgs list, run the dry-run script again
+to make sure that the package will not be installed
+
+  apt-get -s upgrade
+
+If the output is now as you expect it to be, run the real upgrade
+
+  apt-get upgrade
+
+Pay special attention to what packages are upgraded. At times packages will
+cause some applications to segfault. Be sure to look at the logs for Apache,
+Sendmail and Named. Ensure that each application is running as expected.
+
+Apt will supply a list of what packages it plans to upgrade. At times it will
+show a list of packages that it is 'holding back' which means that although 
+new packages are available, apt has decided not to upgrade them unless the
+administrator specifically instructs it to. Often packages are held back due
+to pre-requisites for them are not installed on the machine. Unless you know
+exactly what you are doing, feel free to ignore any packages held back by apt.
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 1
+a1 1
+$Id: apt-howto,v 1.3 2002/10/08 17:02:07 root Exp $
+d16 1
+a16 1
+  apt-get -S upgrade
+d30 1
+a30 1
+  apt-get -S upgrade
+d39 7
+@

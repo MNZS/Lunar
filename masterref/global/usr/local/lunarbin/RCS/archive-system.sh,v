@@ -1,0 +1,550 @@
+head	1.15;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.15
+date	2003.07.03.13.42.36;	author root;	state Exp;
+branches;
+next	1.14;
+
+1.14
+date	2003.07.02.13.10.40;	author root;	state Exp;
+branches;
+next	1.13;
+
+1.13
+date	2003.06.27.22.53.35;	author root;	state Exp;
+branches;
+next	1.12;
+
+1.12
+date	2003.04.22.05.28.46;	author root;	state Exp;
+branches;
+next	1.11;
+
+1.11
+date	2003.04.22.05.26.17;	author root;	state Exp;
+branches;
+next	1.10;
+
+1.10
+date	2003.04.19.16.11.03;	author root;	state Exp;
+branches;
+next	1.9;
+
+1.9
+date	2003.04.17.17.04.48;	author root;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	2003.04.11.14.50.10;	author root;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2003.04.10.22.56.48;	author root;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2003.04.10.07.33.21;	author root;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2003.04.10.06.59.31;	author root;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2003.04.10.06.52.06;	author root;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2003.04.10.06.44.02;	author root;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2003.04.08.18.01.32;	author root;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2003.04.02.19.08.41;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.15
+log
+@had dual 'then' statements
+@
+text
+@#!/bin/bash
+
+# $Id: archive-system.sh,v 1.14 2003/07/02 13:10:40 root Exp root $
+
+REMOTE=$1
+
+if [ $REMOTE = "" ]; then
+  echo "You must specify a remote host!"
+  exit 1
+fi
+
+DATE=`date +%Y%m%d`
+ARCHIVE="/usr/local/archives/$REMOTE/"
+
+SYS="$ARCHIVE/system"
+WWW="$ARCHIVE/$DATE"
+
+RSYNC=`which rsync`
+ARGS="-aPH --partial --delete --delete-after"
+SSH="/usr/bin/ssh -p 9490"
+
+# logging parameters
+NDAY=`date +%d`
+DAY=`date +%a`
+MONTH=`date +%b`
+YEAR=`date +%y`
+TIME=`date +%T`
+
+# log start time
+/bin/echo "$MONTH $NDAY ($DAY) - $TIME : Started backup of $REMOTE" >> /var/log/archives
+
+if [ $REMOTE != "name2.lunarhosting.net" ]; then
+
+  if [ ! -d "$ARCHIVE" ]; then
+    exit 1;
+  fi
+
+  # first make recursive directories
+  mkdir -p $SYS/var/spool
+  mkdir -p $SYS/usr/lib
+  mkdir -p $SYS/usr/local
+
+  if [ $REMOTE = "host2.lunarhosting.net" ] || 
+     [ $REMOTE = "host1.lunarhosting.net" ]; 
+  then
+    mkdir -p $WWW/www
+  fi
+
+  ##
+  ## NON-WWW DIRECTORIES WILL REMAIN IN A MIRRORED STATE TO THE PARENT
+  ##
+
+  # MAIL/CRON/SPOOL BACKUPS
+  $RSYNC $ARGS -e "$SSH"  $REMOTE:/var/spool $SYS/var/
+  # NAMESERVER
+  $RSYNC $ARGS -e "$SSH"  $REMOTE:/var/named $SYS/var/
+  # MYSQL 
+  $RSYNC $ARGS -e "$SSH"  $REMOTE:/var/lib $SYS/var/
+  # ETC
+  $RSYNC $ARGS -e "$SSH"  $REMOTE:/etc $SYS/
+  # HOME
+  $RSYNC $ARGS -e "$SSH"  $REMOTE:/home $SYS/
+
+  # /usr/local
+  if [ $REMOTE = "host1.lunarhosting.net" ] ||
+     [ $REMOTE = "host2.lunarhosting.net" ];
+  then
+    $RSYNC $ARGS -e "$SSH" $REMOTE:/usr/local $SYS/usr
+  fi
+
+  # /usr/local/mrtg and /usr/local/tftp_dir
+  if [ $REMOTE = "name1.lunarhosting.net" ]; then
+    $RSYNC $ARGS -e "$SSH" $REMOTE:/usr/local/mrtg $SYS/usr/local
+    $RSYNC $ARGS -e "$SSH" $REMOTE:/usr/local/tftp_dir $SYS/usr/local
+    $RSYNC $ARGS -e "$SSH" $REMOTE:/usr/local/etc $SYS/usr/local
+    $RSYNC $ARGS -e "$SSH" $REMOTE:/usr/local/bin $SYS/usr/local
+  fi
+
+  # PERL MODULES
+  $RSYNC $ARGS -e "$SSH"  $REMOTE:/usr/lib/perl5 $SYS/usr/lib
+
+  # SQUIRREL MAIL
+  if [ $REMOTE = "host1.lunarhosting.net" ] ||
+     [ $REMOTE = "host2.lunarhosting.net" ];
+  then
+    $RSYNC $ARGS -e "$SSH" $REMOTE:/var/spool/squirrelmail $SYS/var/spool
+    $RSYNC $ARGS -e "$SSH" $REMOTE:/var/lib/squirrelmail $SYS/var/lib
+    $RSYNC $ARGS -e "$SSH" $REMOTE:/usr/share/squirrelmail $SYS/usr/share
+  fi
+
+  ##
+  ## WWW DIRECTORIES WILL BE STORED DAILY TO ALLOW FOR RECOVERIES 
+  ## ACROSS MULTIPLE DAYS
+  ##
+
+  if [ $REMOTE = "host1.lunarhosting.net" ]; then
+    $RSYNC $ARGS -e "$SSH" $REMOTE:/usr/hosting $WWW/
+  fi
+
+  if [ $REMOTE = "host2.lunarhosting.net" ]; then
+    $RSYNC $ARGS -e "$SSH" $REMOTE:/www $WWW/
+  fi
+fi
+
+if [ $REMOTE = "name2.lunarhosting.net" ]; then
+  REMOTE2="name1.lunarhosting.net"
+
+  # make remote directories
+  $SSH $REMOTE2 mkdir -p $SYS/var/spool
+  $SSH $REMOTE2 mkdir -p $SYS/usr/lib
+  $SSH $REMOTE2 mkdir -p $SYS/usr/local
+
+  # MAIL/CRON/SPOOL BACKUPS
+  $RSYNC $ARGS -e "$SSH"  /var/spool $REMOTE2:$SYS/var/
+  # NAMESERVER
+  $RSYNC $ARGS -e "$SSH"  /var/named $REMOTE2:$SYS/var/
+  # MYSQL
+  $RSYNC $ARGS -e "$SSH"  /var/lib $REMOTE2:$SYS/var/
+  # ETC
+  $RSYNC $ARGS -e "$SSH"  /etc $REMOTE2:$SYS/
+  # HOME
+  $RSYNC $ARGS -e "$SSH"  /home $REMOTE2:$SYS/
+  # /usr/local/master*
+  $RSYNC $ARGS -e "$SSH" /usr/local/masterref $REMOTE2:$SYS/usr/local
+  $RSYNC $ARGS -e "$SSH" /usr/local/masterbin $REMOTE2:$SYS/usr/local
+  # MRTG
+  $RSYNC $ARGS -e "$SSH" /usr/local/mrtg $REMOTE2:$SYS/usr/local
+  # PERL MODULES
+  $RSYNC $ARGS -e "$SSH" /usr/lib/perl5 $REMOTE2:$SYS/usr/lib
+fi
+
+
+
+##
+## LOG THE ACTION TO /VAR/LOG
+##
+
+TIME=`date +%T`
+/bin/echo "$MONTH $NDAY ($DAY) - $TIME : Completed backup of $REMOTE" >> /var/log/archives
+
+#
+exit 0
+@
+
+
+1.14
+log
+@Incorrect syntax in squirrel mail routine
+@
+text
+@d3 1
+a3 1
+# $Id: archive-system.sh,v 1.13 2003/06/27 22:53:35 root Exp root $
+d84 1
+a84 1
+     [ $REMOTE = "host2.lunarhosting.net" ]; then
+@
+
+
+1.13
+log
+@Added squirrelmail
+@
+text
+@d3 1
+a3 1
+# $Id: archive-system.sh,v 1.12 2003/04/22 05:28:46 root Exp root $
+d86 3
+a88 3
+    $RSYNC $ARGS -e "$SSH" $REMOTE:/var/spool/squirrelmail $SYS:/var/spool
+    $RSYNC $ARGS -e "$SSH" $REMOTE:/var/lib/squirrelmail $SYS:/var/lib
+    $RSYNC $ARGS -e "$SSH" $REMOTE:/usr/share/squirrelmail $SYS:/usr/share
+@
+
+
+1.12
+log
+@reverted to only backing up some of /usr/local
+@
+text
+@d3 1
+a3 1
+# $Id: archive-system.sh,v 1.10 2003/04/19 16:11:03 root Exp root $
+d82 9
+@
+
+
+1.11
+log
+@changed backups so all of /usr/local/gets archived
+@
+text
+@d63 1
+d65 13
+a77 1
+  $RSYNC $ARGS -e "$SSH" $REMOTE:/usr/local $SYS/usr
+d114 5
+a118 2
+  # /usr/local
+  $RSYNC $ARGS -e "$SSH" /usr/local $REMOTE2:$SYS/usr
+@
+
+
+1.10
+log
+@Added backups for pancho config and pancho-prep support scripts
+@
+text
+@d3 1
+a3 1
+# $Id: archive-system.sh,v 1.9 2003/04/17 17:04:48 root Exp root $
+a62 1
+
+d64 1
+a64 13
+  if [ $REMOTE = "host1.lunarhosting.net" ] ||
+     [ $REMOTE = "host2.lunarhosting.net" ];
+  then
+    $RSYNC $ARGS -e "$SSH" $REMOTE:/usr/local $SYS/usr
+  fi
+
+  # /usr/local/mrtg and /usr/local/tftp_dir
+  if [ $REMOTE = "name1.lunarhosting.net" ]; then
+    $RSYNC $ARGS -e "$SSH" $REMOTE:/usr/local/mrtg $SYS/usr/local
+    $RSYNC $ARGS -e "$SSH" $REMOTE:/usr/local/tftp_dir $SYS/usr/local
+    $RSYNC $ARGS -e "$SSH" $REMOTE:/usr/local/etc $SYS/usr/local
+    $RSYNC $ARGS -e "$SSH" $REMOTE:/usr/local/bin $SYS/usr/local
+  fi
+d101 2
+a102 5
+  # /usr/local/master*
+  $RSYNC $ARGS -e "$SSH" /usr/local/masterref $REMOTE2:$SYS/usr/local
+  $RSYNC $ARGS -e "$SSH" /usr/local/masterbin $REMOTE2:$SYS/usr/local
+  # MRTG
+  $RSYNC $ARGS -e "$SSH" /usr/local/mrtg $REMOTE2:$SYS/usr/local
+@
+
+
+1.9
+log
+@added mrtg backups from both nameX machines
+removed old mrtg data directory backup
+added tftp_dir directory backup from name1
+@
+text
+@d3 1
+a3 1
+# $Id: archive-system.sh,v 1.8 2003/04/11 14:50:10 root Exp root $
+d75 2
+@
+
+
+1.8
+log
+@type s/lunarmedia/lunarhosting/
+@
+text
+@d3 1
+a3 1
+# $Id: archive-system.sh,v 1.7 2003/04/10 22:56:48 root Exp root $
+d71 1
+a71 1
+  # /usr/local/mrtg
+d74 1
+a74 1
+    $RSYNC $ARGS -e "$SSH" $REMOTE:$MRTG_DIR $SYS/usr/local
+d115 2
+@
+
+
+1.7
+log
+@changed logging syntax
+@
+text
+@d3 1
+a3 1
+# $Id: archive-system.sh,v 1.6 2003/04/10 07:33:21 root Exp root $
+d44 1
+a44 1
+     [ $REMOTE = "host1.lunarmedia.net" ]; 
+@
+
+
+1.6
+log
+@changed the /www dir for host1 to /usr/hosting
+@
+text
+@d3 1
+a3 1
+# $Id: archive-system.sh,v 1.5 2003/04/10 06:59:31 root Exp root $
+d30 1
+a30 1
+/bin/echo "$MONTH $NDAY ($DAY) - $TIME : Started backup from $REMOTE" >> /var/log/archives
+@
+
+
+1.5
+log
+@added creation of remote directories for name2 to name1 backup
+@
+text
+@d3 1
+a3 1
+# $Id: archive-system.sh,v 1.4 2003/04/10 06:52:06 root Exp root $
+d85 5
+a89 4
+  if [ $REMOTE = "host1.lunarhosting.net" ] || 
+     [ $REMOTE = "host2.lunarhosting.net" ]; 
+  then
+    # www
+@
+
+
+1.4
+log
+@added backup for name2 to name1
+@
+text
+@d3 1
+a3 1
+# $Id: archive-system.sh,v 1.3 2003/04/10 06:44:02 root Exp root $
+d95 6
+@
+
+
+1.3
+log
+@New method of backup where script is only ran from name2
+@
+text
+@d3 1
+a3 1
+# $Id: archive-system.sh,v 1.1 2003/04/02 19:08:41 root Exp $
+d34 4
+d39 4
+a42 3
+    mkdir -p $SYS/var/spool
+    mkdir -p $SYS/usr/lib
+    mkdir -p $SYS/usr/local
+d94 11
+d106 4
+a109 2
+    $RSYNC $ARGS -e "$SSH" $REMOTE:/usr/local/masterref $SYS/usr/local
+    $RSYNC $ARGS -e "$SSH" $REMOTE:/usr/local/masterbin $SYS/usr/local
+@
+
+
+1.2
+log
+@changed ssh port
+@
+text
+@a1 3
+#
+# $Id: archive-system.sh,v 1.1 2003/04/02 19:08:41 root Exp root $
+#
+d3 3
+a5 1
+SELF=`hostname`
+d7 3
+a9 4
+if [ $SELF = "name2.lunarhosting.net" ]; then
+  HOST="name1.lunarhosting.net"
+else
+  HOST="archives.lunarhosting.net"
+d13 1
+a13 1
+REMOTE_DIR="/usr/local/archives/$SELF/"
+d15 2
+a16 2
+SYS="$REMOTE_DIR/system"
+WWW="$REMOTE_DIR/$DATE"
+d18 2
+a20 1
+ARGS="-aPH --partial --delete --delete-after"
+d30 1
+a30 1
+/bin/echo "$MONTH $NDAY ($DAY) - $TIME : Started backup to $HOST" >> /var/log/archives
+d32 1
+a32 13
+# first make recursive directories
+  $SSH $HOST "mkdir -p $SYS/var/spool"
+  $SSH $HOST "mkdir -p $SYS/usr/lib"
+  $SSH $HOST "mkdir -p $SYS/usr/local"
+if [ $SELF = "host2.lunarhosting.net" ] || 
+   [ $SELF = "host1.lunarmedia.net" ]; 
+then
+  $SSH $HOST "mkdir -p $WWW/www"
+fi
+
+##
+## NON-WWW DIRECTORIES WILL REMAIN IN A MIRRORED STATE TO THE PARENT
+##
+d34 58
+a91 16
+# MAIL/CRON/SPOOL BACKUPS
+/usr/bin/rsync $ARGS -e "$SSH"  /var/spool $HOST:$SYS/var/
+# NAMESERVER
+/usr/bin/rsync $ARGS -e "$SSH"  /var/named $HOST:$SYS/var/
+# MYSQL 
+/usr/bin/rsync $ARGS -e "$SSH"  /var/lib $HOST:$SYS/var/
+# ETC
+/usr/bin/rsync $ARGS -e "$SSH"  /etc $HOST:$SYS/
+# HOME
+/usr/bin/rsync $ARGS -e "$SSH"  /home $HOST:$SYS/
+
+# /usr/local
+if [ $SELF = "host1.lunarhosting.net" ] ||
+   [ $SELF = "host2.lunarhosting.net" ];
+then
+  /usr/bin/rsync $ARGS -e "$SSH" /usr/local $HOST:$SYS/usr
+a93 14
+# /usr/local/master*
+if [ $SELF = "name2.lunarhosting.net" ]; then
+  /usr/bin/rsync $ARGS -e "$SSH" /usr/local/masterref $HOST:$SYS/usr/local
+  /usr/bin/rsync $ARGS -e "$SSH" /usr/local/masterbin $HOST:$SYS/usr/local
+fi
+
+# /usr/local/mrtg
+if [ $SELF = "name1.lunarhosting.net" ]; then
+  /usr/bin/rsync $ARGS -e "$SSH" /usr/local/mrtg $HOST:$SYS/usr/local
+  /usr/bin/rsync $ARGS -e "$SSH" $MRTG_DIR $HOST:$SYS/usr/local
+fi
+
+# PERL MODULES
+/usr/bin/rsync $ARGS -e "$SSH"  /usr/lib/perl5 $HOST:$SYS/usr/lib
+a94 11
+##
+## WWW DIRECTORIES WILL BE STORED DAILY TO ALLOW FOR RECOVERIES 
+## ACROSS MULTIPLE DAYS
+##
+
+if [ $SELF = "host1.lunarhosting.net" ] || 
+   [ $SELF = "host2.lunarhosting.net" ]; 
+then
+  # www
+  /usr/bin/rsync $ARGS -e "$SSH" /www $HOST:$WWW/
+fi
+d101 1
+a101 1
+/bin/echo "$MONTH $NDAY ($DAY) - $TIME : Completed backup to $HOST" >> /var/log/archives
+@
+
+
+1.1
+log
+@initial checkin
+@
+text
+@d3 1
+a3 1
+# $Id: archive-system.sh,v 1.10 2003/03/26 21:51:38 root Exp $
+d20 1
+a20 1
+SSH="/usr/bin/ssh -p 8228"
+@

@@ -1,0 +1,64 @@
+head	1.3;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.3
+date	2003.08.13.17.12.49;	author root;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2003.01.06.19.41.38;	author root;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2003.01.06.19.34.45;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.3
+log
+@*** empty log message ***
+@
+text
+@# $Id: resolv.conf,v 1.2 2003/01/06 19:41:38 root Exp root $
+search lunarmedia.net lunarhosting.net
+nameserver 127.0.0.1
+nameserver 65.172.1.132
+nameserver 208.16.140.132
+@
+
+
+1.2
+log
+@changed order for internal lookups
+@
+text
+@d1 3
+a3 2
+# $Id: resolv.conf,v 1.1 2003/01/06 19:34:45 root Exp root $
+search lunarhosting.net
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 1
+a1 1
+# $Id:$
+d3 1
+a4 1
+nameserver 65.172.1.132
+@

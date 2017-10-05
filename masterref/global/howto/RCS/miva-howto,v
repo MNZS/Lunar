@@ -1,0 +1,74 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.1
+date	2003.06.05.16.15.14;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@## $Id: miva-howto,v 1.2 2003/03/11 05:02:37 root Exp $
+
+How to set up a site as Miva enabled
+
+1. Add site to /etc/miva.conf (or /etc/mivavm.conf)
+   - This file should be edited using rcedit
+   - Follow the template included in the file
+
+2. Copy Miva files into site's pub/public_html
+   - cp -a /usr/local/ref/miva/4.xx /www/<domain>/pub/public_html
+   - substitute the most recent version of miva for "4.xx"
+
+3. Copy the miva virtual machine into site's cgi-bin directory
+   - cp -a /usr/local/ref/miva/cgi-bin/mivavm-v4.02 \ 
+           /www/<domain>/cgi-bin/mivavm
+
+4. Create a new user specifically for Miva access.
+   - Use the 'newuser' tool to create the account
+   - Account should have ftp access but not admin
+   - Account name should be the domain root prefaced by mv_
+       example : mv_lunarhosting
+   - Set password to 'abcd1234'
+
+5. Chown miva content to the new user
+   - chown -R <mivauser> /www/<domain>/pub/
+   - chgrp -R hosting /www/<domain>/pub/
+   - chown <mivauser> /www/<domain>/cgi-bin/mivavm
+   - chmod 4755 /www/<domain>/cgi-bin/mivavm
+
+6. Create the Miva data directory
+   - mkdir /www/DOMAIN/pub/mivadata
+   - chown <mivauser> /www/DOMAIN/pub/mivadata
+   - chmod 700 /www/DOMAIN/pub/mivadata
+
+7. Create Miva include files in Apache
+   Uncomment the lines for Miva in the following files
+   - edit /usr/local/apache/conf/include/features/http.<domain>
+   - edit /usr/local/apache/conf/include/features/https.<domain>
+   Create a new miva include for the domain 
+   - /usr/local/apache/conf/include/commerce/miva/mv.<domain>
+   - edit the file to ensure that correct domain paths are set.
+
+8. Check apache config and gracefully restart
+   - apachectl configtest
+   If this returns ok, then
+   - apachectl graceful
+   - tail the apachelog to make sure the daemon starts up properly
+
+9. Run the diagnostic script and ensure that all 3 test run positive
+   - http://www.DOMAIN/diag.mvc
+   
+@

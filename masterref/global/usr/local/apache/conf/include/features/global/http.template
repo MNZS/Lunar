@@ -1,0 +1,17 @@
+## icb
+#Include "/usr/local/apache/conf/include/features/icb/http.DOMAIN"
+
+## php
+#Include "/usr/local/apache/conf/include/features/php/php.DOMAIN"
+
+## shopzone
+#Include "/usr/local/apache/conf/include/commerce/shopzone/sz.DOMAIN"
+
+## miva
+#Include "/usr/local/apache/conf/include/commerce/miva/mv.DOMAIN"
+
+## process
+#Include "/usr/local/apache/conf/include/commerce/process/proc.DOMAIN"
+
+## local-bin
+#Include "/usr/local/apache/conf/include/features/local-bin/bin.DOMAIN"

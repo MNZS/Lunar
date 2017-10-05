@@ -1,0 +1,5 @@
+/var/log/mrtg {
+  daily
+  rotate 7
+  create 644 root root
+}

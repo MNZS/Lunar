@@ -1,0 +1,321 @@
+#!/usr/bin/perl
+# Mail delivery agent for Minorfish
+#
+# Jakob 'sparky' Kaivo <jkaivo@nodomainname.net>
+# Dan Debertin <airboss@nodewarrior.org>
+#
+# $Id: mf-deliver,v 1.24 2001/11/30 04:50:48 airboss Exp $
+
+use strict;
+use MF qw( &listconf &configure &compose &sendmsg
+	   &getfile &get_header &issub &genconf
+	   $configfile $version &getaddress &log   
+	   &tstamp &attach_mime );
+use POSIX qw( strftime );
+use IPC::Run;
+
+if($#ARGV < 0 || $#ARGV > 1) {
+    print STDERR "Error: incorrect argument count.\n";
+    exit 1;
+}
+
+my $list = lc($ARGV[0]);
+my $confirm = ($ARGV[1]?lc($ARGV[1]):"");
+my $message = '';
+while(<STDIN>) {
+    $message .= $_;
+}
+my $who = &get_header($message, 'from');
+$who = lc(&getaddress($who));
+
+my %config = %{&configure($configfile, ())};
+
+
+
+# A message for a mailing list
+if (! -d "$config{confdir}/$list")
+{
+    my $msg = &getfile ($list, 'nolist', \%config);
+    my $mail = &compose ("$config{self}\@$config{domain}",
+			 "Error: No such list", $msg, ($who));
+    &sendmsg($config{server}, $mail, "$config{self}\@$config{domain}",
+	     ($who));
+    exit 0;
+}
+
+# First figure out if sending is OK
+my $send_ok = 0;
+%config = %{&configure ("$config{confdir}/$list/conf", \%config)};
+
+$send_ok = &issub ($list, $who, \%config);
+foreach (split (/ /, $config{open_lists})) # Is it an open list?
+{
+    $send_ok = 1 if ($_ eq "*" || lc $_ eq $list);
+}
+foreach (split (/ /, $config{closed_lists})) # Or a closed one?
+{
+    $send_ok = 0 if ($_ eq "*" || lc $_ eq $list);
+}
+$send_ok = 1 if ($who eq lc $config{admin}); # Admin is always OK
+# Pre-confirmed by mf-mail or senddigest.
+$send_ok = 1 if ($confirm eq "confirm");
+
+if ($send_ok == 0)
+{
+    my $msg = &getfile ($list, 'nosend', \%config);
+    my $mail = &compose ("$config{self}\@$config{domain}",
+			 "Error: Not allowed", $msg, ($who));
+    &sendmsg($config{server}, $mail, "$config{self}\@$config{domain}",
+	     ($who));
+    
+    &log("s_error", "Unapproved post from $who, list $list", $list, \%config);
+    exit 0;
+}
+
+if(((grep /^($list|\*)$/, (split / /, $config{mod_lists})) &&
+    $confirm ne "confirm") ||
+   $confirm eq "moderate") {
+   
+    # We're on a moderated list, unless $ARGV[1] ($confirm) is set to the 
+    # string "confirm", indicating a pre-approved post piped from mf-mail.
+    # $ARGV[1] ($confirm) can also be set to "moderate", indicating that we
+    # should submit this message for moderation regardless of policy.
+
+    if($config{moderator} eq "") {
+	&log("h_error", "Post to moderated list, but moderator is not specified", $list, \%config);
+	exit 0;
+    }
+
+    # message back to sender
+    my $smsg = &getfile($list, 'mod-post-sender', \%config);
+    my $smail = &compose("$config{self}\@$config{domain}",
+			 "Post to moderated list", $smsg, ($who));
+    &sendmsg($config{server}, $smail, "$config{self}\@$config{domain}",
+	     ($who));
+
+    my $num = &genconf('mod-post', $list, $who, \%config);
+
+    # stow message away until it's approved
+    # FIXME: We need to do housekeeping on this directory.
+    eval{
+	if( ! -d "$config{libdir}/$list/mod" ) {
+	    mkdir "$config{libdir}/$list/mod", 0700 or die "$@";
+	}
+	open(MOD, ">$config{libdir}/$list/mod/$num") or die "$@";
+	print MOD $message;
+	close(MOD);
+    };
+    if($@) {
+	&log("h_error", "Unable to stow message from $who to moderated list $list", $list, \%config);
+	exit 0;
+    }
+
+    # message to moderator
+    my $mmsg = &getfile($list, 'mod-post-moderator', \%config);
+    my $subj = "confirm $num";
+    my $mmail = &compose("$config{self}\@$config{domain}",
+			 $subj, $mmsg, ($config{moderator}));
+    $mmail = &attach_mime($mmail, $message);
+
+    &sendmsg($config{server}, $mmail, "$config{self}\@$config{domain}",
+	     ($config{moderator}));
+    &log("event", "Submitted post to $list from $who to $config{moderator}", $list, \%config);
+
+    exit 0;
+}
+
+# Ordinary delivery from this point on.
+    
+if($config{pipe_cmd} ne "") {
+    my @cmd = split(/\s+/, $config{pipe_cmd});
+    # try to be safe and die if args > 8. This value is arbitrary; 
+    # change at will if it suits you.
+    if($#cmd > 8) {
+	&log("h_error", "pipe_cmd reached maximum argument limit", $list, \%config);
+	exit 1;
+    }
+    $ENV{LIST_NAME} = $list;
+    # Tell the program that this message has already been moderated.
+    if($confirm eq "confirm") {
+	$ENV{APPROVED} = "yes";
+    }
+    my($h, $pipemsg);
+    eval {
+	$h = IPC::Run::start(\@cmd, "<pipe", \*I,
+			     ">pipe", \*O,
+			     "2>pipe", \*E	  );
+	print I $message;
+	close(I);
+	$pipemsg = "";
+	while(<O>) {
+	    $pipemsg .= $_;
+	}
+	my $err = <E>;
+    };
+    if($@) {
+	&log("h_error", "pipe_cmd failed with message: $@", $list, \%config);
+	exit 1;
+    }
+
+  IPC::Run::finish($h);
+
+    # check return values. There are the following "special" returns:
+    # 138 keeps the original message unmodified, discarding whatever the
+    # external command returned.
+    # 139 aborts sending and exits with no error.
+    # 140 submits just this message to a moderator for approval.
+    # Any other non-zero return value aborts sending with an error.
+
+    my $ret = ($? >> 8);
+    $message = $pipemsg if($ret != 138);
+    if($ret == 139) {
+	&log("event", "pipe_cmd returned 139; not sending message", $list, \%config);
+	exit 0;
+    }
+    elsif($ret == 140) {
+	&log("event", "pipe_cmd returned 140; moderating this message", $list, \%config);
+	if(! -x "$config{deliver}") {
+	    &log("h_error", "Can't exec delivery program $config{deliver}", $list, \%config);
+	    exit 0;
+	}
+	my @cmd = ($config{deliver}, $list, 'moderate');
+	my $h = IPC::Run::start(\@cmd, "<pipe", \*I,
+				">pipe", \*O,
+				"2>pipe", \*O);
+	print I $message;
+	close(I);
+	my $out = <O>;   # produces no output
+        IPC::Run::finish($h);
+	exit 0;
+    }
+    elsif($ret != 0 && $ret < 138 && $ret > 140) {
+	&log("h_error", "pipe_cmd returned non-zero value $ret", $list, \%config);
+	exit 1;
+    }
+}
+
+my $type = &get_header ($message, 'content-type');
+if ($type =~ /^multipart/i)
+{
+    $message = &attach_mime($message, &getfile($list, 'footer', \%config));
+}
+else {
+    $message .= &getfile ($list, 'footer', \%config);
+}
+
+my $x_loop = lc "$list\@$config{domain}";
+if (lc &get_header ($message, 'x-loop') eq $x_loop) {
+    &log("s_error", "Found X-Loop: header, aborted sending", $list, \%config);
+    exit 0;
+}
+my ($hdr, $msg) = split (/\n\r*\n/, $message, 2);
+my @hdr = split (/\n/, $hdr);
+$config{subject} =~ s/([\[|\]|\{|\}|\^|\$|\||\(|\)|\.|\*|\?|\,])/\\$1/g;
+foreach (0 .. $#hdr)
+{
+    if ($hdr[$_] =~ /^reply-to: /i && $config{reply_to})
+    {
+	$hdr[$_] = "Reply-To: $config{reply_to}";
+    }
+    elsif ($hdr[$_] =~ /^subject: /i && $config{subject} &&
+	   $hdr[$_] !~ /$config{subject}/)
+    {
+	$config{subject} =~ s/\\([\[|\]|\{|\}|\^|\$|\||\(|\)|\.|\*|\?|\\|\,])/$1/g;
+	$hdr[$_] =~ s/^(subject: )(.*)/$1$config{subject} $2/i;
+    }
+}
+$hdr  = join ("\r\n", @hdr);
+$hdr .= "\r\nX-Loop: $x_loop\r\n";
+$hdr .= "X-Mailing-List: $x_loop\r\n";
+$hdr .= "X-Mailing-List-Server: minorfish $version\r\n";
+if($config{url} ne "") {
+    $hdr .= "X-Archive-Url: $config{url}\r\n";
+}
+$hdr .= "Precedence: bulk\r\n";
+$hdr .= "Reply-To: $config{reply_to}\r\n" if ($hdr !~ /^Reply-To: /im
+					      && $config{reply_to});
+if ($hdr !~ /^Subject: /im && $config{subject}) {
+    $config{subject} =~ s/\\([\[|\]|\{|\}|\^|\$|\||\(|\)|\.|\*|\?|\\|\,])/$1/g;
+    $hdr .= "Subject: $config{subject}\r\n";
+}
+
+$message = "$hdr\r\n$msg\r\n";
+
+# Do we archive?
+my $archive = 0;
+foreach (split (/ /, $config{archive}))
+{
+    $archive = 1 if ($_ eq "*" || lc $_ eq $list);
+}
+$archive = 0 if(&get_header($message, 'X-No-Archive') =~ /yes/i);
+
+if ($archive == 1)
+{
+    my $archivemsg = $message;
+    $archivemsg =~ s/\r\n/\n/g;
+    my (undef, undef, undef, undef, $month, $year, undef) = localtime;
+    $year += 1900;
+    $month++;
+    $month = "0$month" if (length $month < 2);
+    if (! -d "$config{libdir}/$list")
+    {
+	mkdir "$config{libdir}/$list", 0755;
+    }
+    if (! -d "$config{libdir}/$list/$year")
+    {
+	mkdir "$config{libdir}/$list/$year", 0755;
+    }
+    open FILE, ">>$config{libdir}/$list/$year/$month";
+    if ($archivemsg !~ /^From /)
+    {
+	print FILE "From $who  ";
+	print FILE strftime ("%a %b %d %T %Y", localtime);
+	print FILE "\n";
+    }
+    print FILE "$archivemsg\n";
+    close FILE;
+}
+
+# Send or digest the message
+my @digests = split(/ /, $config{digest_lists});
+if((grep(/$list/, @digests) || grep(/\*/, @digests)) && $confirm ne 'confirm') {
+    if( ! -d "$config{libdir}/$list/digest" ) {
+	eval {
+	    mkdir "$config{libdir}/$list/digest", 0750 or die "$@";
+	};
+	if($@) {
+	    &log("h_error", "Unable to create digest directory", $list, \%config);
+	    exit 1;
+	}
+    }
+    if( ! -f "$config{libdir}/$list/digest/$list.digest" ) {
+	# Start the digest for today
+	open(DIGEST, ">$config{libdir}/$list/digest/$list.digest");
+	print DIGEST "From: $config{self}\@$config{domain}\r\n";
+	print DIGEST "To: $list\@$config{domain}\r\n";
+	print DIGEST "Subject: $list Digest from " . &tstamp() . "\r\n";
+	print DIGEST "\n" . '-' x 55 . "\n";
+	close(DIGEST);
+	&log("event", "Opened new digest for $list", $list, \%config);
+    }
+    open(DIGEST, ">>$config{libdir}/$list/digest/$list.digest");
+    print DIGEST "Date: " . &get_header($message, 'date') . "\n";
+    print DIGEST "From: " . &get_header($message, 'from') . "\n";
+    print DIGEST "To: " . &get_header($message, 'to') . "\n";
+    print DIGEST "Subject: " . &get_header($message, 'subject') . "\n\n";
+    # Use $msg instead of $message ... no headers in $msg.
+    print DIGEST $msg;
+    print DIGEST "\n\n" . '-' x 55 . "\n";
+    close(DIGEST);
+    &log("event", "Digested message to $list from $who", $list, \%config);
+}
+else {
+    open LIST, "<$config{libdir}/$list/list";
+    my @to = <LIST>;
+    close LIST;
+    &log("event", "Posting mail to $list from $who", $list, \%config);
+    &sendmsg ($config{server}, $message, $config{admin}, @to);
+}
+
+exit 0;
+

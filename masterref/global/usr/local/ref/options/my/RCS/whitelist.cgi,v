@@ -1,0 +1,1273 @@
+head	1.37;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.37
+date	2003.03.19.19.05.10;	author root;	state Exp;
+branches;
+next	1.36;
+
+1.36
+date	2003.03.19.18.58.00;	author root;	state Exp;
+branches;
+next	1.35;
+
+1.35
+date	2003.03.19.18.56.30;	author root;	state Exp;
+branches;
+next	1.34;
+
+1.34
+date	2003.03.19.18.54.41;	author root;	state Exp;
+branches;
+next	1.33;
+
+1.33
+date	2003.03.19.18.53.33;	author root;	state Exp;
+branches;
+next	1.32;
+
+1.32
+date	2003.03.19.18.52.23;	author root;	state Exp;
+branches;
+next	1.31;
+
+1.31
+date	2003.03.19.18.41.33;	author root;	state Exp;
+branches;
+next	1.30;
+
+1.30
+date	2003.03.19.18.31.59;	author root;	state Exp;
+branches;
+next	1.29;
+
+1.29
+date	2003.03.19.18.24.10;	author root;	state Exp;
+branches;
+next	1.28;
+
+1.28
+date	2003.03.19.18.21.59;	author root;	state Exp;
+branches;
+next	1.27;
+
+1.27
+date	2003.03.19.18.19.18;	author root;	state Exp;
+branches;
+next	1.26;
+
+1.26
+date	2003.03.19.18.13.18;	author root;	state Exp;
+branches;
+next	1.25;
+
+1.25
+date	2003.03.19.18.10.00;	author root;	state Exp;
+branches;
+next	1.24;
+
+1.24
+date	2003.03.19.18.07.54;	author root;	state Exp;
+branches;
+next	1.23;
+
+1.23
+date	2003.03.19.18.06.43;	author root;	state Exp;
+branches;
+next	1.22;
+
+1.22
+date	2003.03.19.16.29.21;	author root;	state Exp;
+branches;
+next	1.21;
+
+1.21
+date	2003.03.19.03.50.48;	author root;	state Exp;
+branches;
+next	1.20;
+
+1.20
+date	2003.03.19.03.42.23;	author root;	state Exp;
+branches;
+next	1.19;
+
+1.19
+date	2003.03.19.03.35.49;	author root;	state Exp;
+branches;
+next	1.18;
+
+1.18
+date	2003.03.19.03.30.04;	author root;	state Exp;
+branches;
+next	1.17;
+
+1.17
+date	2003.03.19.03.28.11;	author root;	state Exp;
+branches;
+next	1.16;
+
+1.16
+date	2003.03.19.03.26.03;	author root;	state Exp;
+branches;
+next	1.15;
+
+1.15
+date	2003.03.19.03.24.23;	author root;	state Exp;
+branches;
+next	1.14;
+
+1.14
+date	2003.03.19.03.22.21;	author root;	state Exp;
+branches;
+next	1.13;
+
+1.13
+date	2003.03.19.03.21.11;	author root;	state Exp;
+branches;
+next	1.12;
+
+1.12
+date	2003.03.19.03.19.52;	author root;	state Exp;
+branches;
+next	1.11;
+
+1.11
+date	2003.03.19.03.18.20;	author root;	state Exp;
+branches;
+next	1.10;
+
+1.10
+date	2003.03.18.19.37.35;	author root;	state Exp;
+branches;
+next	1.9;
+
+1.9
+date	2003.03.18.19.33.14;	author root;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	2003.03.18.19.30.55;	author root;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2003.03.18.19.28.10;	author root;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2003.03.18.19.23.34;	author root;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2003.03.18.19.21.50;	author root;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2003.03.18.19.20.04;	author root;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2003.03.18.19.18.00;	author root;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2003.03.17.22.09.15;	author root;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2003.03.17.21.48.56;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.37
+log
+@*** empty log message ***
+@
+text
+@#!/usr/bin/perl -w
+
+# $Id: whitelist.cgi,v 1.36 2003/03/19 18:58:00 root Exp root $
+
+use strict;
+use Rcs;
+use POSIX qw(strftime);
+use Cwd;
+
+## cgi.pm parameters
+use CGI;
+use CGI::Carp qw(fatalsToBrowser carpout);
+$CGI::DISABLE_UPLOADS = 1;
+$CGI::POST_MAX = 1024;
+my $path = $ENV{'PATH'};
+$ENV{'PATH'} = '/usr/bin';
+my $val = &createCGIHash;
+
+## globals to be used in html
+my ($domain, $images, $self) = &defineGlobals;
+
+## define files to be edited
+my $workdir   = '/etc/mail/spamassassin';
+my $whitelist = 'whitelist.cf';
+my $rcsdir    = "$workdir/RCS";
+
+## create a layout
+if ($val->{action}) {
+  &validateInfo;
+} elsif ($val->{directions}) {
+  &showDirections;
+} else {
+  &showSubmit('0');
+}
+
+## subroutines ###############################
+
+sub validateInfo {
+  my $attempt = $val->{email};
+  chomp $attempt;
+  if ($attempt =~ /^[a-z0-9\.\-]+\@@(?:[a-z0-9\-]+\.)?(?:[a-z0-9\-]+\.)?[a-z0-9\-]+\.[a-zA-Z]{2,6}$/) {
+    &checkForExisting;
+  } else {
+    &showSubmit('format');
+  }
+}
+
+sub checkForExisting {
+  my %existing;
+
+  open(FH,"$workdir/$whitelist")
+    or die "Can't open whitelist!\n";
+  
+  while (my $i = <FH>) {
+    next if $i =~ /^\#/;
+    chomp $i;
+    $i = (split(/\t/,$i))[-1]; 
+    $existing{$i} = '1';
+  }
+
+  if ($existing{$val->{email}}) {
+    &showSubmit('existing');
+  } else {
+    &addAddress;
+  }
+}
+
+sub addAddress {
+  ## set up local time format for RCS log entry
+  my $time = strftime("Local Date: %Y/%m/%d\nLocal Time: %T",localtime);
+
+  ## create message entry for rcs ci argument
+  my $entry = qq|-mAddition: $val->{email}\nAdded by: $ENV{REMOTE_USER}\n$time|;
+
+  ## create new rcs object
+  my $rcs = Rcs->new;
+
+  ## check out the whitelist
+  $rcs->bindir('/usr/bin');
+  $rcs->workdir($workdir);
+  $rcs->rcsdir($rcsdir);
+  $rcs->file($whitelist);
+  $rcs->co('-l');
+
+  ## add email to whitelist
+  open(FH,">>$workdir/$whitelist");
+  print FH "whitelist_from\t$val->{email}\n";
+  close(FH);
+
+  ## check the whitelist in
+  $rcs->bindir('/usr/bin');
+  $rcs->workdir($workdir);
+  $rcs->rcsdir($rcsdir);
+  $rcs->file($whitelist);
+  $rcs->ci('-u', "$entry");
+
+  $val->{email} = '';
+
+  &showSubmit('success');
+}
+
+sub createCGIHash {
+  my $query = new CGI;
+  $query = CGI->new();
+  my %formdata;
+  my @@formfields = $query->param;
+  for my $field(@@formfields) {
+    $formdata{$field} = $query->param($field);
+  }
+  return \%formdata;
+}
+
+sub defineGlobals {
+  my $domain = (split(/\//, cwd()))[-3];
+  $domain =~ /^((?:[\w\-]+\.)?(?:[\w\-]+\.)(?:\w{2,3}\.)?(?:\w{2,4}))$/;
+  $domain = $1 || 'UNKNOWN';
+
+  my $images = "images";
+
+  $0 = (split(/\//, $0))[-1];
+  my $self = "$0";
+
+  return ($domain, $images, $self);
+}
+
+sub htmlHeader {
+print <<HTML;
+Content-type: text/html\n\n
+<html>
+<head>
+    <title>
+      Spam Administration
+    </title>
+<SCRIPT LANGUAGE = "JavaScript"><!--
+function startndnav(url) {
+//alert (remoteWin);
+        remoteWin = window.open(url,'ndnav','toolbar=0,top=10,left=25,directories=0,status=0,menubar=0,scrollbars=no,resizable=no,width=394,height=450');
+     remoteWin.location.href = url;
+        if (remoteWin.opener == null)
+        remoteWin.opener = self;
+        if (window.focus)
+                remoteWin.focus();
+     }
+
+// -->
+</SCRIPT>
+</head>
+
+<!-- BEGIN BODY DEFINES -->
+  <BODY BGCOLOR="#99CC99" TEXT="black" LINK="#cc3300" ALINK="#669999" VLINK="#cc3300">
+    <base href="https://www.$domain/my/">
+HTML
+}
+
+sub htmlFooter {
+print <<HTML
+   </body>
+</html>
+HTML
+}
+
+sub showDirections {
+&htmlHeader;
+print <<HTML;
+<table width="375" cellspacing="0" cellpadding="0" border="0">
+ <tr>
+  <td><font face="Verdana,Geneva,Arial,Helvetica,sans-serif" size="-1"><b>Directions:</b><p>
+You can add your the e-mail addresses of people that you know won't send you spam to a list of "trusted users" so that Spam Assassin won't tag them as offending e-mail.<p>
+Simply type into the form the e-mail address that you would like to add to the list exactly as it appears in the message sent to you. Typically an e-mail address looks something like this: name\@@domain.com<p>
+After you have the address exactly as you would like it, click the submit button. If the e-mail address isn't already in the safe list, it will be immediately added and your friend's e-mail will arrive unchecked by Spam Assassin.
+  </td>
+ </tr>
+</table><p>
+
+<table width="375" cellspacing="0" cellpadding="0" border="0">
+ <tr>
+  <td align="right"><font face="verdana" size="1"><a href="$self"><b><< Back to Administration</b></a></font></td>
+ </tr>
+</table>
+HTML
+&htmlFooter;
+}
+
+sub showToggle {
+
+}
+
+sub showSubmit {
+  my $routine = shift;
+
+&htmlHeader;
+
+print <<INTRODUCTION;
+<!-- \$Id: whitelist.cgi,v 1.36 2003/03/19 18:58:00 root Exp root $ -->
+<table width="375" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td><font face="Verdana,Geneva,Arial,Helvetica,sans-serif" size="-1"><b>Add a friend's e-mail to the list of Trusted Users.</b></font></td>
+ </tr>
+</table>
+<p>
+INTRODUCTION
+
+## various errors or success message
+my $start = '<b><font face="Verdana,Geneva,Arial,Helvetica,sans-serif" size="-1" color="#cc3300">';
+my $end = '</font></b><p>';
+my $error = q|I'm sorry, but the e-mail address you've submitted does not appear to be in the correct format. Please try again.|;
+my $duplicate = q|I'm sorry, but the e-mail address you've submitted appears to already be present in the list of Trusted Users.|;
+my $success = q|Success! The e-mail address you've submitted has been added to the list of Trusted Users.|;
+
+print "$start$error$end"
+  if ($routine eq 'format');
+
+print "$start$duplicate$end"
+  if ($routine eq 'existing');
+
+print "$start$success$end"
+  if ($routine eq 'success');
+
+print <<FORM;
+<table width="375" cellspacing="0" cellpadding="0" border="0">
+ <tr>
+  <td valign="middle"><form method="post" action="$self">Trusted E-Mail:&nbsp;
+  <input name="email" value="$val->{email}" maxlength="64"></td>
+ </tr>
+</table><p>
+
+<table width="375" cellspacing="0" cellpadding="0" border="0">
+ <tr>
+  <td valign="middle" width="50%"><input type="hidden" name="action" value="on"></td>
+  <td valign="middle" width="50%"><input type="image" value="Submit" border="0"
+src="images/submitbutton.gif"></td>
+ </tr>
+</table><p>
+
+<table width="375" cellspacing="0" cellpadding="0" border="0">
+ <tr>
+  <td valign="middle" width="50%"></td>
+  <td valign="middle" width="50%"><b><font color="cc3300" face="verdana" size="1"><a href="$self?directions=1">directions</a> | <a href="javascript:window.close()">close window</b></font></a></td>
+</table>
+</form>
+FORM
+
+&htmlFooter;
+
+}
+@
+
+
+1.36
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+# $Id: whitelist.cgi,v 1.35 2003/03/19 18:56:30 root Exp root $
+d73 1
+a73 1
+  my $entry = qq|-mAddition: $val->{email}\nAdded by: $val->{user}\n$time|;
+d194 1
+a194 1
+<!-- \$Id: whitelist.cgi,v 1.35 2003/03/19 18:56:30 root Exp root $ -->
+a202 4
+for my $i(keys %{$val}) {
+  print "$i -> $val->{$i}<br>";
+}
+
+@
+
+
+1.35
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+# $Id: whitelist.cgi,v 1.34 2003/03/19 18:54:41 root Exp root $
+d16 1
+a16 1
+$ENV{'PATH'} = '/bin';
+d194 1
+a194 1
+<!-- \$Id: whitelist.cgi,v 1.34 2003/03/19 18:54:41 root Exp root $ -->
+@
+
+
+1.34
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+# $Id: whitelist.cgi,v 1.33 2003/03/19 18:53:33 root Exp root $
+d12 1
+d194 1
+a194 1
+<!-- \$Id: whitelist.cgi,v 1.33 2003/03/19 18:53:33 root Exp root $ -->
+@
+
+
+1.33
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+# $Id: whitelist.cgi,v 1.32 2003/03/19 18:52:23 root Exp root $
+d193 1
+a193 1
+<!-- \$Id: whitelist.cgi,v 1.32 2003/03/19 18:52:23 root Exp root $ -->
+d232 1
+a232 1
+  <td valign="middle" width="50%"><input type="hidden" name="click" value="on"></td>
+@
+
+
+1.32
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+# $Id: whitelist.cgi,v 1.31 2003/03/19 18:41:33 root Exp root $
+d193 1
+a193 1
+<!-- \$Id: whitelist.cgi,v 1.31 2003/03/19 18:41:33 root Exp root $ -->
+d203 1
+a203 1
+  print "$val->{$i}<br>";
+@
+
+
+1.31
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+# $Id: whitelist.cgi,v 1.30 2003/03/19 18:31:59 root Exp root $
+d193 1
+a193 1
+<!-- $Id:$ -->
+@
+
+
+1.30
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+# $Id: whitelist.cgi,v 1.29 2003/03/19 18:24:10 root Exp root $
+d193 1
+@
+
+
+1.29
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+# $Id: whitelist.cgi,v 1.28 2003/03/19 18:21:59 root Exp root $
+d201 4
+@
+
+
+1.28
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+# $Id: whitelist.cgi,v 1.27 2003/03/19 18:19:18 root Exp root $
+d23 1
+a23 1
+my $whitelist = 'whitelist.cfg';
+@
+
+
+1.27
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+# $Id: whitelist.cgi,v 1.26 2003/03/19 18:13:18 root Exp root $
+d32 1
+a32 1
+  &showContent;
+d236 1
+a236 1
+  <td valign="middle" width="50%"><b><font color="cc3300" face="verdana" size="1"><a href="$self?instructions=1">directions</a> | <a href="javascript:window.close()">close window</b></font></a></td>
+@
+
+
+1.26
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+# $Id: whitelist.cgi,v 1.25 2003/03/19 18:10:00 root Exp root $
+d29 2
+d43 1
+a43 1
+    &showError('badformat');
+d61 1
+a61 1
+    &showError('existing');
+d96 1
+a96 1
+  $val->{success} = '1';
+d98 1
+a98 1
+  &showContent;
+a159 14
+ 
+sub showContent {
+  &htmlHeader;
+  if ($val->{instructions}) {
+    &showDirections;
+  } elsif ($val->{toggle}) {
+    &showToggle;
+  } elsif ($val->{success}) {
+    &showSubmit('success');
+  } else {
+    &showSubmit('0');
+  }
+  &htmlFooter;    
+}
+d162 1
+d180 1
+d190 2
+d209 1
+a209 1
+  if ($routine eq 'error');
+d212 1
+a212 1
+  if ($routine eq 'duplicate');
+d241 2
+@
+
+
+1.25
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+# $Id: whitelist.cgi,v 1.24 2003/03/19 18:07:54 root Exp root $
+d212 3
+d216 1
+a216 1
+print "$start" . q|I'm sorry, but the e-mail address you've submitted does not appear to be in the correct format. Please try again.| . "$end"
+d219 1
+a219 1
+print "$start" . q|That e-mail address appears to already be in the list of Trusted Users.| . "$end"
+d222 1
+a222 1
+print "$start" . q|Success! The e-mail address you submitted has been added to the list of Trusted Users!' . "$end"
+@
+
+
+1.24
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+# $Id: whitelist.cgi,v 1.23 2003/03/19 18:06:43 root Exp root $
+d213 1
+a213 1
+print $start . q|I'm sorry, but the e-mail address you've submitted does not appear to be in the correct format. Please try again.| . $end
+d216 1
+a216 1
+print $start . q|That e-mail address appears to already be in the list of Trusted Users.| . $end
+d219 1
+a219 1
+print $start . q|Success! The e-mail address you submitted has been added to the list of Trusted Users!' . $end
+@
+
+
+1.23
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+# $Id: whitelist.cgi,v 1.22 2003/03/19 16:29:21 root Exp root $
+d213 1
+a213 1
+print $start . q|I'm sorry, but the e-mail address you've submitted does not appear to be in the correct format. Please try again.| . $end;
+d216 1
+a216 1
+print $start . q|That e-mail address appears to already be in the list of Trusted Users.| . $end;
+d219 1
+a219 1
+print $start . q|Success! The e-mail address you submitted has been added to the list of Trusted Users!' . $end;
+@
+
+
+1.22
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+# $Id: whitelist.cgi,v 1.21 2003/03/19 03:50:48 root Exp root $
+d93 4
+d165 2
+a166 2
+  } elsif ($val->{error}) {
+    &showError;
+d168 1
+a168 1
+    &showSubmit;
+a192 4
+sub showError {
+
+}
+
+d198 2
+d209 13
+@
+
+
+1.21
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+# $Id: whitelist.cgi,v 1.20 2003/03/19 03:42:23 root Exp root $
+d27 5
+a31 1
+&showContent;
+@
+
+
+1.20
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+# $Id: whitelist.cgi,v 1.19 2003/03/19 03:35:49 root Exp root $
+d153 1
+a153 1
+  if ($val->{directions}) {
+d206 2
+a207 2
+  <td valign="middle" width="50%"><form method="post" action="$self">Trusted E-Mail:&nbsp;</td>
+  <td valign="middle" width="50%"><input name="email" value="$val->{email}" maxlength="64"></td>
+@
+
+
+1.19
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+# $Id: whitelist.cgi,v 1.18 2003/03/19 03:30:04 root Exp root $
+d206 2
+a207 2
+  <td valign="middle" width="50%"><form method="post" action="https://www.$domain/$self">Trusted E-Mail:&nbsp;</td>
+  <td valign="middle" width="50%"><input type="password" name="new_password" value="$formdata{new_password}" maxlength="8"></td>
+@
+
+
+1.18
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+# $Id: whitelist.cgi,v 1.17 2003/03/19 03:28:11 root Exp root $
+d194 32
+a225 1
+print "Hello World!";
+@
+
+
+1.17
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+# $Id: whitelist.cgi,v 1.16 2003/03/19 03:26:03 root Exp root $
+d165 1
+a165 1
+sub showSubmit {
+d193 2
+a194 1
+sub showDirections {
+@
+
+
+1.16
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+# $Id: whitelist.cgi,v 1.15 2003/03/19 03:24:23 root Exp root $
+d107 1
+a107 1
+  my $images = "/images";
+d110 1
+a110 1
+  my $self = "/$0";
+d140 1
+a140 1
+    <base href="https://www.$domain/my">
+@
+
+
+1.15
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+# $Id: whitelist.cgi,v 1.14 2003/03/19 03:22:21 root Exp root $
+d179 1
+a179 1
+  <td align="right"><font face="verdana" size="1"><a href="https://www.$domain/$self"><b><< Back to Administration</b></a></font></td>
+@
+
+
+1.14
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+# $Id: whitelist.cgi,v 1.13 2003/03/19 03:21:11 root Exp root $
+d179 1
+a179 1
+  <td align="right"><font face="verdana" size="1"><a href="https://www.$domain/$self"><b>Back to Spam Administration</b></a></font></td>
+@
+
+
+1.13
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+# $Id: whitelist.cgi,v 1.12 2003/03/19 03:19:52 root Exp root $
+d171 1
+a171 1
+Simply type into the form the e-mail address that you would like to add to the list exactly as it appears in the message sent to you. Typically an e-mail address looks something like this: name@@domain.com<p>
+@
+
+
+1.12
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+# $Id: whitelist.cgi,v 1.11 2003/03/19 03:18:20 root Exp root $
+d182 1
+@
+
+
+1.11
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+# $Id: whitelist.cgi,v 1.10 2003/03/18 19:37:35 root Exp root $
+d173 9
+@
+
+
+1.10
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+# $Id: whitelist.cgi,v 1.9 2003/03/18 19:33:14 root Exp root $
+d166 7
+a172 1
+  print "Hello World!\n";
+@
+
+
+1.9
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+# $Id: whitelist.cgi,v 1.8 2003/03/18 19:30:55 root Exp root $
+d155 2
+d160 1
+a160 1
+    print "Hello World\n";
+d165 4
+d173 4
+@
+
+
+1.8
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+# $Id: whitelist.cgi,v 1.7 2003/03/18 19:28:10 root Exp root $
+d107 1
+a107 1
+  my $images = "controlpanel/images";
+d110 1
+a110 1
+  my $self = "controlpanel/$0";
+d140 1
+a140 1
+    <base href="https://www.$domain/">
+@
+
+
+1.7
+log
+@changed path.
+@
+text
+@d3 1
+a3 1
+# $Id: whitelist.cgi,v 1.6 2003/03/18 19:23:34 root Exp root $
+d117 1
+a135 1
+<base href="https://www.$domain/">
+d139 2
+a140 1
+<BODY BGCOLOR="#99CC99" TEXT="black" LINK="#cc3300" ALINK="#669999" VLINK="#cc3300">
+@
+
+
+1.6
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+# $Id: whitelist.cgi,v 1.5 2003/03/18 19:21:50 root Exp root $
+d15 1
+a15 1
+$ENV{'PATH'} = '';
+@
+
+
+1.5
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+# $Id: whitelist.cgi,v 1.4 2003/03/18 19:20:04 root Exp root $
+d103 1
+a103 1
+  my $domain = (split(/\//, cwd()))[-2];
+@
+
+
+1.4
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+# $Id: whitelist.cgi,v 1.3 2003/03/18 19:18:00 root Exp root $
+d26 2
+a27 2
+## begin the checks on content submitted
+&validateInfo;
+d157 1
+a157 1
+
+@
+
+
+1.3
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+# $Id: whitelist.pl,v 1.5 2003/03/18 19:19:44 root Exp $
+d147 1
+@
+
+
+1.2
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+## $Id: whitelist.cgi,v 1.1 2003/03/17 21:48:56 root Exp root $
+a4 1
+## modules
+d6 1
+a7 1
+use Rcs;
+d10 1
+a10 5
+## taint environmentals
+delete @@ENV{qw(IFS CDPATH ENV BASH_ENV)};
+$ENV{'PATH'} = "";
+
+## cgi.pm
+a11 1
+#use CGI::Carp qw(fatalsToBrowser carpout);
+d14 26
+a39 2
+my $query = new CGI;
+$query = CGI->new();
+d41 2
+a42 2
+my %formdata;
+my @@formfields = $query->param;
+d44 15
+a58 2
+for my $field(@@formfields) {
+  $formdata{$field} = $query->param($field);
+d61 29
+a89 36
+## script variables
+my $cwd = cwd();
+my $domain = (split(/\//,$cwd))[2];
+my $rcs = (qw$Revision: 1.1 $)[-1];
+my $images = "my/images";
+
+$0 = (split(/\//, $0))[-1];
+my $self = "my/$0";
+
+## html
+print <<STARTHTML;
+Content-type: text/html\n\n
+<HTML>
+  <HEAD>
+
+  <TITLE>Safe E-Mail Addresses</TITLE>
+
+    <SCRIPT LANGUAGE="JavaScript">
+    <!--
+    window.onerror = null;
+
+    function targetwindow(url) {
+     var root;
+      if (parent.opener.closed) {
+        root=window.open('','opener','toolbar=yes,location=yes,status=yes,menubar=yes,scrollbars=yes,resizable=yes,copyhistory=no');
+        root.location.href = url;
+    
+      } else { 
+        parent.opener.top.location.href = url;
+      }
+    }
+
+    function done() {
+      window.close()
+    }
+    // -->
+d91 10
+a100 1
+    </SCRIPT>
+d102 4
+a105 1
+  </HEAD>
+d107 1
+d109 30
+d140 2
+a141 1
+STARTHTML
+d143 13
+a155 6
+## create the body 
+if ($formdata{instructions}) {
+  &content('instructions');
+
+} else {
+  &content('none');
+d157 2
+d161 1
+a161 47
+## end html
+print <<ENDHTML;
+    <p>
+  </BODY>
+</HTML>
+ENDHTML
+
+## subroutines
+
+## generate content of page
+sub content {
+
+  ## find out if new flags should be used
+  my $routine = shift;
+
+  ## successful change of password 
+  if ($routine eq "success") {
+
+print <<SUCCESS;
+<table width="375" cellspacing="0" cellpadding="0" border="0">
+ <tr>
+  <td><font face="Verdana,Geneva,Arial,Helvetica,sans-serif" size="-1"></font><p></td>
+ </tr>
+ <tr>
+  <td align="left"><font color="cc3300" face="verdana" size="1"><b><a href="javascript:window.close()">close window</b></font></a></td>
+ </tr>
+</table>
+SUCCESS
+
+  ## error processing
+  } elsif ($routine eq "instructions") {
+
+print <<INSTRUCTIONS;
+<table width="375" cellspacing="0" cellpadding="0" border="0">
+ <tr>
+  <td><font face="Verdana,Geneva,Arial,Helvetica,sans-serif" size="-1"><b>Directions:</b><p>
+</font>
+  </td>
+ </tr>
+</table><p>
+
+<table width="375" cellspacing="0" cellpadding="0" border="0">
+ <tr>
+  <td align="right"><font face="verdana" size="1"><a href="https://www.$domain/$self"><b>Back to Password Change</b></a></font></td>
+ </tr>
+</table>
+INSTRUCTIONS
+d163 1
+a163 65
+  ## error processing
+  } else {
+
+print <<INTRODUCTION;
+<table width="375" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td><font face="Verdana,Geneva,Arial,Helvetica,sans-serif" size="-1"><b>Use this form to change your current password.</b></font></td>
+ </tr>
+</table>
+<p>
+INTRODUCTION
+
+print qq|<b><font face="Verdana,Geneva,Arial,Helvetica,sans-serif" size="-1" color="#cc3300">Your current password is incorrect!</font></b><p>|
+  if ($routine eq "bad_pass");
+
+print qq|<b><font face="Verdana,Geneva,Arial,Helvetica,sans-serif" size="-1" color="#cc3300">That username is not allowed!</font></b><p>|
+  if ($routine eq "no_allow");
+
+print qq|<b><font face="Verdana,Geneva,Arial,Helvetica,sans-serif" size="-1" color="#cc3300">It appears that your new password is incorrect in format. The phrase should be up to 8 characters, and may include letters and numbers with no white space.</b></font><p>|
+  if ($routine eq "bad_new_pass");
+
+print <<FORM;
+
+<table width="375" cellspacing="0" cellpadding="0" border="0">
+ <tr>
+  <td valign="middle" width="50%"><form method="post" action="https://www.$domain/$self"><font face="Verdana,Geneva,Arial,Helvetica,sans-serif" size="-1">Username:&nbsp;</td>
+  <td valign="left" width="50%"><font face="Verdana,Geneva,Arial,Helvetica,sans-serif" size="-1">&nbsp;<b>$ENV{REMOTE_USER}</b></font><input type="hidden" name="username" value="$ENV{REMOTE_USER}"></td>
+ </tr>
+</table><p>
+
+<table width="375" cellspacing="0" cellpadding="0" border="0">
+ <tr>
+  <td valign="middle" width="50%"><font face="Verdana,Geneva,Arial,Helvetica,sans-serif" size="-1">Current Password:&nbsp;</font></td>
+  <td valign="middle" width="50%"><input type="password" name="current_password" value="$formdata{current_password}" maxlength="8"></td>
+ </tr>
+</table><p>
+
+<table width="375" cellspacing="0" cellpadding="0" border="0">
+ <tr>
+  <td valign="middle" width="50%"><font face="Verdana,Geneva,Arial,Helvetica,sans-serif" size="-1">New Password:&nbsp;</font></td>
+  <td valign="middle" width="50%"><input type="password" name="new_password" value="$formdata{new_password}" maxlength="8"></td>
+ </tr>
+</table><p>
+
+<table width="375" cellspacing="0" cellpadding="0" border="0">
+ <tr>
+  <td valign="middle" width="50%"><font face="Verdana,Geneva,Arial,Helvetica,sans-serif" size="-1">Repeat Password:&nbsp;</font></td>
+  <td valign="middle" width="50%"><input type="password" name="repeat_password" value="$formdata{repeat_password}" maxlength="8"></td>
+ </tr>
+</table><p>
+
+<table width="375" cellspacing="0" cellpadding="0" border="0">
+ <tr>
+  <td valign="middle" width="50%"><input type="hidden" name="click" value="on"></td>
+  <td valign="middle" width="50%"><input type="image" value="Submit" border="0" src="images/submitbutton.gif"></td>
+ </tr>
+</table><p>
+
+<table width="375" cellspacing="0" cellpadding="0" border="0">
+ <tr>
+  <td valign="middle" width="50%"></td>
+  <td valign="middle" width="50%"><b><font color="cc3300" face="verdana" size="1"><a href="https://www.$domain/$self?instructions=1">directions</a> | <a href="javascript:window.close()">close window</b></font></a></td>
+</table>
+</form>
+FORM
+d165 1
+a165 2
+  ## end of if/else routine
+  }
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d3 1
+a3 1
+## $Id: password.cgi,v 1.3 2002/04/10 21:24:05 root Exp $
+d33 1
+a33 1
+my $rcs = (qw$Revision: 1.3 $)[-1];
+d105 1
+a105 1
+  <td><font face="Verdana,Geneva,Arial,Helvetica,sans-serif" size="-1"><b>Your password has been changed!</b><p>Although your password has been updated on the system, it may take up to 10 minutes for it to propogate to all servers.<p>We recommend that you log out of your account management page and then log back in to ensure that the change has been accepted.</font><p></td>
+a119 1
+If you know your current password, you can use this form to change it to something new. Its recommended that you change your password once every few months to further limit any attempts by hackers to guess your current passphrase.<br>Your password should be between 6 and 8 characters long and should make use of both upper and lowercase letters and should try to include at least one number.
+a126 7
+  <td><font face="Verdana,Geneva,Arial,Helvetica,sans-serif" size="-1">&nbsp;<b>1. Enter your current password.<p>&nbsp;2. Enter your desired new password.<p>&nbsp;3. Repeat this new password.<p>&nbsp;4. Click Submit.</b><p><b>Note:</b> Passwords will not be visible. Stars will appear in place of characters. All changes are immediate.</font>
+  </td>
+ </tr>
+</table><p>
+
+<table width="375" cellspacing="0" cellpadding="0" border="0">
+ <tr>
+@

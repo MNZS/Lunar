@@ -1,0 +1,64 @@
+Miva Virtual Machine 4.07
+Release Notes
+
+The Miva Virtual Machine 4.07, released February 2003, includes the following:
+
+Bug Fixes
+---------
+
+o  Expressions inside array references that are passed to a filter or passed in an MvDO, no longer give a Runtime Error.
+
+o  MvSMTP_Error is now being set when a connection error is encountered.
+
+o  Files compiled with a Miva Script Compiler version prior to 1.0 no longer cause the Virtual Machine to crash.
+
+o  dyn_tm_usec now reports microseconds, rather than milliseconds, as expected. 
+
+o  time_t and dyn_time_t functions are now reporting the proper time.
+
+o  MvGO now works when ROWS is equal to a variable whose value is 'top' or 'bottom'.
+
+o  MvHIDE on subaggregates now properly generates <INPUT TYPE=HIDDEN> tags.
+
+o  crypto_md5 with certain strings no longer causes the Virtual Machine to crash.
+
+o  Expressions in MvDO or MvFILTER are now case-sensitive.
+
+o  MvFUNCTIONRETURN inside of an MvLOCKFILE block now releases all locks.  
+
+o  MvOPEN on a .dbt file no longer causes the VM to crash.
+
+o  MvCALL no longer truncates responses from certain servers.
+
+o  MvGO and MvPRIMARY no longer crash when indices have different database handles in each index expression.
+
+o  MvCLOSEVIEW now properly resets the database's primary view.
+
+o  Certain cases where variables with nonexistent members were being evaluated, causing the values that did exist to be deleted, no longer occur.
+
+o  Adding one or subtracting one to certain numbers no longer reports incorrect results.
+
+o  Performing MvFIND on a database with no indices no longer causes the VM to crash.
+
+o  Performing MvFIND when indices have different database handles in each index expression.
+
+o  Opening a database with a new alias, using the prior indices names where the index expression contains the previous database alias, no longer causes a crash doing an MvFIND.
+
+o  An MvFILTER expression with an argument, operator and a function that contains a negative constant passed as a parameter no longer returns an error and behaves as expected. 
+
+o  MvSMTP now properly sends mail to the email addresses in the "CC" field.
+
+o  MvSMTP no longer sets the date field to an empty string on unix/linux.
+
+o  trim() no longer crashes on all white space strings.
+
+o  miva_array_deserialize() no longer discards the top-level structure element name, flattening structures of structures to a single structure.
+
+o  glosub_array() now properly calculates the string length of the newly created string.
+
+o  mvVariable_Set_Array_Element() now works properly on function parameters.
+
+o  Miva_ValidateFileUpload and Miva_ProcessFileUpload routines coded with Miva Script tags on the line after the MvFUNCTION tag no longer give "Stack Underflow" errors by the VM.
+
+o  When performing an upgrade, windows installer no longer inserts multiple program entries in the Add/Remove Program menu.
+

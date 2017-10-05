@@ -1,0 +1,9 @@
+## DOMAIN
+
+  ## make alias for crypt directory
+  Alias /crypt/ /etc/commerce/DOMAIN/crypt/
+
+  ## set authorization/authentication for directory
+  <Directory /etc/commerce/DOMAIN/crypt>
+    AllowOverride All
+  </Directory>

@@ -1,0 +1,1247 @@
+head	1.52;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.52
+date	2003.08.20.05.35.36;	author root;	state Exp;
+branches;
+next	1.51;
+
+1.51
+date	2003.08.11.19.41.18;	author root;	state Exp;
+branches;
+next	1.50;
+
+1.50
+date	2003.08.11.19.37.43;	author root;	state Exp;
+branches;
+next	1.49;
+
+1.49
+date	2003.08.08.14.25.37;	author root;	state Exp;
+branches;
+next	1.48;
+
+1.48
+date	2003.07.30.20.30.03;	author root;	state Exp;
+branches;
+next	1.47;
+
+1.47
+date	2003.07.30.20.29.30;	author root;	state Exp;
+branches;
+next	1.46;
+
+1.46
+date	2003.06.29.14.59.40;	author root;	state Exp;
+branches;
+next	1.45;
+
+1.45
+date	2003.06.29.14.56.45;	author root;	state Exp;
+branches;
+next	1.44;
+
+1.44
+date	2003.06.25.19.54.53;	author root;	state Exp;
+branches;
+next	1.43;
+
+1.43
+date	2003.06.06.21.16.09;	author root;	state Exp;
+branches;
+next	1.42;
+
+1.42
+date	2003.05.29.03.37.54;	author root;	state Exp;
+branches;
+next	1.41;
+
+1.41
+date	2003.05.07.10.42.57;	author root;	state Exp;
+branches;
+next	1.40;
+
+1.40
+date	2003.04.29.14.04.46;	author root;	state Exp;
+branches;
+next	1.39;
+
+1.39
+date	2003.04.15.18.28.12;	author root;	state Exp;
+branches;
+next	1.38;
+
+1.38
+date	2003.04.15.12.57.02;	author root;	state Exp;
+branches;
+next	1.37;
+
+1.37
+date	2003.04.15.12.49.56;	author root;	state Exp;
+branches;
+next	1.36;
+
+1.36
+date	2003.04.15.12.42.32;	author root;	state Exp;
+branches;
+next	1.35;
+
+1.35
+date	2003.04.14.13.50.43;	author root;	state Exp;
+branches;
+next	1.34;
+
+1.34
+date	2003.04.11.06.53.25;	author root;	state Exp;
+branches;
+next	1.33;
+
+1.33
+date	2003.04.10.00.50.50;	author root;	state Exp;
+branches;
+next	1.32;
+
+1.32
+date	2003.04.10.00.35.56;	author root;	state Exp;
+branches;
+next	1.31;
+
+1.31
+date	2003.04.10.00.35.38;	author root;	state Exp;
+branches;
+next	1.30;
+
+1.30
+date	2003.04.10.00.35.18;	author root;	state Exp;
+branches;
+next	1.29;
+
+1.29
+date	2003.04.08.23.01.00;	author root;	state Exp;
+branches;
+next	1.28;
+
+1.28
+date	2003.04.08.22.05.47;	author root;	state Exp;
+branches;
+next	1.27;
+
+1.27
+date	2003.04.02.10.58.37;	author root;	state Exp;
+branches;
+next	1.26;
+
+1.26
+date	2003.03.26.22.03.53;	author root;	state Exp;
+branches;
+next	1.25;
+
+1.25
+date	2003.03.26.16.38.11;	author root;	state Exp;
+branches;
+next	1.24;
+
+1.24
+date	2003.03.24.17.37.39;	author root;	state Exp;
+branches;
+next	1.23;
+
+1.23
+date	2003.03.24.17.09.34;	author root;	state Exp;
+branches;
+next	1.22;
+
+1.22
+date	2003.03.12.18.34.52;	author root;	state Exp;
+branches;
+next	1.21;
+
+1.21
+date	2003.03.11.18.06.48;	author root;	state Exp;
+branches;
+next	1.20;
+
+1.20
+date	2003.03.05.07.41.52;	author root;	state Exp;
+branches;
+next	1.19;
+
+1.19
+date	2003.02.23.16.12.02;	author root;	state Exp;
+branches;
+next	1.18;
+
+1.18
+date	2003.02.19.21.00.35;	author root;	state Exp;
+branches;
+next	1.17;
+
+1.17
+date	2003.01.30.21.17.03;	author root;	state Exp;
+branches;
+next	1.16;
+
+1.16
+date	2003.01.30.15.54.53;	author root;	state Exp;
+branches;
+next	1.15;
+
+1.15
+date	2003.01.24.03.00.02;	author root;	state Exp;
+branches;
+next	1.14;
+
+1.14
+date	2003.01.23.23.33.35;	author root;	state Exp;
+branches;
+next	1.13;
+
+1.13
+date	2003.01.06.19.25.59;	author root;	state Exp;
+branches;
+next	1.12;
+
+1.12
+date	2003.01.06.02.57.31;	author root;	state Exp;
+branches;
+next	1.11;
+
+1.11
+date	2003.01.05.16.42.19;	author root;	state Exp;
+branches;
+next	1.10;
+
+1.10
+date	2003.01.04.15.47.11;	author root;	state Exp;
+branches;
+next	1.9;
+
+1.9
+date	2003.01.04.02.27.06;	author root;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	2003.01.03.18.57.07;	author root;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2003.01.03.18.54.07;	author root;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2003.01.03.18.50.19;	author root;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2003.01.03.18.14.21;	author root;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2003.01.03.07.03.12;	author root;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2002.12.31.11.37.00;	author root;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2002.12.30.19.49.11;	author root;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2002.12.30.19.48.47;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.52
+log
+@changing the script to clear procmail logs
+@
+text
+@# $Id: root,v 1.51 2003/08/11 19:41:18 root Exp root $
+
+##########################################################################
+
+## "minute" "hour" "day of month" "month" "day of week"
+
+## "0-59"   "0-23" "0-31"         "0-12"  "0-7"
+
+## 0-SUN 1-MON 2-TUE 3-WED 4-THU 5-FRI 6-SAT 7-SUN
+
+#######################################################################
+
+## SERVER SYNCHRONIZATION
+
+## password sync
+#*/15 * * * *	/usr/local/lunarbin/passwd_sync.pl
+## build htaccess files
+15 * * * *	/usr/local/lunarbin/panelpasswd.pl
+
+#######################################################################
+
+## HOST MONITORING
+
+## monitor server load
+*/5 * * * *	/usr/local/lunarbin/notify.pl
+## monitor server services
+*/15 * * * *	/usr/local/lunarbin/daemonwatch.pl
+## graph rbl statistics
+15 1 * * *	/usr/local/lunarbin/reportRBL.pl
+
+######################################################################
+
+## ARCHIVAL SERVICES
+
+## mysqldump
+0 7 * * *       /usr/local/lunarbin/archive-sql.pl >/dev/null 2>&1
+## clean up backup repositories to only hold 3 days of archives 
+10 2 * * 2,3,4,5,6    /usr/local/lunarbin/archive-cleanse.pl
+## backup the server offsite 
+30 2 * * 2,3,4,5,6    /usr/local/lunarbin/archive-system.pl
+
+######################################################################
+
+## URCHIN STATISTICS AND LOGGING
+
+## urchin config creation
+30 23 * * *     /usr/local/lunarbin/urchin_mkconfig.pl >/dev/null 2>&1
+## urchin log analyzation
+0 0 * * *       /usr/local/lunarbin/urchin_run.pl >/dev/null 2>&1
+## keep urchin archived logs for only 5 days
+45 0 * * *	/usr/local/lunarbin/urchin_logrotate.pl
+## rotate the ftp/www logs for the month
+00 1 1 * *      /usr/local/lunarbin/logrotate.pl
+
+######################################################################
+
+## E-MAIL SERVICES
+
+## restart sendmail and rebuild the virtusertable
+00 5,11,17,23 * * *   /usr/local/lunarbin/mkmail.pl >/dev/null 2>&1
+## clear out procmail.log files
+#30 06 * * 7     /usr/local/lunarbin/clearProcmailLog.pl
+
+######################################################################
+
+## BIND SERVICES
+
+## check for named updates and reload accordingly
+*/20 * * * *	/usr/local/lunarbin/named_update.pl
+## clear out all zone files for a fresh copy
+0 6 1 * *	/usr/local/lunarbin/named_refresh.pl
+
+######################################################################
+
+## SNMP MONITORING
+
+## trend bandwidth utilization
+*/5 * * * *	/usr/local/lunarbin/snmpBandwidth.pl
+## graph current disk utilization
+*/15 * * * *	/usr/local/lunarbin/snmpDiskUsage.pl
+## trend free memory
+*/5 * * * *	/usr/local/lunarbin/snmpMemLoad.pl
+## trend cpu load
+*/5 * * * *	/usr/local/lunarbin/snmpCpuLoad.pl
+
+######################################################################
+
+## CONTROL PANEL SERVICES
+
+## update the search engine indexes
+25 03 * * *     /usr/local/lunarbin/searchindex.pl >/dev/null 2>&1
+## calculate disk usage for hosting clients
+20 */4 * * *	/usr/local/lunarbin/adddisk.pl
+
+######################################################################
+
+## BANDWIDTH AND BILLING
+
+## calculate bandwidth for hosting clients
+45 23 * * *  	/usr/local/lunarbin/addband.pl
+## on first day of each month create a billing report 
+30 00 1 * *  	/usr/local/lunarbin/billing.pl
+## on first day of each month clear out previous total and send email
+00 01 1 * *    	/usr/local/lunarbin/addband.pl --summary
+ 
+######################################################################
+
+## MAIL ARCHIVES
+
+## script to create html-ized version of mail sent to archives@@
+15,45 */1 * * * /usr/local/lunarbin/mailarchive-update.pl
+01 00 1 * *     /usr/local/lunarbin/mailarchive-monthly.pl
+
+######################################################################
+
+## CUSTOMER SPECIFICS
+
+## script to create html-ized version of pancho-discuss
+17,47 */1 * * * /usr/local/lunarbin/pancho-archive.pl
+## script to backup pancho cvs logs
+*/1 * * * *	/usr/local/lunarbin/pancho-cvs.pl
+## script to backup pancho discuss search archive
+*/1 * * * *	/usr/local/lunarbin/pancho-file-archive.pl
+## kna-pacific.com
+0 9,17 * * *	/usr/local/lunarbin/getquote.pl
+
+######################################################################
+
+@
+
+
+1.51
+log
+@type-o on disk monitor
+@
+text
+@d1 1
+a1 1
+# $Id: root,v 1.50 2003/08/11 19:37:43 root Exp root $
+d62 1
+a62 1
+30 06 * * 7     /usr/local/lunarbin/clear_procmail_log.pl
+@
+
+
+1.50
+log
+@Added disk load polling
+@
+text
+@d1 1
+a1 1
+# $Id: root,v 1.49 2003/08/08 14:25:37 root Exp root $
+d80 1
+a80 1
+*/15 * * * *	/usr/local/lunarbin/snmpDiskLoad.pl
+@
+
+
+1.49
+log
+@Added memory trending
+@
+text
+@d1 1
+a1 1
+# $Id: root,v 1.48 2003/07/30 20:30:03 root Exp root $
+d79 2
+@
+
+
+1.48
+log
+@changed panelpasswd to run every 15 minutes
+@
+text
+@d1 1
+a1 1
+# $Id: root,v 1.47 2003/07/30 20:29:30 root Exp root $
+d79 2
+@
+
+
+1.47
+log
+@removed the password sync script
+@
+text
+@d1 1
+a1 1
+# $Id: root,v 1.46 2003/06/29 14:59:40 root Exp root $
+d18 1
+a18 1
+22 * * * *	/usr/local/lunarbin/panelpasswd.pl
+@
+
+
+1.46
+log
+@reportRBL runs everyday at 1:15 am to avoid the log rotation
+and miss the true data for every seventh day
+@
+text
+@d1 1
+a1 1
+# $Id: root,v 1.45 2003/06/29 14:56:45 root Exp root $
+d16 1
+a16 1
+*/15 * * * *	/usr/local/lunarbin/passwd_sync.pl
+@
+
+
+1.45
+log
+@reportRBL ony runs mon-sat
+@
+text
+@d1 1
+a1 1
+# $Id: root,v 1.44 2003/06/25 19:54:53 root Exp root $
+d29 1
+a29 1
+0 6 * * 1,2,3,4,5,6	/usr/local/lunarbin/reportRBL.pl
+@
+
+
+1.44
+log
+@added the rbl report script
+@
+text
+@d1 1
+a1 1
+# $Id: root,v 1.43 2003/06/06 21:16:09 root Exp root $
+d29 1
+a29 1
+0 6 * * *	/usr/local/lunarbin/reportRBL.pl
+@
+
+
+1.43
+log
+@put archive mail rotation back in
+@
+text
+@d1 1
+a1 1
+# $Id: root,v 1.42 2003/05/29 03:37:54 root Exp root $
+d28 2
+@
+
+
+1.42
+log
+@pancho archive back in
+@
+text
+@d1 1
+a1 1
+# $Id: root,v 1.41 2003/05/07 10:42:57 root Exp root $
+d105 2
+a106 2
+#15,45 */1 * * * /usr/local/lunarbin/mailarchive-update.pl
+#01 00 1 * *     /usr/local/lunarbin/mailarchive-monthly.pl
+@
+
+
+1.41
+log
+@removed mkrelay. it is now called from within named_update.pl
+@
+text
+@d1 1
+a1 1
+# $Id: root,v 1.40 2003/04/29 14:04:46 root Exp root $
+d113 1
+a113 1
+#17,47 */1 * * * /usr/local/lunarbin/pancho-archive.pl
+@
+
+
+1.40
+log
+@added mkrelay.pl
+@
+text
+@d1 1
+a1 1
+# $Id: root,v 1.39 2003/04/15 18:28:12 root Exp root $
+a60 2
+## build new relay-domains file on mx1/mx2
+*/20 * * * *    /usr/local/lunarbin/mkrelay.pl
+@
+
+
+1.39
+log
+@put archive back into action
+@
+text
+@d1 1
+a1 1
+# $Id: root,v 1.38 2003/04/15 12:57:02 root Exp root $
+d61 2
+@
+
+
+1.38
+log
+@Added CPU load monitoring
+@
+text
+@d1 1
+a1 1
+# $Id: root,v 1.37 2003/04/15 12:49:56 root Exp root $
+d36 1
+a36 1
+#10 2 * * 2,3,4,5,6    /usr/local/lunarbin/archive-cleanse.pl
+d38 1
+a38 1
+#30 2 * * 2,3,4,5,6    /usr/local/lunarbin/archive-system.pl
+@
+
+
+1.37
+log
+@added snmp bandwidth polling
+@
+text
+@d1 1
+a1 1
+# $Id: root,v 1.36 2003/04/15 12:42:32 root Exp root $
+a27 2
+## trend cpu usage
+*/5 * * * *	/usr/local/lunarbin/tlc.pl >/dev/null 2>&1
+d74 2
+d77 2
+@
+
+
+1.36
+log
+@removed old snmp polling
+@
+text
+@d1 1
+a1 1
+# $Id: root,v 1.35 2003/04/14 13:50:43 root Exp root $
+d76 1
+@
+
+
+1.35
+log
+@put getquote.pl
+@
+text
+@d1 1
+a1 1
+# $Id: root,v 1.34 2003/04/11 06:53:25 root Exp root $
+d75 1
+a75 4
+## MRTG
+*/5 * * * *	/usr/local/lunarbin/mrtg_router.pl
+#*/5 * * * *	/usr/local/lunarbin/mrtg_servers.pl
+#*/15 * * * *	/usr/local/lunarbin/mrtg_wireless.pl
+@
+
+
+1.34
+log
+@archives suspended
+@
+text
+@d1 1
+a1 1
+# $Id: root,v 1.33 2003/04/10 00:50:50 root Exp root $
+d119 1
+a119 1
+#0 9,17 * * *	/usr/local/lunarbin/getquote.pl
+@
+
+
+1.33
+log
+@*** empty log message ***
+@
+text
+@d1 1
+a1 1
+# $Id: root,v 1.32 2003/04/10 00:35:56 root Exp root $
+d38 1
+a38 1
+10 2 * * 2,3,4,5,6    /usr/local/lunarbin/archive-cleanse.pl
+d40 1
+a40 1
+30 2 * * 2,3,4,5,6    /usr/local/lunarbin/archive-system.pl
+@
+
+
+1.32
+log
+@*** empty log message ***
+@
+text
+@d1 1
+a1 1
+# $Id: root,v 1.31 2003/04/10 00:35:38 root Exp root $
+d116 2
+a117 2
+## script to backup pancho cvs logs
+*/15 * * * *	/usr/local/lunarbin/pancho-file-archive.pl
+@
+
+
+1.31
+log
+@added pancho-file-archive.pl
+@
+text
+@d1 1
+a1 1
+# $Id: root,v 1.30 2003/04/10 00:35:18 root Exp root $
+d117 1
+a117 1
+*/1 * * * *	/usr/local/lunarbin/pancho-file-archive.pl
+@
+
+
+1.30
+log
+@*** empty log message ***
+@
+text
+@d1 1
+a1 1
+# $Id: root,v 1.29 2003/04/08 23:01:00 root Exp root $
+d117 1
+a117 1
+*/1 * * * *	/usr/local/lunarbin/pancho-file.pl
+@
+
+
+1.29
+log
+@added pancho cvs backups
+@
+text
+@d1 1
+a1 1
+# $Id: root,v 1.28 2003/04/08 22:05:47 root Exp root $
+d116 2
+@
+
+
+1.28
+log
+@removed mail archiving scripts
+@
+text
+@d1 1
+a1 1
+# $Id: root,v 1.27 2003/04/02 10:58:37 root Exp root $
+d114 2
+@
+
+
+1.27
+log
+@removed snmp polling of wireless nodes
+@
+text
+@d1 1
+a1 1
+# $Id: root,v 1.26 2003/03/26 22:03:53 root Exp root $
+d77 1
+a77 1
+*/5 * * * *	/usr/local/lunarbin/mrtg_servers.pl
+d105 2
+a106 2
+15,45 */1 * * * /usr/local/lunarbin/mailarchive-update.pl
+01 00 1 * *     /usr/local/lunarbin/mailarchive-monthly.pl
+d113 1
+a113 1
+17,47 */1 * * * /usr/local/lunarbin/pancho-archive.pl
+@
+
+
+1.26
+log
+@mrtg and masterref combined into system backup
+@
+text
+@d1 1
+a1 1
+# $Id: root,v 1.25 2003/03/26 16:38:11 root Exp root $
+d78 1
+a78 1
+*/15 * * * *	/usr/local/lunarbin/mrtg_wireless.pl
+@
+
+
+1.25
+log
+@removed the kna-pacific script
+@
+text
+@d1 1
+a1 1
+# $Id: root,v 1.24 2003/03/24 17:37:39 root Exp root $
+a40 4
+## backup the masterref system
+45 5 * * *	/usr/local/lunarbin/archive-masterref.pl 
+## backup the mrtg system
+30 5 * * *	/usr/local/lunarbin/archive-mrtg.pl
+@
+
+
+1.24
+log
+@changing panelpasswd to run only once an hour
+the script will be called now through passwd_sync.pl
+@
+text
+@d1 1
+a1 1
+# $Id: root,v 1.23 2003/03/24 17:09:34 root Exp root $
+d119 1
+a119 1
+0 9,17 * * *	/usr/local/lunarbin/getquote.pl
+@
+
+
+1.23
+log
+@added passwd_sync.pl
+@
+text
+@d1 1
+a1 1
+# $Id: root,v 1.22 2003/03/12 18:34:52 root Exp root $
+d17 2
+a87 2
+## build htaccess file
+*/10 * * * *	/usr/local/lunarbin/panelpasswd.pl
+@
+
+
+1.22
+log
+@added archive-mrtg
+@
+text
+@d1 1
+a1 1
+# $Id: root,v 1.21 2003/03/11 18:06:48 root Exp root $
+d13 7
+@
+
+
+1.21
+log
+@added mrtg polling servers
+@
+text
+@d1 1
+a1 1
+# $Id: root,v 1.20 2003/03/05 07:41:52 root Exp root $
+d34 2
+@
+
+
+1.20
+log
+@added backup of the masterref system from name2 to name1
+@
+text
+@d1 1
+a1 1
+# $Id: root,v 1.19 2003/02/23 16:12:02 root Exp root $
+d70 1
+@
+
+
+1.19
+log
+@mixing the search and archive times back a bit
+@
+text
+@d1 1
+a1 1
+# $Id: root,v 1.18 2003/02/19 21:00:35 root Exp root $
+d32 2
+@
+
+
+1.18
+log
+@updated wireless mrtg polls to 15 min
+@
+text
+@d1 1
+a1 1
+# $Id: root,v 1.17 2003/01/30 21:17:03 root Exp root $
+d29 1
+a29 1
+30 2 * * 2,3,4,5,6    /usr/local/lunarbin/archive-cleanse.pl
+d31 1
+a31 1
+30 3 * * 2,3,4,5,6    /usr/local/lunarbin/archive-system.pl
+d77 1
+a77 1
+00 04 * * *     /usr/local/lunarbin/searchindex.pl >/dev/null 2>&1
+@
+
+
+1.17
+log
+@removed the mysqlflush test
+@
+text
+@d1 1
+a1 1
+# $Id: root,v 1.16 2003/01/30 15:54:53 root Exp root $
+d68 1
+a68 1
+*/5 * * * *	/usr/local/lunarbin/mrtg_wireless.pl
+@
+
+
+1.16
+log
+@added mysqlflush.pl
+@
+text
+@d1 1
+a1 1
+# $Id: root,v 1.15 2003/01/24 03:00:02 root Exp root $
+a12 5
+## flush hosts for host2 to troubleshoot mysql
+0 6 * * *	/usr/local/lunarbin/mysqlflush.pl
+
+#######################################################################
+
+@
+
+
+1.15
+log
+@added the urchin log rotation
+@
+text
+@d1 1
+a1 1
+# $Id: root,v 1.14 2003/01/23 23:33:35 root Exp root $
+d13 5
+d21 1
+a21 1
+*/5 * * * *	/root/bin/notify.pl
+d23 1
+a23 1
+*/15 * * * *	/root/bin/daemonwatch.pl
+d25 1
+a25 1
+*/5 * * * *	/root/bin/tlc.pl >/dev/null 2>&1
+@
+
+
+1.14
+log
+@added backup cleansing
+@
+text
+@d1 1
+a1 1
+# $Id: root,v 1.13 2003/01/06 19:25:59 root Exp root $
+d41 2
+@
+
+
+1.13
+log
+@added named_refresh
+changed update-dns to named_update.pl
+@
+text
+@d1 1
+a1 1
+# $Id: root,v 1.12 2003/01/06 02:57:31 root Exp root $
+d28 2
+@
+
+
+1.12
+log
+@changed cpu_trend.pl to tlc.pl
+@
+text
+@d1 1
+a1 1
+# $Id: root,v 1.11 2003/01/05 16:42:19 root Exp root $
+d56 3
+a58 1
+*/20 * * * *	/usr/local/lunarbin/update-dns.pl
+@
+
+
+1.11
+log
+@sent quite a few script output to /dev/null
+@
+text
+@d1 1
+a1 1
+# $Id: root,v 1.10 2003/01/04 15:47:11 root Exp root $
+d20 1
+a20 1
+*/5 * * * *	/root/bin/cpu_trend.pl	>/dev/null 2>&1
+@
+
+
+1.10
+log
+@wrong path for archive-system
+@
+text
+@d1 1
+a1 1
+# $Id: root,v 1.9 2003/01/04 02:27:06 root Exp root $
+d27 1
+a27 1
+0 7 * * *       /usr/local/lunarbin/archive-sql.pl
+d47 1
+a47 1
+00 5,11,17,23 * * *   /usr/local/lunarbin/mkmail.pl
+d71 1
+a71 1
+00 04 * * *     /usr/local/lunarbin/searchindex.pl
+@
+
+
+1.9
+log
+@wrong path for getquote.pl
+@
+text
+@d1 1
+a1 1
+# $Id: root,v 1.8 2003/01/03 18:57:07 root Exp root $
+d29 1
+a29 1
+30 3 * * 2,3,4,5,6    /root/bin/archive-system.pl
+@
+
+
+1.8
+log
+@Added mrtg polling for name1
+@
+text
+@d1 1
+a1 1
+# $Id: root,v 1.7 2003/01/03 18:54:07 root Exp root $
+d101 1
+a101 1
+0 9,17 * * *	/root/customer-bin/getquote.pl
+@
+
+
+1.7
+log
+@added update-dns.pl
+@
+text
+@d1 1
+a1 1
+# $Id: root,v 1.6 2003/01/03 18:50:19 root Exp root $
+d60 6
+@
+
+
+1.6
+log
+@converted all shell script to using at least perl wrappers
+@
+text
+@d1 1
+a1 1
+# $Id: root,v 1.5 2003/01/03 18:14:21 root Exp root $
+d53 7
+@
+
+
+1.5
+log
+@working my way through getting rid of shell scripts
+@
+text
+@d1 1
+a1 1
+# $Id: root,v 1.4 2003/01/03 07:03:12 root Exp root $
+d29 1
+a29 1
+30 3 * * 2,3,4,5,6    /root/bin/archive-system.sh
+d40 1
+a40 1
+00 1 1 * *      /usr/local/lunarbin/logrotate.sh
+d49 1
+a49 1
+30 06 * * 7     /usr/local/lunarbin/clean_procmail_log.sh
+d58 1
+a58 1
+00 04 * * *     /usr/local/lunarbin/searchindex.sh >/dev/null 2>&1
+d60 1
+a60 1
+20 */4 * * *	/usr/local/lunarbin/adddisk.sh
+d78 2
+a79 2
+15,45 */1 * * * /usr/local/lunarbin/mailarchive-update.sh >/dev/null 2>&1
+01 00 1 * *     /usr/local/lunarbin/mailarchive-monthly.sh >/dev/null 2>&1
+d86 1
+a86 1
+17,47 */1 * * * /usr/local/lunarbin/pancho-archive.sh >/dev/null 2>&1
+@
+
+
+1.4
+log
+@changing format
+@
+text
+@d1 1
+a1 1
+# $Id: root,v 1.3 2002/12/31 11:37:00 root Exp root $
+d27 1
+a27 1
+0 7 * * *       /usr/local/lunarbin/sqldump.sh  >/dev/null 2>&1
+d36 1
+a36 1
+30 23 * * *     /usr/local/lunarbin/mkurchin           >/dev/null 2>&1
+d38 1
+a38 1
+0 0 * * *       /usr/local/urchin/urchin -q     >/dev/null 2>&1
+d47 1
+a47 1
+00 5,11,17,23 * * *   /usr/local/lunarbin/mkmail
+d56 1
+a56 1
+*/10 * * * *	/usr/local/lunarbin/panelpasswd
+d69 1
+a69 1
+30 00 1 * *  	/usr/local/lunarbin/billing.cgi
+d88 1
+a88 1
+0 9,17 * * *	/root/customer-bin/getquote
+@
+
+
+1.3
+log
+@*** empty log message ***
+@
+text
+@d1 1
+a1 1
+# $Id: root,v 1.2 2002/12/30 19:49:11 root Exp root $
+d9 1
+a9 8
+# 0 - Sunday
+# 1 - Monday
+# 2 - Tuesday
+# 3 - Wednesday
+# 4 - Thursday
+# 5 - Friday
+# 6 - Saturday
+# 7 - Sunday
+d11 3
+a13 1
+###########################################################################
+a16 1
+
+d19 6
+d26 2
+d31 14
+a44 2
+## trend cpu usage
+*/5 * * * *	/root/bin/cpu_trend.pl	>/dev/null 2>&1
+d48 6
+a56 1
+
+d58 3
+a60 1
+00 04 * * *     /usr/local/lunarbin/searchindex.sh                >/dev/null 2>&1
+d62 1
+a62 2
+## rotate the ftp/www logs for the month
+00 1 1 * *      /usr/local/lunarbin/logrotate.sh
+d64 1
+a64 2
+## calculate disk usage for hosting clients
+20 */4 * * *	/usr/local/lunarbin/adddisk.sh
+a67 1
+
+a69 1
+
+d72 2
+d75 1
+a75 5
+## urchin config creation
+30 23 * * *     /usr/local/lunarbin/mkurchin           >/dev/null 2>&1
+
+## urchin log analyzation
+0 0 * * *       /usr/local/urchin/urchin -q     >/dev/null 2>&1
+d77 3
+a79 2
+## mysqldump
+0 7 * * *	/usr/local/lunarbin/sqldump.sh	>/dev/null 2>&1
+d81 1
+a81 6
+## clear out procmail.log files
+30 06 * * 7	/usr/local/lunarbin/clean_procmail_log.sh 
+ 
+#########
+######### mail to html conversions
+#########
+d83 1
+a83 3
+## script to create html-ized version of mail sent to archives@@
+15,45 */1 * * * /usr/local/lunarbin/mailarchive-update.sh         >/dev/null 2>&1
+01 00 1 * *     /usr/local/lunarbin/mailarchive-monthly.sh        >/dev/null 2>&1
+d86 3
+a88 7
+17,47 */1 * * * /usr/local/lunarbin/pancho-archive.sh            >/dev/null 2>&1
+
+## customer scripts used 
+#*/3 * * * *	/usr/local/lunarbin/mvdonna.sh	## dhot.com
+
+0 9,17 * * *	/root/customer-bin/getquote	## kna-pacific.com
+
+d90 1
+@
+
+
+1.2
+log
+@*** empty log message ***
+@
+text
+@d1 1
+a1 1
+# $Id:$
+d24 1
+a24 1
+*/10 0,1,2,3,4,5 * * *	/root/bin/daemonwatch.pl
+a30 1
+*/5 * * * *	/root/bin/mem_trend.pl	>/dev/null 2>&1
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 2
+a2 3
+# DO NOT EDIT THIS FILE - edit the master and reinstall.
+# (/tmp/crontab.4358 installed on Tue Dec 24 07:47:12 2002)
+# (Cron version -- $Id: crontab.c,v 2.13 1994/01/17 03:20:37 vixie Exp $)
+@

@@ -1,0 +1,50 @@
+head	1.2;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.2
+date	2003.06.10.14.19.33;	author root;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2003.04.02.19.08.41;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.2
+log
+@changed lockfile name
+@
+text
+@# $Id: check_lockfile.pl,v 1.1 2003/04/02 19:08:41 root Exp root $
+# quit if lockfile
+my $lockfile = '/var/run/allServices.lock';
+if (-e $lockfile) {
+  exit 1;
+}
+ 
+1;
+@
+
+
+1.1
+log
+@initial checkin
+@
+text
+@d1 1
+a1 1
+# $Id: check_lockfile.pl,v 1.1 2003/01/13 16:06:10 root Exp $
+d3 1
+a3 1
+my $lockfile = '/var/run/cmenzes.lock';
+@

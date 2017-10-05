@@ -1,0 +1,10 @@
+#
+# See http://www.miva.com/docs/mvadmin.html for detailed information
+# on all Miva Engine configuration directives.
+#
+                                                                                
+## liquidshirts.com
+#<AUTH ACCESS="allow,deny" TYPE="group">
+#  mv_liquidshirts=/www/liquidshirts.com/pub/miva
+#</AUTH>
+mv_liquidshirts=/www/liquidshirts.com/pub/miva

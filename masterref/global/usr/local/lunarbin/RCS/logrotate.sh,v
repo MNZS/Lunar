@@ -1,0 +1,145 @@
+head	1.2;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.2
+date	2003.05.24.15.31.15;	author root;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2003.04.02.19.08.41;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.2
+log
+@updated to only keep the last month's copy
+@
+text
+@#!/bin/bash
+
+## ftp log rotation
+###############################################
+ftpdir="/var/log/ftp"
+
+## remove last months archives
+rm -f $ftpdir/*.0
+
+## move into ftp directory
+cd $ftpdir
+
+## move ftp logfiles
+for i in `ls ftp*`; do
+  mv $ftpdir/$i $ftpdir/$i.0
+done
+
+## restart ftpd
+/etc/rc3.d/S51proftpd restart
+
+##################################################
+
+
+## archives logs for non-urchin sites
+
+wwwdir="/var/log/www"
+
+## move into www directory
+cd $wwwdir
+
+for i in `ls /etc/hosting-options`; do
+
+  if [ ! -e "/etc/hosting-options/$i/urchin" ]; then
+
+    mv $wwwdir/www-xfer.$i $wwwdir/www-xfer.$i.0
+    mv $wwwdir/www-error.$i $wwwdir/www-error.$i.0
+
+  fi
+
+done
+
+## gracefully restart http
+/usr/local/apache/bin/apachectl graceful
+@
+
+
+1.1
+log
+@initial checkin
+@
+text
+@d7 2
+a8 45
+year=`date +%Y`
+month=`date +%m`
+
+if [ $month = "01" ]; then
+  month="12"
+
+elif [ $month = "02" ]; then
+  month="01"
+
+elif [ $month = "03" ]; then
+  month="02"
+
+elif [ $month = "04" ]; then
+  month="03"
+
+elif [ $month = "05" ]; then
+  month="04"
+
+elif [ $month = "06" ]; then
+  month="05"
+
+elif [ $month = "07" ]; then
+  month="06"
+
+elif [ $month = "08" ]; then
+  month="07"
+
+elif [ $month = "09" ]; then
+  month="08"
+
+elif [ $month = "10" ]; then
+  month="09"
+
+elif [ $month = "11" ]; then
+  month="10"
+
+elif [ $month = "12" ]; then
+  month="11"
+
+fi 
+
+arch="$year$month"
+
+##make archive directories
+mkdir $ftpdir/archive/$arch
+d15 1
+a15 1
+  mv $ftpdir/$i $ftpdir/archive/$arch/$i.$arch
+a17 3
+## gzip files
+gzip $ftpdir/archive/$arch/*
+
+a27 3
+## make archive directory
+mkdir $wwwdir/archive/$arch
+
+d35 2
+a36 2
+    mv $wwwdir/www-xfer.$i $wwwdir/archive/$arch/$i.$arch
+    mv $wwwdir/www-error.$i $wwwdir/archive/$arch/$i.$arch
+a41 3
+## gzip the old logs
+gzip $wwwdir/archive/$arch/*
+
+@

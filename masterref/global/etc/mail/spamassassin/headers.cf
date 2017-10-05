@@ -1,0 +1,4 @@
+# $Id: headers.cf,v 1.1 2003/03/26 17:31:13 root Exp $
+
+# needed to added rewritten subject line
+rewrite_subject 1

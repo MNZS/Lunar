@@ -1,0 +1,565 @@
+head	1.2;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.2
+date	2003.06.05.04.42.49;	author root;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2003.06.05.04.39.31;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.2
+log
+@*** empty log message ***
+@
+text
+@# Created by 
+# /usr/bin/cfgmaker --ifdesc=descr --no-down --descint --global 'Options[_]: bits,growright' --global 'WorkDir: /usr/local/mrtg/switches/bandwidth' monitor@@backbone.lunarhosting.net
+
+
+### Global Config Options
+
+#  for UNIX
+# WorkDir: /home/http/mrtg
+
+#  or for NT
+# WorkDir: c:\mrtgdata
+
+### Global Defaults
+
+#  to get bits instead of bytes and graphs growing to the right
+# Options[_]: growright, bits
+
+Options[_]: bits,growright
+WorkDir: /usr/local/mrtg/switches/backbone/bandwidth
+
+######################################################################
+# System: backbone.lunarhosting.net
+# Description: Cisco Internetwork Operating System Software 
+#          IOS (tm) C2900XL Software (C2900XL-C3H2S-M), Version 12.0(5)WC7, RELEASE SOFTWARE (fc1)
+#          Copyright (c) 1986-2003 by cisco Systems, Inc.
+#          Compiled Wed 05-Mar-03 10:26 by antonino
+# Contact: 
+# Location: 
+######################################################################
+
+
+### Interface 1 >> Descr: 'VLAN1' | Name: 'VL1' | Ip: '' | Eth: '' ###
+### The following interface is commented out because:
+### * it is a cisco VLAN interface
+# 
+# Target[backbone.lunarhosting.net_1]: 1:monitor@@backbone.lunarhosting.net:
+# SetEnv[backbone.lunarhosting.net_1]: MRTG_INT_IP="" MRTG_INT_DESCR="VLAN1"
+# MaxBytes[backbone.lunarhosting.net_1]: 1250000
+# Title[backbone.lunarhosting.net_1]: VLAN1 -- backbone.lunarhosting.net
+# PageTop[backbone.lunarhosting.net_1]: <H1>VLAN1 -- backbone.lunarhosting.net</H1>
+#  <TABLE>
+#    <TR><TD>System:</TD>     <TD>backbone.lunarhosting.net in </TD></TR>
+#    <TR><TD>Maintainer:</TD> <TD></TD></TR>
+#    <TR><TD>Description:</TD><TD>VLAN1  </TD></TR>
+#    <TR><TD>ifType:</TD>     <TD>ethernetCsmacd (6)</TD></TR>
+#    <TR><TD>ifName:</TD>     <TD>VL1</TD></TR>
+#    <TR><TD>Max Speed:</TD>  <TD>10.0 Mbits/s</TD></TR>
+#  </TABLE>
+
+
+### Interface 2 >> Descr: 'FastEthernet0/1' | Name: 'Fa0/1' | Ip: '' | Eth: '00-90-2b-d8-af-01' ###
+
+Target[backbone.lunarhosting.net_2]: 2:monitor@@backbone.lunarhosting.net:
+SetEnv[backbone.lunarhosting.net_2]: MRTG_INT_IP="" MRTG_INT_DESCR="FastEthernet0/1"
+MaxBytes[backbone.lunarhosting.net_2]: 12500000
+Title[backbone.lunarhosting.net_2]: FastEthernet0/1 -- backbone.lunarhosting.net
+PageTop[backbone.lunarhosting.net_2]: <H1>FastEthernet0/1 -- backbone.lunarhosting.net</H1>
+ <TABLE>
+   <TR><TD>System:</TD>     <TD>backbone.lunarhosting.net in </TD></TR>
+   <TR><TD>Maintainer:</TD> <TD></TD></TR>
+   <TR><TD>Description:</TD><TD>FastEthernet0/1 Feth 0/1 gateway.eth-1-0.lunarhosting.net </TD></TR>
+   <TR><TD>ifType:</TD>     <TD>ethernetCsmacd (6)</TD></TR>
+   <TR><TD>ifName:</TD>     <TD>Fa0/1</TD></TR>
+   <TR><TD>Max Speed:</TD>  <TD>100.0 Mbits/s</TD></TR>
+ </TABLE>
+
+
+### Interface 3 >> Descr: 'FastEthernet0/2' | Name: 'Fa0/2' | Ip: '' | Eth: '00-90-2b-d8-af-02' ###
+
+Target[backbone.lunarhosting.net_3]: 3:monitor@@backbone.lunarhosting.net:
+SetEnv[backbone.lunarhosting.net_3]: MRTG_INT_IP="" MRTG_INT_DESCR="FastEthernet0/2"
+MaxBytes[backbone.lunarhosting.net_3]: 1250000
+Title[backbone.lunarhosting.net_3]: FastEthernet0/2 -- backbone.lunarhosting.net
+PageTop[backbone.lunarhosting.net_3]: <H1>FastEthernet0/2 -- backbone.lunarhosting.net</H1>
+ <TABLE>
+   <TR><TD>System:</TD>     <TD>backbone.lunarhosting.net in </TD></TR>
+   <TR><TD>Maintainer:</TD> <TD></TD></TR>
+   <TR><TD>Description:</TD><TD>FastEthernet0/2 Feth 0/2 host1.lunarhosting.net </TD></TR>
+   <TR><TD>ifType:</TD>     <TD>ethernetCsmacd (6)</TD></TR>
+   <TR><TD>ifName:</TD>     <TD>Fa0/2</TD></TR>
+   <TR><TD>Max Speed:</TD>  <TD>10.0 Mbits/s</TD></TR>
+ </TABLE>
+
+
+### Interface 4 >> Descr: 'FastEthernet0/3' | Name: 'Fa0/3' | Ip: '' | Eth: '00-90-2b-d8-af-03' ###
+
+Target[backbone.lunarhosting.net_4]: 4:monitor@@backbone.lunarhosting.net:
+SetEnv[backbone.lunarhosting.net_4]: MRTG_INT_IP="" MRTG_INT_DESCR="FastEthernet0/3"
+MaxBytes[backbone.lunarhosting.net_4]: 1250000
+Title[backbone.lunarhosting.net_4]: FastEthernet0/3 -- backbone.lunarhosting.net
+PageTop[backbone.lunarhosting.net_4]: <H1>FastEthernet0/3 -- backbone.lunarhosting.net</H1>
+ <TABLE>
+   <TR><TD>System:</TD>     <TD>backbone.lunarhosting.net in </TD></TR>
+   <TR><TD>Maintainer:</TD> <TD></TD></TR>
+   <TR><TD>Description:</TD><TD>FastEthernet0/3 Feth 0/3 name1.lunarhosting.net </TD></TR>
+   <TR><TD>ifType:</TD>     <TD>ethernetCsmacd (6)</TD></TR>
+   <TR><TD>ifName:</TD>     <TD>Fa0/3</TD></TR>
+   <TR><TD>Max Speed:</TD>  <TD>10.0 Mbits/s</TD></TR>
+ </TABLE>
+
+
+### Interface 5 >> Descr: 'FastEthernet0/4' | Name: 'Fa0/4' | Ip: '' | Eth: '00-90-2b-d8-af-04' ###
+
+Target[backbone.lunarhosting.net_5]: 5:monitor@@backbone.lunarhosting.net:
+SetEnv[backbone.lunarhosting.net_5]: MRTG_INT_IP="" MRTG_INT_DESCR="FastEthernet0/4"
+MaxBytes[backbone.lunarhosting.net_5]: 12500000
+Title[backbone.lunarhosting.net_5]: FastEthernet0/4 -- backbone.lunarhosting.net
+PageTop[backbone.lunarhosting.net_5]: <H1>FastEthernet0/4 -- backbone.lunarhosting.net</H1>
+ <TABLE>
+   <TR><TD>System:</TD>     <TD>backbone.lunarhosting.net in </TD></TR>
+   <TR><TD>Maintainer:</TD> <TD></TD></TR>
+   <TR><TD>Description:</TD><TD>FastEthernet0/4 Unused Interface </TD></TR>
+   <TR><TD>ifType:</TD>     <TD>ethernetCsmacd (6)</TD></TR>
+   <TR><TD>ifName:</TD>     <TD>Fa0/4</TD></TR>
+   <TR><TD>Max Speed:</TD>  <TD>100.0 Mbits/s</TD></TR>
+ </TABLE>
+
+
+### Interface 6 >> Descr: 'FastEthernet0/5' | Name: 'Fa0/5' | Ip: '' | Eth: '00-90-2b-d8-af-05' ###
+
+Target[backbone.lunarhosting.net_6]: 6:monitor@@backbone.lunarhosting.net:
+SetEnv[backbone.lunarhosting.net_6]: MRTG_INT_IP="" MRTG_INT_DESCR="FastEthernet0/5"
+MaxBytes[backbone.lunarhosting.net_6]: 12500000
+Title[backbone.lunarhosting.net_6]: FastEthernet0/5 -- backbone.lunarhosting.net
+PageTop[backbone.lunarhosting.net_6]: <H1>FastEthernet0/5 -- backbone.lunarhosting.net</H1>
+ <TABLE>
+   <TR><TD>System:</TD>     <TD>backbone.lunarhosting.net in </TD></TR>
+   <TR><TD>Maintainer:</TD> <TD></TD></TR>
+   <TR><TD>Description:</TD><TD>FastEthernet0/5 Unused Interface </TD></TR>
+   <TR><TD>ifType:</TD>     <TD>ethernetCsmacd (6)</TD></TR>
+   <TR><TD>ifName:</TD>     <TD>Fa0/5</TD></TR>
+   <TR><TD>Max Speed:</TD>  <TD>100.0 Mbits/s</TD></TR>
+ </TABLE>
+
+
+### Interface 7 >> Descr: 'FastEthernet0/6' | Name: 'Fa0/6' | Ip: '' | Eth: '00-90-2b-d8-af-06' ###
+
+Target[backbone.lunarhosting.net_7]: 7:monitor@@backbone.lunarhosting.net:
+SetEnv[backbone.lunarhosting.net_7]: MRTG_INT_IP="" MRTG_INT_DESCR="FastEthernet0/6"
+MaxBytes[backbone.lunarhosting.net_7]: 12500000
+Title[backbone.lunarhosting.net_7]: FastEthernet0/6 -- backbone.lunarhosting.net
+PageTop[backbone.lunarhosting.net_7]: <H1>FastEthernet0/6 -- backbone.lunarhosting.net</H1>
+ <TABLE>
+   <TR><TD>System:</TD>     <TD>backbone.lunarhosting.net in </TD></TR>
+   <TR><TD>Maintainer:</TD> <TD></TD></TR>
+   <TR><TD>Description:</TD><TD>FastEthernet0/6 Unused Interface </TD></TR>
+   <TR><TD>ifType:</TD>     <TD>ethernetCsmacd (6)</TD></TR>
+   <TR><TD>ifName:</TD>     <TD>Fa0/6</TD></TR>
+   <TR><TD>Max Speed:</TD>  <TD>100.0 Mbits/s</TD></TR>
+ </TABLE>
+
+
+### Interface 8 >> Descr: 'FastEthernet0/7' | Name: 'Fa0/7' | Ip: '' | Eth: '00-90-2b-d8-af-07' ###
+
+Target[backbone.lunarhosting.net_8]: 8:monitor@@backbone.lunarhosting.net:
+SetEnv[backbone.lunarhosting.net_8]: MRTG_INT_IP="" MRTG_INT_DESCR="FastEthernet0/7"
+MaxBytes[backbone.lunarhosting.net_8]: 1250000
+Title[backbone.lunarhosting.net_8]: FastEthernet0/7 -- backbone.lunarhosting.net
+PageTop[backbone.lunarhosting.net_8]: <H1>FastEthernet0/7 -- backbone.lunarhosting.net</H1>
+ <TABLE>
+   <TR><TD>System:</TD>     <TD>backbone.lunarhosting.net in </TD></TR>
+   <TR><TD>Maintainer:</TD> <TD></TD></TR>
+   <TR><TD>Description:</TD><TD>FastEthernet0/7 Feth 0/7 gateway.feth-0-0.lunarhosting.net </TD></TR>
+   <TR><TD>ifType:</TD>     <TD>ethernetCsmacd (6)</TD></TR>
+   <TR><TD>ifName:</TD>     <TD>Fa0/7</TD></TR>
+   <TR><TD>Max Speed:</TD>  <TD>10.0 Mbits/s</TD></TR>
+ </TABLE>
+
+
+### Interface 9 >> Descr: 'FastEthernet0/8' | Name: 'Fa0/8' | Ip: '' | Eth: '00-90-2b-d8-af-08' ###
+
+Target[backbone.lunarhosting.net_9]: 9:monitor@@backbone.lunarhosting.net:
+SetEnv[backbone.lunarhosting.net_9]: MRTG_INT_IP="" MRTG_INT_DESCR="FastEthernet0/8"
+MaxBytes[backbone.lunarhosting.net_9]: 1250000
+Title[backbone.lunarhosting.net_9]: FastEthernet0/8 -- backbone.lunarhosting.net
+PageTop[backbone.lunarhosting.net_9]: <H1>FastEthernet0/8 -- backbone.lunarhosting.net</H1>
+ <TABLE>
+   <TR><TD>System:</TD>     <TD>backbone.lunarhosting.net in </TD></TR>
+   <TR><TD>Maintainer:</TD> <TD></TD></TR>
+   <TR><TD>Description:</TD><TD>FastEthernet0/8 Feth 0/8 host2.lunarhosting.net </TD></TR>
+   <TR><TD>ifType:</TD>     <TD>ethernetCsmacd (6)</TD></TR>
+   <TR><TD>ifName:</TD>     <TD>Fa0/8</TD></TR>
+   <TR><TD>Max Speed:</TD>  <TD>10.0 Mbits/s</TD></TR>
+ </TABLE>
+
+
+### Interface 10 >> Descr: 'FastEthernet0/9' | Name: 'Fa0/9' | Ip: '' | Eth: '00-90-2b-d8-af-09' ###
+
+Target[backbone.lunarhosting.net_10]: 10:monitor@@backbone.lunarhosting.net:
+SetEnv[backbone.lunarhosting.net_10]: MRTG_INT_IP="" MRTG_INT_DESCR="FastEthernet0/9"
+MaxBytes[backbone.lunarhosting.net_10]: 1250000
+Title[backbone.lunarhosting.net_10]: FastEthernet0/9 -- backbone.lunarhosting.net
+PageTop[backbone.lunarhosting.net_10]: <H1>FastEthernet0/9 -- backbone.lunarhosting.net</H1>
+ <TABLE>
+   <TR><TD>System:</TD>     <TD>backbone.lunarhosting.net in </TD></TR>
+   <TR><TD>Maintainer:</TD> <TD></TD></TR>
+   <TR><TD>Description:</TD><TD>FastEthernet0/9 Feth 0/9 name2.lunarhosting.net </TD></TR>
+   <TR><TD>ifType:</TD>     <TD>ethernetCsmacd (6)</TD></TR>
+   <TR><TD>ifName:</TD>     <TD>Fa0/9</TD></TR>
+   <TR><TD>Max Speed:</TD>  <TD>10.0 Mbits/s</TD></TR>
+ </TABLE>
+
+
+### Interface 11 >> Descr: 'FastEthernet0/10' | Name: 'Fa0/10' | Ip: '' | Eth: '00-90-2b-d8-af-0a' ###
+
+Target[backbone.lunarhosting.net_11]: 11:monitor@@backbone.lunarhosting.net:
+SetEnv[backbone.lunarhosting.net_11]: MRTG_INT_IP="" MRTG_INT_DESCR="FastEthernet0/10"
+MaxBytes[backbone.lunarhosting.net_11]: 12500000
+Title[backbone.lunarhosting.net_11]: FastEthernet0/10 -- backbone.lunarhosting.net
+PageTop[backbone.lunarhosting.net_11]: <H1>FastEthernet0/10 -- backbone.lunarhosting.net</H1>
+ <TABLE>
+   <TR><TD>System:</TD>     <TD>backbone.lunarhosting.net in </TD></TR>
+   <TR><TD>Maintainer:</TD> <TD></TD></TR>
+   <TR><TD>Description:</TD><TD>FastEthernet0/10 Unused Interface </TD></TR>
+   <TR><TD>ifType:</TD>     <TD>ethernetCsmacd (6)</TD></TR>
+   <TR><TD>ifName:</TD>     <TD>Fa0/10</TD></TR>
+   <TR><TD>Max Speed:</TD>  <TD>100.0 Mbits/s</TD></TR>
+ </TABLE>
+
+
+### Interface 12 >> Descr: 'FastEthernet0/11' | Name: 'Fa0/11' | Ip: '' | Eth: '00-90-2b-d8-af-0b' ###
+
+Target[backbone.lunarhosting.net_12]: 12:monitor@@backbone.lunarhosting.net:
+SetEnv[backbone.lunarhosting.net_12]: MRTG_INT_IP="" MRTG_INT_DESCR="FastEthernet0/11"
+MaxBytes[backbone.lunarhosting.net_12]: 12500000
+Title[backbone.lunarhosting.net_12]: FastEthernet0/11 -- backbone.lunarhosting.net
+PageTop[backbone.lunarhosting.net_12]: <H1>FastEthernet0/11 -- backbone.lunarhosting.net</H1>
+ <TABLE>
+   <TR><TD>System:</TD>     <TD>backbone.lunarhosting.net in </TD></TR>
+   <TR><TD>Maintainer:</TD> <TD></TD></TR>
+   <TR><TD>Description:</TD><TD>FastEthernet0/11 Unused Interface </TD></TR>
+   <TR><TD>ifType:</TD>     <TD>ethernetCsmacd (6)</TD></TR>
+   <TR><TD>ifName:</TD>     <TD>Fa0/11</TD></TR>
+   <TR><TD>Max Speed:</TD>  <TD>100.0 Mbits/s</TD></TR>
+ </TABLE>
+
+
+### Interface 13 >> Descr: 'FastEthernet0/12' | Name: 'Fa0/12' | Ip: '' | Eth: '00-90-2b-d8-af-0c' ###
+
+Target[backbone.lunarhosting.net_13]: 13:monitor@@backbone.lunarhosting.net:
+SetEnv[backbone.lunarhosting.net_13]: MRTG_INT_IP="" MRTG_INT_DESCR="FastEthernet0/12"
+MaxBytes[backbone.lunarhosting.net_13]: 12500000
+Title[backbone.lunarhosting.net_13]: FastEthernet0/12 -- backbone.lunarhosting.net
+PageTop[backbone.lunarhosting.net_13]: <H1>FastEthernet0/12 -- backbone.lunarhosting.net</H1>
+ <TABLE>
+   <TR><TD>System:</TD>     <TD>backbone.lunarhosting.net in </TD></TR>
+   <TR><TD>Maintainer:</TD> <TD></TD></TR>
+   <TR><TD>Description:</TD><TD>FastEthernet0/12 Unused Interface </TD></TR>
+   <TR><TD>ifType:</TD>     <TD>ethernetCsmacd (6)</TD></TR>
+   <TR><TD>ifName:</TD>     <TD>Fa0/12</TD></TR>
+   <TR><TD>Max Speed:</TD>  <TD>100.0 Mbits/s</TD></TR>
+ </TABLE>
+
+
+### Interface 14 >> Descr: 'FastEthernet0/13' | Name: 'Fa0/13' | Ip: '' | Eth: '00-90-2b-d8-af-0d' ###
+
+Target[backbone.lunarhosting.net_14]: 14:monitor@@backbone.lunarhosting.net:
+SetEnv[backbone.lunarhosting.net_14]: MRTG_INT_IP="" MRTG_INT_DESCR="FastEthernet0/13"
+MaxBytes[backbone.lunarhosting.net_14]: 12500000
+Title[backbone.lunarhosting.net_14]: FastEthernet0/13 -- backbone.lunarhosting.net
+PageTop[backbone.lunarhosting.net_14]: <H1>FastEthernet0/13 -- backbone.lunarhosting.net</H1>
+ <TABLE>
+   <TR><TD>System:</TD>     <TD>backbone.lunarhosting.net in </TD></TR>
+   <TR><TD>Maintainer:</TD> <TD></TD></TR>
+   <TR><TD>Description:</TD><TD>FastEthernet0/13 Unused Interface </TD></TR>
+   <TR><TD>ifType:</TD>     <TD>ethernetCsmacd (6)</TD></TR>
+   <TR><TD>ifName:</TD>     <TD>Fa0/13</TD></TR>
+   <TR><TD>Max Speed:</TD>  <TD>100.0 Mbits/s</TD></TR>
+ </TABLE>
+
+
+### Interface 15 >> Descr: 'FastEthernet0/14' | Name: 'Fa0/14' | Ip: '' | Eth: '00-90-2b-d8-af-0e' ###
+
+Target[backbone.lunarhosting.net_15]: 15:monitor@@backbone.lunarhosting.net:
+SetEnv[backbone.lunarhosting.net_15]: MRTG_INT_IP="" MRTG_INT_DESCR="FastEthernet0/14"
+MaxBytes[backbone.lunarhosting.net_15]: 12500000
+Title[backbone.lunarhosting.net_15]: FastEthernet0/14 -- backbone.lunarhosting.net
+PageTop[backbone.lunarhosting.net_15]: <H1>FastEthernet0/14 -- backbone.lunarhosting.net</H1>
+ <TABLE>
+   <TR><TD>System:</TD>     <TD>backbone.lunarhosting.net in </TD></TR>
+   <TR><TD>Maintainer:</TD> <TD></TD></TR>
+   <TR><TD>Description:</TD><TD>FastEthernet0/14 Unused Interface </TD></TR>
+   <TR><TD>ifType:</TD>     <TD>ethernetCsmacd (6)</TD></TR>
+   <TR><TD>ifName:</TD>     <TD>Fa0/14</TD></TR>
+   <TR><TD>Max Speed:</TD>  <TD>100.0 Mbits/s</TD></TR>
+ </TABLE>
+
+
+### Interface 16 >> Descr: 'FastEthernet0/15' | Name: 'Fa0/15' | Ip: '' | Eth: '00-90-2b-d8-af-0f' ###
+
+Target[backbone.lunarhosting.net_16]: 16:monitor@@backbone.lunarhosting.net:
+SetEnv[backbone.lunarhosting.net_16]: MRTG_INT_IP="" MRTG_INT_DESCR="FastEthernet0/15"
+MaxBytes[backbone.lunarhosting.net_16]: 12500000
+Title[backbone.lunarhosting.net_16]: FastEthernet0/15 -- backbone.lunarhosting.net
+PageTop[backbone.lunarhosting.net_16]: <H1>FastEthernet0/15 -- backbone.lunarhosting.net</H1>
+ <TABLE>
+   <TR><TD>System:</TD>     <TD>backbone.lunarhosting.net in </TD></TR>
+   <TR><TD>Maintainer:</TD> <TD></TD></TR>
+   <TR><TD>Description:</TD><TD>FastEthernet0/15 Unused Interface </TD></TR>
+   <TR><TD>ifType:</TD>     <TD>ethernetCsmacd (6)</TD></TR>
+   <TR><TD>ifName:</TD>     <TD>Fa0/15</TD></TR>
+   <TR><TD>Max Speed:</TD>  <TD>100.0 Mbits/s</TD></TR>
+ </TABLE>
+
+
+### Interface 17 >> Descr: 'FastEthernet0/16' | Name: 'Fa0/16' | Ip: '' | Eth: '00-90-2b-d8-af-10' ###
+
+Target[backbone.lunarhosting.net_17]: 17:monitor@@backbone.lunarhosting.net:
+SetEnv[backbone.lunarhosting.net_17]: MRTG_INT_IP="" MRTG_INT_DESCR="FastEthernet0/16"
+MaxBytes[backbone.lunarhosting.net_17]: 12500000
+Title[backbone.lunarhosting.net_17]: FastEthernet0/16 -- backbone.lunarhosting.net
+PageTop[backbone.lunarhosting.net_17]: <H1>FastEthernet0/16 -- backbone.lunarhosting.net</H1>
+ <TABLE>
+   <TR><TD>System:</TD>     <TD>backbone.lunarhosting.net in </TD></TR>
+   <TR><TD>Maintainer:</TD> <TD></TD></TR>
+   <TR><TD>Description:</TD><TD>FastEthernet0/16 Unused Interface </TD></TR>
+   <TR><TD>ifType:</TD>     <TD>ethernetCsmacd (6)</TD></TR>
+   <TR><TD>ifName:</TD>     <TD>Fa0/16</TD></TR>
+   <TR><TD>Max Speed:</TD>  <TD>100.0 Mbits/s</TD></TR>
+ </TABLE>
+
+
+### Interface 18 >> Descr: 'FastEthernet0/17' | Name: 'Fa0/17' | Ip: '' | Eth: '00-90-2b-d8-af-11' ###
+
+Target[backbone.lunarhosting.net_18]: 18:monitor@@backbone.lunarhosting.net:
+SetEnv[backbone.lunarhosting.net_18]: MRTG_INT_IP="" MRTG_INT_DESCR="FastEthernet0/17"
+MaxBytes[backbone.lunarhosting.net_18]: 12500000
+Title[backbone.lunarhosting.net_18]: FastEthernet0/17 -- backbone.lunarhosting.net
+PageTop[backbone.lunarhosting.net_18]: <H1>FastEthernet0/17 -- backbone.lunarhosting.net</H1>
+ <TABLE>
+   <TR><TD>System:</TD>     <TD>backbone.lunarhosting.net in </TD></TR>
+   <TR><TD>Maintainer:</TD> <TD></TD></TR>
+   <TR><TD>Description:</TD><TD>FastEthernet0/17 Unused Interface </TD></TR>
+   <TR><TD>ifType:</TD>     <TD>ethernetCsmacd (6)</TD></TR>
+   <TR><TD>ifName:</TD>     <TD>Fa0/17</TD></TR>
+   <TR><TD>Max Speed:</TD>  <TD>100.0 Mbits/s</TD></TR>
+ </TABLE>
+
+
+### Interface 19 >> Descr: 'FastEthernet0/18' | Name: 'Fa0/18' | Ip: '' | Eth: '00-90-2b-d8-af-12' ###
+
+Target[backbone.lunarhosting.net_19]: 19:monitor@@backbone.lunarhosting.net:
+SetEnv[backbone.lunarhosting.net_19]: MRTG_INT_IP="" MRTG_INT_DESCR="FastEthernet0/18"
+MaxBytes[backbone.lunarhosting.net_19]: 12500000
+Title[backbone.lunarhosting.net_19]: FastEthernet0/18 -- backbone.lunarhosting.net
+PageTop[backbone.lunarhosting.net_19]: <H1>FastEthernet0/18 -- backbone.lunarhosting.net</H1>
+ <TABLE>
+   <TR><TD>System:</TD>     <TD>backbone.lunarhosting.net in </TD></TR>
+   <TR><TD>Maintainer:</TD> <TD></TD></TR>
+   <TR><TD>Description:</TD><TD>FastEthernet0/18 Unused Interface </TD></TR>
+   <TR><TD>ifType:</TD>     <TD>ethernetCsmacd (6)</TD></TR>
+   <TR><TD>ifName:</TD>     <TD>Fa0/18</TD></TR>
+   <TR><TD>Max Speed:</TD>  <TD>100.0 Mbits/s</TD></TR>
+ </TABLE>
+
+
+### Interface 20 >> Descr: 'FastEthernet0/19' | Name: 'Fa0/19' | Ip: '' | Eth: '00-90-2b-d8-af-13' ###
+
+Target[backbone.lunarhosting.net_20]: 20:monitor@@backbone.lunarhosting.net:
+SetEnv[backbone.lunarhosting.net_20]: MRTG_INT_IP="" MRTG_INT_DESCR="FastEthernet0/19"
+MaxBytes[backbone.lunarhosting.net_20]: 12500000
+Title[backbone.lunarhosting.net_20]: FastEthernet0/19 -- backbone.lunarhosting.net
+PageTop[backbone.lunarhosting.net_20]: <H1>FastEthernet0/19 -- backbone.lunarhosting.net</H1>
+ <TABLE>
+   <TR><TD>System:</TD>     <TD>backbone.lunarhosting.net in </TD></TR>
+   <TR><TD>Maintainer:</TD> <TD></TD></TR>
+   <TR><TD>Description:</TD><TD>FastEthernet0/19 Unused Interface </TD></TR>
+   <TR><TD>ifType:</TD>     <TD>ethernetCsmacd (6)</TD></TR>
+   <TR><TD>ifName:</TD>     <TD>Fa0/19</TD></TR>
+   <TR><TD>Max Speed:</TD>  <TD>100.0 Mbits/s</TD></TR>
+ </TABLE>
+
+
+### Interface 21 >> Descr: 'FastEthernet0/20' | Name: 'Fa0/20' | Ip: '' | Eth: '00-90-2b-d8-af-14' ###
+
+Target[backbone.lunarhosting.net_21]: 21:monitor@@backbone.lunarhosting.net:
+SetEnv[backbone.lunarhosting.net_21]: MRTG_INT_IP="" MRTG_INT_DESCR="FastEthernet0/20"
+MaxBytes[backbone.lunarhosting.net_21]: 12500000
+Title[backbone.lunarhosting.net_21]: FastEthernet0/20 -- backbone.lunarhosting.net
+PageTop[backbone.lunarhosting.net_21]: <H1>FastEthernet0/20 -- backbone.lunarhosting.net</H1>
+ <TABLE>
+   <TR><TD>System:</TD>     <TD>backbone.lunarhosting.net in </TD></TR>
+   <TR><TD>Maintainer:</TD> <TD></TD></TR>
+   <TR><TD>Description:</TD><TD>FastEthernet0/20 Unused Interface </TD></TR>
+   <TR><TD>ifType:</TD>     <TD>ethernetCsmacd (6)</TD></TR>
+   <TR><TD>ifName:</TD>     <TD>Fa0/20</TD></TR>
+   <TR><TD>Max Speed:</TD>  <TD>100.0 Mbits/s</TD></TR>
+ </TABLE>
+
+
+### Interface 22 >> Descr: 'FastEthernet0/21' | Name: 'Fa0/21' | Ip: '' | Eth: '00-90-2b-d8-af-15' ###
+
+Target[backbone.lunarhosting.net_22]: 22:monitor@@backbone.lunarhosting.net:
+SetEnv[backbone.lunarhosting.net_22]: MRTG_INT_IP="" MRTG_INT_DESCR="FastEthernet0/21"
+MaxBytes[backbone.lunarhosting.net_22]: 12500000
+Title[backbone.lunarhosting.net_22]: FastEthernet0/21 -- backbone.lunarhosting.net
+PageTop[backbone.lunarhosting.net_22]: <H1>FastEthernet0/21 -- backbone.lunarhosting.net</H1>
+ <TABLE>
+   <TR><TD>System:</TD>     <TD>backbone.lunarhosting.net in </TD></TR>
+   <TR><TD>Maintainer:</TD> <TD></TD></TR>
+   <TR><TD>Description:</TD><TD>FastEthernet0/21 Unused Interface </TD></TR>
+   <TR><TD>ifType:</TD>     <TD>ethernetCsmacd (6)</TD></TR>
+   <TR><TD>ifName:</TD>     <TD>Fa0/21</TD></TR>
+   <TR><TD>Max Speed:</TD>  <TD>100.0 Mbits/s</TD></TR>
+ </TABLE>
+
+
+### Interface 23 >> Descr: 'FastEthernet0/22' | Name: 'Fa0/22' | Ip: '' | Eth: '00-90-2b-d8-af-16' ###
+
+Target[backbone.lunarhosting.net_23]: 23:monitor@@backbone.lunarhosting.net:
+SetEnv[backbone.lunarhosting.net_23]: MRTG_INT_IP="" MRTG_INT_DESCR="FastEthernet0/22"
+MaxBytes[backbone.lunarhosting.net_23]: 12500000
+Title[backbone.lunarhosting.net_23]: FastEthernet0/22 -- backbone.lunarhosting.net
+PageTop[backbone.lunarhosting.net_23]: <H1>FastEthernet0/22 -- backbone.lunarhosting.net</H1>
+ <TABLE>
+   <TR><TD>System:</TD>     <TD>backbone.lunarhosting.net in </TD></TR>
+   <TR><TD>Maintainer:</TD> <TD></TD></TR>
+   <TR><TD>Description:</TD><TD>FastEthernet0/22 Unused Interface </TD></TR>
+   <TR><TD>ifType:</TD>     <TD>ethernetCsmacd (6)</TD></TR>
+   <TR><TD>ifName:</TD>     <TD>Fa0/22</TD></TR>
+   <TR><TD>Max Speed:</TD>  <TD>100.0 Mbits/s</TD></TR>
+ </TABLE>
+
+
+### Interface 24 >> Descr: 'FastEthernet0/23' | Name: 'Fa0/23' | Ip: '' | Eth: '00-90-2b-d8-af-17' ###
+
+Target[backbone.lunarhosting.net_24]: 24:monitor@@backbone.lunarhosting.net:
+SetEnv[backbone.lunarhosting.net_24]: MRTG_INT_IP="" MRTG_INT_DESCR="FastEthernet0/23"
+MaxBytes[backbone.lunarhosting.net_24]: 12500000
+Title[backbone.lunarhosting.net_24]: FastEthernet0/23 -- backbone.lunarhosting.net
+PageTop[backbone.lunarhosting.net_24]: <H1>FastEthernet0/23 -- backbone.lunarhosting.net</H1>
+ <TABLE>
+   <TR><TD>System:</TD>     <TD>backbone.lunarhosting.net in </TD></TR>
+   <TR><TD>Maintainer:</TD> <TD></TD></TR>
+   <TR><TD>Description:</TD><TD>FastEthernet0/23 Unused Interface </TD></TR>
+   <TR><TD>ifType:</TD>     <TD>ethernetCsmacd (6)</TD></TR>
+   <TR><TD>ifName:</TD>     <TD>Fa0/23</TD></TR>
+   <TR><TD>Max Speed:</TD>  <TD>100.0 Mbits/s</TD></TR>
+ </TABLE>
+
+
+### Interface 25 >> Descr: 'FastEthernet0/24' | Name: 'Fa0/24' | Ip: '' | Eth: '00-90-2b-d8-af-18' ###
+
+Target[backbone.lunarhosting.net_25]: 25:monitor@@backbone.lunarhosting.net:
+SetEnv[backbone.lunarhosting.net_25]: MRTG_INT_IP="" MRTG_INT_DESCR="FastEthernet0/24"
+MaxBytes[backbone.lunarhosting.net_25]: 12500000
+Title[backbone.lunarhosting.net_25]: FastEthernet0/24 -- backbone.lunarhosting.net
+PageTop[backbone.lunarhosting.net_25]: <H1>FastEthernet0/24 -- backbone.lunarhosting.net</H1>
+ <TABLE>
+   <TR><TD>System:</TD>     <TD>backbone.lunarhosting.net in </TD></TR>
+   <TR><TD>Maintainer:</TD> <TD></TD></TR>
+   <TR><TD>Description:</TD><TD>FastEthernet0/24 Unused Interface </TD></TR>
+   <TR><TD>ifType:</TD>     <TD>ethernetCsmacd (6)</TD></TR>
+   <TR><TD>ifName:</TD>     <TD>Fa0/24</TD></TR>
+   <TR><TD>Max Speed:</TD>  <TD>100.0 Mbits/s</TD></TR>
+ </TABLE>
+
+
+### Interface 26 >> Descr: 'Null0' | Name: 'Nu0' | Ip: '' | Eth: '' ###
+### The following interface is commented out because:
+### * it is a cisco Null0 interface
+# 
+# Target[backbone.lunarhosting.net_26]: 26:monitor@@backbone.lunarhosting.net:
+# SetEnv[backbone.lunarhosting.net_26]: MRTG_INT_IP="" MRTG_INT_DESCR="Null0"
+# MaxBytes[backbone.lunarhosting.net_26]: 536870911
+# Title[backbone.lunarhosting.net_26]: Null0 -- backbone.lunarhosting.net
+# PageTop[backbone.lunarhosting.net_26]: <H1>Null0 -- backbone.lunarhosting.net</H1>
+#  <TABLE>
+#    <TR><TD>System:</TD>     <TD>backbone.lunarhosting.net in </TD></TR>
+#    <TR><TD>Maintainer:</TD> <TD></TD></TR>
+#    <TR><TD>Description:</TD><TD>Null0  </TD></TR>
+#    <TR><TD>ifType:</TD>     <TD>Other (1)</TD></TR>
+#    <TR><TD>ifName:</TD>     <TD>Nu0</TD></TR>
+#    <TR><TD>Max Speed:</TD>  <TD>4295.0 Mbits/s</TD></TR>
+#  </TABLE>
+
+
+### Interface 28 >> Descr: 'VLAN20' | Name: 'VL20' | Ip: '65.172.1.133' | Eth: '' ###
+### The following interface is commented out because:
+### * it is a cisco VLAN interface
+### * got 'Received SNMP response with error code
+###       error status: noSuchName
+###       index 1 (OID: 1.3.6.1.2.1.2.2.1.10.28)
+###     SNMPv1_Session (remote host: "backbone.lunarhosting.net" [65.172.1.133].161)
+###                       community: "monitor"
+###                      request ID: 173278563
+###                     PDU bufsize: 8000 bytes
+###                         timeout: 2s
+###                         retries: 5
+###                         backoff: 1)' from interface when trying to query
+# 
+# Target[backbone.lunarhosting.net_28]: 28:monitor@@backbone.lunarhosting.net:
+# SetEnv[backbone.lunarhosting.net_28]: MRTG_INT_IP="65.172.1.133" MRTG_INT_DESCR="VLAN20"
+# MaxBytes[backbone.lunarhosting.net_28]: 1250000
+# Title[backbone.lunarhosting.net_28]: VLAN20 -- backbone.lunarhosting.net
+# PageTop[backbone.lunarhosting.net_28]: <H1>VLAN20 -- backbone.lunarhosting.net</H1>
+#  <TABLE>
+#    <TR><TD>System:</TD>     <TD>backbone.lunarhosting.net in </TD></TR>
+#    <TR><TD>Maintainer:</TD> <TD></TD></TR>
+#    <TR><TD>Description:</TD><TD>VLAN20  </TD></TR>
+#    <TR><TD>ifType:</TD>     <TD>ethernetCsmacd (6)</TD></TR>
+#    <TR><TD>ifName:</TD>     <TD>VL20</TD></TR>
+#    <TR><TD>Max Speed:</TD>  <TD>10.0 Mbits/s</TD></TR>
+#    <TR><TD>Ip:</TD>         <TD>65.172.1.133 (reserved.lunarhosting.net)</TD></TR>
+#  </TABLE>
+
+
+### Interface 29 >> Descr: 'Loopback0' | Name: 'Lo0' | Ip: '' | Eth: '' ###
+### The following interface is commented out because:
+### * it is a Software Loopback interface
+# 
+# Target[backbone.lunarhosting.net_29]: 29:monitor@@backbone.lunarhosting.net:
+# SetEnv[backbone.lunarhosting.net_29]: MRTG_INT_IP="" MRTG_INT_DESCR="Loopback0"
+# MaxBytes[backbone.lunarhosting.net_29]: 536870911
+# Title[backbone.lunarhosting.net_29]: Loopback0 -- backbone.lunarhosting.net
+# PageTop[backbone.lunarhosting.net_29]: <H1>Loopback0 -- backbone.lunarhosting.net</H1>
+#  <TABLE>
+#    <TR><TD>System:</TD>     <TD>backbone.lunarhosting.net in </TD></TR>
+#    <TR><TD>Maintainer:</TD> <TD></TD></TR>
+#    <TR><TD>Description:</TD><TD>Loopback0  </TD></TR>
+#    <TR><TD>ifType:</TD>     <TD>softwareLoopback (24)</TD></TR>
+#    <TR><TD>ifName:</TD>     <TD>Lo0</TD></TR>
+#    <TR><TD>Max Speed:</TD>  <TD>4295.0 Mbits/s</TD></TR>
+#  </TABLE>
+
+
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d19 1
+a19 1
+WorkDir: /usr/local/mrtg/switches/bandwidth
+@

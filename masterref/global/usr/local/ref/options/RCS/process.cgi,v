@@ -1,0 +1,986 @@
+head	1.26;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.26
+date	2002.05.28.16.02.12;	author root;	state Exp;
+branches;
+next	1.25;
+
+1.25
+date	2001.10.17.21.31.26;	author root;	state Exp;
+branches;
+next	1.24;
+
+1.24
+date	2001.10.17.21.28.41;	author root;	state Exp;
+branches;
+next	1.23;
+
+1.23
+date	2001.10.17.20.59.22;	author root;	state Exp;
+branches;
+next	1.22;
+
+1.22
+date	2001.10.17.20.56.46;	author root;	state Exp;
+branches;
+next	1.21;
+
+1.21
+date	2001.10.17.20.56.21;	author root;	state Exp;
+branches;
+next	1.20;
+
+1.20
+date	2001.10.17.20.56.04;	author root;	state Exp;
+branches;
+next	1.19;
+
+1.19
+date	2001.10.17.20.55.51;	author root;	state Exp;
+branches;
+next	1.18;
+
+1.18
+date	2001.10.17.20.55.36;	author root;	state Exp;
+branches;
+next	1.17;
+
+1.17
+date	2001.10.17.20.54.21;	author root;	state Exp;
+branches;
+next	1.16;
+
+1.16
+date	2001.10.17.15.14.33;	author root;	state Exp;
+branches;
+next	1.15;
+
+1.15
+date	2001.10.09.21.39.00;	author root;	state Exp;
+branches;
+next	1.14;
+
+1.14
+date	2001.08.01.22.21.07;	author root;	state Exp;
+branches;
+next	1.13;
+
+1.13
+date	2001.08.01.22.16.54;	author root;	state Exp;
+branches;
+next	1.12;
+
+1.12
+date	2001.08.01.22.15.56;	author root;	state Exp;
+branches;
+next	1.11;
+
+1.11
+date	2001.08.01.21.57.07;	author root;	state Exp;
+branches;
+next	1.10;
+
+1.10
+date	2001.08.01.21.52.43;	author root;	state Exp;
+branches;
+next	1.9;
+
+1.9
+date	2001.08.01.21.50.16;	author root;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	2001.08.01.21.43.39;	author root;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2001.08.01.21.34.34;	author root;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2001.08.01.21.24.33;	author root;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2001.08.01.21.22.25;	author root;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2001.08.01.21.22.10;	author root;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2001.08.01.21.18.27;	author root;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2001.08.01.18.29.15;	author root;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2001.07.05.19.29.08;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.26
+log
+@converting to a final version taht is usable across customers
+@
+text
+@#!/usr/bin/perl -w
+#
+
+# $Id: process.cgi,v 1.22 2001/10/17 20:56:46 root Exp $
+
+# This entire script is based on the premise that clients wanting to
+# take advantage of its capabilities have a directory at:
+#
+#  /etc/commerce/<client>
+#
+# Without this structure, the script will fail without heavily editing.
+#
+ 
+use strict;
+use POSIX qw(strftime);
+use Mail::Sendmail;
+
+delete @@ENV{qw(IFS CDPATH ENV BASH_ENV)};
+$ENV{'PATH'} = "/usr/bin:/usr/local/bin";
+use CGI;
+$CGI::DISABLE_UPLOADS = 1;
+$CGI::POST_MAX = 1024;
+
+################## EDIT THIS ########################################
+#####################################################################
+
+# domain of client
+my $domain = "DOMAIN"; # www.domain.com
+
+
+####            DO NOT EDIT BELOW THIS MARK                      ####
+
+#####################################################################
+#####################################################################
+#####################################################################
+#####################################################################
+
+
+## variables
+my %CONFIG;
+my $filename;
+my %FORM;
+my $filenamehead;
+my @@missed_fields;
+
+## grab form input
+my $query = CGI->new(); 
+
+## grab form field and stick values in hash
+my @@formfields = $query->param;
+
+for my $field(@@formfields) {
+  if ($field eq 'recipient' ||
+    $field eq 'replyaddr' ||
+    $field eq 'required' ||
+    $field eq 'replyname' ||
+    $field eq 'title' ||
+    $field eq 'redirect' ||
+    $field eq 'subject' ||
+    $field eq 'postdir' ||
+    $field eq 'body_message' ||
+    $field eq 'return_link_title' ||
+    $field eq 'return_link_url' ) {
+
+    $CONFIG{$field} = $query->param($field);
+
+  } else {
+    if ($field eq "17cardnumber") {
+      my @@i = $query->param($field);
+      for my $i(@@i) {
+        $FORM{$field} = "$FORM{$field} - $i";
+      }
+    
+    } else {
+      $FORM{$field} = $query->param($field);
+    
+    }
+  }
+}
+
+## for required fields, add them to an array
+#my @@required = split(/,/, $CONFIG{required});
+
+#for my $i(@@required) {
+# if (!$FORM{$i}) {
+#    push @@missed_fields, $i;
+#  }
+#}
+
+#&advise if ($#missed_fields > -1);
+
+# directory where files will be written
+my $crypt = "crypt"; # crypt directory
+
+# customer id
+my $cust = $domain;
+$cust =~ s/^www\.//;
+
+# complete url that will be send to client
+my $url = "$domain\/$crypt";
+
+# 
+my $mailprog = '/usr/lib/sendmail';
+
+# set the date string 
+my $date = strftime("%a %b %e, %Y at %H:%M:%S", localtime);
+
+# get the result location
+$filenamehead=(1000000000-time()) . "-" . $$ . ".txt";
+
+# set the location for the crypt protected file
+
+$filename="\/etc\/commerce\/$cust\/$crypt\/" . $filenamehead; 
+
+
+# Redirect User to after page
+&redirect();
+
+#
+&make_file();
+
+# Send E-Mail
+&send_mail();
+
+# Subroutines
+
+sub send_mail {
+
+  ## declare mail hash
+  my %mail;
+
+  ## place variables into hash
+  ## seperated into scalars to allow for 'if' judgements
+  $mail{To} = "$CONFIG{recipient}";
+  $mail{From} = "$CONFIG{replyname} <$CONFIG{replyaddr}>";
+  $mail{Subject} = "$CONFIG{subject}";
+  $mail{Message} = "Please process https://$url/$filenamehead\n\nThank you";
+
+  ## send the mail
+  &sendmail(%mail)
+    or die "Problem with Mail::Sendmail! : $!\n";
+
+}
+
+sub make_file {
+     open(FILE,">$filename");
+     print FILE "To:      $CONFIG{'recipient'}\n";
+     print FILE "Subject: $CONFIG{'subject'}\n";
+     print FILE "Date:    $date\n";
+     print FILE "Below is the result of your feedback form.\n";
+     print FILE "---------------------------------------------------------------------------\n\n";
+
+     for my $key (sort keys %FORM) {
+	   # Print the name and value pairs in FORM array to html.
+	      print FILE "$key: $FORM{$key}\n";
+          }
+
+     print FILE "---------------------------------------------------------------------------\n";
+
+     close (FILE);
+}
+     
+sub redirect {
+  if ($CONFIG{'redirect'}) {
+    print "Location: $CONFIG{'redirect'}\n\n";
+  }
+}
+
+sub advise {
+print <<WARN;
+Content-type: text/html\n\n
+<html>
+<head>
+  <title>Missed fields!</title>
+  <body bgcolor=#FFFFFF>
+The following form fields need to be completed:<p>
+WARN
+
+for my $i(@@missed_fields) {
+  print qq|<li> $i<br>\n|;
+}
+
+print <<WARN;
+<p>
+Please use your browser's back button<br>
+to return to the previous page and fill<br>
+out the missing fields.<br>
+</body>
+</html>
+WARN
+
+exit;
+}
+@
+
+
+1.25
+log
+@@@missed_fields needs global declaration
+@
+text
+@d4 1
+a4 1
+# $Id: process.cgi,v 1.24 2001/10/17 21:28:41 root Exp root $
+d9 1
+a9 1
+#  /etc/e-commerce/<client>
+d16 2
+d28 1
+a28 1
+my $domain = "www.lunarmedia.net"; # www.domain.com
+d82 1
+a82 11
+if ($CONFIG{required}) {
+
+  ##create an array of the required fields
+  my @@required = split(/,/, $CONFIG{required});
+
+  ## each missed field is placed in a new array
+  for my $i(@@required) {
+    if (!$FORM{$i}) {
+      push @@missed_fields, $i;
+    }
+  }
+d84 5
+a88 2
+  ## create after page displaying missed fields
+  &advise if ($#missed_fields > -1);
+d90 1
+a90 1
+}
+d96 2
+a97 1
+my $cust = (split(/\./, $domain))[-2];
+d111 3
+a113 3
+if ($CONFIG{'postdir'} eq 'CreditCard') { 
+  $filename="\/etc\/e-commerce\/$cust\/$crypt\/" . $filenamehead; 
+}
+d123 1
+a123 1
+&send_mail;
+a127 2
+   # Open The Mail Program
+   open(MAIL,"|$mailprog -t");
+d129 2
+a130 7
+   print MAIL qq|From: $CONFIG{replyname} <$CONFIG{'replyaddr'}>\n|;
+   print MAIL "To:      $CONFIG{'recipient'}\n";
+   print MAIL "Subject: $CONFIG{'subject'}\n";
+
+   if ($CONFIG{'postdir'} eq 'CreditCard') {
+     print MAIL "Please process https://$url/$filenamehead\n\n"; 
+   }
+d132 10
+a141 2
+   print MAIL "\n\n";
+   print MAIL "Thank you\n";
+d143 1
+a143 2
+   close (MAIL);
+}                     
+a145 4
+   # Open The File
+
+   if ($CONFIG{'postdir'})
+   {
+a160 1
+     }
+@
+
+
+1.24
+log
+@updated script for sites that do not use 'rqequired
+@
+text
+@d4 1
+a4 1
+# $Id: process.cgi,v 1.23 2001/10/17 20:59:22 root Exp root $
+d42 1
+a80 1
+  my @@missed_fields;
+@
+
+
+1.23
+log
+@*** empty log message ***
+@
+text
+@d4 1
+a4 1
+# $Id: process.cgi,v 1.22 2001/10/17 20:56:46 root Exp root $
+a41 1
+my @@missed_fields;
+d79 2
+a80 1
+my @@required = split(/,/, $CONFIG{required});
+d82 8
+a89 3
+for my $i(@@required) {
+  if (!$FORM{$i}) {
+    push @@missed_fields, $i;
+d91 4
+a95 2
+
+&advise if ($#missed_fields > -1);
+@
+
+
+1.22
+log
+@*** empty log message ***
+@
+text
+@d4 1
+a4 1
+# $Id: process.cgi,v 1.21 2001/10/17 20:56:21 root Exp root $
+d177 1
+a177 1
+  <body bgcolor=#000000>
+@
+
+
+1.21
+log
+@*** empty log message ***
+@
+text
+@d4 1
+a4 1
+# $Id: process.cgi,v 1.20 2001/10/17 20:56:04 root Exp root $
+d192 1
+a192 1
+WARN;
+@
+
+
+1.20
+log
+@*** empty log message ***
+@
+text
+@d4 1
+a4 1
+# $Id: process.cgi,v 1.19 2001/10/17 20:55:51 root Exp root $
+d84 1
+a84 1
+    push $i, @@missed_fields;
+@
+
+
+1.19
+log
+@*** empty log message ***
+@
+text
+@d4 1
+a4 1
+# $Id: process.cgi,v 1.18 2001/10/17 20:55:36 root Exp root $
+d84 1
+a84 1
+    push $i @@missed_fields;
+@
+
+
+1.18
+log
+@*** empty log message ***
+@
+text
+@d4 1
+a4 1
+# $Id: process.cgi,v 1.17 2001/10/17 20:54:21 root Exp root $
+d84 1
+a84 1
+    push @@missed_fields $i;
+@
+
+
+1.17
+log
+@*** empty log message ***
+@
+text
+@d4 1
+a4 1
+# $Id: process.cgi,v 1.16 2001/10/17 15:14:33 root Exp root $
+d42 1
+@
+
+
+1.16
+log
+@updated version to make use of perl modules
+@
+text
+@d4 1
+a4 1
+# $Id: process.cgi,v 1.15 2001/10/09 21:39:00 root Exp $
+d45 2
+d51 1
+a52 1
+    $field eq 'replyaddr' ||
+d79 9
+a87 1
+## my @@required = split(/,/, $CONFIG{required});
+d168 26
+@
+
+
+1.15
+log
+@added the new replyaddr and replyname features
+@
+text
+@d4 1
+a4 1
+# $Id: process.cgi,v 1.14 2001/08/01 22:21:07 root Exp root $
+d15 6
+a20 1
+
+d26 1
+a26 2
+my $domain = ""; # www.domain.com
+
+a27 7
+#
+# Must have hidden form variables:
+#   recipient         = who gets the email announcement
+#   subject           = variable for what the subject is
+#   redirect          = variable for redirecting a url to the user
+#   postdir           = variable for where to post the file: dank, naer
+#   title             = Title of the form
+d29 1
+a29 1
+####		DO NOT EDIT BELOW THIS MARK			 ####
+d36 2
+a37 2
+# variables
+my $crypt;
+a39 2
+my $date;
+my $key;
+a40 18
+my $buffer;
+my @@pairs;
+my $pair;
+my $name;
+my $value;
+my @@required;
+my @@days;
+my @@months;
+my $sec;
+my $min;
+my $hour;
+my $mday;
+my $mon;
+my $year;
+my $wday;
+my $yday;
+my $isdst;
+my $url;
+d42 36
+a77 2
+my $mailprog;
+my $cust;
+d80 1
+a80 1
+$crypt = "crypt"; # crypt directory
+d83 1
+a83 1
+$cust = (split(/\./, $domain))[-2];
+d86 1
+a86 1
+$url = "$domain\/$crypt";
+d89 1
+a89 4
+$mailprog = '/usr/lib/sendmail';
+
+# Retrieve Date
+get_date();
+d91 2
+a92 2
+# Parse Form Contents
+parse_form();
+d94 1
+a94 2
+
+#get the result location
+d143 1
+a143 1
+     foreach $key (sort keys %FORM) {
+a153 66
+sub parse_form {
+      # Get the input
+      read(STDIN, $buffer, $ENV{'CONTENT_LENGTH'});
+      # Split the name-value pairs
+      @@pairs = split(/&/, $buffer);
+
+   foreach $pair (@@pairs) {
+      ($name, $value) = split(/=/, $pair);
+ 
+      $name =~ tr/+/ /;
+      $name =~ s/%([a-fA-F0-9][a-fA-F0-9])/pack("C", hex($1))/eg;
+
+      $value =~ tr/+/ /;
+      $value =~ s/%([a-fA-F0-9][a-fA-F0-9])/pack("C", hex($1))/eg;
+
+      # If they try to include server side includes, erase them, so they
+      # arent a security risk if the html gets returned.  Another 
+      # security hole plugged up.
+
+      $value =~ s/<!--(.|\n)*-->//g;
+
+      # Create two associative arrays here.  One is a configuration array
+      # which includes all fields that this form recognizes.  The other
+      # is for fields which the form does not recognize and will report 
+      # back to the user in the html return page and the e-mail message.
+      # Also determine required fields.
+
+      if ($name eq 'recipient' ||
+          $name eq 'replyaddr' ||
+          $name eq 'replyname' ||
+	  $name eq 'title' ||
+          $name eq 'redirect' ||
+          $name eq 'subject' ||
+	  $name eq 'postdir' ||
+	  $name eq 'body_message' ||
+	  $name eq 'return_link_title' ||
+	  $name eq 'return_link_url' && ($value)) {
+	 
+	 $CONFIG{$name} = $value;
+      }
+      elsif ($name eq 'required') {
+	 @@required = split(/,/,$value);
+      }
+      else {
+	 if ($FORM{$name} && ($value)) {
+	    $FORM{$name} = "$FORM{$name}, $value";
+	 }
+	 elsif ($value) {
+	    $FORM{$name} = $value;
+	 }
+      }
+   }
+}
+
+sub get_date {
+   @@days = ('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
+   @@months = ('January','February','March','April','May','June','July',
+	      'August','September','October','November','December');
+   ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = localtime(time);
+   if ($hour < 10) { $hour = "0$hour"; }
+   if ($min < 10) { $min = "0$min"; }
+   if ($sec < 10) { $sec = "0$sec"; }
+   $year = 1900 + $year;
+   $date = "$days[$wday], $months[$mon] $mday, $year at $hour\:$min\:$sec";
+}
+
+@
+
+
+1.14
+log
+@needed to correct path in url that is sent via email
+@
+text
+@d4 1
+a4 1
+# $Id: process.cgi,v 1.13 2001/08/01 22:16:54 root Exp root $
+d110 1
+d175 2
+@
+
+
+1.13
+log
+@*** empty log message ***
+@
+text
+@d4 1
+a4 1
+# $Id: process.cgi,v 1.12 2001/08/01 22:15:56 root Exp root $
+d69 1
+a69 1
+$crypt = ""; # crypt directory
+d114 1
+a114 1
+     print MAIL "Please process https://$url$filenamehead\n\n"; 
+@
+
+
+1.12
+log
+@domain needed global my
+@
+text
+@d4 1
+a4 1
+# $Id: process.cgi,v 1.11 2001/08/01 21:57:07 root Exp root $
+d114 1
+a114 1
+     print MAIL "Please process https://$url/$filenamehead\n\n"; 
+@
+
+
+1.11
+log
+@*** empty log message ***
+@
+text
+@d4 1
+a4 1
+# $Id: process.cgi,v 1.10 2001/08/01 21:52:43 root Exp root $
+d21 1
+a21 1
+$domain = ""; # www.domain.com
+a40 1
+my $domain;
+@
+
+
+1.10
+log
+@final
+@
+text
+@d4 1
+a4 1
+# $Id:$
+d16 8
+d32 7
+a67 9
+
+################## EDIT THIS ########################################
+#####################################################################
+
+# domain of client
+$domain = ""; # www.domain.com
+
+#####################################################################
+#####################################################################
+@
+
+
+1.9
+log
+@*** empty log message ***
+@
+text
+@d4 10
+a13 1
+# 
+@
+
+
+1.8
+log
+@corrected y2k issue
+@
+text
+@d4 1
+a47 3
+# customer id
+$cust = ""; # generally domain name without .com or .net suffix
+
+d51 3
+d57 2
+a58 2
+#####################################################################
+#####################################################################
+@
+
+
+1.7
+log
+@*** empty log message ***
+@
+text
+@d191 2
+a192 1
+   $date = "$days[$wday], $months[$mon] $mday, 19$year at $hour\:$min\:$sec";
+@
+
+
+1.6
+log
+@*** empty log message ***
+@
+text
+@d42 7
+d56 3
+d76 1
+a76 1
+  $filename="/secure/crypt/" . $filenamehead; 
+@
+
+
+1.5
+log
+@*** empty log message ***
+@
+text
+@d39 3
+d44 1
+a44 1
+$domain = "" # www.domain.com
+d47 1
+a47 1
+$crypt = "" # crypt directory
+d50 1
+a50 1
+$url = "$domain\/$crypt" 
+@
+
+
+1.4
+log
+@*** empty log message ***
+@
+text
+@d21 1
+a21 1
+my $%FORM;
+@
+
+
+1.3
+log
+@*** empty log message ***
+@
+text
+@d14 26
+d41 1
+a41 1
+my $domain = "" # www.domain.com
+d44 1
+a44 1
+my $crypt = "" # crypt directory
+d47 1
+a47 1
+my $url = "$domain\/$crypt" 
+d50 1
+a50 1
+my $mailprog = '/usr/lib/sendmail';
+d60 1
+a60 1
+my $filenamehead=(1000000000-time()) . "-" . $$ . ".txt";
+@
+
+
+1.2
+log
+@*** empty log message ***
+@
+text
+@d41 2
+a42 2
+# Return HTML Page or Redirect User
+&return_html();
+d44 1
+a46 1
+
+d153 6
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d14 9
+d24 1
+a24 1
+$mailprog = '/usr/lib/sendmail';
+d34 2
+a35 1
+$filenamehead=(1000000000-time()) . "-" . $$ . ".txt";
+d42 3
+a44 2
+&return_html;
+&make_file;
+a57 1
+   print MAIL "Date:    $date\n";
+d59 3
+a61 1
+   if ($CONFIG{'postdir'} eq 'CreditCard') { print MAIL "Please process https://shop.lunarmedia.net/crypt/$filenamehead\n\n"; }
+a153 47
+
+sub return_html {
+   if ($CONFIG{'redirect'} =~ /http\:\/\/.*\..*/ ||
+       $CONFIG{'redirect'} =~ /https\:\/\/.*\..*/ ) {
+      # If the redirect option of the form contains a valid url,
+      # print the redirectional location header.
+      print "Location: $CONFIG{'redirect'}\n\n";
+   }                                               
+   else {
+
+      print "Content-type: text/html\n\n";
+      print "<html>\n <head>\n";
+
+      # Print out title of page
+      if ($CONFIG{'title'}) {
+	 print "  <title>$CONFIG{'title'}</title>\n";
+      }
+      else {
+	 print "  <title>Thank You</title>\n";
+      }
+
+      print " </head>\n <body";
+
+      # Close Body Tag
+      print ">\n  <center>\n";
+
+      if ($CONFIG{'title'}) {
+	 print "   <h1>$CONFIG{'title'}</h1>\n";
+      }
+      else {
+	 print "   <h1>Thank You For Filling Out This Form</h1>\n";
+      }
+
+      print "<center>\n";
+      print "$date<p><hr size=7 width=75\%><p>\n";
+      print "$CONFIG{'body_message'}<p>\n";
+      print "</center>\n";
+
+      # Check for a Return Link
+	 print "\n";
+	 print "<a href=\"$CONFIG{'return_link_url'}\">$CONFIG{'return_link_title'}</a>\n";
+	 print "\n";
+
+      print "</body>\n</html>";
+   }
+}
+
+@

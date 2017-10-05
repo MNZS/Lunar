@@ -1,0 +1,58 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.1
+date	2001.10.24.20.36.48;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@#!/usr/bin/perl -wT
+
+use strict;
+use Cwd;
+
+my $domain = (split /\//, cwd())[-2];
+
+$|=1;
+
+## this content dynamically generated
+
+$mypic[0] = ""; 	# image name "image.jpg"
+$myurl[0] = "";		# fqdn url "http://www.lunarmedia.net/"
+
+$mypic[1] = ""; 
+$myurl[1] = "";
+
+$mypic[2] = ""; 
+$myurl[2] = "";
+
+$mypic[3] = ""; 
+$myurl[3] = "";
+
+## end of dynamically generated content
+ 
+## generate random number
+srand(time ^ $$);
+
+## pick number from the hat
+$pick = rand(@@mypic);
+
+## print out results
+print qq|Content-type: text/html\n\n|;
+print qq|<A HREF="$myurl[$pick]"> <IMG SRC="http://www.$domain/images/$mypic[$pick]></A>|;
+
+@

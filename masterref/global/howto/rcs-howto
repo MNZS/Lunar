@@ -1,0 +1,57 @@
+# $Id: rcs-howto,v 1.1 2003/06/05 16:15:14 root Exp $
+
+SYNOPSIS
+  Describes how to use RCS protected files using the rcedit application
+  or manually using ci and co with the editor of your choice.
+
+USAGE
+  RCS allow for a file to have automatic backups of each edited revision
+  made. The copies are not flat file copies. Rather they are special 
+  single files that hold the differences between each revision. The special
+  file are present in the RCS directory that resides in the same directory
+  as the file being protected.
+
+  If you prefer 'vi' as your editor, you can simply type
+
+    rcedit <filename>
+
+  To access the file via RCS and archive the file. If you prefer to
+  use an alternate editor, you'll need to perform the checkout and 
+  checkin procedure manually. 
+
+    co -l <filename>
+      Use this command to checkout a file for editing. This should be
+      done when a file already exists within RCS.
+
+  After you have the file checked out, you can edit it using the editor
+  of your choice. Proceed with the usual steps and commit your changes.
+  Once you are through editing the file, you will need to check it back
+  into RCS, so the file will be archived.
+
+    ci -u <filename>
+      Use this command to commit your changes to the file to the RCS
+      archives. This command can also be used to check a file into RCS
+      for the first time ever.
+
+  You will be prompted to add a comment on the changes you are making.
+  Once you have added your comment, you may then exit the comment screen
+  by typing a single period on an empty line and hitting the return key.
+  This will complete the process.
+
+  To view the log entries for a particular file, you may enter the 
+  command
+
+    rlog <filename>
+
+  You may want to pipe this to more as for some files it may be quite
+  extensive.
+
+KNOWN BUGS
+  Not all files are RCS protected. If you are curious to know if a file
+  is protected. you can run 'ls RCS' to see a listing of the files under
+  protection. The output will be a list of files followed by ',v'. The
+  ',v' is just a flag showing the file is an RCS Archive file. If you do
+  not see your file in the list, it is not RCS protected.
+
+AUTHOR
+  charles@lunarmedia.net

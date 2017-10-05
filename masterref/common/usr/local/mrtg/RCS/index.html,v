@@ -1,0 +1,99 @@
+head	1.4;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.4
+date	2003.04.15.18.25.41;	author root;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2003.04.15.18.23.40;	author root;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2003.04.15.18.20.59;	author root;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2003.04.15.18.11.09;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.4
+log
+@making left frame smaller
+@
+text
+@<html>
+ <!-- $Id: index.html,v 1.3 2003/04/15 18:23:40 root Exp root $ -->
+ <head>
+  <title>SNMP Graphing</title>
+ </head>
+ <frameset cols="15%,*">
+   <frame name="left" src="left.html">
+   <frame name="right" src="right.html">
+ </frameset>
+ <noframes>
+  <body>
+    This site requires frames, but your browser does not support them.
+  </body>
+ </noframes>
+</html>
+@
+
+
+1.3
+log
+@another change
+@
+text
+@d2 1
+a2 1
+ <!-- $Id: index.html,v 1.2 2003/04/15 18:20:59 root Exp root $ -->
+d6 1
+a6 1
+ <frameset cols="25%,*">
+@
+
+
+1.2
+log
+@changed frames
+@
+text
+@d2 1
+a2 1
+ <!-- $Id: index.html,v 1.1 2003/04/15 18:11:09 root Exp root $ -->
+d6 1
+a6 1
+ <frameset cols="25%">
+a7 2
+ </frameset>
+ <frameset cols="75%">
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d2 1
+a2 1
+ <!-- $Id:$ -->
+d8 2
+d17 1
+a17 1
+</html
+@

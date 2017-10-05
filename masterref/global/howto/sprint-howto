@@ -1,0 +1,15 @@
+## Circuit Information for DS1
+
+Support Number: 800-877-5045
+Account Number: 13106447
+
+Private Line 408013 Sequence 1 (Ser0/1)
+  IP Address 144.232.215.230, Subnet Mask 255.255.255.252
+  Circuit ID 45007227
+Private Line 408013 Sequence 2 (Ser0/0)
+  IP Address 144.232.215.238, Subnet Mask 255.255.255.252
+  Circuit ID 45007228
+
+Upstream Sprint Router
+  sl-gw9-kc/144.232.215.229, Subnet Mask 255.255.255.252.
+  sl-gw9-kc/144.232.215.237, Subnet Mask 255.255.255.252.

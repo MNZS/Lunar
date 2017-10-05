@@ -1,0 +1,130 @@
+head	1.2;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.2
+date	2003.05.15.19.48.27;	author root;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2003.04.02.19.08.41;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.2
+log
+@cleaned up a little
+@
+text
+@#!/usr/bin/perl -w
+
+# $Id: mkslave,v 1.1 2003/04/02 19:08:41 root Exp root $
+
+use strict;
+use File::Copy;
+use POSIX qw(strftime);
+use Sys::Hostname;
+use Socket;
+
+## generate a named.conf include file to be used on ns1 and n2
+
+## my primary address for setting the masters statement
+my $master = hostname();
+$master = gethostbyname("$master");
+$master = inet_ntoa("$master");
+
+## create two variables for documentation with named file
+my $date = strftime("%c",localtime);
+my $hostname = hostname();
+
+## back up existing slave file
+move("/var/named/slave_$hostname","/var/named/.slave_$hostname-old");
+
+## named files to NOT read from 
+## this should include our global named.conf file as well as any
+## named files that include slave domains that would be of no use
+## to pass on.
+my %conf_files = (	
+			"named.conf"		=> "1",
+			"named.motion"		=> "1",
+		);
+
+my %new_slaves;
+
+## named root dir
+my $named_dir = "/var/named";
+chdir $named_dir or die "Cant chdir to $named_dir : $!\n";
+my @@named_files = glob("named.*");
+
+for my $i(@@named_files) {
+  next if $conf_files{$i};
+  open(FH, "$named_dir/$i");
+    while(<FH>) {
+      my $line = $_;
+      next unless $line =~ /^zone/;
+      $line =~ s/^zone.+\"(.*)\".+{.*/$1/g; 
+      chomp $line;
+      $new_slaves{$line} = "$i";
+    }
+  close(FH);
+}
+
+open(FH, ">/var/named/slave_$hostname");
+
+print FH <<HEADER;
+
+/* $date */
+
+HEADER
+ 
+for my $i(sort keys %new_slaves) {
+
+  print FH <<ZONE;
+zone "$i" in {
+  type slave;
+  masters { $master; };
+  file "systems/$hostname/db.$i";
+  allow-query { any; };
+  notify no;
+};
+
+ZONE
+
+}
+close(FH);
+@
+
+
+1.1
+log
+@initial checkin
+@
+text
+@d3 1
+a3 1
+# $Id: mkslave,v 1.1 2002/12/30 18:21:33 root Exp $
+d11 1
+a11 2
+## generate a named.conf include file to be used on dns1.motion.net or 
+## other nameservers which will be pulling zone files from ns1.lunarmedia.net
+a17 10
+## my slave server
+my $slave = "name1.lunarhosting.net";
+$slave = gethostbyname("$slave");
+$slave = inet_ntoa("$slave");
+
+## the secondary nameserver
+my $sec = 'ns2.lunarhosting.net';
+$sec = gethostbyname("$sec");
+$sec = inet_ntoa("$sec");
+
+@

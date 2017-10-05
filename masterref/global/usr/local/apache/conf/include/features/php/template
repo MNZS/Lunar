@@ -1,0 +1,4 @@
+## enable php in document root
+<Directory "/www/DOMAIN/pub/public_html">
+  AddType application/x-httpd-php .php
+</Directory>

@@ -1,0 +1,119 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.1
+date	2003.04.14.13.32.45;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@#!/bin/bash
+
+# masterref guarded
+
+#
+# mysqld	This shell script takes care of starting and stopping
+#		the MySQL subsystem (mysqld).
+#
+# chkconfig: - 78 12
+# description:	MySQL database server.
+# processname: mysqld
+# config: /etc/my.cnf
+# pidfile: /var/run/mysqld/mysqld.pid
+
+# Source function library.
+. /etc/rc.d/init.d/functions
+
+# Source networking configuration.
+. /etc/sysconfig/network
+
+
+prog="MySQL"
+
+datadir="/var/lib/mysql"
+
+start(){
+	touch /var/log/mysqld.log
+	chown mysql.mysql /var/log/mysqld.log 
+	chmod 0640 /var/log/mysqld.log
+	if [ ! -d $datadir/mysql ] ; then
+	    action $"Initializing MySQL database: " /usr/bin/mysql_install_db
+	    ret=$?
+	    chown -R mysql.mysql $datadir
+	    if [ $ret -ne 0 ] ; then
+	    	return $ret
+	    fi
+	fi
+	chown -R mysql.mysql $datadir
+	chmod 0755 $datadir
+	#/usr/bin/safe_mysqld  --defaults-file=/etc/my.cnf >/dev/null 2>&1 &
+	/usr/bin/safe_mysqld  --defaults-file=/etc/my.cnf -O max_connect_errors=100 >/dev/null 2>&1 &
+	ret=$?
+	if [ $ret -eq 0 ]; then
+	    action $"Starting $prog: " /bin/true
+	else
+    	    action $"Starting $prog: " /bin/false
+	fi
+	[ $ret -eq 0 ] && touch /var/lock/subsys/mysqld
+	return $ret
+}
+
+stop(){
+        /bin/kill `cat /var/run/mysqld/mysqld.pid  2> /dev/null ` > /dev/null 2>&1
+	ret=$?
+	if [ $ret -eq 0 ]; then
+	    action $"Stopping $prog: " /bin/true
+	else
+    	    action $"Stopping $prog: " /bin/false
+	fi
+	[ $ret -eq 0 ] && rm -f /var/lock/subsys/mysqld
+	[ $ret -eq 0 ] && rm -f $datadir/mysql.sock
+	return $ret
+}
+ 
+restart(){
+    stop
+    start
+}
+
+condrestart(){
+    [ -e /var/lock/subsys/mysqld ] && restart || :
+}
+
+# See how we were called.
+case "$1" in
+  start)
+    start
+    ;;
+  stop)
+    stop
+    ;;
+  status)
+    status mysqld
+    ;;
+  restart)
+    restart
+    ;;
+  condrestart)
+    condrestart
+    ;;
+  *)
+    echo $"Usage: $0 {start|stop|status|condrestart|restart}"
+    exit 1
+esac
+
+exit $?
+@

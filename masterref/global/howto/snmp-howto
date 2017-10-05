@@ -1,0 +1,13 @@
+$Id: snmp-howto,v 1.1 2003/06/05 16:15:14 root Exp $
+
+Servers
+ - Only configured with RO string 'Wl7d0w%!'
+ - Access controlled via /etc/snmp/snmpd.conf file to only allow
+   name1.lunarhosting.net to poll
+ - /etc/snmp/snmpd.conf file is masterref guarded on name2
+   in the file /usr/local/masterref/etc/snmp/snmpd.conf
+ - Servers are polled via MRTG on name1
+
+Routers 
+ - Configured with RO and RW strings
+ Access controlled via cisco ACL applied to strings

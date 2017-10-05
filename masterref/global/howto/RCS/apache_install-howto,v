@@ -1,0 +1,378 @@
+head	1.3;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.3
+date	2003.07.19.14.12.46;	author root;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2003.07.19.03.07.47;	author root;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2003.06.05.16.15.14;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.3
+log
+@updated with lib php stuff
+@
+text
+@$Id: apache_install-howto,v 1.2 2003/07/19 03:07:47 root Exp root $
+
+This document covers how to upgrade to a newer version of Apache to run
+on the Lunar servers.
+
+1. Download the new tar/gz file from httpd.apache.org to /usr/local/src
+
+2. Untar the file 
+
+3. Create a file called config.status in the root of the directory and 
+   include the following content:
+
+NOTE! If this is for a name server, do not include the line about
+      adding mod_frontpage.
+
+#!/bin/sh
+
+./configure \
+"--with-layout=Apache" \
+"--enable-shared=max" \
+"--add-module=mod_frontpage.c" \
+"--enable-module=ssl" \
+"--enable-module=most" \
+"$@@"
+
+*** IF THE SERVER YOU ARE INSTALLING APACHE ON IS A NAMESERVER, SKIP
+*** TO STEP 6.
+
+4. Copy the /usr/local/ref/frontpage/fp-patch-apache_X.X.X to the root of
+   your new untarred apache src. (Its a good idea to check the www.rtr.com
+   website to make sure that you're using the latest copy of the frontpage
+   patch). 
+
+5. Patch your new apache src with the frontpage patch. Change into the 
+   root directory of your new untarred apache src and issue the command:
+
+     patch -p0 < fp-patch-apache_X.X.X
+
+   Where X.X.X is replaced with the version of the frontpage page file.
+   You should see something along the following lines:
+
+patching file ./mod_frontpage.c
+patching file ./src/include/httpd.h
+Hunk #1 succeeded at 797 (offset -9 lines).
+patching file ./src/main/http_request.c
+Hunk #2 succeeded at 579 (offset 1 line).
+patching file ./src/main/util.c
+
+6. Download the latest version of mod_ssl (www.modssl.org) which corresponds
+   to the new version of Apache. Do NOT use a version of modssl that is meant
+   for a different version of Apache (e.g. mod_ssl-2.8.8-1.3.24 should not
+   be used with apache_1.3.26).
+
+7. Untar/gz the new version of mod_ssl. 
+
+8. Ensure that you have the following RedHat RPMs installed with the latest
+   stable versions.
+
+     rpm -q perl
+     rpm -q mm
+     rpm -q gzip
+     rpm -q openssl
+
+9. Change into the root directory of your new mod_ssl src directory. Run the
+   following configure command.
+
+     ./configure --with-apache=/usr/local/src/apache_X.X.X
+
+   Where X.X.X is your newly untar/gz'd src directory.
+
+10. You should see some output that will not contain any error messages. If it
+    does, you will need to address them before you continue. Output should look
+    similar to this:
+
+Configuring mod_ssl/2.8.11 for Apache/1.3.27
+ + Apache location: /usr/local/src/apache_1.3.27 (Version 1.3.27)
+ + Auxiliary patch tool: ./etc/patch/patch (local)    
+ + Applying packages to Apache source tree:
+   o Extended API (EAPI)
+   o Distribution Documents
+   o SSL Module Source
+   o SSL Support
+   o SSL Configuration Additions
+   o SSL Module Documentation
+   o Addons
+Done: source extension and patches successfully applied.
+
+Now proceed with the following commands (Bourne-Shell syntax):
+ $ cd /usr/local/src/apache_1.3.27
+ $ SSL_BASE=/path/to/openssl ./configure ... --enable-module=ssl
+ $ make
+ $ make certificate
+ $ make install
+
+11. Change directory back into your new Apache src directory
+
+12. Run the command 'sh config.status'. This will run the configuration utility
+    for apache with our predefined environment. There will be quite a bit of
+    output. There should be NO errors and if you see any present, they should
+    be addressed before continuing forward.
+
+    Definitely look for a successful message showing the frontpage module being 
+    installed correctly and your new mod_ssl version.
+
+    Output should appear similar to the following:
+
+Configuring for Apache, Version 1.3.27
+ + using installation path layout: Apache (config.layout)
+ + on-the-fly added and activated frontpage module (modules/extra/mod_frontpage.o)
+Creating Makefile
+Creating Configuration.apaci in src
+ + enabling mod_so for DSO support
+Creating Makefile in src
+ + configured for Linux platform
+ + setting C compiler to gcc
+ + setting C pre-processor to gcc -E
+ + checking for system header files
+ + adding selected modules
+    o rewrite_module uses ConfigStart/End
+ + using -ldb1 for DBM support
+      enabling DBM support for mod_rewrite
+    o dbm_auth_module uses ConfigStart/End
+    o ssl_module uses ConfigStart/End
+      + SSL interface: mod_ssl/2.8.11
+      + SSL interface build type: DSO
+      + SSL interface compatibility: enabled
+      + SSL interface experimental code: disabled
+      + SSL interface conservative code: disabled
+      + SSL interface vendor extensions: disabled
+      + SSL interface plugin: Built-in SDBM
+      + SSL library path: [SYSTEM]
+      + SSL library version: OpenSSL 0.9.6b [engine] 9 Jul 2001
+      + SSL library type: installed package (system-wide)
+ + enabling Extended API (EAPI)
+ + using system Expat
+ + using -ldl for vendor DSO support
+ + checking sizeof various data types
+ + doing sanity check on compiler and options
+Creating Makefile in src/support
+Creating Makefile in src/regex
+Creating Makefile in src/os/unix
+Creating Makefile in src/ap
+Creating Makefile in src/main
+Creating Makefile in src/modules/standard
+Creating Makefile in src/modules/extra
+Creating Makefile in src/modules/proxy
+Creating Makefile in src/modules/ssl
+
+13. Run 'make'. This will create a large amount of output from gcc 
+    and will scroll on for several screens. This output should end
+    however with NO errors. The final few lines should appear similar to:
+
+| Thanks for using Apache & mod_ssl.       Ralf S. Engelschall        |
+|                                          rse@@engelschall.com        |
+|                                          www.engelschall.com        |
++---------------------------------------------------------------------+
+make[1]: Leaving directory `/usr/local/src/apache_1.3.27'
+<=== src
+
+*** THESE NEXT STEPS ARE VERY DANGEROUS. BE SURE TO READ THROUGH 
+*** THIS DOCUMENTATION AND CLEARLY UNDERSTAND WHAT YOU ARE DOING.
+***
+*** BEFORE YOU CONTINUE ON, OPEN A SECOND WINDOW AND BEGIN A TAIL 
+*** OF THE APACHELOG USING THE COMMAND: tail -f /apachelog
+
+15. Stop the current Apache server with the following command:
+
+      apachectl stop
+
+16. Change directory into /usr/local
+  
+17. Remove the current symlink for apache. This symlink will point to 
+    a directory with a descriptive name for the current production 
+    apache version
+
+    Example:
+    apache -> apache-1.3.26
+
+18. Change directory into the new version of Apache's src dir.
+
+      cd /usr/local/src/apache_X.X.X
+
+19. Run 'make install'. This will create a large amount of output and 
+    will show our new version of Apache being written to /usr/local/apache
+
+20. After this run completes, change directory to /usr/local
+
+21. Move (mv) the newly created /usr/local/apache directory to a name 
+    that is descriptive of its version. If there is no change in Apache
+    revision numbers, add something to the description to denote the
+    reason for the upgrade.
+
+      mv /usr/local/apache /usr/local/apache-1.3.27
+
+22. Create a symlink to the new directory using the generic name 'apache'
+
+      ln -s /usr/local/apache-1.3.27 /usr/local/apache
+
+23. Change directory into the new apache-X.X.X directory
+
+24. Run 'mv conf conf-original'
+
+25. Run 'cp -a /usr/local/apache-Y.Y.Y/conf /usr/local/apache-X.X.X'
+    In this command, Y.Y.Y represents the previous production Apache 
+    directory and X.X.X represents our new Apache install.
+    This command will move our apache configuration into the new Apache 
+    version's structure
+
+26. If no change was made to PHP during this upgrade, perform the following
+    command as well 
+
+     cp -a \
+     /usr/local/apache-Y.Y.Y/libexec/libphp* \
+     /usr/local/apache-X.X.X/libexec/
+
+27. Run 'apachectl startssl'. 
+    Enter the certificate passphrases.
+    Watch your apache log tail to make sure that the daemon starts 
+    without error.
+
+27. Pull up a web browser and ensure that you can bring up customer websites. 
+    Pull up a few customer control panels to make sure that they 
+    work correctly. Surf customer sites for at least 30 minutes and try
+    to hit as many as possible. 
+    Be sure to surf to sub-pages and not just bring up home pages.
+
+    Send an HUP signal to the daemon by running 'apachectl graceful' to 
+    ensure that the server can perform a graceful restart.
+
+28. Let the application run for 48 hours. Continue to tail the apache 
+    log looking for any errors. Make sure that Urchin runs smoothly.
+@
+
+
+1.2
+log
+@*** empty log message ***
+@
+text
+@d1 1
+a1 1
+$Id: apache_install-howto,v 1.1 2003/06/05 16:15:14 root Exp root $
+d13 3
+d26 2
+a27 2
+NOTE! If this is for a name server, do not include the line about 
+      adding mod_frontpage.
+d32 1
+a32 2
+   patch). Again, skip this step if you are installing/upgrading apache on
+   a nameserver.
+a48 2
+   Again, skip this step if the host is a nameserver.
+
+d149 3
+a151 3
+13. Run 'make'. This will create a large amount of output from gcc and will scroll
+    on for several screens. This output should end however with NO errors. The final
+    few lines should appear similar to:
+d160 5
+a164 19
+14. Run 'make certificate'. You will be greeted with several questions that require
+    input to create the test certificate. Hit 'enter' and take the default for each
+    question.
+
+    NOTE: For the question "Encrypt the private key now? [Y/n]:" you may answer 'no'
+          or, if you choose 'yes', you can enter any phrase you would like for the
+          passphrase since this will be replaced by our production server certificate.
+
+*** THE FOLLOWING STEPS ARE VERY DANGEROUS AND SHOULD BE READ OVER CAREFULLY ***
+
+    You are now ready to put this new version of apache into production! This should
+    be done after hours and customers should be notified in order to allow for downtime.
+    This should be done either well before or well after Urchin runs for the evening.
+
+    This upgrade will take down the current Apache webserver, so there will be an 
+    interruption in service until the new server is up and running.
+
+    Start this work by opening two windows to the server. In one, start a tail to the 
+    apache log file 'tail -f /apachelog'. Continue the installation in the other window.
+d172 3
+a174 2
+17. Remove the current symlink for apache. This symlink will point to a directory with a
+    very descriptive name for the current production apache version. 
+d177 1
+a177 1
+    apache -> apache.1.3.26-modssl.2.8.10-php4.2.2-frontpage-suexec-log
+d183 2
+a184 2
+19. Run 'make install'. This will create a large amount of output and will show our new version
+    of Apache being written to /usr/local/apache
+d188 4
+a191 2
+21. Move (mv) the newly created /usr/local/apache directory to a name that is descriptive of its
+    version
+d201 1
+a201 1
+24. Run 'rm -rf ./conf'
+d204 11
+a214 3
+    In this command, Y.Y.Y represents the previous production Apache directory and X.X.X represents 
+    our new Apache install.
+    This command will move our apache configuration into the new Apache version's structure
+d216 1
+a216 1
+26. Run 'apachectl startssl'. 
+d218 2
+a219 1
+    Watch your apache log tail to make sure that the daemon starts without error.
+d222 3
+a224 2
+    Pull up a few customer control panels to make sure that they work correctly.
+    Surf customer sites for at least 30 minutes and try to hit as many as possible.
+d227 2
+a228 2
+    Send an HUP signal to the daemon by running 'apachectl graceful' to ensure that 
+    the server can perform a graceful restart.
+d230 2
+a231 2
+28. Let the application run for 48 hours. Continue to tail the apache log looking for any 
+    errors. Make sure that Urchin runs smoothly.
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 1
+a1 1
+$Id: apache_install-howto,v 1.3 2002/10/04 20:52:21 charles Exp $
+a20 7
+"--enable-suexec" \
+"--suexec-caller=nobody" \
+"--suexec-docroot=/" \
+"--suexec-uidmin=500" \
+"--suexec-gidmin=500" \
+"--suexec-safepath=/usr/bin:/bin" \
+"--suexec-logfile=/var/log/suexec" \
+d23 3
+d29 2
+a30 1
+   patch).
+d47 2
+@

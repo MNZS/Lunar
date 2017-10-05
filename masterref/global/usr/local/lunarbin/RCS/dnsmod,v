@@ -1,0 +1,366 @@
+head	1.6;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.6
+date	2003.07.18.18.41.35;	author root;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2003.07.14.19.31.08;	author root;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2003.07.14.13.25.33;	author root;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2003.07.14.13.23.01;	author root;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2003.04.21.16.03.05;	author root;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2003.04.02.19.08.41;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.6
+log
+@removed add handle
+@
+text
+@#!/usr/bin/perl -w
+
+# $Id: dnsmod,v 1.5 2003/07/14 19:31:08 root Exp root $
+
+use strict;
+use Getopt::Long;
+use Fcntl ':flock';
+use Socket;
+
+my $dir = "/var/named";
+my %existing;
+my @@configfiles;
+
+my $rcs = (qw$Revision: 1.5 $)[-1];
+
+my $action;
+my $domain;
+
+my $checkout = "co -q -l";
+
+## check to ensure that at least one flag is present
+&help_message unless (@@ARGV);
+
+## command line options
+my $file;
+my $add;
+my $remove;
+my $list;
+my $help;
+my $slave;
+
+GetOptions (	'file=s'	=> \$file,
+		'add=s'		=> \$add,
+		'remove=s'	=> \$remove,
+		'slave=s'	=> \$slave,
+		'list'		=> \$list,
+		'help'		=> \$help,
+	   );
+
+## verify that needed flags are present
+if ($add && !$file) {
+  print "\nYou must use -f to specify which file\nyou will be editing.\n\n";
+  exit;
+}
+
+if ($remove && !$file) {
+  print "\nYou must use -f to specify which file\nyou will be editing.\n\n";
+  exit;
+}
+
+## check to ensure that the named file exists
+if ($file) {
+  die "\nThe file named.$file does not exist!\n\n" 
+    unless ( -e "$dir/named.$file" );
+}
+
+## get list of configuration files
+chdir "$dir" or die "Cant open directory $dir : $!\n";
+@@configfiles = glob("named.*");
+
+## make a hash of existing domains so 
+## the same record cant be entered
+## more than once within the list.
+for my $i(@@configfiles) {
+  open(FH, "$dir/$i") or die "Cant open $dir/$i : $!\n";
+  flock(FH,LOCK_EX);
+  seek(FH,0,0);
+  while(<FH>) {
+    next if $_ !~ /^zone/;
+    my $list = $_;
+    chomp $list;
+    $list =~ s/^zone.+\"(.*)\".+{$/$1/g;
+    $existing{$list} = "1";
+  }
+  flock(FH,LOCK_UN);
+  close(FH);
+}
+
+## echo the help menu
+&help_message
+  if ($help);
+
+## check to see if duplicate domain exists within config files.
+if ($add) {
+  die "\nThe domain $add already exists!\n\n" 
+    if ($existing{$add});
+}
+
+## check to see if the domain doesnt exist within config files.
+if ($remove) {
+  die "\nThat domain isnt within the existing config file!\n\n"
+    if (!$existing{$remove});
+}
+
+## take action
+&add if ($add);
+
+&remove if ($remove);
+
+&list if ($list);
+
+## subroutines
+sub add {
+
+  my $checkin = "ci -u -q -m\"Added $add\"";
+
+  $add =~ tr/A-Z/a-z/;
+
+  system("$checkout $dir/named.$file");
+
+  open FH, ">>$dir/named.$file" 
+    or die "Cant open config file to append new domain $!\n";
+
+  flock(FH,LOCK_EX);
+  seek(FH,0,2);
+  
+  print FH "zone \"$add\" in \{\n\ttype master\;\n\tfile \"$file\/db.$add\"\;\n\tallow-query \{ any\; \}\; \}\;\n\n" if (!$slave);
+  print FH "zone \"$add\" in \{\n\ttype slave\;\n\tfile \"$file\/db.$add\"\;\n\tallow-query \{ any\; \}\;\n\tmasters \{ $slave\; \}\; \}\;\n\n" if ($slave);
+
+  flock(FH,LOCK_UN);
+  close FH;
+
+  open FH, "$dir/named.$file" 
+    or die "Could not open $file for sorting : $!\n";
+
+  flock(FH,LOCK_EX);
+  seek(FH,0,0);
+
+  $/ = "\;\n\n";
+  my @@array = <FH>;
+
+  @@array = sort @@array;
+
+  flock(FH,LOCK_UN);
+  close FH;
+  
+  open FH, ">$dir/named.$file";
+
+  flock(FH,LOCK_EX);
+  seek(FH,0,0);
+  
+  print FH @@array;
+
+  flock(FH,LOCK_UN);
+  close FH;
+
+  system("$checkin $dir/named.$file");
+
+  $/ = "\n";
+
+  ## add domain to /etc/mail/local-host-names
+  #&mailHandle('add');
+
+  exit;
+}
+
+sub remove {
+$remove =~ tr/A-Z/a-z/;
+my @@new_array;
+
+my $checkin = "ci -u -q -m\"Removed $remove\"";
+
+system("$checkout $dir/named.$file");
+
+open FH, "$dir/named.$file" 
+  or die "Cant open config file to remove new domain : $!\n";
+flock(FH,LOCK_EX);
+seek(FH,0,0);
+  $/ = "\;\n\n";
+  my @@array = <FH>;
+  for my $i(@@array) {
+    push (@@new_array, $i) 
+      unless $i =~ /^zone\s\"$remove/;
+  }
+flock(FH,LOCK_UN);
+close FH;
+open FH, ">$dir/named.$file" 
+  or die "Cant open config file for sorting : $!\n";
+flock(FH,LOCK_EX);
+seek(FH,0,0);
+  print FH @@new_array;
+flock(FH,LOCK_UN);
+close FH;
+
+system("$checkin $dir/named.$file");
+
+$/ = "\n";
+
+  ## removed from /etc/mail/local-host-names
+  &mailHandle('remove');
+
+exit;
+}
+
+sub list { 
+for my $i(sort keys %existing) {
+  print "$i\n";
+}
+exit;
+}
+
+sub mailHandle {
+  my $action = shift;
+  open(FH,'/etc/mail/local-host-names')
+    or die "Can't open local-host-names : $!\n";
+  if ($action eq 'add') {
+    print FH $add;
+  }
+
+}
+
+sub help_message {
+
+print <<HELP;
+ 
+  --file   refers to the filename suffix. examples
+           would be "corp" or "clients"
+
+  --add    refers to the domain being added. examples
+           would be "lunarmedia.net" or "motion.net"
+
+  --remove similar to add, but it removes
+
+  --slave  add the domain as a slave with the argument
+           being the master nameserver's ip address.
+
+  --help   this menu
+
+HELP
+
+exit;
+ 
+}
+@
+
+
+1.5
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+# $Id: dnsmod,v 1.4 2003/07/14 13:25:33 root Exp root $
+d14 1
+a14 1
+my $rcs = (qw$Revision: 1.4 $)[-1];
+d152 1
+a152 1
+  &mailHandle('add');
+@
+
+
+1.4
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+# $Id: dnsmod,v 1.3 2003/07/14 13:23:01 root Exp root $
+d14 1
+a14 1
+my $rcs = (qw$Revision: 1.3 $)[-1];
+d204 5
+@
+
+
+1.3
+log
+@getting ready to add a subroutine to handle adding the new
+domain to /etc/mail/local-host-names
+@
+text
+@d3 1
+a3 1
+# $Id: dnsmod,v 1.2 2003/04/21 16:03:05 root Exp root $
+d14 1
+a14 1
+my $rcs = (qw$Revision: 1.2 $)[-1];
+d203 1
+d212 1
+a212 1
+           would be "lunar" "motion" or "clients"
+@
+
+
+1.2
+log
+@changed etc/nameserver to var/named
+@
+text
+@d3 1
+a3 1
+# $Id: dnsmod,v 1.1 2003/04/02 19:08:41 root Exp root $
+d14 1
+a14 1
+my $rcs = (qw$Revision: 1.1 $)[-1];
+d151 3
+d188 4
+d202 3
+@
+
+
+1.1
+log
+@initial checkin
+@
+text
+@d3 1
+a3 1
+# $Id: dnsmod,v 1.3 2003/01/15 14:36:36 root Exp $
+d10 1
+a10 1
+my $dir = "/etc/nameserver";
+d14 1
+a14 1
+my $rcs = (qw$Revision: 1.3 $)[-1];
+@

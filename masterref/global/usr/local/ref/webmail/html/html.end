@@ -1,0 +1,21 @@
+	</td>
+       </tr>
+       <tr>
+        <td><img src="%%imageshttp%%/trans2.gif" alt="Web Mail" width="2" height="2" border="0"><br></td>
+       </tr>
+
+<!--
+       <tr>
+	<td align="right">
+          <table width="300" border="0" cellspacing="0" cellpadding="0" align="center">
+           <tr>
+            <td align="right"><a href="javascript:window.close()"><img src="%%imageshttp%%/closewindow.gif" alt="W3Mail 1.0.5" width="101" height="23" border="0"></a></td>
+            </tr>
+          </table>
+        </td>
+       </tr>
+-->
+      </table>
+
+</body>
+</html>

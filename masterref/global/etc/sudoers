@@ -1,0 +1,22 @@
+# $Id: sudoers,v 1.20 2003/09/24 21:12:53 root Exp $
+
+# THIS FILE IS MASTERREF GUARDED
+
+# logging
+Defaults        logfile=/var/log/sudo
+
+nobody  ALL=NOPASSWD: /usr/local/nobody/nouseradd,      \
+                      /usr/local/nobody/nopasswd,       \
+                      /usr/local/nobody/noverify
+
+cmenzes	ALL=PASSWD:	/usr/sbin/tcpdump,			\
+			/usr/local/apache/bin/apachectl,	\
+			/etc/rc3.d/S45named restart,		\
+			/usr/local/lunarbin/mkmail.pl,		\
+			/bin/bash,				\
+			/usr/bin/apt-get
+
+cmenzes	ALL=NOPASSWD:	/usr/local/lunarbin/zoneupdate
+
+scott	ALL=PASSWD:	/bin/bash
+craig	ALL=PASSWD:	/bin/bash

@@ -1,0 +1,5 @@
+## list of known spammers
+blacklist_from  Brich*
+blacklist_from  *@joefuzz.com
+blacklist_from	sai_creation@mantraonline.com
+blacklist_from	big@boss.com

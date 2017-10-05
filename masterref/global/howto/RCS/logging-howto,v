@@ -1,0 +1,32 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.1
+date	2003.06.05.16.15.14;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@$Id: logging-howto,v 1.1 2003/01/24 03:05:04 root Exp $
+
+*Urchin
+Websites that use Urchin for log reporting are rotated on a daily basis
+during each Urchin run. A site's log for the day is archived as the log
+filename with the current date appended in the format YYYYMMDD.
+These archived logs are held for 5 days. The urchin_logrotate.pl script
+will delete the archived log files, from 5 days prior, for each urchin 
+enabled domain.
+@

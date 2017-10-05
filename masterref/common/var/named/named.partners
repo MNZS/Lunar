@@ -1,0 +1,29 @@
+/* $Id: named.partners,v 1.5 2003/08/13 17:39:09 root Exp $ */
+
+/* Charles Wiechman */
+zone "wiechdoctor.com" in {
+        type slave;
+	notify no;
+        file "partners/db.wiechdoctor.com";
+        allow-query { any; };
+        masters { 216.17.156.125; }; };
+  
+zone "wiechdoctor.net" in {
+        type slave;
+	notify no;
+        file "partners/db.wiechdoctor.net";
+        allow-query { any; };
+        masters { 216.17.156.125; }; };
+
+/* Sai Kumar */
+zone "elastname.com" in {
+        type master;
+	notify no;
+        file "partners/db.elastname.com";
+        allow-query { any; }; };
+ 
+zone "surenetworks.com" in {
+        type master;
+	notify no;
+        file "partners/db.surenetworks.com";
+        allow-query { any; }; };

@@ -1,0 +1,84 @@
+head	1.3;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.3
+date	2003.04.10.07.34.18;	author root;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2003.04.10.06.42.00;	author root;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2003.04.02.19.08.41;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.3
+log
+@added a check for hostname so that script only runs on name2
+and removed a reference to running the bash script without arguments
+@
+text
+@#!/usr/bin/perl -w
+
+# Masterref
+# $Id: archive-system.pl,v 1.2 2003/04/10 06:42:00 root Exp root $
+
+use strict;
+use Sys::Hostname;
+
+# check for global stop file
+require '/usr/local/lunarbin/check_lockfile.pl';
+
+if (hostname() ne 'name2.lunarhosting.net') {
+  exit 1;
+}
+
+my @@hosts = qw ( host1.lunarhosting.net
+		 host2.lunarhosting.net
+		 name1.lunarhosting.net
+		 name2.lunarhosting.net );
+
+for my $i(@@hosts) {
+  system("/usr/local/lunarbin/archive-system.sh $i");
+}
+@
+
+
+1.2
+log
+@new scheme for backing up servers.
+name2 is now a key player and the only box with ssh key access
+@
+text
+@d4 1
+a4 1
+# $Id: archive-system.pl,v 1.1 2003/04/02 19:08:41 root Exp root $
+d12 4
+a15 1
+`/usr/local/lunarbin/archive-system.sh`;
+@
+
+
+1.1
+log
+@initial checkin
+@
+text
+@d4 1
+a4 1
+# $Id: archive-system.pl,v 1.4 2003/03/26 22:01:06 root Exp $
+d13 8
+@

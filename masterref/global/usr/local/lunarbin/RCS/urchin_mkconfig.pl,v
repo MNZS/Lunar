@@ -1,0 +1,311 @@
+head	1.9;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.9
+date	2003.05.12.22.47.15;	author root;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	2003.05.12.22.45.23;	author root;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2003.05.12.22.42.44;	author root;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2003.05.12.22.40.39;	author root;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2003.05.12.22.39.33;	author root;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2003.05.12.22.38.34;	author root;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2003.04.22.14.35.11;	author root;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2003.04.10.01.29.32;	author root;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2003.04.02.19.08.41;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.9
+log
+@changed format of error log
+@
+text
+@#!/usr/bin/perl -w
+
+use strict;
+use Sys::Hostname;
+
+# MasterRef
+# $Id: urchin_mkconfig.pl,v 1.8 2003/05/12 22:45:23 root Exp root $
+
+# script used to create an Urchin config file based on the contents
+# of include files for various hosted domains. the include files can
+# be manually configured by clients on a per domain basis
+
+if (hostname() !~ /^host/) {
+  exit 1;
+}
+
+## global variables
+my $opt = "/etc/hosting-options";
+my $dir = "/usr/local/urchin";
+my $cfg = "$dir/config";
+my $inc = "/include";
+
+## get list of options
+chdir $opt
+  or die "Cant change directory to options dir : $!\n";
+my @@options = glob("*")
+  or die "Cant read options directory : $!\n";
+
+## per server license
+my %license = ( 
+		'host1.lunarhosting.net' => 'EFFPM-8MVXT-FAU5A-4TBKK',
+		'host2.lunarhosting.net' => 'VFHH4-7VF4E-3J8S9-K1B4E',
+);
+
+my %serial = ( 	
+  		'host1.lunarhosting.net' => '1337-3337-7462-6218',
+	 	'host2.lunarhosting.net' => '7733-1737-1836-6218',
+);
+
+## place hostname into variable
+my $hostname = hostname();
+
+## open the urchin config file
+open(FH, ">$cfg")
+  or die "Cant open the Urchin config file : $!\n";
+
+## print out global configs
+print FH <<CFG;
+#=======================================================================
+#                  Urchin Dedicated 3 Config File
+#=======================================================================
+
+## licensing
+#U3-DED A8ZB-RZWV-BG4E-1616
+SerialNumber:	$serial{$hostname}
+LicenseCode:	$license{$hostname}
+
+## global configuration
+ProcessEcommerce:       off
+ProcessDNS:             on
+ProcessBrowsers:        on
+ResolverIP:             208.16.140.132
+Visitor_Timeout:        86400
+RestartCommand:         /usr/local/apache/bin/apachectl graceful
+#SystemReport:          on
+#SystemDirectory:    /www/systemreport/
+
+#=======================================================================
+
+CFG
+
+## print urchin configurations per client 
+for my $i (@@options) {
+  next if ($i eq ".");
+  next if ($i eq "..");
+  if (-e "$i/urchin") {
+
+print FH <<CFG;
+## $i
+<Report>
+  ReportName:\t\t$i 
+  ReportDomains:\t$i, www.$i
+  ReportDirectory:\t/www/$i/urchin/
+  FilterOut:\t\tdefault\\.ida|\\.exe|robots\\.txt|favicon\\.ico|\\.cfm
+  LogDestiny:\t\tarchive	
+  #LogDestiny:\t\tdont touch
+  TransferFormat:\tcombined
+  TransferLog:\t\t/var/log/www/www-xfer.$i
+  TransferFormat:\tcombined
+  TransferLog:\t\t/var/log/www/www-error.$i
+CFG
+
+  ## add miva processing if applicable
+  if (-e "/www/$i/pub/mivadata/elf.log") {
+    print FH "  ProcessEcommerce:\ton\n";
+    print FH "  TransferFormat:\telf\n";
+    print FH "  TransferLog:\t/www/$i/pub/mivadata/elf.log\n";
+  }
+
+print FH "</Report>\n\n";
+
+  }
+}
+@
+
+
+1.8
+log
+@needed additional transfer format for error log
+@
+text
+@d7 1
+a7 1
+# $Id: urchin_mkconfig.pl,v 1.7 2003/05/12 22:42:44 root Exp root $
+d90 1
+a90 1
+  ErrorLog:\t\t/var/log/www/www-error.$i
+@
+
+
+1.7
+log
+@*** empty log message ***
+@
+text
+@d7 1
+a7 1
+# $Id: urchin_mkconfig.pl,v 1.6 2003/05/12 22:40:39 root Exp root $
+d89 1
+@
+
+
+1.6
+log
+@*** empty log message ***
+@
+text
+@d7 1
+a7 1
+# $Id: urchin_mkconfig.pl,v 1.5 2003/05/12 22:39:33 root Exp root $
+d81 1
+a81 1
+  ReportName:\t$i 
+d84 3
+a86 3
+  FilterOut:\tdefault\\.ida|\\.exe|robots\\.txt|favicon\\.ico|\\.cfm
+  LogDestiny:\tarchive	
+  #LogDestiny:\tdont touch
+d88 2
+a89 2
+  TransferLog:\t/var/log/www/www-xfer.$i
+  ErrorLog:\t/var/log/www/www-error.$i
+d94 3
+a96 3
+    print FH "ProcessEcommerce:\ton\n";
+    print FH "TransferFormat:\telf\n";
+    print FH "TransferLog:\t/www/$i/pub/mivadata/elf.log\n";
+@
+
+
+1.5
+log
+@*** empty log message ***
+@
+text
+@d7 1
+a7 1
+# $Id: urchin_mkconfig.pl,v 1.4 2003/05/12 22:38:34 root Exp root $
+d99 1
+a99 1
+print FH "</Report";
+@
+
+
+1.4
+log
+@added miva support
+@
+text
+@d7 1
+a7 1
+# $Id: urchin_mkconfig.pl,v 1.3 2003/04/22 14:35:11 root Exp root $
+d94 3
+a96 3
+    print FH, "ProcessEcommerce:\ton\n";
+    print FH, "TransferFormat:\telf\n";
+    print FH, "TransferLog:\t/www/$i/pub/mivadata/elf.log\n";
+@
+
+
+1.3
+log
+@had wrong license/serial in for host2
+@
+text
+@d7 1
+a7 1
+# $Id: urchin_mkconfig.pl,v 1.2 2003/04/10 01:29:32 root Exp root $
+d81 17
+a97 9
+  ReportName:           $i 
+  ReportDomains:        $i, www.$i
+  ReportDirectory:      /www/$i/urchin/
+  FilterOut:		default\\.ida|\\.exe|robots\\.txt|favicon\\.ico|\\.cfm
+  LogDestiny:		archive	
+  #LogDestiny:		dont touch
+  TransferLog:          /var/log/www/www-xfer.$i
+  ErrorLog:             /var/log/www/www-error.$i
+</Report>
+d99 1
+a99 1
+CFG
+@
+
+
+1.2
+log
+@made a change to accomodate the wacked hostname on host1
+@
+text
+@d7 1
+a7 1
+# $Id: urchin_mkconfig.pl,v 1.1 2003/04/02 19:08:41 root Exp root $
+d32 1
+a32 2
+		'host1' 		 => 'EFFPM-8MVXT-FAU5A-4TBKK',
+		'host2.lunarhosting.net' => 'EFFPM-8MVXT-FAU5A-4TBKK',
+d37 1
+a37 2
+  		'host1' 		 => '1337-3337-7462-6218',
+	 	'host2.lunarhosting.net' => '1337-3337-7462-6218',
+@
+
+
+1.1
+log
+@initial checkin
+@
+text
+@d7 1
+a7 1
+# $Id: urchin_mkconfig.pl,v 1.5 2003/01/28 10:56:30 root Exp $
+d30 3
+a32 1
+my %license = ( 'host1.lunarhosting.net' => 'EFFPM-8MVXT-FAU5A-4TBKK',
+d36 3
+a38 1
+my %serial = ( 	'host1.lunarhosting.net' => '1337-3337-7462-6218',
+@

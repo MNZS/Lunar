@@ -1,0 +1,10 @@
+.lunartext {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; line-height: 18px; color: BLACK}
+.linktext {  font-family: Arial,Verdana, Arial, Helvetica, sans-serif; font-size: 10px; line-height: 15px; color: #FFFF99; text-decoration: none }
+.normaltext {  line-height: 19px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px}
+.formcreate { font-size: 12px; width : 200px; border-top:#009999 solid thin; border-bottom:#009999 solid thin; border-right:#009999 solid thin; border-left:#009999 solid thin; font-family: verdana, helvetica, sans-serif; }
+.formcreate2 { font-size: 12px; width : 400px; border-top:#009999 solid thin; border-bottom:#009999 solid thin; border-right:#009999 solid thin; border-left:#009999 solid thin; font-family: verdana, helvetica, sans-serif; }
+.formcreate3 { font-size: 12px; width : 200px; border-top:black solid thin; border-bottom:black solid thin; border-right:black solid thin; border-left:black solid thin; font-family: verdana, helvetica, sans-serif; }
+.formcreate4 { font-size: 12px; width : 50px; border-top:#009999 solid thin; border-bottom:#009999 solid thin; border-right:#009999 solid thin; border-left:#009999 solid thin; font-family: verdana, helvetica, sans-serif; }
+.formcreate5 { font-size: 12px; width : 200px; border-top:#CC6633 solid thin; border-bottom:#CC6633 solid thin; border-right:#CC6633 solid thin; border-left:#CC6633 solid thin; font-family: verdana, helvetica, sans-serif; }
+.formcreate5a { font-size: 12px; width : 300px; height : 100px; border-top:#CC6633 solid thin; border-bottom:#CC6633 solid thin; border-right:#CC6633 solid thin; border-left:#CC6633 solid thin; font-family: verdana, helvetica, sans-serif; }
+.smalltext { font-size: 11px; font-family: arial, helvetica, sans-serif; }

@@ -1,0 +1,29 @@
+#!/usr/bin/perl -w
+
+# $Id: nopasswd,v 1.2 2002/12/31 12:15:16 root Exp $
+
+use strict;
+use Passwd::Linux qw(modpwinfo mgetpwnam);
+use Getopt::Long;
+
+my $username;
+my $password;
+GetOptions ( 'username=s' => \$username, 'password=s' => \$password, );
+
+if (!$username || !$password) { die; }
+
+&clean_vars;
+
+my @user_info = mgetpwnam($username);
+$user_info[1] = $password;
+my $err = modpwinfo(@user_info);
+
+return 0 if !$err;
+
+sub clean_vars {
+  $username =~ tr/A-Z/a-z/;
+  $username =~ s/[^a-z0-9]//g;
+  $username =~ s/^([0-9a-z]{1,16}).*/$1/;
+  
+  if ($username eq 'root') { exit 1; }
+} 

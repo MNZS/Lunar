@@ -1,0 +1,59 @@
+head	1.2;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.2
+date	2003.01.27.16.41.15;	author root;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2003.01.26.15.40.03;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.2
+log
+@*** empty log message ***
+@
+text
+@#!/usr/bin/perl -w
+
+use strict;
+
+my $file = 'global-rfc1918';
+
+open(FH,">>$file");
+
+for my $i(16 .. 31) {
+  print FH "zone \"$i.172.in-addr.arpa\" in {\n\ttype master;\n\tfile \"corp\/db.rfc1918\"; };\n\n";
+}
+
+close(FH);
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d9 2
+a10 8
+my $oct1 = '0';
+my $oct2 = '0';
+my $oct3 = '0';
+
+for my $i(0 .. 255) {
+  for my $j(0 .. 255) {
+    print FH "zone \"$j.$i.10.in-addr.arpa\" in {\n\ttype master;\n\tfile \"corp\/db.rfc1918\"; };\n\n";
+  }
+@

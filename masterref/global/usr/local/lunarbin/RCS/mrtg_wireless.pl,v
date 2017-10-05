@@ -1,0 +1,38 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.1
+date	2003.04.02.19.08.41;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.1
+log
+@initial checkin
+@
+text
+@#!/usr/bin/perl -w
+
+# MasterRef
+# $Id: mrtg_wireless.pl,v 1.3 2003/01/06 19:51:31 root Exp $
+
+use strict;
+use Sys::Hostname;
+
+if (hostname() !~ /^name1/) {
+  exit 1;
+}
+
+my $cli = '/usr/local/lunarbin/mrtg_process.sh';
+
+system("$cli");
+@

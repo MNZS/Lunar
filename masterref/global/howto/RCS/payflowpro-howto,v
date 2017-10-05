@@ -1,0 +1,64 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.1
+date	2003.08.27.01.33.58;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@$Date:$
+
+PayFlow Pro is a Verisign service which allows for live-time credit card
+transaction processing. This is a paid service through Verisign that can
+be integrated into Miva Empresa.
+To be eligible for using PayFlow Pro, a customer much first register with
+Verisign for the service. Once registered, the customer will set up their
+MerchantID and other information with Verisign. The customer will also be
+given a login for 
+
+ https://manager.verisign.com/
+
+Through this login, we may download the PayFlowPro library to be used with 
+Miva. This file will have a name similar to
+
+ PFProMiva.so
+
+PayFlow Pro is known as a Commerce Method in Miva syntax. In order for a
+website to be eligible to use PayFlowPro, an Apache environment variable
+needs to be set up defining it.
+
+To set up this variable, first edit the domain's Apache include for Miva.
+This is located in:
+
+ /usr/local/apache/conf/include/commerce/miva/mv.DOMAIN
+
+In this file, you will want to edit the last line which is a call to an
+ICB commerce include file. The include line references:
+
+ /usr/local/apache/conf/include/commerce/icb/icb.DOMAIN
+
+This file should include the following information:
+
+## payflo pro commerce library
+SetEnv MvCONFIG_COMMERCE_PNTRANSACT     /full/path/to/PFProMiva.so 
+
+(This location has yet to be determined.)
+
+One caveat that was found to exist is the lack of a CERT variable defined
+for access via PayFlowPro. As a result, a symlink MUST be created in the 
+current miva-bin directly to /usr/local/miva/certs
+@

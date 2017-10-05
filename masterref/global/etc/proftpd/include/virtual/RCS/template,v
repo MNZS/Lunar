@@ -1,0 +1,98 @@
+head	1.3;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.3
+date	2003.04.21.19.38.16;	author root;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2003.04.21.15.58.29;	author root;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2003.01.05.05.56.49;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.3
+log
+@removed passive ports
+@
+text
+@# $Id: template,v 1.2 2003/04/21 15:58:29 root Exp root $
+
+<VirtualHost www.DOMAIN>
+  ServerIdent on " "
+
+  DisplayConnect /etc/proftpd/connect
+  DefaultRoot /www/DOMAIN/pub/
+  AllowOverwrite on
+
+    <Limit Login>
+      Order allow,deny
+      AllowGroup adm_GROUP
+      AllowGroup ftp_GROUP
+      #AllowGroup tmp_GROUP
+      AllowGroup lunarhosting
+      AllowGroup consultants
+      #RESELLER
+      Deny All
+    </Limit>
+
+    <Directory /*>
+      GroupOwner hosting
+    </Directory>
+
+  MaxClients 5
+  ShowSymLinks on
+  Umask 002
+  TransferLog /var/log/ftp/ftp-xfer.DOMAIN
+  RequireValidShell off
+
+  # anonymous ftp
+  # Include "/etc/proftpd/anonymous/anon.DOMAIN"
+
+  # shopzone
+  # Include "/etc/proftpd/include/commerce/shopzone/sz.DOMAIN"
+
+  # miva
+  # Include "/etc/proftpd/include/commerce/miva/miva.DOMAIN"
+
+</VirtualHost>
+@
+
+
+1.2
+log
+@added passive ports
+@
+text
+@d1 1
+a1 1
+# $Id: template,v 1.1 2003/01/05 05:56:49 root Exp root $
+a8 1
+  PassivePorts 65000 65010
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 1
+a1 1
+# $Id:$
+d9 1
+@

@@ -1,0 +1,42 @@
+head	1.2;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.2
+date	2003.05.29.03.36.34;	author root;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2003.04.02.19.08.41;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.2
+log
+@*** empty log message ***
+@
+text
+@#!/bin/bash
+
+/usr/local/bin/mhonarc -add -tidxfname index.html --outdir "/www/projectpancho.org/pub/public_html/mail-archives/" /var/spool/mail/pancho-discuss-archives
+@
+
+
+1.1
+log
+@initial checkin
+@
+text
+@d3 1
+a3 1
+/usr/local/MHonArc/bin/mhonarc -add -tidxfname index.html --outdir "/www/projectpancho.org/pub/public_html/mail-archives/" /var/spool/mail/pancho-discuss-archives
+@

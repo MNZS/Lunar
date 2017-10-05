@@ -1,0 +1,42 @@
+Miva Virtual Machine 4.09
+Release Notes
+
+The Miva Virtual Machine 4.09, released August 2003, includes the following:
+
+Bug Fixes
+---------
+
+o  The AuthorizeNet commerce library now correctly parses the whole
+   message returned from the server, and includes the x_delim_char and
+   x_delim_data fields.
+o  The AuthorizeNet commerce library now correctly calculates the MD5
+   hash sum.
+o  The modulo operator ("MOD") now properly traps for division by zero.
+o  The builtin function glosub_array no longer returns a null string when
+   one or more of the replacement strings isn't found.
+o  The 3.x compatibility API routine miva_file_resolve executes correctly when
+   MvCONFIG_DIR_COMMERCE was not set.
+o  The time_t system variable on Microsoft Windows platforms now takes the
+   timezone into consideration correctly.
+o  The LinkPoint commerce libraries now entity encode product and billing
+   information.
+o  MvSMTP calls are now correctly dealing with SMTP replies that are longer
+   than 256 bytes.
+o  If an aggregate variable is stored in an external database variable, the
+   variable is serialized (turned into a comma-separated list) first.
+o  Testing for public/private keys being loaded is now independant of the
+   version of OpenSSL.
+o  Storage into an external database variable and then using that variable
+   will show the newly assigned value, and not refetch the value from the 
+   database.
+o  Assigning values to non-existant database fields (or to fields of databases
+   that are not open) no longer will cause the VM to crash.
+
+Notification
+------------
+
+o  The LinkPoint commerce libraries 4.08 and above [and 3.9601 and above]
+   are linked against new LinkPoint libraries, which communicate via port
+   1129.  Older version of this commerce librarie used 1139.  A symptom 
+   of using the wrong communication port is if purchases result in 
+   "CC-2501: Unable to connect to SSL Server" errors.

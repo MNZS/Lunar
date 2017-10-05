@@ -1,0 +1,43 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.1
+date	2003.01.27.16.34.34;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@#!/usr/bin/perl -w
+
+use strict;
+
+my $file = 'db.rfc1918';
+
+open(FH,">>$file");
+
+my $oct1 = '0';
+my $oct2 = '0';
+my $oct3 = '0';
+
+for my $i(0 .. 255) {
+  for my $j(0 .. 255) {
+    print FH "\$ORIGIN $j.$i.10.in-addr.arpa.\n";
+    print FH "\$GENERATE 0-255 \$.$j.$i.10.in-addr.arpa. PTR rfc1918.10-$i-$j-\$.lunarhosting.net.\n";
+  }
+}
+
+close(FH);
+@

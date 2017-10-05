@@ -1,0 +1,44 @@
+# $Id: alias.Base,v 1.13 2003/11/12 15:53:21 root Exp $
+
+# Basic system aliases -- these MUST be present.
+mailer-daemon:  postmaster
+postmaster:     root
+
+# General redirections for pseudo accounts.
+bin:            root
+daemon:         root
+adm:            root
+lp:             root
+sync:           root
+shutdown:       root
+halt:           root
+mail:           root
+news:           root
+operator:       root
+ftp:            root
+nobody:         root
+apache:         root
+named:          root
+
+## well-knowns
+webmaster:	root
+info:		root
+support:	root
+abuse:		root
+
+## final recipient
+#root: cmenzes@lunarmedia.net,craig@fastmonster.net
+root: /dev/null
+
+## for script notification
+emergency-pager: cmenzes@lunarmedia.net,craig@fastmonster.net,scott@reboot.net
+#emergency-pager: 3125937235@voicestream.net,craig@fastmonster.net,scott@reboot.net
+warn-pager:	cmenzes@lunarmedia.net,scott@reboot.net,craig@fastmonster.net
+
+## anti-spam
+null: /dev/null
+nospam: /dev/null
+charles-mobile: /dev/null
+
+## guest
+guest: /dev/null

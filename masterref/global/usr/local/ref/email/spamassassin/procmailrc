@@ -1,0 +1,8 @@
+# $Id: procmailrc,v 1.1 2003/03/21 00:05:54 root Exp $
+
+## define a logging area
+LOGFILE=$HOME/procmail.log
+
+## filter the remaining mail for spam possibilities
+:0fw: spamassassin.lock
+| /usr/bin/spamassassin

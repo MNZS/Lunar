@@ -1,0 +1,77 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.1
+date	2003.06.05.16.15.14;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@SYNOPSIS
+  This document covers the /include/ subdirectory and its contents 
+  within the /usr/local/apache/conf directory structure.
+
+USAGE
+  Most all features of client hosting domains are held within 
+  include files that are called from within the domain-specific
+  configuration file. Each include file is created from a template
+  file specific to that aspect of the apache configuration it concerns.
+  This allows for standardization across each client, and allows for
+  features to be added/removed from configurations with a simple 
+  addition or removal of a comment in the domains configuration file
+
+  A brief synopsis of the directory structure is as follows:
+
+    /usr/local/apache/conf/include/ - base directory for includes
+
+      |_ /virtual/    directory holding the root configurations for 
+                      all client domains
+
+      |_ /global/     directory holding include files that are called
+                      from within the main httpd.conf file or can be
+                      applied to each of the client virtual files
+                      without customization
+
+      |_ /commerce/   directory holding include files relating to 
+                      e-commerce configurations
+
+        |_ /miva/     directory holding include to enable the miva
+                      shopping cart for a site
+
+        |_ /shopzone/ directory holding include to enable the 
+                      shopzone shopping cart for a site
+
+        |_ /process/  directory holding include to enable the 
+                      process.cgi secure form script
+
+      |_ /features/   directory holding includes to enable non-global
+                      features on a per site basis
+
+        |_ /php/      directory holding include to enable php
+
+        |_ /asp/      direcotry hodling include to enable asp
+
+      |_ /bugfix/     directory holding includes for global bugfixes that
+                      will be applied universally 
+
+  For more understanding of what the includes bring to each configuration,
+  please read through the "template" file held within each directory
+
+BUGS
+
+AUTHOR
+  charles@@lunarmedia.net
+@

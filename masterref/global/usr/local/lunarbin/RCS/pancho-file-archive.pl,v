@@ -1,0 +1,204 @@
+head	1.9;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.9
+date	2003.08.27.20.38.03;	author root;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	2003.08.27.20.31.42;	author root;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2003.08.20.06.38.58;	author root;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2003.08.20.06.37.54;	author root;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2003.08.20.06.37.12;	author root;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2003.04.28.19.18.32;	author root;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2003.04.22.18.02.37;	author root;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2003.04.10.00.41.39;	author root;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2003.04.09.12.35.34;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.9
+log
+@*** empty log message ***
+@
+text
+@#!/usr/bin/perl -w
+
+use strict;
+use Sys::Hostname;
+use Mail::Mailer;
+use Lunar::Users;
+
+my $shell = 'sh(?:2)?$';
+
+my %validUsers = ( cmenzes => '1',
+		   root => '1',
+                   craig => '1',
+                   scott => '1', );
+
+if (hostname() =~ /^name/) {
+  $validUsers{dnsupdate} = '1';
+}
+
+my %shellUsers = getUsers('all');
+
+for my $user(keys %shellUsers) {
+  if ($shellUsers{$user}{'shell'} =~ /$shell/ ) {
+    &notify($user) unless ($validUsers{$user});
+  }
+}
+
+sub notify {
+ my $login = shift;
+ my $hostname = hostname();
+ 
+ my %mailFrom = ( from => 'admin@@lunarhosting.net',
+                  to => 'emergency-pager', );
+ 
+ my $subject = "ALARM: $login has valid shell on $hostname";
+ 
+  my $mailer = Mail::Mailer->new();
+                                                                                
+  $mailer->open({
+                        To      => "$mailFrom{to}",
+                        Subject => "$subject",
+                        From    => "$mailFrom{from}",
+  });
+                                                                                
+  $mailer->close;
+}
+
+@
+
+
+1.8
+log
+@*** empty log message ***
+@
+text
+@a16 1
+  $validUsers{paul} = '1';
+@
+
+
+1.7
+log
+@*** empty log message ***
+@
+text
+@d17 1
+@
+
+
+1.6
+log
+@typo
+@
+text
+@d22 1
+a22 1
+  if (%shellUsers{$user}{'shell'} =~ /$shell/ ) {
+@
+
+
+1.5
+log
+@changing to using Lunar::Users
+@
+text
+@d22 1
+a22 1
+  if (%shellUsers{$user}{'shell'} =~ /$shell/
+@
+
+
+1.4
+log
+@added dnsupdate to valid users on nameX
+@
+text
+@d6 1
+a8 1
+my $file = '/etc/passwd';
+a12 1
+		   ttrader => '1',
+d19 5
+a23 10
+open(FH,'/etc/passwd');
+my @@readFile = <FH>;
+close(FH);
+
+my @@shellUsers = grep(/$shell/,@@readFile);
+
+for my $i(@@shellUsers) {
+  my $user = (split(/:/,$i))[0];
+  unless ($validUsers{$user}) {
+    &notify($user);
+@
+
+
+1.3
+log
+@added ttrader
+@
+text
+@d16 3
+@
+
+
+1.2
+log
+@changed method that $user is passed to notify
+@
+text
+@d13 1
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d25 1
+a25 1
+    &notify;
+@

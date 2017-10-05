@@ -1,0 +1,176 @@
+head	1.5;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.5
+date	2003.10.02.12.55.16;	author root;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2003.09.23.19.24.42;	author root;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2003.09.23.19.23.47;	author root;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2003.06.04.22.56.38;	author root;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2003.04.02.19.08.41;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.5
+log
+@*** empty log message ***
+@
+text
+@#!/usr/bin/perl -w
+
+# $Id: archive-cleanse.pl,v 1.4 2003/09/23 19:24:42 root Exp root $
+
+use strict;
+use POSIX qw(strftime);
+use Date::Manip;
+use Sys::Hostname;
+
+## only run on archives.lunarhosting.net
+if (hostname() ne 'name2.lunarhosting.net') {
+  exit;
+}
+
+if (-e '/usr/local/nobackups') {
+  exit 0;
+}
+
+# check for global stop file
+require '/usr/local/lunarbin/check_lockfile.pl';
+
+## hosting servers with archive directories
+my @@hostServers = qw(host1.lunarhosting.net host2.lunarhosting.net);
+
+## number of days to go back for directory deletion
+
+# sun mon tue wed thu fri sat 
+
+# 4 days worth of backups
+#my %pastDays = ( 'sun' => '0',
+#		 'mon' => '0',
+#		 'tue' => '6',
+#		 'wed' => '6',
+#		 'thu' => '6',
+#		 'fri' => '6',
+#		 'sat' => '4',
+#	       );
+
+# 3 days worth of backups
+my %pastDays = ( 'sun' => '0',
+                'mon' => '0',
+                'tue' => '5',
+                'wed' => '5',
+                'thu' => '5',
+                'fri' => '3',
+                'sat' => '3',
+              );
+
+## find today three character code
+my $today = lc(strftime("%a",localtime));
+
+## find date for X number of days ago in YYYYMMDD format
+my $targetDir = &ParseDateDelta("$pastDays{$today} days ago");
+$targetDir = &UnixDate("$targetDir","%Y%m%d");
+exit if ($targetDir eq '');
+
+## WWW archive directory
+my $archiveDir = '/usr/local/archives';
+
+## march the lemmings to the edge
+for my $hostName(@@hostServers) {
+  if (-d "$archiveDir/$hostName/$targetDir") {
+    system("rm -rf $archiveDir/$hostName/$targetDir");
+  }
+}
+@
+
+
+1.4
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+# $Id: archive-cleanse.pl,v 1.3 2003/09/23 19:23:47 root Exp root $
+d44 1
+a44 1
+                'thu' => '6',
+@
+
+
+1.3
+log
+@changed past days to 3 days
+@
+text
+@d3 1
+a3 1
+# $Id: archive-cleanse.pl,v 1.2 2003/06/04 22:56:38 root Exp root $
+d15 4
+@
+
+
+1.2
+log
+@changed to keep 4 days
+@
+text
+@d3 1
+a3 1
+# $Id: archive-cleanse.pl,v 1.1 2003/04/02 19:08:41 root Exp root $
+d22 14
+d37 7
+a43 7
+		 'mon' => '0',
+		 'tue' => '6',
+		 'wed' => '6',
+		 'thu' => '6',
+		 'fri' => '6',
+		 'sat' => '4',
+	       );
+@
+
+
+1.1
+log
+@initial checkin
+@
+text
+@d3 1
+a3 1
+# $Id: archive-cleanse.pl,v 1.6 2003/01/23 13:13:13 root Exp $
+d24 5
+a28 5
+		 'tue' => '5',
+		 'wed' => '5',
+		 'thu' => '5',
+		 'fri' => '3',
+		 'sat' => '3',
+d40 1
+a40 1
+my $archiveDir = '/usr/local/archives-www';
+@

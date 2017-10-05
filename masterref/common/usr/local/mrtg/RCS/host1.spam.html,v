@@ -1,0 +1,109 @@
+head	1.5;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.5
+date	2003.06.26.04.30.23;	author root;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2003.06.25.23.15.00;	author root;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2003.06.25.20.09.56;	author root;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2003.06.25.20.05.16;	author root;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2003.06.25.19.58.29;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.5
+log
+@*** empty log message ***
+@
+text
+@<html>
+ <!-- $Id: host1.spam.html,v 1.4 2003/06/25 23:15:00 root Exp root $ -->
+ <body>
+   &nbsp;
+   <p>
+   <img src="https://name2.lunarhosting.net/monitor/servers/host1/mail/spam-7.gif"><p>
+   <img src="https://name2.lunarhosting.net/monitor/servers/host1/mail/spam-28.gif"><p>
+ </body>
+</html>
+@
+
+
+1.4
+log
+@*** empty log message ***
+@
+text
+@d2 1
+a2 1
+ <!-- $Id: host1.spam.html,v 1.3 2003/06/25 20:09:56 root Exp root $ -->
+d6 2
+a7 2
+   <img src="https://name2.lunarhosting.net/monitor/servers/host1/mail/spam-14.gif"><p>
+   <img src="https://name2.lunarhosting.net/monitor/servers/host1/mail/spam-31.gif"><p>
+@
+
+
+1.3
+log
+@*** empty log message ***
+@
+text
+@d2 1
+a2 1
+ <!-- $Id: host1.spam.html,v 1.2 2003/06/25 20:05:16 root Exp root $ -->
+d6 2
+a7 1
+   <img src="https://name2.lunarhosting.net/monitor/servers/host1/mail/spam-168.gif"><p>
+@
+
+
+1.2
+log
+@*** empty log message ***
+@
+text
+@d2 1
+a2 1
+ <!-- $Id: host1.spam.html,v 1.1 2003/06/25 19:58:29 root Exp root $ -->
+d6 1
+a6 1
+   <img src="https://name2.lunarhosting.net/monitor/servers/host1/spam/spam-168.gif"><p>
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d2 1
+a2 1
+ <!-- $Id: host1.cpu.html,v 1.2 2003/04/15 14:27:25 root Exp $ -->
+d6 1
+a6 1
+   <img src="https://name2.lunarhosting.net/monitor/servers/host1/cpu/spam-168.gif"><p>
+@

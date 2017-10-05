@@ -1,0 +1,29 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.1
+date	2003.01.04.16.24.41;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@## webpublisher
+Alias /webpublisher /www/DOMAIN/webpublisher
+<Directory /www/DOMAIN/webpublisher>
+  AllowOverride All
+  Options +ExecCGI FollowSymLinks
+</Directory>
+@

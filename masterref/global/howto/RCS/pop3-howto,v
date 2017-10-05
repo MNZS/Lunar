@@ -1,0 +1,90 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.1
+date	2003.06.05.16.15.14;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@$Id: pop3-howto,v 1.5 2003/04/19 23:03:40 root Exp $
+
+The POP3 daemon used by Lunar Hosting is QPopper by Qualcomm. The tool's 
+homepage is found at: http://www.eudora.com/qpopper/
+The current release of the tool can be downloaded from the website or 
+from its FTP site: ftp.qualcomm.com/eudora/servers/unix/popper/
+
+Installing the tool requires a typical configure, make, make install. The
+configure options should be as follows:
+
+./configure     --disable-check-pw-max \
+                --enable-timing \
+                --enable-nonauth-file=/etc/qpopper/nonauth \
+                --enable-shy \
+                --enable-specialauth \
+                --with-openssl
+
+Once installed. A directory called /etc/qpopper should be created on the 
+server where the daemon will run. A file called 'config' should be created
+with the following contents:
+
+set downcase-user
+set trim-domain
+set reverse-lookup
+set statistics
+
+A second file called config-tls should also be created in /etc/qpopper with 
+the following as its content:
+
+set tls-support = alternate-port
+set tls-private-key-file = /etc/qpopper/certs/name2.lunarhosting.net.key
+set tls-server-cert-file = /etc/qpopper/certs/name2.lunarhosting.net.cert-priv
+set downcase-user
+set trim-domain
+set reverse-lookup
+set statistics
+
+Finally, to activate the pop3 and pop3s services, create two files in 
+/etc/xinetd.d. Each file should be called by their service name respectively.
+
+/etc/xinetd.d/pop3s:
+service pop3s
+{
+        socket_type             = stream
+        protocol                = tcp
+        wait                    = no
+        user                    = root
+        server                  = /usr/local/sbin/popper
+        server_args             = qpopper -f /etc/qpopper/config-tls
+        disable                 = no
+}
+
+/etc/xinetd.d/pop3:
+service pop3
+{
+        socket_type             = stream
+        protocol                = tcp
+        wait                    = no
+        user                    = root
+        server                  = /usr/local/sbin/popper
+        server_args             = qpopper -f /etc/qpopper/config
+        disable                 = no
+}
+
+Once this has been completed, restart xinetd through its init script located
+in /etc/init.d
+The server should now be listening on TCP/110 and TCP/995
+@

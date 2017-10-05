@@ -1,0 +1,12 @@
+// $Id: local-config,v 1.2 2003/08/14 04:13:55 root Exp $
+
+// hosting server includes
+include "/var/named/host1.lunarhosting.net";
+
+include "/var/named/host2.lunarhosting.net";
+
+// partners
+include "/var/named/named.partners";
+
+// ddns
+include "/var/named/named.ddns";

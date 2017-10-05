@@ -1,0 +1,1 @@
+/www/lunarmedia.net/cgi-bin/*

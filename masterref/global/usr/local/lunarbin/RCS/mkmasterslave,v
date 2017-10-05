@@ -1,0 +1,93 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.1
+date	2003.04.02.19.08.41;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.1
+log
+@initial checkin
+@
+text
+@#!/usr/bin/perl -w
+
+# $Id: mkmasterslave,v 1.2 2003/02/14 18:36:02 root Exp $
+
+use strict;
+use File::Copy;
+use POSIX qw(strftime);
+use Sys::Hostname;
+use Socket;
+
+## generate a named.conf include file to be used on dns1.motion.net or 
+## other nameservers which will be pulling zone files from ns1.lunarmedia.net
+
+## my primary address for setting the masters statement
+my $master = hostname();
+$master = gethostbyname("$master");
+$master = inet_ntoa("$master");
+
+## locations
+my $namedDir = '/var/named';
+my $productionFile = "$namedDir/named.masterslave";
+my $backupFile = "$namedDir/.named.masterslave";
+
+## create two variables for documentation with named file
+my $date = strftime("%c",localtime);
+my $hostname = hostname();
+
+## back up existing slave file
+move("$productionFile","$backupFile");
+
+## named files that contain zones
+my @@namedFiles = qw(host1.lunarhosting.net host2.lunarhosting.net);
+
+my %newSlaves;
+
+for my $i(@@namedFiles) {
+  open(FH, "$namedDir/$i");
+    while(<FH>) {
+      my $line = $_;
+      next unless $line =~ /^zone/;
+      $line =~ s/^zone.+\"(.*)\".+{.*/$1/g; 
+      chomp $line;
+      $newSlaves{$line} = "$i";
+    }
+  close(FH);
+}
+
+open(FH, ">$productionFile");
+
+print FH <<HEADER;
+
+/* $date */
+
+HEADER
+ 
+for my $i(sort keys %newSlaves) {
+
+  print FH <<ZONE;
+zone "$i" in {
+  type slave;
+  masters { $master; };
+  file "lunarmedia/db.$i";
+  allow-query { any; };
+  notify no;
+};
+
+ZONE
+
+}
+close(FH);
+@

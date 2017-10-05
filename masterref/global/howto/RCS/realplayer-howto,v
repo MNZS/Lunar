@@ -1,0 +1,35 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.1
+date	2003.06.05.16.15.14;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@Admin Username:         mediaadmin
+Admin Password:         dyq4o3w
+Monitor Password:       dyq4o3w
+Encoder Username:       mediaadmin
+Encoder Password:       dyq4o3w
+PNA Port:               7070
+RTSP Port:              554
+HTTP Port:              8080
+Admin Port:             11091
+
+http://host1.lunarhosting.net:11091/admin/index.html
+
+@

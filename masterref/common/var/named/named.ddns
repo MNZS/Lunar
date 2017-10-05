@@ -1,0 +1,13 @@
+/* $Id: named.ddns,v 1.1 2003/08/14 04:01:45 root Exp $ */
+
+// key secret for ddns updates
+key chicago-host1 {
+  algorithm hmac-md5;
+  secret "3RaOcKGJ0qR/Q6JA3fvuGA==";
+};
+
+zone "ddns.lunarmedia.net" in {
+        type master;
+        file "ddns/db.ddns.lunarmedia.net";
+        allow-update { key chicago-host1; };
+        allow-query { any; }; };

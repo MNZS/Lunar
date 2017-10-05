@@ -1,0 +1,238 @@
+head	1.8;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.8
+date	2003.05.07.10.43.45;	author root;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2003.04.28.20.05.41;	author root;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2003.04.28.19.52.26;	author root;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2003.04.28.19.37.54;	author root;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2003.04.28.19.36.21;	author root;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2003.04.28.19.13.37;	author root;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2003.04.08.18.01.16;	author root;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2003.04.02.19.08.41;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.8
+log
+@removed the makeRelay option
+@
+text
+@#!/usr/bin/perl -w
+
+# $Id: zoneupdate,v 1.7 2003/04/28 20:05:41 root Exp root $
+
+use strict;
+use Net::SSH::Perl;
+use Sys::Hostname;
+use POSIX qw(strftime);
+
+# This script is used to copy a newly created dns slave configuration file
+# to a slave server in order for that server to pull the updated zone list
+
+my $today   = strftime("%Y%m%d-%H:%M:%S",localtime);
+my $srchost = hostname();
+my @@dsthost = qw(name1.lunarhosting.net name2.lunarhosting.net);
+my $srcfile = "/var/named/slave_$srchost";
+my $dstfile = "/var/named/$srchost";
+my $backup  = "/var/named/systems/archives/$srchost-$today";
+my $copy    = "/bin/cp -f $dstfile $backup";
+my $user    = "dnsupdate";
+my $phrase  = 'I%2xl5-?Ql8';
+my $makego  = "echo \"  $srchost-$today\" >> /var/named/run/named.go";
+
+&backup_files();
+
+&copy_files();
+
+&create_go_file();
+
+sub backup_files {
+
+  for my $dsthost(@@dsthost) {
+
+    my %params = ( port     => '9490', );
+    my $ssh = Net::SSH::Perl->new($dsthost, %params);
+    $ssh->login($user,$phrase);
+    $ssh->cmd($copy);
+    $ssh->cmd('logout');
+
+  }
+
+}
+
+sub copy_files {
+
+  for my $dsthost (@@dsthost) {
+ 
+    system("scp -P 9490 $srcfile dnsupdate\@@$dsthost:$dstfile");
+
+  }
+
+}
+
+sub create_go_file {
+
+  for my $dsthost (@@dsthost) {
+
+    my %params = ( port => '9490', );
+    my $ssh = Net::SSH::Perl->new($dsthost, %params);
+    $ssh->login($user,$phrase);
+    $ssh->cmd($makego);
+    $ssh->cmd('logout');
+
+  }
+
+}
+@
+
+
+1.7
+log
+@put into production!
+@
+text
+@d3 1
+a3 1
+# $Id: zoneupdate,v 1.6 2003/04/28 19:52:26 root Exp root $
+a22 1
+my $makeRelay = "echo \"  $srchost-$today\" >> /var/named/run/relay.go";
+a61 1
+    $ssh->cmd($makeRelay);
+@
+
+
+1.6
+log
+@updated with /var/named path
+@
+text
+@d3 1
+a3 1
+# $Id: zoneupdate,v 1.5 2003/04/28 19:37:54 root Exp root $
+d22 2
+a23 4
+#my $makego  = "echo \"  $srchost-$today\" >> /var/named/run/named.go";
+#my $makeRelay = "echo \"  $srchost-$today\" >> /var/named/run/relay.go";
+my $makego  = "echo \"  $srchost-$today\" >> /var/named/run/CJMnamed.go";
+my $makeRelay = "echo \"  $srchost-$today\" >> /var/named/run/CJMrelay.go";
+@
+
+
+1.5
+log
+@testing files
+@
+text
+@d3 1
+a3 1
+# $Id: zoneupdate,v 1.4 2003/04/28 19:36:21 root Exp root $
+d16 1
+a16 1
+my $srcfile = "/etc/nameserver/slave_$srchost";
+a19 1
+my $sudo    = "/etc/rc3.d/S45named restart";
+@
+
+
+1.4
+log
+@added make relay file creation
+@
+text
+@d3 1
+a3 1
+# $Id: zoneupdate,v 1.3 2003/04/28 19:13:37 root Exp root $
+d23 4
+a26 2
+my $makego  = "echo \"  $srchost-$today\" >> /var/named/run/named.go";
+my $makeRelay = "echo \"  $srchost-$today\" >> /var/named/run/named.relay";
+@
+
+
+1.3
+log
+@prepping for change to non-privelaged user
+@
+text
+@d3 1
+a3 1
+# $Id: zoneupdate,v 1.2 2003/04/08 18:01:16 root Exp root $
+d24 1
+d64 1
+@
+
+
+1.2
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+# $Id: zoneupdate,v 1.1 2003/04/02 19:08:41 root Exp root $
+d21 2
+a22 2
+my $user    = "root";
+my $phrase  = 'L2l%wI4*';
+d49 1
+a49 1
+    system("scp -P 9490 $srcfile root\@@$dsthost:$dstfile");
+@
+
+
+1.1
+log
+@initial checkin
+@
+text
+@d3 1
+a3 1
+# $Id: zoneupdate,v 1.1 2002/12/30 18:21:33 root Exp $
+d35 1
+a35 1
+    my %params = ( port     => '8228', );
+d49 1
+a49 1
+    system("scp -P 8228 $srcfile root\@@$dsthost:$dstfile");
+d59 1
+a59 1
+    my %params = ( port => '8228', );
+@

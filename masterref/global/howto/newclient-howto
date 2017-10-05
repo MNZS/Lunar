@@ -1,0 +1,57 @@
+# $Id: newclient-howto,v 1.1 2003/06/05 16:15:14 root Exp $
+
+SYNOPSIS
+  Adding new clients to the Lunar Hosting server is achieved by running a
+  single script to begin the process. This script is called "newclient"
+  and must be ran as root.
+
+USAGE
+  To add a brand new client, run:
+
+    newclient --add --domain domain.com
+
+  To add a new client brought by a reseller, run:
+
+    newclient --add --domain domain.com --reseller reseller_id
+
+  To remove an existing client, run:
+
+    newclient --remove --domain domain.com
+
+  Care needs to be taken when running this tool as it affects nearly 
+  every service that we use on the server. Moreover, the --remove is
+  particulary deadly since it will remove all of the files associated
+  with that client. In order to retrive them, we would need to restore
+  them from the offsite backup.
+
+  Once the script has completed running, it will provide a list of final
+  steps that need to take place in order to finish the setup.
+
+  See the resellers-howto file for more information on the --reseller
+  flag and what acceptable options are.
+
+KNOWN BUGS
+  One problem with the script is that the new "groupadd" utility that
+  ships with redhat will not add group names longer than 16 characters.
+  During the install process, two groups are added. Each group is based
+  on the customer's domain name: "customer.com"
+
+  The groups added are:
+
+    customer
+    adm_customer
+    ftp_customer
+    tmp_customer
+
+  If the customer's domain is over 16 characters, the groupadd part of
+  the script will fail, and these domains will need to be added manually.
+  This can be done by editing the /etc/group file and adding the two 
+  groups by hand. Take care to keep the proper syntax and increment the
+  groupnumber so that they are unique in the list.
+
+    customer:x:10510:
+    adm_customer:x:10511:
+    ftp_customer:x:10512:
+
+AUTHOR
+  charles@lunarhosting.net

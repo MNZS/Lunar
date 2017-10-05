@@ -1,0 +1,42 @@
+# $Id: mkmail-howto,v 1.1 2003/06/05 16:15:14 root Exp $
+
+SYNOPSIS
+  This file covers the usage and working of the mkmail perl script.
+
+USAGE
+  The mkmail script is generally ran strictly through its cron job
+  which runs at 5, 11, 17 and 23 hours. However, if a change is made
+  to the sendmail configuration of any of its file held within /etc/mail,
+  the mkmail script should be ran to restart the daemon.
+  The mkmail script should be looked upon as a full replacement for the
+  /etc/rc3.d/S80sendmail init script. This init script should NEVER be
+  ran directly.
+  The mkmail script builds the /etc/aliases file and /etc/mail/virtusertable
+  files from include files held within /etc/mail/include/*
+
+  To run the script, as root:
+
+    # mkmail.pl
+
+  You should see output similar to
+
+  Shutting down sendmail:                                    [  OK  ]
+  /etc/aliases: 26 aliases, longest 26 bytes, 319 bytes total
+
+  Generally any errors will be printed to the screen. You can verify that
+  sendmail is running correctly by telnetting to the local machine on port
+  25
+
+  # telnet localhost 25
+  Trying 127.0.0.1...
+  Connected to localhost.
+  Escape character is '^]'.
+  220 name2.lunarhosting.net ESMTP Sendmail 8.12.5/8.12.5; Tue, 4 Feb 2003 12:13:20 -0600
+
+  You can ctrl-] to leave this prompt
+  
+KNOWN BUGS
+  There are no known bugs.
+
+AUTHOR
+  charles@lunarmedia.net

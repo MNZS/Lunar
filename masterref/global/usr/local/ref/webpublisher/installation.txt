@@ -1,0 +1,58 @@
+Installation is simple. 
+
+1) If necessary, change the path to Perl (#!/usr/bin/perl) pointing to
+Perl's path in your environment (`which perl` from the command-line will tell
+you what to use here).
+
+2) Create a folder "webpublisher" under your root directory and chmod to 777.
+
+3) Create a folder "images1" under the "webpublisher" folder and upload all images
+that come with the zip file to this folder.
+
+4) Create another folder "images2" and chmod to 777.
+
+5) Open the script "webpublisher.cgi". Modify the variables at top portion. Upload
+the script to the "webpublisher" folder and chmod to 755.
+
+THE TAGS:
+=========
+<!-- upoint type="textbox" name="Section 1" rows=n --><!-- /upoint -->
+   where n is the number of rows of area input box.
+
+<!-- upoint type="email" name="Email 1" --><!-- /upoint -->
+<!-- upoint type="imageURL" name="Image 1" --><!-- /upoint -->
+<!-- upoint type="link" name="Link 1" --><!-- /upoint -->
+
+NOTE:
+=====
+1) The variable $imageURL that you defined in the script is the default folder URL for your uploaded images. If you are using the Image Tag and specifying only the filename (without full URL), the URL in $imageURL will be attached to the filename. To use images at other folders, specify the full URL starting with http:// (in this case, the URL in $imageURL will be ignored).
+
+2) For the link tag pair, always start the URL with http:// or broken link may be resulted.
+
+3) Default master password is "master" and slave password is "slave". Change as necessary.
+
+QUESTIONS:
+==========
+1) Question: I have just deleted all pages from the editable file list. Now the admin interface
+can't load properly.
+Answer: FTP to the webpublisher folder and remove the file "upoint.txt". Reload the page.
+
+SKIN:
+=====
+1) WinXP skin courtesy of http://www.litestorm.net, David L. Kerley.
+
+PROBLEMS?
+========
+Please sent an email to help@upoint.net describing
+- the problems
+- error message generated
+- URL to the script and/or result page
+- other things that you think might be helpful
+* We usually response in less than 12 hours (average is about 4 hours). But before that, you will receive an auto-responded email describing the most common CGI installation mistakes.
+
+The Management,
+UPDN Network Sdn Bhd
+www.upoint.net
+General: mail@upoint.net
+Technical help: help@upoint.net
+

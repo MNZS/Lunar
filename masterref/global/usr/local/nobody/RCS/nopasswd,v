@@ -1,0 +1,66 @@
+head	1.2;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.2
+date	2002.12.31.12.15.16;	author root;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2002.12.30.19.46.28;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.2
+log
+@added rcs tag
+@
+text
+@#!/usr/bin/perl -w
+
+# $Id:$
+
+use strict;
+use Passwd::Linux qw(modpwinfo mgetpwnam);
+use Getopt::Long;
+
+my $username;
+my $password;
+GetOptions ( 'username=s' => \$username, 'password=s' => \$password, );
+
+if (!$username || !$password) { die; }
+
+&clean_vars;
+
+my @@user_info = mgetpwnam($username);
+$user_info[1] = $password;
+my $err = modpwinfo(@@user_info);
+
+return 0 if !$err;
+
+sub clean_vars {
+  $username =~ tr/A-Z/a-z/;
+  $username =~ s/[^a-z0-9]//g;
+  $username =~ s/^([0-9a-z]{1,16}).*/$1/;
+  
+  if ($username eq 'root') { exit 1; }
+} 
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d3 2
+@

@@ -1,0 +1,48 @@
+$Id: urchin-howto,v 1.1 2003/06/05 16:15:14 root Exp $
+
+This document deals with adding the Urchin Web Statistics reports to a
+customer's website.
+
+Lunar Hosting makes use of Quantified Systems' web statistics program 
+called "urchin" to provide customers with details about traffic coming
+to their website. The number of licenses for Urchin is limited, so it
+must be enabled on a per customer basis upon their request.
+
+* Installation
+To enable Urchin for a domain, simply create a file called 'urchin' in
+the /etc/hosting-options/DOMAIN directory, where DOMAIN is substituted
+with the actual customer's domain (e.g. "lunarmedia.net"). One this file
+is in place, the customer will have urchin statistics as of midnight that
+very evening.
+
+* Viewing
+All POP3 user accounts configured for a domain will have privelages to
+log into the Urchin portion of the website to view statistics. The URL 
+viewing may be accessed directly through
+
+  https://www.DOMAIN/stats/
+
+Or it can be access through a link in the domain's control panel. The
+link in the control panel is in the left hand column of hyperlinks. This
+link is only present for domain's which have an 'urchin' file present
+in /etc/hosting-optiosn/DOMAIN
+
+* Statistics creation and logs 
+Once an 'urchin' file is put into place, the domain is added to the 
+Urching configuration file (/usr/local/urchin/config). This file is 
+rewritten everyday to accomodate new domains which have urchin enabled.
+This process is achieved through the 'mkurchin' script which runs each
+day at 23:30.
+Urchin itself runs at 00:00 each day. As the application runs, it takes
+each domain's log and archives it with -YYYYMMDD appended to the end of
+it. It then sends a HUP1 signal to apache to gracefully restart the 
+daemon so that new logfiles may be created. 
+If any configuration changes have been added to Apache that will require
+a full stop/startssl restart, this graceful restart through Urchin will
+fail! This means that the server will be down starting at midnight!
+
+IF THERE ARE ANY CHANGES MADE TO APACHE DURING THE DAY THAT REQUIRE A
+FULL STOP AND STARTSSL RESTART, DO SO BEFORE URCHIN RUNS!!
+
+See the apache_start-howto file for more information on what requires a
+full stop/startssl restart and what can be handled via a graceful restart. 

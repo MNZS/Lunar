@@ -1,0 +1,54 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.1
+date	2003.06.05.16.15.14;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@# $Id: howto-howto,v 1.1 2002/08/09 00:00:52 charles Exp $
+
+SYNOPSIS
+  This file describes how to create howto files.
+
+USAGE
+  Copy the file called "template" to a suitable name for the project
+  you are going to discuss.
+
+    cp template <project>-howto
+
+  Once this is done, edit the file using rcedit
+
+    rcedit <project>-howto
+
+  This will place you into the rcedit script. This is just the normal
+  vi editor. If you would prefer to use pico rather than vi, you can 
+  follow this process.
+
+  First, edit the file with pico. then check the file into RCS by
+ 
+    ci -u <project>-howto
+
+  Once you check the file into RCS, you will need to add a comment
+  to describe the file. Add your remarks and type a single period
+  on an empty line to complete the process.
+
+KNOWN BUGS
+
+AUTHOR
+  charles@@lunarmedia.net
+@

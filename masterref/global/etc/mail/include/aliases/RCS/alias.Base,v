@@ -1,0 +1,316 @@
+head	1.13;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.13
+date	2003.11.12.15.53.21;	author root;	state Exp;
+branches;
+next	1.12;
+
+1.12
+date	2003.08.11.20.28.03;	author root;	state Exp;
+branches;
+next	1.11;
+
+1.11
+date	2003.06.06.21.25.16;	author root;	state Exp;
+branches;
+next	1.10;
+
+1.10
+date	2003.04.02.11.05.28;	author root;	state Exp;
+branches;
+next	1.9;
+
+1.9
+date	2003.02.05.06.00.43;	author root;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	2003.02.05.05.59.05;	author root;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2003.01.30.20.39.39;	author root;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2003.01.23.19.47.12;	author root;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2003.01.23.17.33.38;	author root;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2003.01.23.16.36.10;	author root;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2003.01.23.13.25.42;	author root;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2003.01.04.17.01.03;	author root;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2003.01.04.16.58.37;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.13
+log
+@removed voicestream
+@
+text
+@# $Id: alias.Base,v 1.12 2003/08/11 20:28:03 root Exp root $
+
+# Basic system aliases -- these MUST be present.
+mailer-daemon:  postmaster
+postmaster:     root
+
+# General redirections for pseudo accounts.
+bin:            root
+daemon:         root
+adm:            root
+lp:             root
+sync:           root
+shutdown:       root
+halt:           root
+mail:           root
+news:           root
+operator:       root
+ftp:            root
+nobody:         root
+apache:         root
+named:          root
+
+## well-knowns
+webmaster:	root
+info:		root
+support:	root
+abuse:		root
+
+## final recipient
+#root: cmenzes@@lunarmedia.net,craig@@fastmonster.net
+root: /dev/null
+
+## for script notification
+emergency-pager: cmenzes@@lunarmedia.net,craig@@fastmonster.net,scott@@reboot.net
+#emergency-pager: 3125937235@@voicestream.net,craig@@fastmonster.net,scott@@reboot.net
+warn-pager:	cmenzes@@lunarmedia.net,scott@@reboot.net,craig@@fastmonster.net
+
+## anti-spam
+null: /dev/null
+nospam: /dev/null
+charles-mobile: /dev/null
+
+## guest
+guest: /dev/null
+@
+
+
+1.12
+log
+@Added a new warn-pager
+@
+text
+@d1 1
+a1 1
+# $Id: alias.Base,v 1.11 2003/06/06 21:25:16 root Exp root $
+d34 2
+a35 1
+emergency-pager: 3125937235@@voicestream.net,craig@@fastmonster.net,scott@@reboot.net
+@
+
+
+1.11
+log
+@added craig and scott to emergency-pager
+@
+text
+@d1 1
+a1 1
+# $Id: alias.Base,v 1.10 2003/04/02 11:05:28 root Exp root $
+d35 1
+@
+
+
+1.10
+log
+@removed scottc from notify pages
+@
+text
+@d1 1
+a1 1
+# $Id: alias.Base,v 1.9 2003/02/05 06:00:43 root Exp root $
+d34 1
+a34 2
+#emergency-pager: 3125937235@@voicestream.net,scottc@@whatupg.com
+emergency-pager: 3125937235@@voicestream.net
+@
+
+
+1.9
+log
+@*** empty log message ***
+@
+text
+@d1 1
+a1 1
+# $Id: alias.Base,v 1.8 2003/02/05 05:59:05 root Exp root $
+d34 2
+a35 1
+emergency-pager: 3125937235@@voicestream.net,scottc@@whatupg.com
+@
+
+
+1.8
+log
+@*** empty log message ***
+@
+text
+@d1 1
+a1 1
+# $Id: alias.Base,v 1.7 2003/01/30 20:39:39 root Exp root $
+d34 1
+a34 1
+emergency-pager: 3125937235@@voicestream.net,scottc@@whatupg.net
+@
+
+
+1.7
+log
+@added guest
+@
+text
+@d1 1
+a1 1
+# $Id: alias.Base,v 1.6 2003/01/23 19:47:12 root Exp root $
+d34 1
+a34 1
+emergency-pager: 3125937235@@voicestream.net
+@
+
+
+1.6
+log
+@*** empty log message ***
+@
+text
+@d1 1
+a1 1
+# $Id: alias.Base,v 1.5 2003/01/23 17:33:38 root Exp root $
+d40 3
+@
+
+
+1.5
+log
+@*** empty log message ***
+@
+text
+@d1 1
+a1 1
+# $Id: alias.Base,v 1.4 2003/01/23 16:36:10 root Exp root $
+d30 2
+a31 1
+root: cmenzes@@lunarmedia.net,craig@@fastmonster.net
+@
+
+
+1.4
+log
+@new pager number
+@
+text
+@d1 1
+a1 1
+# $Id: alias.Base,v 1.3 2003/01/23 13:25:42 root Exp root $
+d38 1
+@
+
+
+1.3
+log
+@added emergency-pager
+@
+text
+@d1 1
+a1 1
+# $Id: alias.Base,v 1.2 2003/01/04 17:01:03 root Exp root $
+d33 1
+a33 1
+emergency-pager: cmenzes #placeholder for voicestream account
+@
+
+
+1.2
+log
+@*** empty log message ***
+@
+text
+@d1 1
+a1 1
+# $Id:$
+d32 3
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 2
+a16 1
+uucp:           root
+a17 2
+games:          root
+gopher:         root
+a21 14
+xfs:            root
+gdm:            root
+mailnull:       root
+postgres:       root
+squid:          root
+rpcuser:        root
+rpc:            root
+
+ingres:         root
+system:         root
+toor:           root
+manager:        root
+dumper:         root
+abuse:          root
+d23 5
+a27 9
+newsadm:        root
+newsadmin:      root
+usenet:         root
+ftpadm:         root
+ftpadmin:       root
+ftp-adm:        root
+ftp-admin:      root
+# trap decode to catch security attacks
+decode:         root
+d29 1
+d32 1
+@

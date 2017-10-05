@@ -1,0 +1,257 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.1
+date	2003.04.02.19.08.41;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.1
+log
+@initial checkin
+@
+text
+@#!/usr/bin/perl -w
+
+# $Id: mkfp,v 1.1 2002/12/30 18:21:33 root Exp $
+
+# installs/upgrades frontpage for a client site
+
+use strict;
+use Getopt::Long;
+use Term::ReadKey;
+use File::Copy;
+
+my $upgrade;
+my $install;
+
+my @@frontpage;
+
+GetOptions (    
+ 		'upgrade=s'	=> \$upgrade,
+		'install=s'	=> \$install,
+           );
+
+## base frontpage admin executable
+my $path = "/usr/local/frontpage/version5.0/bin/owsadm.exe";
+
+## add username and group of apache server
+$path = $path . " -xuser nobody -xgroup hosting";
+
+## add path to server config file
+$path = $path . " -servconf /usr/local/apache/conf/httpd.conf";
+
+
+if ($upgrade) {
+
+  my $domain = '';
+
+  ## tag on upgrade operation to path statement
+  $path = $path . " -operation upgrade";
+
+  # complete the command line
+  my $execute = $path . " -m $domain";
+
+  ## upgrade the domain 
+  system("$execute");
+
+} elsif ($install) {
+
+
+  ## tag on install operation to path statement
+  $path = $path . " -operation install";
+
+  my $domain = $install;
+  chomp $domain;
+  print "\n";
+
+  ## clean up domain
+  $domain =~ tr/A-Z/a-z/;
+  $domain =~ s/[^a-z0-9\.\-]//g;
+
+  ## if domain starts with www, then exit
+
+  if ($domain =~ /^www\./i) {
+
+    print "\nDomain should be the the format of DOMAIN.COM\n\n";
+
+    exit 1;
+
+  }
+
+  ## if the include file for the domain does not exist exit
+  if ( !-e "/usr/local/apache/conf/include/virtual/apache.$domain") {
+
+    print "\nIt does not appear that this client has been set up\nyet through the newclient admin tool.\nPlease consult with an administrator before trying again.\n\n";
+
+    exit 1;
+
+  }
+
+  ## let user know the domain they will be making changes for
+  print "\nThe domain you entered is \"$domain\"\n\n";
+  print "If this incorrect, you may Ctrl-C now to quit\n\n";
+
+  ## get username
+  print "Please enter the username that will administrate this site:\n>> ";
+  my $username = <STDIN>;
+  chomp $username;
+  print "\n";
+
+  if (length($username) < 1) {
+
+    print "\nThe username you've entered does not appear to be valid.\n\n";
+
+    exit 1;
+
+  }
+
+  ## get password
+  print "Please enter the password to be used with this username:\n>> ";
+
+  ## turn off echo
+  ReadMode('noecho');
+
+  my $password = <STDIN>;
+  chomp $password;
+  print "\n";
+
+  ## turn on echo
+  ReadMode('restore');
+
+  ## repeat password
+  print "Please re-enter the password:\n>> ";
+
+  ## turn off echo
+  ReadMode('noecho');
+
+  my $repeat = <STDIN>;
+  chomp $repeat;
+
+  ## turn on echo
+  ReadMode('restore');
+
+  ## clean up the passwords
+  $password =~ s/ //g;
+  $repeat =~ s/ //g;
+
+  ## if the passwords don't match, drop out
+  if ($password ne $repeat) {
+
+    print "\nSorry, your passwords do not seem to match, please try again.\n\n";
+
+    exit 1;
+
+  }
+
+  ## add admin username and password to execute path
+  $path = $path . " -username $username -password $password";
+
+  my $checkout = "co -q -l";
+  my $checkin = "ci -u -q -m\"Modification of $domain\"";
+
+  ## check out domains.conf from RCS
+  system("$checkout /usr/local/apache/conf/domains.conf");
+
+  ## open the file and place into an array
+  open(FH, "/usr/local/apache/conf/domains.conf")
+    or die "Cant open domains.conf";
+
+  my @@domains_conf = <FH>;
+
+  close(FH);
+
+  ## open the file for writing
+  open(FH, ">/usr/local/apache/conf/domains.conf")
+    or die "Cant open domains.conf for writing";
+
+  for my $i(@@domains_conf) {
+ 
+    if ($i =~ /^Include \"\/usr\/local\/apache\/conf\/include\/virtual\/apache\.$domain\"$/) {
+
+      ## stick a comment in front of the frontpage enabled domain
+      $i =~ s/^(Include \"\/usr\/local\/apache\/conf\/include\/virtual\/apache\.$domain\")$/\#$1/;
+   
+      print FH $i;
+
+    } else {
+
+      print FH $i;
+
+    }
+
+  }
+
+  close(FH);
+
+  ## check domains.conf back into RCS
+  system("$checkin /usr/local/apache/conf/domains.conf");
+
+  ## check httpd.conf out of RCS
+  system("$checkout /usr/local/apache/conf/httpd.conf");
+
+  ## open file for appending
+  open(FH, ">>/usr/local/apache/conf/httpd.conf");
+
+  open(IF, "/usr/local/apache/conf/include/virtual/apache.$domain");
+
+  print FH "\n";
+  print FH "\#\# " . uc $domain . " BEGIN\n";
+
+  ## append the include file to the httpd.conf
+  while(my $i = <IF>) {
+
+    chomp $i;
+
+    next if ($i =~ /^$/);
+    next if ($i =~ /^\#/);
+
+    #print FH "$i \#\#" . uc $domain . "\n";
+    print FH "$i\n";
+
+  }
+
+  print FH "\n\#\# " . uc $domain . " END\n\n";
+
+  close(IF);
+
+  close(FH);
+
+  ## check httpd.conf back into RCS
+  system("$checkin /usr/local/apache/conf/httpd.conf");
+
+  ## complete the commandline
+  my $execute = $path . " -m $domain";
+
+  ## testing
+  print "$execute\n";
+
+  ## install for the domain
+  system("$execute");
+
+} else {
+
+  print <<EOF;
+
+USAGE: 
+  
+  mkfp [ --upgrade ]
+       [ --install (domain.com) ]
+
+EOF
+
+}
+
+
+# this is the method used with all options spelled out. this method has not yet been tested
+# ./owsadm.exe -operation install -username ics -password therun7 -multihost ic-solutions.net -port 80 -servconf /usr/local/apache/conf/httpd.conf -xuser nobody -xgroup nobody
+@

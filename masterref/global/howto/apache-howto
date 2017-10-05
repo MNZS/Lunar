@@ -1,0 +1,21 @@
+# $Id: apache-howto,v 1.1 2003/06/05 16:15:14 root Exp $
+
+SYNOPSIS
+  This document provides an index for the various apache howto
+  in this directory
+
+USAGE
+  The following files for apache can be summarized as follows:
+
+    apache_start-howto : this file describes how to start and stop
+                         apache for adding new clients or making 
+                         small configuration changes
+
+    apache_files-howto : this file describes how apache's config
+                         works and explains how each include file
+			 affects the apache config
+
+KNOWN BUGS
+
+AUTHOR
+  charles@lunarhosting.net

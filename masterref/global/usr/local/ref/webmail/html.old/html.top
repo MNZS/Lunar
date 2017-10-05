@@ -1,0 +1,21 @@
+<html>
+<head>
+	<title>Lunar Hosting Web Based E-Mail</title>
+<link rel="stylesheet" type="text/css" href="%%css%%">
+</head>
+
+<body bgcolor="%%bgcolor%%" vlink="%%vlink%%" link="%%link%%" alink="%%alink%%" %%onload%%>
+
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+<tr bgcolor="%%bgcolor%%">
+	<td width="100%" align="left"><img src="%%imageshttp%%/dot_clear.gif" width="1" height="10" border="0" alt="W3Mail"></td>
+</tr>
+<tr bgcolor="%%bgcolor%%">
+	<td width="100%" align="left"><a href="http://www.cascadesoft.com/"><img src="%%imageshttp%%/head.gif" width="150" height="28" border="0" alt="W3Mail"></a></td>
+</tr>
+<tr bgcolor="%%bgcolor%%">
+	<td width="100%" align="left"><img src="%%imageshttp%%/dot_clear.gif" width="1" height="5" border="0" alt="W3Mail"></td>
+</tr>
+<tr height="5" bgcolor="%%bgcolor%%"><td background="%%imageshttp%%/line_top.gif"><img src="%%imageshttp%%/dot_clear.gif" width="1" height="5"></td></tr>
+<tr bgcolor="#FFFFFF"><td><img src="%%imageshttp%%/dot_clear.gif" width="1" height="16"></td></tr>
+<tr bgcolor="#FFFFFF"><td>

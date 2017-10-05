@@ -1,0 +1,27 @@
+**** NOT YET IMPLEMENTED ***
+
+How DNS responsibilities are enabled within the Server Distribution
+
+o Master nameservers are ns1.lunarhosting.net and ns2.lunarhosting.net.
+  These nameservers allow for recursive queries for the Fast Monster
+  Wireless network. They also allow for queries regarding all Lunar 
+  Hosting customer domains.
+
+o Hosting servers, e.g. hostX.lunarhosting.net, will allow queries 
+  for their locally hosted domains. In theory, no queries will come
+  directly to them, instead, the world will send queries to ns1 and ns2.
+
+  Hosting servers update nsX with a new list of domains it should be
+  considered authoritative for, each time a new client is added. the
+  update takes place using the zoneupdate script. 
+
+o To summarize. ns1 and ns2 are slave servers to both host1 and host2.
+  ns1 and ns2 are listed publicly as the authoritative servers for
+  all hosted domains.
+  The hosting servers are each master nameservers, however they are 
+  not seen as authoritative by the world.
+
+o Read through named_update-howto for more on the inter-server communication
+
+$Author: root $
+$Date: 2003/06/05 16:15:14 $

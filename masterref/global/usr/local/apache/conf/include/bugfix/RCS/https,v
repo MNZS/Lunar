@@ -1,0 +1,27 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.1
+date	2003.01.04.16.22.02;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@## fix for internet explorer keepalive problem
+SetEnvIf User-Agent ".*MSIE.*" \
+  nokeepalive ssl-unclean-shutdown \
+  downgrade-1.0 force-response-1.0
+@

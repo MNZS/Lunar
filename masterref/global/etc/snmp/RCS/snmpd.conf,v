@@ -1,0 +1,54 @@
+head	1.2;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.2
+date	2003.04.11.18.29.16;	author root;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2003.04.11.18.28.52;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.2
+log
+@*** empty log message ***
+@
+text
+@# snmpd.conf
+
+# $Id:$
+
+# SECTION: Access Control Setup
+#
+# rocommunity: a SNMPv1/SNMPv2c read-only access community name
+#   arguments:  community [default|hostname|network/bits] [oid]
+
+rocommunity  Wl7d0w%! name1.lunarhosting.net 
+rocommunity  Wl7d0w%! name2.lunarhosting.net 
+
+# SECTION: System Information Setup
+#
+syslocation  LUNARHOSTING-SPFLD
+syscontact  admin@@lunarhosting.net
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d3 2
+d11 1
+@

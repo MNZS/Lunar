@@ -1,0 +1,13 @@
+$TTL 21600
+@       IN      SOA     localhost admin.lunarhosting.net. (
+                                2003012501 ; Serial
+                                1h         ; Refresh
+                                1h         ; Retry
+                                14d        ; Expire
+                                1h )       ; Cache TTL
+
+; $Id: db.rfc1918,v 1.2 2003/01/26 02:30:09 root Exp root $
+
+; NS Records for caching hints
+;                IN      NS      ns1.lunarhosting.net.
+;                IN      NS      ns2.lunarhosting.net.

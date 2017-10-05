@@ -1,0 +1,37 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.1
+date	2003.06.05.16.15.14;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@$Id: backup-howto,v 1.3 2003/06/05 16:13:06 root Exp $
+
+This document covers the backup and restoration process for Lunar 
+Hosting servers.
+
+Each morning at 03:30, the nameX servers run a script called 
+archive-system.pl. This script is a simple wrapper that ensures the
+script is being ran on a nameX server and then calls a shell script,
+archive-system.sh for each host in the network. All servers are backed
+up to name2, however name2's files are backed up to name1.
+
+All web data is held in /usr/local/archives/<hostname>/<date>/
+
+All system data is held in /usr/local/archives/<hostname>/system/
+@

@@ -1,0 +1,31 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.1
+date	2003.01.04.16.24.38;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@## user account configuration
+Alias /my /www/DOMAIN/options/my
+
+<Directory /www/DOMAIN/options/my>
+  ## enable cgi-scripts
+  AllowOverride All
+  Options +ExecCGI FollowSymLinks
+</Directory>
+@

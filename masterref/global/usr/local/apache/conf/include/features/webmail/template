@@ -1,0 +1,14 @@
+Alias /webmail /www/DOMAIN/webmail/html
+Alias /mime /www/DOMAIN/webmail/mime
+
+## ignore the configuration file for display
+<Files "w3mail.conf">
+  Order allow,deny
+  Deny from All
+  Satisfy All
+</Files>
+
+## do not allow directory listing in /mime/
+<Directory /www/DOMAIN/webmail/mime>
+  Options -Indexes
+</Directory>

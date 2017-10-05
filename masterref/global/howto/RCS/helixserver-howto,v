@@ -1,0 +1,37 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.1
+date	2003.06.05.16.15.14;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@Admin User/Password:    helixadmin/dyq4o3w
+Encoder User/Password:  helixadmin/dyq4o3w
+Monitor Password:       dyq4o3w
+RTSP Port:              554
+HTTP Port:              8080
+PNA Port:               7070
+MMS Port:               1755
+Admin Port:             14582
+Destination:            /usr/local/HelixServer
+
+http://name2.lunarhosting.net:14582/admin/index.html
+
+startup:
+/usr/local/HelixServer/Bin/rmserver /usr/local/HelixServer/rmserver.cfg &
+@

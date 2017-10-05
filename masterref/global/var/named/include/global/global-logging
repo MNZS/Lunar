@@ -1,0 +1,49 @@
+// $Id: global-logging,v 1.4 2003/08/27 20:49:26 root Exp $
+
+// define logging parameters
+logging {
+
+  channel null_log {
+    file "/dev/null";
+    severity info;
+  };
+
+  channel to_general_file {
+    file "/var/log/named/named.general" versions 5 size 5m;
+    severity info;
+    print-category yes;
+    print-severity yes;
+    print-time yes;
+  };
+
+  channel to_security_file {
+    file "/var/log/named/named.security" versions 5 size 5m;
+    severity warning;
+    print-category no;
+    print-severity yes;
+    print-time yes;
+  };
+
+  channel to_notify_file {
+    file "/var/log/named/named.notify" versions 5 size 5m;
+    severity info;
+    print-category no;
+    print-severity yes;
+    print-time yes;
+  };
+
+  channel to_query_file {
+    file "/var/log/named/named.query" versions 5 size 5m;
+    severity info;
+    print-category no;
+    print-severity yes;
+    print-time yes;
+  };
+
+  category default { to_general_file; };
+  category lame-servers { null_log; };
+  category notify { to_notify_file; };
+  category security { to_security_file; };
+  category queries { to_query_file; };
+
+};

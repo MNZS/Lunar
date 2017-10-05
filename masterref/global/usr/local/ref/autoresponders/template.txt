@@ -1,0 +1,7 @@
+#!/bin/bash
+
+/usr/local/bin/autoresponder	\
+--from	FROM	\
+--ignore-from	RESPONDER	\
+--subject	"SUBJECT"	\
+--file	/usr/local/autoresponders/TEXTFILE	

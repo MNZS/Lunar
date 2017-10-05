@@ -1,0 +1,35 @@
+## webmail
+Include "/usr/local/apache/conf/include/features/webmail/webmail.DOMAIN"
+
+## urchin
+Include "/usr/local/apache/conf/include/features/urchin/urchin.DOMAIN"
+
+## my 
+Include "/usr/local/apache/conf/include/features/my/my.DOMAIN"
+
+## webpublisher
+Include "/usr/local/apache/conf/include/features/webpublisher/webpublisher.DOMAIN"
+
+## control panel
+Include "/usr/local/apache/conf/include/features/controlpanel/controlpanel.DOMAIN"
+
+## icb
+#Include "/usr/local/apache/conf/include/features/icb/https.DOMAIN"
+
+## php
+#Include "/usr/local/apache/conf/include/features/php/php.DOMAIN"
+
+## shopzone
+#Include "/usr/local/apache/conf/include/commerce/shopzone/sz.DOMAIN"
+
+## miva
+#Include "/usr/local/apache/conf/include/commerce/miva/mv.DOMAIN"
+
+## process
+#Include "/usr/local/apache/conf/include/commerce/process/proc.DOMAIN"
+
+## local-bin
+#Include "/usr/local/apache/conf/include/features/local-bin/bin.DOMAIN"
+
+## mysql
+#Include "/usr/local/apache/conf/include/features/mysql/sql.DOMAIN"

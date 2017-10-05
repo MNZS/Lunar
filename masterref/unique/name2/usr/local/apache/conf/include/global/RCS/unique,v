@@ -1,0 +1,52 @@
+head	1.2;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.2
+date	2003.08.04.16.56.03;	author root;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2003.04.15.13.23.08;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@added abta
+@
+
+
+1.2
+log
+@*** empty log message ***
+@
+text
+@## $Id: unique,v 1.1 2003/04/15 13:23:08 root Exp root $
+
+## ABTA
+Alias /video /www/abta.org/pub/video
+
+## TEST WEBMAIL
+Alias /testmail /usr/share/squirrelmail
+<Directory "/usr/share/squirrelmail">
+  AddType application/x-httpd-php .php
+</Directory>
+
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 1
+a1 1
+## $Id:$
+d5 7
+@

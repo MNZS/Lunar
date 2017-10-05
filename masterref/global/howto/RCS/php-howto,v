@@ -1,0 +1,65 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.1
+date	2003.06.05.16.15.14;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@$Id: php-howto,v 1.1 2003/05/29 14:44:34 root Exp $
+
+Installing and Upgrading PHP
+
+1. Download the latest STABLE source code from www.php.net.
+   Download the tar.gz file to /usr/local/src
+
+2. Untargz the file
+   # tar xvfz php-x.x.x.tar.gz
+
+3. Change directory into the newly created repository
+   # cd php-x.x.x
+
+4. Compile the source using the following configuration parameters
+   # ./configure \ 
+     --with-mysql \
+     --with-apxs=/usr/local/apache/bin/apxs \
+     --with-config-file-path=/usr/local/php-config
+
+5. Build the engine
+   # make
+
+6. Stop the webserver
+  # apachectl stop
+
+7. Install the engine
+   # make install
+
+8. Edit the httpd.conf file to remove the PHP configuration parameters
+   that were added during the installation process.
+
+9. Copy the php.ini-recommended file to the production configuration 
+   directory
+   # cp php.ini-recommended /usr/local/php-config/php.ini-x.x.x
+
+10. copy the new version's php.ini-x.x.x to php.ini
+    # cp php.ini-x.x.x php.ini
+
+11. Restart the webserver
+    # apachectl startssl
+
+12. Tail the apachelog to ensure that it was correctly started.
+@

@@ -1,0 +1,34 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.1
+date	2003.04.20.07.21.24;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@service pop3s
+{
+        socket_type             = stream
+        protocol                = tcp
+        wait                    = no
+        user                    = root
+        server                  = /usr/local/sbin/popper
+        server_args             = qpopper -f /etc/qpopper/config-tls
+        disable                 = no
+}
+
+@

@@ -1,0 +1,16 @@
+$Id: webmail_install-howto,v 1.3 2003/08/04 16:27:13 root Exp $
+
+Lunar Hosting webmail is handled by the open source software Squirrel Mail.
+To install squirrelmail, the following packages need to be installed:
+
+  squirrelmail
+  imap
+
+Since Apache is compiled by hand on our servers, a 'apache' group does not
+exist by default. Squirrelmail when installed as an RPM, tries to apply 
+group permissions to directories it uses as 'apache'. Make sure that the 
+'apache' group exists in /etc/group as:
+
+  apache:x:48:nobody
+
+It should appear exactly as above.

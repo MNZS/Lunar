@@ -1,0 +1,55 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.1
+date	2003.06.05.16.15.14;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@$Id: rcedit-howto,v 1.4 2003/02/04 18:21:12 root Exp $
+
+Most important files on the Lunar Hosting servers are RCS protected.
+This means that each file has multiple revisions of itself archived
+within the RCS tree to allow for backing out of a fat-fingered config 
+or reverting to a prior revision for some administrative purpose. 
+
+To find out if a file is RCS protected, first look in the file
+
+ /masterbin/sources
+
+on name2.lunarhosting.net. If the file is in this list, DO NOT edit
+the file locally on the server where you are working. This is a 
+masterref guarded file and should be edited only through the masterref
+process. Read through the masterref-howto to find out more.
+If the file is not in the list, you can simply perform a 'ls RCS' in
+the directory where the files resides.
+If you see the same file name appeneded with ",v" in the RCS directory,
+then the file IS rcs protected and should only be edited via "rcedit".
+If the file is not present in the RCS directory, it is safe to edit
+with the editor of your choice.
+
+RCEDIT is a perl wrapper for the RCS ci and co commands for checking
+files in and out of RCS. The wrapper will check a file out and allow 
+you to edit the file using 'vi'. Once you have written the file and
+exited vi, you will then be prompted for an rcs log entry if you made
+any changes to the file. You may enter as long and as descriptive a
+message as you see fit. Once you have entered all the description that
+you would like, you can exit the log entry by entering a single period
+on a blank log entry line. This will return you to the command line.
+
+
+@

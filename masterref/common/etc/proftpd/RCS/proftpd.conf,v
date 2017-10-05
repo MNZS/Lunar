@@ -1,0 +1,191 @@
+head	1.4;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.4
+date	2003.04.21.19.36.20;	author root;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2003.04.21.19.29.48;	author root;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2003.04.21.15.28.46;	author root;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2003.04.21.15.25.53;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.4
+log
+@Added a global container for passive ports
+@
+text
+@# $Id: proftpd.conf,v 1.3 2003/04/21 19:29:48 root Exp root $
+
+<Global>
+  PassivePorts 	65000 65010
+</Global>
+
+ServerName                      " "
+DeferWelcome                    on
+ServerType                      standalone
+DefaultServer                   on
+ServerIdent                     on "This system is proprietary and not meant for public access."
+MultilineRFC2228 on
+
+Port                            21
+Umask                           022
+
+MaxInstances                    30
+
+User                            proftpd
+Group                           proftpd
+
+TimeoutLogin                    60
+TimeoutIdle                     600
+TimeoutStalled                  1800
+UseReverseDNS                   off
+
+<Directory /*>
+  AllowOverwrite                off
+</Directory>
+
+# global deterences
+DefaultRoot                     /usr/local/jail
+
+# logging format for anonymous
+LogFormat anon "%t %a %A %F %b"
+
+# system logging
+SystemLog /var/log/ftp/ftp-access.proftpd
+
+# virtual hosting
+Include "/etc/proftpd/domains.conf"
+@
+
+
+1.3
+log
+@Added global container tag
+@
+text
+@d1 2
+d4 17
+a20 1
+  # $Id: proftpd.conf,v 1.2 2003/04/21 15:28:46 root Exp root $
+d22 20
+a41 37
+  ServerName                      " "
+  DeferWelcome                    on
+  ServerType                      standalone
+  DefaultServer                   on
+  ServerIdent                     on "This system is proprietary and not meant for public access."
+  MultilineRFC2228 on
+  PassivePorts			65000 65010
+  
+  Port                            21
+  Umask                           022
+  
+  MaxInstances                    30
+  
+  User                            proftpd
+  Group                           proftpd
+  
+  TimeoutLogin                    60
+  TimeoutIdle                     600
+  TimeoutStalled                  1800
+  UseReverseDNS                   off
+  
+  <Directory /*>
+    AllowOverwrite                off
+  </Directory>
+  
+  # global deterences
+  DefaultRoot                     /usr/local/jail
+  
+  # logging format for anonymous
+  LogFormat anon "%t %a %A %F %b"
+  
+  # system logging
+  SystemLog /var/log/ftp/ftp-access.proftpd
+  
+  # virtual hosting
+  Include "/etc/proftpd/domains.conf"
+</Global>
+@
+
+
+1.2
+log
+@added passive ports command
+@
+text
+@d1 2
+a2 9
+# $Id: proftpd.conf,v 1.1 2003/04/21 15:25:53 root Exp root $
+#
+ServerName                      " "
+DeferWelcome                    on
+ServerType                      standalone
+DefaultServer                   on
+ServerIdent                     on "This system is proprietary and not meant for public access."
+MultilineRFC2228 on
+PassivePorts			65000 65010
+d4 37
+a40 28
+Port                            21
+Umask                           022
+
+MaxInstances                    30
+
+User                            proftpd
+Group                           proftpd
+
+TimeoutLogin                    60
+TimeoutIdle                     600
+TimeoutStalled                  1800
+UseReverseDNS                   off
+
+<Directory /*>
+  AllowOverwrite                off
+</Directory>
+
+# global deterences
+DefaultRoot                     /usr/local/jail
+
+# logging format for anonymous
+LogFormat anon "%t %a %A %F %b"
+
+# system logging
+SystemLog /var/log/ftp/ftp-access.proftpd
+
+# virtual hosting
+Include "/etc/proftpd/domains.conf"
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 1
+a1 1
+# $Id: proftpd.conf,v 1.4 2003/04/10 18:43:00 root Exp $
+d9 1
+@

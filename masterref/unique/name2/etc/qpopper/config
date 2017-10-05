@@ -1,0 +1,4 @@
+set downcase-user
+set trim-domain
+set reverse-lookup
+set statistics

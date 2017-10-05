@@ -1,0 +1,231 @@
+Version 1.0.5 released April 30, 2002
+* Resolved a issues with certain mime/types
+* Previewing messages to send with attachments now sends the attachments
+* Fixed forwarding problem for certain attachment types
+* Various bugfixes
+
+Version 1.0.4 released January 13, 2002
+* Support for Replying/Forwarding messages with attachments
+* Fixes compose.cgi not being able to find encode_base64 with certain versions of perl
+* Dies with an error when messages aren't successfully sent
+* Changed login form to post so user info doesn't show up in address bar.
+
+Version 1.0.3 released December 4, 2001
+* Fixed potential security exploit by filtering special metacharacters.
+* Attachments are now properly deleted on logout.
+* Attachments with a space in the filename can now be properly viewed.
+* Fixed bug preventing ampersand in Name preference.
+* $replyto is now displayed correctly when inbox is empty.
+* Added cookie support for saving username and server
+* Fixed html layout problems for certain browsers in the Inbox
+* W3Admin has been removed for the time being and will be rewritten for a future
+  version.
+  
+Version 1.0.2 released January 21, 2001
+* Fixed bug in inbox.cgi so $replyto no longer has a \ before the @ when user has no messages.
+* Added folder list and address book to inbox.cgi when user has no messages
+* Added $columns = 100 to showmessage.cgi to prevent cutting off of long URL's and strings of text.
+* Fixed the table colspans in the Outbox
+* Changed != to ne on line 56 of w3admin.cgi.  This bug prevented logging in through w3admin.
+
+Version 1.0.1 released December 22, 2000
+* Fix bug preventing user from changing preferences when no email in inbox.
+* title_addressbook.gif is now spelled properly.
+* Icons have descriptions when inbox is empty.
+* When sending an email, from is now $name <$replyto> instead of just $replyto.
+* When inbox is empty the replyto no longer contains a \, such as smiles\@gladstone.uoregon.edu.
+* showmessage.cgi now has a button to load the address book.
+* Previous and Next buttons in showmessage.cgi were confusing,  fixed so that Next goes to next, previous goes to previous.
+* inbox.cgi no longer has blue lines next to some images in certain webbrowsers.
+* Added	AUTH_MODE => 'PASS' to pop3connect of w3vars.cgi.  Caused problems with certain pop3 servers without it.
+* Improved parsing of email addresses.
+* Some minor changes to w3admin.cgi
+* Placed signature before message when replying and forwarding in compose.cgi.
+
+Version 1.0 released September 5, 2000
+* MIME attachments are deleted upon logout.
+* Import feature for address book. (Import Outlook Express and Netscape Messenger books)
+* Various grammatical fixes.
+* install.pl and w3admin.cgi updated.
+* file attachment bugs fixed, file attachments now work for CC and BCC as well.
+* $read variable, shows if message is marked read or unread
+* Outbox folder has been implemented which stores a copy of outgoing messages.
+* Login process, SessionID verification is much smoother now.
+* Major code rewrite, lots of new subs in w3vars.cgi.
+* Security issue regarding login's without password resolved.
+
+
+Version 1.0.0pre2 released June 5, 2000
+* Lots of things have changed in this release, and I'd like to give a very
+  special thanks to Juerg Raess <jraess@oxygen.ch> for the many great changes
+  and additions. While I have not incorporated all the changes he made, I have
+  incorporated the majority of them, and W3Mail now sports a much nicer look
+  and feel thanks to Juerg.  So once again Juerg, thank you so very much, this
+  is what makes open source so beautiful.
+* install.pl has been removed.  I didn't feel that it worked very well, and
+  was too much of a hassle, if someone would like to redo it please feel free.
+* w3admin.cgi no longer works.  It needs to be redone..
+* added html.top and html.end
+* added subroutines &PrintTop and &PrintTail to vars-file
+* The check of the POP-Message, where the output "bad username/pwd" will be 
+  printed out in changed that way: Deleted the two lines:
+   print $pop->Head(1);
+   print $pop->Message();
+* All Errormessages put in in &PrintTop and &PrintTail;
+* Preview of messages now works with correct linebreaks (<xmp>-tag)
+* Mailbody is always in fixed with font, added word-wrapping for
+  reading (plain-text) and previewing messages.
+* Reading messages will parse the content better, use fixed with font for content,
+  wrapped to 75 if text/plain, less errors with html-emails
+* Addressbook:
+  Add Recipient will fill in as default value, to be able to make
+  changes.  Invalid email-addresses are not accepted anymore.
+  Support for the sign @ in name.
+* Added support for two attachments in both compose.pl and sendmail.pl
+  Sendmail-changes were quite tricky, but now one can
+  even read the messages correct after they are sent.
+  File names are parsed, so "C:\TEMP\FILE.GIF" -> "FILE.GIF"
+* Added change-button in preview in order to be able to change 
+  the message again.
+* Avoid POP-Lock-Busy:
+  Often there were two pop-connections open. To avoid the
+  pop-lock busy (script will fail then...) the connections are
+  closed every time.
+  combined in inbox.cgi ($pop->Close();) and showmessage.cgi
+* sendmessage.cgi: Send MultiPart-Messages if there are attached files.
+  (This fixes it so that attachments sent with W3Mail can now be viewed with
+  W3Mail)
+* Now support for a default signature specified by the administrator.
+* Config-File:
+   New parameters:
+   - System path to "rm"
+   - Colums to show messages
+   - Max. size of posted messages
+   - Http-Path to image-directory
+* Awesome new layout done by bwolfensberger@access.ch
+* Reorganized the whole html-part:
+   -Most "print"'s now as: print qq~<tags>~;
+   -Fonts now: Geneva (MAC!!), Arial, Helvetica
+   -Changed the color configuration:
+   Toolbar with images can be chosen by user
+   Table_light & _dark can be chosen
+* Not all buttons while registering first time
+   (Checkmail etc. won't work)
+
+Version 1.0.0pre1 released May 22, 2000
+* inbox.cgi: Form button font size decreased
+* inbox.cgi: Decreased output size by 20% to speed things up over slow
+  analog connections.
+* Replyto preference works correctly (Thanks James)
+* inbox.cgi: <title> now reflects alternate replyto
+* compose.cgi:  Added what will be needed for two attachments, however
+  haven't written code in sendmessage.cgi yet... 
+
+Version 0.9.6 released May 17, 2000
+* inbox.cgi:  $from is parsed, looks much better now.
+* inbox.cgi:  Message displays message number next to it.
+* inbox.cgi:  Address Book button.
+* inbox.cgi:  Message Block pull down menu now selects the message block
+  being viewed.
+* inbox.cgi:  Add Contact link
+* inbox.cgi:  Fixed reply and forward links, they were missing Re and Fwd
+  from replynum
+* inbox.cgi:  added $sig =~ s/(\@)/\\\@/g on line 101 to fix a problem with
+  '@'s in the user's signature.  (Thanks to Greg Spiegelberg <greg@defract.twotone.org>)
+* prefs.cgi:  added s/(\@)/\\\@/g to this file as well   (Thanks to Greg Spiegelberg <greg@defract.twotone.org>)
+* userprefs.cgi:  Switched the replyto which appears at the top of the table
+  to $replyto instead of $user\@$mailserv_replyto
+* showmessage.cgi:  Attachments of type "message/*" are now properly
+  supported.
+* prefs.cgi:  Fixed bug preventing login when header.body, which is no
+  longer used, wasn't present.
+
+Version 0.9.5 released April 25, 2000
+* Added some more documentation in INSTALL
+* onMouseOver window.status for links in inbox.cgi
+* Check Mail button in inbox.cgi, this existed in older versions, but was
+  accidentally removed
+* Add Contact to addressbook in showmessage.cgi
+* Link bar in preferences.cgi
+* Added a reply-to user preference
+* Fixed a bug which was preventing users to login under certain
+  circumstances (inbox.cgi, line 140)
+
+Version 0.9.4 released April 13, 2000
+* fixed some bugs in w3admin.cgi
+* Added "Compose Message" to menu bar in showmessage.cgi
+* Added a menubar to compose.cgi
+* Address book support with addressbook.cgi
+* Tables now render better in IE
+* E-Mail's addresses in showmessage.cgi are converted to links which compose
+  a message to that email address.
+* Messages with no subject show up with (No Subject) in showmessage.cgi
+  instead of blank
+* CGI::Cookie was required by some files, and not needed, it has been
+  removed.
+
+Version 0.9.3 released March 1, 2000
+* W3Mail is now released under the GPL.
+* Text attachments are automatically deleted.
+* Attachments of type message, application, audio, and video are now
+  supported.
+* File attachments (binary and ascii) handled much better now.
+* encpass has been taken out of the url, a SessionID is now passed along,
+  stored in the user's info file and compared to that one, which increases
+  security quite a bit.
+* compose.cgi handles reply's and forward's by more efficient means
+* $subject bug fixed
+* parse_date sub in w3vars.cgi
+* showmessage.cgi now displays CC: field
+* message_size sub in w3vars.cgi for computing size of messages
+* Users password must be verified before a dir is created for them
+* fixed up some login procedures by adding pop3connect()
+* I think i've fixed the bug where it didn't display the messages and acted
+   as if it had logged in, but hadn't.
+* Added better MIME support for image handling
+
+Version 0.9.2 released Feb 14, 2000
+* Lots of bug fixes, but still dont know why inbox appears blank sometimes,
+   any ideas anybody?
+* Added options in preferences for colors and messages per page
+* Messages displayed per page is now variable
+* Preview message before sending (Still some issues with this)
+* Select All messages for deleting (Thanks Jengo)
+* Instead of one file (w3mail.pl), w3mail now resides in many files, which
+   increases speed a great deal (Help provided by Jengo)
+* Alternating row colors in the inbox (Thanks Jengo)
+* W3Mail now supports multiple POP3 servers
+
+Version 0.9.0a released Feb 9, 2000
+* Problems occured when $datadir didn't exist or didn't have write access.
+   Those are better addressed.
+
+Version 0.9.0 released Feb 8, 2000
+* MIME parsing support added, support text and images.
+* install.pl for easy configuration
+* w3admin.pl for configuration after initial setup
+* datadir/server/user: Each user now has a directory, will allow for place
+   to store signature files and address book and other user prefs in the
+   future.
+
+
+Version 0.5.2 released Feb 3, 2000
+* This release contains primarily usability enhancements.
+* Made compose message prettier
+* Modified tables for show message and inbox
+* Sending file attachment now works
+* Inbox shows 20 messages at a time
+
+Version 0.5.1 released Jan 30, 2000
+* Fixed bug with deleting messages
+* Prevented possible DoS and flooding my limiting size of message (100k
+default)
+* Configuration options now in w3mail.conf (thanks mark@reynolds.net.au)
+* pop3.pl renamed w3mail.pl
+* Added options to customize colors
+* Various bug fixes
+* Added header options with header.login and header.body
+* Documentation
+
+Version 0.5.0 released Jan 28, 2000
+* Initial Release

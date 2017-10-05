@@ -1,0 +1,38 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.1
+date	2003.04.02.19.08.41;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.1
+log
+@initial checkin
+@
+text
+@#!/usr/bin/perl -w
+
+# MasterRef
+# $Id: mrtg_servers.pl,v 1.1 2003/03/11 18:08:06 root Exp $
+
+use strict;
+use Sys::Hostname;
+
+if (hostname() !~ /^name1/) {
+  exit 1;
+}
+
+my $cli = '/usr/local/lunarbin/mrtg_servers.sh';
+
+system("$cli");
+@

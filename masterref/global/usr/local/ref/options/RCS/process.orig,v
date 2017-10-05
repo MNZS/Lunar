@@ -1,0 +1,240 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.1
+date	2001.10.17.15.13.41;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@#!/usr/bin/perl -w
+#
+
+# $Id: process.cgi,v 1.15 2001/10/09 21:39:00 root Exp $
+
+# This entire script is based on the premise that clients wanting to
+# take advantage of its capabilities have a directory at:
+#
+#  /etc/e-commerce/<client>
+#
+# Without this structure, the script will fail without heavily editing.
+#
+ 
+use strict;
+
+
+################## EDIT THIS ########################################
+#####################################################################
+
+# domain of client
+my $domain = ""; # www.domain.com
+
+
+#
+# Must have hidden form variables:
+#   recipient         = who gets the email announcement
+#   subject           = variable for what the subject is
+#   redirect          = variable for redirecting a url to the user
+#   postdir           = variable for where to post the file: dank, naer
+#   title             = Title of the form
+
+####		DO NOT EDIT BELOW THIS MARK			 ####
+
+#####################################################################
+#####################################################################
+#####################################################################
+#####################################################################
+
+# variables
+my $crypt;
+my %CONFIG;
+my $filename;
+my $date;
+my $key;
+my %FORM;
+my $buffer;
+my @@pairs;
+my $pair;
+my $name;
+my $value;
+my @@required;
+my @@days;
+my @@months;
+my $sec;
+my $min;
+my $hour;
+my $mday;
+my $mon;
+my $year;
+my $wday;
+my $yday;
+my $isdst;
+my $url;
+my $filenamehead;
+my $mailprog;
+my $cust;
+
+# directory where files will be written
+$crypt = "crypt"; # crypt directory
+
+# customer id
+$cust = (split(/\./, $domain))[-2];
+
+# complete url that will be send to client
+$url = "$domain\/$crypt";
+
+# 
+$mailprog = '/usr/lib/sendmail';
+
+# Retrieve Date
+get_date();
+
+# Parse Form Contents
+parse_form();
+
+
+#get the result location
+$filenamehead=(1000000000-time()) . "-" . $$ . ".txt";
+
+if ($CONFIG{'postdir'} eq 'CreditCard') { 
+  $filename="\/etc\/e-commerce\/$cust\/$crypt\/" . $filenamehead; 
+}
+
+
+# Redirect User to after page
+&redirect();
+
+#
+&make_file();
+
+# Send E-Mail
+&send_mail;
+
+# Subroutines
+
+sub send_mail {
+   # Open The Mail Program
+   open(MAIL,"|$mailprog -t");
+
+   print MAIL qq|From: $CONFIG{replyname} <$CONFIG{'replyaddr'}>\n|;
+   print MAIL "To:      $CONFIG{'recipient'}\n";
+   print MAIL "Subject: $CONFIG{'subject'}\n";
+
+   if ($CONFIG{'postdir'} eq 'CreditCard') {
+     print MAIL "Please process https://$url/$filenamehead\n\n"; 
+   }
+
+   print MAIL "\n\n";
+   print MAIL "Thank you\n";
+
+   close (MAIL);
+}                     
+
+sub make_file {
+   # Open The File
+
+   if ($CONFIG{'postdir'})
+   {
+     open(FILE,">$filename");
+     print FILE "To:      $CONFIG{'recipient'}\n";
+     print FILE "Subject: $CONFIG{'subject'}\n";
+     print FILE "Date:    $date\n";
+     print FILE "Below is the result of your feedback form.\n";
+     print FILE "---------------------------------------------------------------------------\n\n";
+
+     foreach $key (sort keys %FORM) {
+	   # Print the name and value pairs in FORM array to html.
+	      print FILE "$key: $FORM{$key}\n";
+          }
+
+     print FILE "---------------------------------------------------------------------------\n";
+
+     close (FILE);
+     }
+}
+     
+sub parse_form {
+      # Get the input
+      read(STDIN, $buffer, $ENV{'CONTENT_LENGTH'});
+      # Split the name-value pairs
+      @@pairs = split(/&/, $buffer);
+
+   foreach $pair (@@pairs) {
+      ($name, $value) = split(/=/, $pair);
+ 
+      $name =~ tr/+/ /;
+      $name =~ s/%([a-fA-F0-9][a-fA-F0-9])/pack("C", hex($1))/eg;
+
+      $value =~ tr/+/ /;
+      $value =~ s/%([a-fA-F0-9][a-fA-F0-9])/pack("C", hex($1))/eg;
+
+      # If they try to include server side includes, erase them, so they
+      # arent a security risk if the html gets returned.  Another 
+      # security hole plugged up.
+
+      $value =~ s/<!--(.|\n)*-->//g;
+
+      # Create two associative arrays here.  One is a configuration array
+      # which includes all fields that this form recognizes.  The other
+      # is for fields which the form does not recognize and will report 
+      # back to the user in the html return page and the e-mail message.
+      # Also determine required fields.
+
+      if ($name eq 'recipient' ||
+          $name eq 'replyaddr' ||
+          $name eq 'replyname' ||
+	  $name eq 'title' ||
+          $name eq 'redirect' ||
+          $name eq 'subject' ||
+	  $name eq 'postdir' ||
+	  $name eq 'body_message' ||
+	  $name eq 'return_link_title' ||
+	  $name eq 'return_link_url' && ($value)) {
+	 
+	 $CONFIG{$name} = $value;
+      }
+      elsif ($name eq 'required') {
+	 @@required = split(/,/,$value);
+      }
+      else {
+	 if ($FORM{$name} && ($value)) {
+	    $FORM{$name} = "$FORM{$name}, $value";
+	 }
+	 elsif ($value) {
+	    $FORM{$name} = $value;
+	 }
+      }
+   }
+}
+
+sub get_date {
+   @@days = ('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
+   @@months = ('January','February','March','April','May','June','July',
+	      'August','September','October','November','December');
+   ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = localtime(time);
+   if ($hour < 10) { $hour = "0$hour"; }
+   if ($min < 10) { $min = "0$min"; }
+   if ($sec < 10) { $sec = "0$sec"; }
+   $year = 1900 + $year;
+   $date = "$days[$wday], $months[$mon] $mday, $year at $hour\:$min\:$sec";
+}
+
+sub redirect {
+  if ($CONFIG{'redirect'}) {
+    print "Location: $CONFIG{'redirect'}\n\n";
+  }
+}
+@

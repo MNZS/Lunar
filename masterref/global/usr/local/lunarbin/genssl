@@ -1,0 +1,67 @@
+#!/usr/bin/perl -w
+
+use strict;
+use Getopt::Long;
+use File::Copy;
+
+# $Id: genssl,v 1.1 2003/04/02 19:08:41 root Exp $
+
+## utility for creating and managing openssl certificates and keys
+
+my $ssl = `which openssl`; chomp $ssl;
+my $certdir = "/usr/local/apache/conf/ssl.crt";
+my $keydir = "/usr/local/apache/conf/ssl.key";
+my $csrdir = "/usr/local/apache/conf/ssl.csr";
+my $rand1 = "/var/log/messages";
+my $rand2 = "/var/log/maillog";
+
+## ensure that we get options
+die "\nYou must enter a fqdn!\nTry running $0 --host www.domain.com\n\n" if ($#ARGV < 0);
+
+## command line options
+my $host;
+my $days;
+my $pass;
+my $tmp;
+my $key;
+my $all;
+my $csr;
+my $pwd;
+my $prod;
+
+GetOptions (	'host=s'	=>	\$host,
+		'days=s'  	=>	\$days,
+		'pass'		=>	\$pass,
+		'tmp'		=>	\$tmp,
+		'key'		=>	\$key,
+		'all'		=>	\$all,
+		'pwd'		=>	\$pwd,
+		'csr'		=>	\$csr,
+		'prod'		=>	\$prod,
+	   );
+
+##
+my $valid_days = $days || "3650";
+my $valid_host = $host || "";
+
+## prompt for password
+
+## ssl options
+my %sslopts = (	key	=>	"genrsa -des3 -rand $rand1:$rand2 -out $valid_host.key 1024",
+		csr	=>	"req -new -key $valid_host.key -out $valid_host.csr",
+		tmp	=>	"x509 -req -days $valid_days -in $valid_host.csr -signkey $valid_host.key -out $valid_host.cert-priv", 
+		pwd	=>	"rsa -des3 < $keydir/$valid_host.key > $keydir/$valid_host.key-tmp",
+           );
+
+## execute
+&genssl;
+
+sub genssl {
+system("$ssl $sslopts{key}") unless ($pwd);
+system("$ssl $sslopts{csr}") unless ($pwd);
+system("$ssl $sslopts{tmp}") unless ($pwd);
+system("$ssl $sslopts{pwd}") if ($pwd);
+move("$host.key","$keydir") if ($prod);
+move("$host.csr","$csrdir") if ($prod);
+move("$host.cert-priv","$certdir") if ($prod);
+}

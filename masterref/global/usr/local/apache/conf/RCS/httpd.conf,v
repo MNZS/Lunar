@@ -1,0 +1,237 @@
+head	1.3;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.3
+date	2003.01.07.01.24.56;	author root;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2003.01.06.22.40.37;	author root;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2003.01.06.22.38.07;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.3
+log
+@added a frontpage include
+@
+text
+@## $Id: httpd.conf,v 1.2 2003/01/06 22:40:37 root Exp root $
+
+### Section 1: Global Environment
+
+#######################################################
+ServerType standalone
+ServerRoot "/usr/local/apache"
+PidFile /usr/local/apache/logs/httpd.pid
+ScoreBoardFile /usr/local/apache/logs/httpd.scoreboard
+ResourceConfig /dev/null 
+AccessConfig /dev/null 
+Timeout 300
+KeepAlive On
+MaxKeepAliveRequests 100
+KeepAliveTimeout 15
+MinSpareServers 5
+MaxSpareServers 10
+StartServers 5
+MaxClients 250
+MaxRequestsPerChild 30000
+
+UseCanonicalName On
+HostnameLookups Off
+ServerSignature Off
+AccessFileName .htaccess
+
+User nobody
+Group nobody
+
+### Section 2  : Global Includes
+Include "/usr/local/apache/conf/include/global/modules"
+Include "/usr/local/apache/conf/include/global/mime-types"
+Include "/usr/local/apache/conf/include/global/icons"
+Include "/usr/local/apache/conf/include/global/indexes"
+Include "/usr/local/apache/conf/include/global/frontpage"
+Include "/usr/local/apache/conf/include/bugfix/http"
+
+##logging
+LogLevel warn
+LogFormat "%h %v %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" combined
+ErrorLog "/var/log/www/system-default.lunarhosting.net
+
+DocumentRoot "/www/lunarhosting.net/pub/public_html"
+
+### Section 3: 'Main' server configuration
+
+<VirtualHost _default_:80>
+
+  ## lunarhosting.net
+  ServerAdmin hosting@@lunarhosting.net
+  DocumentRoot "/www/lunarhosting.net/pub/public_html"
+
+  ## logging 
+  CustomLog /var/log/www/www-xfer.lunarhosting.net combined
+  ErrorLog /var/log/www/www-error.lunarhosting.net
+
+  <Files ~ "^\.ht">
+    Order allow,deny
+    Deny from all
+    Satisfy All
+  </Files>
+
+  # End of aliases.
+
+</VirtualHost>
+
+###########################################################################
+###########################################################################
+
+### Section 3: SSL Configuration 
+
+<IfDefine SSL>
+Listen 80
+Listen 443
+</IfDefine>
+
+##  SSL Global Context
+<IfDefine SSL>
+AddType application/x-x509-ca-cert .crt
+AddType application/x-pkcs7-crl    .crl
+</IfDefine>
+
+<IfModule mod_ssl.c>
+
+SSLPassPhraseDialog  builtin
+
+#SSLSessionCache        shmcb:/usr/local/apache/logs/ssl_scache(512000)
+SSLSessionCache         dbm:/usr/local/apache/logs/ssl_scache
+SSLSessionCacheTimeout  300
+
+SSLMutex  file:/usr/local/apache/logs/ssl_mutex
+
+SSLRandomSeed startup builtin
+SSLRandomSeed connect builtin
+SSLLog      /usr/local/apache/logs/ssl_engine_log
+SSLLogLevel info
+
+</IfModule>
+
+<IfDefine SSL>
+
+##
+## SSL Virtual Host Context
+##
+
+<VirtualHost _default_:443>
+
+  ServerAdmin hosting@@lunarhosting.net
+  DocumentRoot /www/lunarhosting.net/pub/public_html
+
+  ## logging
+  CustomLog /var/log/www/www-xfer.lunarhosting.net combined 
+  ErrorLog "/var/log/www/www-error.lunarhosting.net"
+
+  ## ssl configuration
+  SSLEngine on
+  SSLCipherSuite ALL:!ADH:!EXPORT56:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP:+eNULL
+  SSLCertificateFile /usr/local/apache/conf/ssl.crt/www.lunarhosting.net.cert-priv
+  SSLCertificateKeyFile /usr/local/apache/conf/ssl.key/www.lunarhosting.net.key
+  SSLVerifyDepth 10
+  SSLCACertificateFile /usr/local/apache/conf/ssl.crt/ca-bundle.crt
+  SSLCACertificatePath /usr/local/apache/conf/ssl.crt
+
+  ## bugfixes
+  Include "/usr/local/apache/conf/include/bugfix/https"
+
+  Alias /monitor /usr/local/trends/
+
+</VirtualHost>
+
+</IfDefine>
+
+### Virtual Hosts
+Include "/usr/local/apache/conf/domains.conf"
+
+### Temporary info for installing PHP4
+### Used only for new installations of PHP
+#AddModule mod_php4.c
+#LoadModule php4_module        libexec/libphp4.so
+
+### Frontpage enabled domains
+@
+
+
+1.2
+log
+@configured with host independency
+@
+text
+@d1 1
+a1 1
+## $Id: httpd.conf,v 1.1 2003/01/06 22:38:07 root Exp root $
+d35 1
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 1
+a1 1
+## $Id: httpd.conf,v 1.2 2002/12/13 07:21:01 root Exp $
+d40 1
+a40 1
+ErrorLog "/var/log/www/system-host2.lunarhosting.net
+a50 1
+  ServerName host2.lunarhosting.net
+a55 23
+
+#  ## cgi-bin
+#  ScriptAlias /cgi-bin/ "/www/lunarhosting.net/cgi-bin/"
+#  <Directory "/www/lunarhosting.net/cgi-bin">
+#     AllowOverride None
+#     Options None
+#     Order allow,deny
+#     Allow from all
+#  </Directory>
+
+
+#  <Directory />
+#    Options FollowSymLinks 
+#    AllowOverride None
+#  </Directory>
+
+#  <Directory "/www/lunarhosting.net/pub/public_html">
+#    Options FollowSymLinks Includes
+#    AllowOverride None
+#    Order allow,deny
+#    Allow from all
+#  </Directory>
+
+a106 1
+  ServerName host2.lunarhosting.net
+a109 3
+#  ## aliases
+#  ScriptAlias /cgi-bin/ "/www/lunarhosting.net/cgi-bin/"
+
+a122 4
+#  <Directory "/www/lunarhosting.net/cgi-bin">
+#    SSLOptions +StdEnvVars
+#  </Directory>
+
+@

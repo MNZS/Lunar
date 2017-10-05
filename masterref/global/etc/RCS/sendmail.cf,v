@@ -1,0 +1,3667 @@
+head	1.17;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.17
+date	2003.09.02.20.34.50;	author root;	state Exp;
+branches;
+next	1.16;
+
+1.16
+date	2003.08.07.14.53.44;	author root;	state Exp;
+branches;
+next	1.15;
+
+1.15
+date	2003.07.16.13.26.30;	author root;	state Exp;
+branches;
+next	1.14;
+
+1.14
+date	2003.07.08.21.43.01;	author root;	state Exp;
+branches;
+next	1.13;
+
+1.13
+date	2003.07.03.20.24.25;	author root;	state Exp;
+branches;
+next	1.12;
+
+1.12
+date	2003.06.24.01.30.44;	author root;	state Exp;
+branches;
+next	1.11;
+
+1.11
+date	2003.06.24.01.27.50;	author root;	state Exp;
+branches;
+next	1.10;
+
+1.10
+date	2003.06.20.21.23.55;	author root;	state Exp;
+branches;
+next	1.9;
+
+1.9
+date	2003.06.19.22.07.41;	author root;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	2003.03.25.17.45.22;	author root;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2003.03.25.17.13.39;	author root;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2003.03.25.14.29.20;	author root;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2003.01.06.16.36.39;	author root;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2003.01.06.16.30.32;	author root;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2003.01.06.16.27.07;	author root;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2002.12.31.13.02.23;	author root;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2002.12.30.19.44.23;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.17
+log
+@removed monkey.com
+@
+text
+@#
+# Copyright (c) 1998-2001 Sendmail, Inc. and its suppliers.
+#	All rights reserved.
+# Copyright (c) 1983, 1995 Eric P. Allman.  All rights reserved.
+# Copyright (c) 1988, 1993
+#	The Regents of the University of California.  All rights reserved.
+#
+# By using this file, you agree to the terms and conditions set
+# forth in the LICENSE file which can be found at the top level of
+# the sendmail distribution.
+#
+#
+
+######################################################################
+######################################################################
+#####
+#####		SENDMAIL CONFIGURATION FILE
+#####
+##### built by root@@host1.lunarhosting.net on Tue Sep 2 15:33:45 CDT 2003
+##### in /root
+##### using /usr/share/sendmail-cf/ as configuration include directory
+#####
+######################################################################
+######################################################################
+
+#####  $Id: cfhead.m4,v 8.76.4.16 2001/03/06 22:56:36 ca Exp $  #####
+#####  $Id: cf.m4,v 8.32 1999/02/07 07:26:14 gshapiro Exp $  #####
+
+#####  linux setup for Red Hat Linux and edited for SASL support by Charles  #####
+#####  $Id: linux.m4,v 8.11.16.2 2000/09/17 17:04:22 gshapiro Exp $  #####
+
+
+
+#####  $Id: local_procmail.m4,v 8.21 1999/11/18 05:06:23 ca Exp $  #####
+
+
+
+
+#####  $Id: no_default_msa.m4,v 8.1.10.1 2000/09/17 17:04:22 gshapiro Exp $  #####
+
+#####  $Id: smrsh.m4,v 8.14 1999/11/18 05:06:23 ca Exp $  #####
+
+#####  $Id: mailertable.m4,v 8.18 1999/07/22 17:55:35 gshapiro Exp $  #####
+
+#####  $Id: virtusertable.m4,v 8.16 1999/07/22 17:55:36 gshapiro Exp $  #####
+
+#####  $Id: redirect.m4,v 8.15 1999/08/06 01:47:36 gshapiro Exp $  #####
+
+#####  $Id: always_add_domain.m4,v 8.9 1999/02/07 07:26:08 gshapiro Exp $  #####
+
+#####  $Id: use_cw_file.m4,v 8.9 1999/02/07 07:26:13 gshapiro Exp $  #####
+
+
+#####  $Id: use_ct_file.m4,v 8.9 1999/02/07 07:26:13 gshapiro Exp $  #####
+
+
+#####  $Id: local_procmail.m4,v 8.21 1999/11/18 05:06:23 ca Exp $  #####
+
+#####  $Id: access_db.m4,v 8.15 1999/07/22 17:55:34 gshapiro Exp $  #####
+
+
+
+
+
+#####  $Id: blacklist_recipients.m4,v 8.13 1999/04/02 02:25:13 gshapiro Exp $  #####
+
+#####  $Id: accept_unresolvable_domains.m4,v 8.10 1999/02/07 07:26:07 gshapiro Exp $  #####
+Cwlocalhost.localdomain
+
+
+#####  $Id: proto.m4,v 8.446.2.5.2.44 2001/07/31 22:25:49 gshapiro Exp $  #####
+
+
+# level 9 config file format
+V9/Berkeley
+
+# override file safeties - setting this option compromises system security,
+# addressing the actual file configuration problem is preferred
+# need to set this before any file actions are encountered in the cf file
+#O DontBlameSendmail=safe
+
+# default LDAP map specification
+# need to set this now before any LDAP maps are defined
+#O LDAPDefaultSpec=-h localhost
+
+##################
+#   local info   #
+##################
+
+Cwlocalhost localhost.localdomain
+# file containing names of hosts for which we receive email
+Fw/etc/mail/local-host-names
+
+# my official domain name
+# ... define this only if sendmail cannot automatically determine your domain
+#Dj$w.Foo.COM
+
+CP.
+
+# "Smart" relay host (may be null)
+DS
+
+
+# operators that cannot be in local usernames (i.e., network indicators)
+CO @@ % !
+
+# a class with just dot (for identifying canonical names)
+C..
+
+# a class with just a left bracket (for identifying domain literals)
+C[[
+
+# access_db acceptance class
+C{Accept}OK RELAY
+
+
+
+
+# Hosts for which relaying is permitted ($=R)
+FR-o /etc/mail/relay-domains
+
+# arithmetic map
+Karith arith
+# possible values for tls_connect in access map
+C{tls}VERIFY ENCR
+
+# who I send unqualified names to (null means deliver locally)
+DR
+
+# who gets all local email traffic ($R has precedence for unqualified names)
+DH
+
+# dequoting map
+Kdequote dequote
+
+# class E: names that should be exposed as from this host, even if we masquerade
+# class L: names that should be delivered locally, even if we have a relay
+# class M: domains that should be converted to $M
+# class N: domains that should not be converted to $M
+#CL root
+C{TrustAuthMech}PLAIN LOGIN
+C{E}root
+
+# who I masquerade as (null for no masquerading) (see also $=M)
+DM
+
+# my name for error messages
+DnMAILER-DAEMON
+
+
+# Mailer table (overriding domains)
+Kmailertable hash -o /etc/mail/mailertable.db
+
+# Virtual user table (maps incoming users)
+Kvirtuser hash -o /etc/mail/virtusertable.db
+
+CPREDIRECT
+
+# Access list database (for spam stomping)
+Kaccess hash -o /etc/mail/access.db
+
+# Configuration version number
+DZ8.11.6
+
+
+###############
+#   Options   #
+###############
+
+# strip message body to 7 bits on input?
+O SevenBitInput=False
+
+# 8-bit data handling
+#O EightBitMode=pass8
+
+# wait for alias file rebuild (default units: minutes)
+O AliasWait=10
+
+# location of alias file
+O AliasFile=/etc/aliases
+
+# minimum number of free blocks on filesystem
+O MinFreeBlocks=100
+
+# maximum message size
+O MaxMessageSize=10000000
+
+# substitution for space (blank) characters
+O BlankSub=.
+
+# avoid connecting to "expensive" mailers on initial submission?
+O HoldExpensive=False
+
+# checkpoint queue runs after every N successful deliveries
+#O CheckpointInterval=10
+
+# default delivery mode
+O DeliveryMode=background
+
+# automatically rebuild the alias database?
+# NOTE: There is a potential for a denial of service attack if this is set.
+#       This option is deprecated and will be removed from a future version.
+O AutoRebuildAliases
+
+# error message header/file
+#O ErrorHeader=/etc/mail/error-header
+
+# error mode
+#O ErrorMode=print
+
+# save Unix-style "From_" lines at top of header?
+#O SaveFromLine=False
+
+# temporary file mode
+O TempFileMode=0600
+
+# match recipients against GECOS field?
+#O MatchGECOS=False
+
+# maximum hop count
+#O MaxHopCount=17
+
+# location of help file
+O HelpFile=/etc/mail/helpfile
+
+# ignore dots as terminators in incoming messages?
+#O IgnoreDots=False
+
+# name resolver options
+#O ResolverOptions=+AAONLY
+
+# deliver MIME-encapsulated error messages?
+O SendMimeErrors=True
+
+# Forward file search path
+O ForwardPath=$z/.forward.$w:$z/.forward
+
+# open connection cache size
+O ConnectionCacheSize=2
+
+# open connection cache timeout
+O ConnectionCacheTimeout=5m
+
+# persistent host status directory
+#O HostStatusDirectory=.hoststat
+
+# single thread deliveries (requires HostStatusDirectory)?
+#O SingleThreadDelivery=False
+
+# use Errors-To: header?
+O UseErrorsTo=False
+
+# log level
+O LogLevel=9
+
+# send to me too, even in an alias expansion?
+#O MeToo=True
+
+# verify RHS in newaliases?
+O CheckAliases=False
+
+# default messages to old style headers if no special punctuation?
+O OldStyleHeaders=True
+
+# SMTP daemon options
+O DaemonPortOptions=Name=MTA
+
+# SMTP client options
+#O ClientPortOptions=Address=0.0.0.0
+
+# privacy flags
+O PrivacyOptions=authwarnings,novrfy,noexpn,restrictqrun
+
+# who (if anyone) should get extra copies of error messages
+#O PostmasterCopy=Postmaster
+
+# slope of queue-only function
+#O QueueFactor=600000
+
+# queue directory
+O QueueDirectory=/var/spool/mqueue
+
+# timeouts (many of these)
+#O Timeout.initial=5m
+O Timeout.connect=1m
+#O Timeout.iconnect=5m
+#O Timeout.helo=5m
+#O Timeout.mail=10m
+#O Timeout.rcpt=1h
+#O Timeout.datainit=5m
+#O Timeout.datablock=1h
+#O Timeout.datafinal=1h
+#O Timeout.rset=5m
+#O Timeout.quit=2m
+#O Timeout.misc=2m
+#O Timeout.command=1h
+O Timeout.ident=0s
+#O Timeout.fileopen=60s
+#O Timeout.control=2m
+O Timeout.queuereturn=5d
+#O Timeout.queuereturn.normal=5d
+#O Timeout.queuereturn.urgent=2d
+#O Timeout.queuereturn.non-urgent=7d
+O Timeout.queuewarn=4h
+#O Timeout.queuewarn.normal=4h
+#O Timeout.queuewarn.urgent=1h
+#O Timeout.queuewarn.non-urgent=12h
+#O Timeout.hoststatus=30m
+#O Timeout.resolver.retrans=5s
+#O Timeout.resolver.retrans.first=5s
+#O Timeout.resolver.retrans.normal=5s
+#O Timeout.resolver.retry=4
+#O Timeout.resolver.retry.first=4
+#O Timeout.resolver.retry.normal=4
+
+# should we not prune routes in route-addr syntax addresses?
+#O DontPruneRoutes=False
+
+# queue up everything before forking?
+O SuperSafe=True
+
+# status file
+O StatusFile=/etc/mail/statistics
+
+# time zone handling:
+#  if undefined, use system default
+#  if defined but null, use TZ envariable passed in
+#  if defined and non-null, use that info
+#O TimeZoneSpec=
+
+# default UID (can be username or userid:groupid)
+O DefaultUser=8:12
+
+# list of locations of user database file (null means no lookup)
+O UserDatabaseSpec=/etc/mail/userdb.db
+
+# fallback MX host
+#O FallbackMXhost=fall.back.host.net
+
+# if we are the best MX host for a site, try it directly instead of config err
+O TryNullMXList=true
+
+# load average at which we just queue messages
+#O QueueLA=8
+
+# load average at which we refuse connections
+#O RefuseLA=12
+
+# maximum number of children we allow at one time
+#O MaxDaemonChildren=12
+
+# maximum number of new connections per second
+#O ConnectionRateThrottle=0
+
+# work recipient factor
+#O RecipientFactor=30000
+
+# deliver each queued job in a separate process?
+#O ForkEachJob=False
+
+# work class factor
+#O ClassFactor=1800
+
+# work time factor
+#O RetryFactor=90000
+
+# shall we sort the queue by hostname first?
+#O QueueSortOrder=priority
+
+# minimum time in queue before retry
+#O MinQueueAge=30m
+
+# default character set
+#O DefaultCharSet=iso-8859-1
+
+# service switch file (ignored on Solaris, Ultrix, OSF/1, others)
+#O ServiceSwitchFile=/etc/mail/service.switch
+
+# hosts file (normally /etc/hosts)
+#O HostsFile=/etc/hosts
+
+# dialup line delay on connection failure
+#O DialDelay=10s
+
+# action to take if there are no recipients in the message
+#O NoRecipientAction=add-to-undisclosed
+
+# chrooted environment for writing to files
+#O SafeFileEnvironment=/arch
+
+# are colons OK in addresses?
+#O ColonOkInAddr=True
+
+# how many jobs can you process in the queue?
+#O MaxQueueRunSize=10000
+
+# shall I avoid expanding CNAMEs (violates protocols)?
+#O DontExpandCnames=False
+
+# SMTP initial login message (old $e macro)
+O SmtpGreetingMessage=$j
+
+# UNIX initial From header format (old $l macro)
+O UnixFromLine=From $g $d
+
+# From: lines that have embedded newlines are unwrapped onto one line
+#O SingleLineFromHeader=False
+
+# Allow HELO SMTP command that does not include a host name
+#O AllowBogusHELO=False
+
+# Characters to be quoted in a full name phrase (@@,;:\()[] are automatic)
+#O MustQuoteChars=.
+
+# delimiter (operator) characters (old $o macro)
+O OperatorChars=.:%@@!^/[]+
+
+# shall I avoid calling initgroups(3) because of high NIS costs?
+#O DontInitGroups=False
+
+# are group-writable :include: and .forward files (un)trustworthy?
+#O UnsafeGroupWrites=True
+
+# where do errors that occur when sending errors get sent?
+#O DoubleBounceAddress=postmaster
+
+# where to save bounces if all else fails
+#O DeadLetterDrop=/var/tmp/dead.letter
+
+# what user id do we assume for the majority of the processing?
+#O RunAsUser=sendmail
+
+# maximum number of recipients per SMTP envelope
+#O MaxRecipientsPerMessage=100
+
+# shall we get local names from our installed interfaces?
+O DontProbeInterfaces=true
+
+# Return-Receipt-To: header implies DSN request
+#O RrtImpliesDsn=False
+
+# override connection address (for testing)
+#O ConnectOnlyTo=0.0.0.0
+
+# Trusted user for file ownership and starting the daemon
+#O TrustedUser=root
+
+# Control socket for daemon management
+#O ControlSocketName=/var/spool/mqueue/.control
+
+# Maximum MIME header length to protect MUAs
+#O MaxMimeHeaderLength=0/0
+
+# Maximum length of the sum of all headers
+#O MaxHeadersLength=32768
+
+# Maximum depth of alias recursion
+#O MaxAliasRecursion=10
+
+# location of pid file
+#O PidFile=/var/run/sendmail.pid
+
+# Prefix string for the process title shown on 'ps' listings
+#O ProcessTitlePrefix=prefix
+
+# Data file (df) memory-buffer file maximum size
+#O DataFileBufferSize=4096
+
+# Transcript file (xf) memory-buffer file maximum size
+#O XscriptFileBufferSize=4096
+
+# list of authentication mechanisms
+O AuthMechanisms=PLAIN LOGIN
+
+# default authentication information for outgoing connections
+#O DefaultAuthInfo=/etc/mail/default-auth-info
+
+# SMTP AUTH flags
+O AuthOptions=A
+
+
+
+# CA directory
+#O CACERTPath
+# CA file
+#O CACERTFile
+# Server Cert
+#O ServerCertFile
+# Server private key
+#O ServerKeyFile
+# Client Cert
+#O ClientCertFile
+# Client private key
+#O ClientKeyFile
+# DHParameters (only required if DSA/DH is used)
+#O DHParameters
+# Random data source (required for systems without /dev/urandom under OpenSSL)
+#O RandFile
+
+
+
+###########################
+#   Message precedences   #
+###########################
+
+Pfirst-class=0
+Pspecial-delivery=100
+Plist=-30
+Pbulk=-60
+Pjunk=-100
+
+#####################
+#   Trusted users   #
+#####################
+
+# this is equivalent to setting class "t"
+Ft/etc/mail/trusted-users
+Troot
+Tdaemon
+Tuucp
+
+#########################
+#   Format of headers   #
+#########################
+
+H?P?Return-Path: <$g>
+HReceived: $?sfrom $s $.$?_($?s$|from $.$_)
+	$.$?{auth_type}(authenticated$?{auth_ssf} (${auth_ssf} bits)$.)
+	$.by $j ($v/$Z)$?r with $r$. id $i$?{tls_version}
+	(using ${tls_version} with cipher ${cipher} (${cipher_bits} bits) verified ${verify})$.$?u
+	for $u; $|;
+	$.$b
+H?D?Resent-Date: $a
+H?D?Date: $a
+H?F?Resent-From: $?x$x <$g>$|$g$.
+H?F?From: $?x$x <$g>$|$g$.
+H?x?Full-Name: $x
+# HPosted-Date: $a
+# H?l?Received-Date: $b
+H?M?Resent-Message-Id: <$t.$i@@$j>
+H?M?Message-Id: <$t.$i@@$j>
+
+#
+######################################################################
+######################################################################
+#####
+#####			REWRITING RULES
+#####
+######################################################################
+######################################################################
+
+############################################
+###  Ruleset 3 -- Name Canonicalization  ###
+############################################
+Scanonify=3
+
+# handle null input (translate to <@@> special case)
+R$@@			$@@ <@@>
+
+# strip group: syntax (not inside angle brackets!) and trailing semicolon
+R$*			$: $1 <@@>			mark addresses
+R$* < $* > $* <@@>	$: $1 < $2 > $3			unmark <addr>
+R@@ $* <@@>		$: @@ $1				unmark @@host:...
+R$* :: $* <@@>		$: $1 :: $2			unmark node::addr
+R:include: $* <@@>	$: :include: $1			unmark :include:...
+R$* [ IPv6 : $+ ] <@@>	$: $1 [ IPv6 : $2 ]		unmark IPv6 addr
+R$* : $* [ $* ]		$: $1 : $2 [ $3 ] <@@>		remark if leading colon
+R$* : $* <@@>		$: $2				strip colon if marked
+R$* <@@>			$: $1				unmark
+R$* ;			   $1				strip trailing semi
+R$* < $+ :; > $*	$@@ $2 :; <@@>			catch <list:;>
+R$* < $* ; >		   $1 < $2 >			bogus bracketed semi
+
+# null input now results from list:; syntax
+R$@@			$@@ :; <@@>
+
+# strip angle brackets -- note RFC733 heuristic to get innermost item
+R$*			$: < $1 >			housekeeping <>
+R$+ < $* >		   < $2 >			strip excess on left
+R< $* > $+		   < $1 >			strip excess on right
+R<>			$@@ < @@ >			MAIL FROM:<> case
+R< $+ >			$: $1				remove housekeeping <>
+
+# strip route address <@@a,@@b,@@c:user@@d> -> <user@@d>
+R@@ $+ , $+		$2
+R@@ $+ : $+		$2
+
+# find focus for list syntax
+R $+ : $* ; @@ $+	$@@ $>Canonify2 $1 : $2 ; < @@ $3 >	list syntax
+R $+ : $* ;		$@@ $1 : $2;			list syntax
+
+# find focus for @@ syntax addresses
+R$+ @@ $+		$: $1 < @@ $2 >			focus on domain
+R$+ < $+ @@ $+ >		$1 $2 < @@ $3 >			move gaze right
+R$+ < @@ $+ >		$@@ $>Canonify2 $1 < @@ $2 >	already canonical
+
+# do some sanity checking
+R$* < @@ $* : $* > $*	$1 < @@ $2 $3 > $4		nix colons in addrs
+
+# convert old-style addresses to a domain-based address
+R$- ! $+		$@@ $>Canonify2 $2 < @@ $1 .UUCP >	resolve uucp names
+R$+ . $- ! $+		$@@ $>Canonify2 $3 < @@ $1 . $2 >		domain uucps
+R$+ ! $+		$@@ $>Canonify2 $2 < @@ $1 .UUCP >	uucp subdomains
+
+# if we have % signs, take the rightmost one
+R$* % $*		$1 @@ $2				First make them all @@s.
+R$* @@ $* @@ $*		$1 % $2 @@ $3			Undo all but the last.
+R$* @@ $*		$@@ $>Canonify2 $1 < @@ $2 >	Insert < > and finish
+
+# else we must be a local name
+R$*			$@@ $>Canonify2 $1
+
+
+################################################
+###  Ruleset 96 -- bottom half of ruleset 3  ###
+################################################
+
+SCanonify2=96
+
+# handle special cases for local names
+R$* < @@ localhost > $*		$: $1 < @@ $j . > $2		no domain at all
+R$* < @@ localhost . localdomain > $*		$: $1 < @@ $j . > $2		no domain at all
+R$* < @@ localhost . $m > $*	$: $1 < @@ $j . > $2		local domain
+R$* < @@ localhost . UUCP > $*	$: $1 < @@ $j . > $2		.UUCP domain
+
+# check for IPv6 domain literal (save quoted form)
+R$* < @@ [ IPv6 : $+ ] > $*	$: $2 $| $1 < @@@@ [ $(dequote $2 $) ] > $3	mark IPv6 addr
+R$+ $| $* < @@@@ $=w > $*		$: $2 < @@ $j . > $4		self-literal
+R$+ $| $* < @@@@ [ $+ ] > $*	$@@ $2 < @@ [ IPv6 : $1 ] > $4	canon IP addr
+
+# check for IPv4 domain literal
+R$* < @@ [ $+ ] > $*		$: $1 < @@@@ [ $2 ] > $3		mark [a.b.c.d]
+R$* < @@@@ $=w > $*		$: $1 < @@ $j . > $3		self-literal
+R$* < @@@@ $+ > $*		$@@ $1 < @@ $2 > $3		canon IP addr
+
+
+
+
+
+# if really UUCP, handle it immediately
+
+# try UUCP traffic as a local address
+R$* < @@ $+ . UUCP > $*		$: $1 < @@ $[ $2 $] . UUCP . > $3
+R$* < @@ $+ . . UUCP . > $*	$@@ $1 < @@ $2 . > $3
+
+# hostnames ending in class P are always canonical
+R$* < @@ $* $=P > $*		$: $1 < @@ $2 $3 . > $4
+R$* < @@ $* $~P > $*		$: $&{daemon_flags} $| $1 < @@ $2 $3 > $4
+R$* CC $* $| $* < @@ $+.$+ > $*	$: $3 < @@ $4.$5 . > $6
+R$* CC $* $| $*			$: $3
+# pass to name server to make hostname canonical
+R$* $| $* < @@ $* > $*		$: $2 < @@ $[ $3 $] > $4
+R$* $| $*			$: $2
+
+# local host aliases and pseudo-domains are always canonical
+R$* < @@ $=w > $*		$: $1 < @@ $2 . > $3
+R$* < @@ $=M > $*		$: $1 < @@ $2 . > $3
+R$* < @@ $={VirtHost} > $* 	$: $1 < @@ $2 . > $3
+R$* < @@ $* . . > $*		$1 < @@ $2 . > $3
+
+
+##################################################
+###  Ruleset 4 -- Final Output Post-rewriting  ###
+##################################################
+Sfinal=4
+
+R$+ :; <@@>		$@@ $1 :				handle <list:;>
+R$* <@@>			$@@				handle <> and list:;
+
+# strip trailing dot off possibly canonical name
+R$* < @@ $+ . > $*	$1 < @@ $2 > $3
+
+# eliminate internal code
+R$* < @@ *LOCAL* > $*	$1 < @@ $j > $2
+
+# externalize local domain info
+R$* < $+ > $*		$1 $2 $3			defocus
+R@@ $+ : @@ $+ : $+	@@ $1 , @@ $2 : $3		<route-addr> canonical
+R@@ $*			$@@ @@ $1				... and exit
+
+# UUCP must always be presented in old form
+R$+ @@ $- . UUCP		$2!$1				u@@h.UUCP => h!u
+
+# delete duplicate local names
+R$+ % $=w @@ $=w		$1 @@ $2				u%host@@host => u@@host
+
+
+
+##############################################################
+###   Ruleset 97 -- recanonicalize and call ruleset zero   ###
+###		   (used for recursive calls)		   ###
+##############################################################
+
+SRecurse=97
+R$*			$: $>canonify $1
+R$*			$@@ $>parse $1
+
+
+######################################
+###   Ruleset 0 -- Parse Address   ###
+######################################
+
+Sparse=0
+
+R$*			$: $>Parse0 $1		initial parsing
+R<@@>			$#local $: <@@>		special case error msgs
+R$*			$: $>ParseLocal $1	handle local hacks
+R$*			$: $>Parse1 $1		final parsing
+
+#
+#  Parse0 -- do initial syntax checking and eliminate local addresses.
+#	This should either return with the (possibly modified) input
+#	or return with a #error mailer.  It should not return with a
+#	#mailer other than the #error mailer.
+#
+
+SParse0
+R<@@>			$@@ <@@>			special case error msgs
+R$* : $* ; <@@>		$#error $@@ 5.1.3 $: "553 List:; syntax illegal for recipient addresses"
+R@@ <@@ $* >		< @@ $1 >		catch "@@@@host" bogosity
+R<@@ $+>			$#error $@@ 5.1.3 $: "553 User address required"
+R$*			$: <> $1
+R<> $* < @@ [ $+ ] > $*	$1 < @@ [ $2 ] > $3
+R<> $* <$* : $* > $*	$#error $@@ 5.1.3 $: "553 Colon illegal in host name part"
+R<> $*			$1
+R$* < @@ . $* > $*	$#error $@@ 5.1.2 $: "553 Invalid host name"
+R$* < @@ $* .. $* > $*	$#error $@@ 5.1.2 $: "553 Invalid host name"
+R$* , $~O $*		$#error $@@ 5.1.2 $: "553 Invalid route address"
+
+# now delete the local info -- note $=O to find characters that cause forwarding
+R$* < @@ > $*		$@@ $>Parse0 $>canonify $1	user@@ => user
+R< @@ $=w . > : $*	$@@ $>Parse0 $>canonify $2	@@here:... -> ...
+R$- < @@ $=w . >		$: $(dequote $1 $) < @@ $2 . >	dequote "foo"@@here
+R< @@ $+ >		$#error $@@ 5.1.3 $: "553 User address required"
+R$* $=O $* < @@ $=w . >	$@@ $>Parse0 $>canonify $1 $2 $3	...@@here -> ...
+R$- 			$: $(dequote $1 $) < @@ *LOCAL* >	dequote "foo"
+R< @@ *LOCAL* >		$#error $@@ 5.1.3 $: "553 User address required"
+R$* $=O $* < @@ *LOCAL* >
+			$@@ $>Parse0 $>canonify $1 $2 $3	...@@*LOCAL* -> ...
+R$* < @@ *LOCAL* >	$: $1
+
+#
+#  Parse1 -- the bottom half of ruleset 0.
+#
+
+SParse1
+
+# handle numeric address spec
+R$* < @@ [ $+ ] > $*	$: $>ParseLocal $1 < @@ [ $2 ] > $3	numeric internet spec
+R$* < @@ [ $+ ] > $*	$1 < @@ [ $2 ] : $S > $3		Add smart host to path
+R$* < @@ [ IPv6 : $+ ] : > $*
+		$#esmtp $@@ [ $(dequote $2 $) ] $: $1 < @@ [IPv6 : $2 ] > $3	no smarthost: send
+R$* < @@ [ $+ ] : > $*	$#esmtp $@@ [$2] $: $1 < @@ [$2] > $3	no smarthost: send
+R$* < @@ [ $+ ] : $- : $*> $*	$#$3 $@@ $4 $: $1 < @@ [$2] > $5	smarthost with mailer
+R$* < @@ [ $+ ] : $+ > $*	$#esmtp $@@ $3 $: $1 < @@ [$2] > $4	smarthost without mailer
+
+# handle virtual users
+R$+			$: <!> $1		Mark for lookup
+R<!> $+ < @@ $={VirtHost} . > 	$: < $(virtuser $1 @@ $2 $@@ $1 $: @@ $) > $1 < @@ $2 . >
+R<!> $+ < @@ $=w . > 	$: < $(virtuser $1 @@ $2 $@@ $1 $: @@ $) > $1 < @@ $2 . >
+R<@@> $+ + $* < @@ $* . >
+			$: < $(virtuser $1 + * @@ $3 $@@ $1 $@@ $2 $: @@ $) > $1 + $2 < @@ $3 . >
+R<@@> $+ + $* < @@ $* . >
+			$: < $(virtuser $1 @@ $3 $@@ $1 $: @@ $) > $1 + $2 < @@ $3 . >
+R<@@> $+ + $+ < @@ $+ . >	$: < $(virtuser + * @@ $3 $@@ $1 $@@ $2 $: @@ $) > $1 + $2 < @@ $3 . >
+R<@@> $+ + $* < @@ $+ . >	$: < $(virtuser @@ $3 $@@ $1 $@@ $2 $: @@ $) > $1 + $2 < @@ $3 . >
+R<@@> $+ < @@ $+ . >	$: < $(virtuser @@ $2 $@@ $1 $: @@ $) > $1 < @@ $2 . >
+R<@@> $+			$: $1
+R<!> $+			$: $1
+R< error : $-.$-.$- : $+ > $* 	$#error $@@ $1.$2.$3 $: $4
+R< error : $- $+ > $* 	$#error $@@ $(dequote $1 $) $: $2
+R< $+ > $+ < @@ $+ >	$: $>Recurse $1
+
+# short circuit local delivery so forwarded email works
+
+
+R$=L < @@ $=w . >	$#local $: @@ $1			special local names
+R$+ < @@ $=w . >		$#local $: $1			regular local name
+
+# not local -- try mailer table lookup
+R$* <@@ $+ > $*		$: < $2 > $1 < @@ $2 > $3	extract host name
+R< $+ . > $*		$: < $1 > $2			strip trailing dot
+R< $+ > $*		$: < $(mailertable $1 $) > $2	lookup
+R< $~[ : $* > $* 	$>MailerToTriple < $1 : $2 > $3		check -- resolved?
+R< $+ > $*		$: $>Mailertable <$1> $2		try domain
+
+# resolve remotely connected UUCP links (if any)
+
+# resolve fake top level domains by forwarding to other hosts
+
+
+
+# pass names that still have a host to a smarthost (if defined)
+R$* < @@ $* > $*		$: $>MailerToTriple < $S > $1 < @@ $2 > $3	glue on smarthost name
+
+# deal with other remote names
+R$* < @@$* > $*		$#esmtp $@@ $2 $: $1 < @@ $2 > $3	user@@host.domain
+
+# handle locally delivered names
+R$=L			$#local $: @@ $1		special local names
+R$+			$#local $: $1			regular local names
+
+###########################################################################
+###   Ruleset 5 -- special rewriting after aliases have been expanded   ###
+###########################################################################
+
+SLocal_localaddr
+Slocaladdr=5
+R$+			$: $1 $| $>"Local_localaddr" $1
+R$+ $| $#$*		$#$2
+R$+ $| $*		$: $1
+
+
+
+
+# deal with plussed users so aliases work nicely
+R$+ + *			$#local $@@ $&h $: $1
+R$+ + $*		$#local $@@ + $2 $: $1 + *
+
+# prepend an empty "forward host" on the front
+R$+			$: <> $1
+
+
+# see if we have a relay or a hub
+R< > $+			$: < $H > $1			try hub
+R< > $+			$: < $R > $1			try relay
+
+R< > $+			$: < > < $1 <> $&h >		nope, restore +detail
+R< > < $+ <> + $* >	$: < > < $1 + $2 >		check whether +detail
+R< > < $+ <> $* >	$: < > < $1 >			else discard
+R< > < $+ + $* > $*	   < > < $1 > + $2 $3		find the user part
+R< > < $+ > + $*	$#local $@@ $2 $: @@ $1		strip the extra +
+R< > < $+ >		$@@ $1				no +detail
+R$+			$: $1 <> $&h			add +detail back in
+R$+ <> + $*		$: $1 + $2			check whether +detail
+R$+ <> $*		$: $1				else discard
+R< local : $* > $*	$: $>MailerToTriple < local : $1 > $2	no host extension
+R< error : $* > $*	$: $>MailerToTriple < error : $1 > $2	no host extension
+R< $- : $+ > $+		$: $>MailerToTriple < $1 : $2 > $3 < @@ $2 >
+R< $+ > $+		$@@ $>MailerToTriple < $1 > $2 < @@ $1 >
+
+###################################################################
+###  Ruleset 90 -- try domain part of mailertable entry 	###
+###################################################################
+
+SMailertable=90
+R$* <$- . $+ > $*	$: $1$2 < $(mailertable .$3 $@@ $1$2 $@@ $2 $) > $4
+R$* <$~[ : $* > $*	$>MailerToTriple < $2 : $3 > $4		check -- resolved?
+R$* < . $+ > $* 	$@@ $>Mailertable $1 . <$2> $3		no -- strip & try again
+R$* < $* > $*		$: < $(mailertable . $@@ $1$2 $) > $3	try "."
+R< $~[ : $* > $*	$>MailerToTriple < $1 : $2 > $3		"." found?
+R< $* > $*		$@@ $2				no mailertable match
+
+###################################################################
+###  Ruleset 95 -- canonify mailer:[user@@]host syntax to triple	###
+###################################################################
+
+SMailerToTriple=95
+R< > $*				$@@ $1			strip off null relay
+R< error : $-.$-.$- : $+ > $* 	$#error $@@ $1.$2.$3 $: $4
+R< error : $- $+ > $*		$#error $@@ $(dequote $1 $) $: $2
+R< local : $* > $*		$>CanonLocal < $1 > $2
+R< $- : $+ @@ $+ > $*<$*>$*	$# $1 $@@ $3 $: $2<@@$3>	use literal user
+R< $- : $+ > $*			$# $1 $@@ $2 $: $3	try qualified mailer
+R< $=w > $*			$@@ $2			delete local host
+R< [ IPv6 : $+ ] > $*		$#relay $@@ $(dequote $1 $) $: $2	use unqualified mailer
+R< $+ > $*			$#relay $@@ $1 $: $2	use unqualified mailer
+
+###################################################################
+###  Ruleset CanonLocal -- canonify local: syntax		###
+###################################################################
+
+SCanonLocal
+# strip local host from routed addresses
+R< $* > < @@ $+ > : $+		$@@ $>Recurse $3
+R< $* > $+ $=O $+ < @@ $+ >	$@@ $>Recurse $2 $3 $4
+
+# strip trailing dot from any host name that may appear
+R< $* > $* < @@ $* . >		$: < $1 > $2 < @@ $3 >
+
+# handle local: syntax -- use old user, either with or without host
+R< > $* < @@ $* > $*		$#local $@@ $1@@$2 $: $1
+R< > $+				$#local $@@ $1    $: $1
+
+# handle local:user@@host syntax -- ignore host part
+R< $+ @@ $+ > $* < @@ $* >	$: < $1 > $3 < @@ $4 >
+
+# handle local:user syntax
+R< $+ > $* <@@ $* > $*		$#local $@@ $2@@$3 $: $1
+R< $+ > $* 			$#local $@@ $2    $: $1
+
+###################################################################
+###  Ruleset 93 -- convert header names to masqueraded form	###
+###################################################################
+
+SMasqHdr=93
+
+
+# do not masquerade anything in class N
+R$* < @@ $* $=N . >	$@@ $1 < @@ $2 $3 . >
+
+# special case the users that should be exposed
+R$=E < @@ *LOCAL* >	$@@ $1 < @@ $j . >		leave exposed
+R$=E < @@ $=M . >	$@@ $1 < @@ $2 . >
+R$=E < @@ $=w . >	$@@ $1 < @@ $2 . >
+
+# handle domain-specific masquerading
+R$* < @@ $=M . > $*	$: $1 < @@ $2 . @@ $M > $3	convert masqueraded doms
+R$* < @@ $=w . > $*	$: $1 < @@ $2 . @@ $M > $3
+R$* < @@ *LOCAL* > $*	$: $1 < @@ $j . @@ $M > $2
+R$* < @@ $+ @@ > $*	$: $1 < @@ $2 > $3		$M is null
+R$* < @@ $+ @@ $+ > $*	$: $1 < @@ $3 . > $4		$M is not null
+
+###################################################################
+###  Ruleset 94 -- convert envelope names to masqueraded form	###
+###################################################################
+
+SMasqEnv=94
+R$* < @@ *LOCAL* > $*	$: $1 < @@ $j . > $2
+
+###################################################################
+###  Ruleset 98 -- local part of ruleset zero (can be null)	###
+###################################################################
+
+SParseLocal=98
+
+# addresses sent to foo@@host.REDIRECT will give a 551 error code
+R$* < @@ $+ .REDIRECT. >		$: $1 < @@ $2 . REDIRECT . > < ${opMode} >
+R$* < @@ $+ .REDIRECT. > <i>	$: $1 < @@ $2 . REDIRECT. >
+R$* < @@ $+ .REDIRECT. > < $- >	$#error $@@ 5.1.1 $: "551 User has moved; please try " <$1@@$2>
+
+
+
+
+######################################################################
+###  LookUpDomain -- search for domain in access database
+###
+###	Parameters:
+###		<$1> -- key (domain name)
+###		<$2> -- default (what to return if not found in db)
+###		<$3> -- passthru (additional data passed unchanged through)
+###		<$4> -- mark (must be <(!|+) single-token>)
+###			! does lookup only with tag
+###			+ does lookup with and without tag
+######################################################################
+
+SLookUpDomain
+R<[IPv6 : $+]> <$+> <$*> <$*>	$: <[$(dequote $1 $)]> <$2> <$3> <$4>
+R<$*> <$+> <$*> <$- $->		$: < $(access $5:$1 $: ? $) > <$1> <$2> <$3> <$4 $5>
+R<?> <$+> <$+> <$*> <+ $*>	$: < $(access $1 $: ? $) > <$1> <$2> <$3> <+ $4>
+R<?> <[$+.$-]> <$+> <$*> <$*>	$@@ $>LookUpDomain <[$1]> <$3> <$4> <$5>
+R<?> <[$+::$-]> <$+> <$*> <$*>	$: $>LookUpDomain <[$1]> <$3> <$4> <$5>
+R<?> <[$+:$-]> <$+> <$*> <$*>	$: $>LookUpDomain <[$1]> <$3> <$4> <$5>
+R<?> <$+.$+> <$+> <$*> <$*>	$@@ $>LookUpDomain <$2> <$3> <$4> <$5>
+R<?> <$+> <$+> <$*> <$*>	$@@ <$2> <$3>
+R<$*> <$+> <$+> <$*> <$*>	$@@ <$1> <$4>
+
+######################################################################
+###  LookUpAddress -- search for host address in access database
+###
+###	Parameters:
+###		<$1> -- key (dot quadded host address)
+###		<$2> -- default (what to return if not found in db)
+###		<$3> -- passthru (additional data passed through)
+###		<$4> -- mark (must be <(!|+) single-token>)
+###			! does lookup only with tag
+###			+ does lookup with and without tag
+######################################################################
+
+SLookUpAddress
+R<$+> <$+> <$*> <$- $+>		$: < $(access $5:$1 $: ? $) > <$1> <$2> <$3> <$4 $5>
+R<?> <$+> <$+> <$*> <+ $+>	$: < $(access $1 $: ? $) > <$1> <$2> <$3> <+ $4>
+R<?> <$+::$-> <$+> <$*> <$*>	$@@ $>LookUpAddress <$1> <$3> <$4> <$5>
+R<?> <$+:$-> <$+> <$*> <$*>	$@@ $>LookUpAddress <$1> <$3> <$4> <$5>
+R<?> <$+.$-> <$+> <$*> <$*>	$@@ $>LookUpAddress <$1> <$3> <$4> <$5>
+R<?> <$+> <$+> <$*> <$*>	$@@ <$2> <$3>
+R<$*> <$+> <$+> <$*> <$*>	$@@ <$1> <$4>
+
+######################################################################
+###  CanonAddr --	Convert an address into a standard form for
+###			relay checking.  Route address syntax is
+###			crudely converted into a %-hack address.
+###
+###	Parameters:
+###		$1 -- full recipient address
+###
+###	Returns:
+###		parsed address, not in source route form
+######################################################################
+
+SCanonAddr
+R$*			$: $>Parse0 $>canonify $1	make domain canonical
+
+
+######################################################################
+###  ParseRecipient --	Strip off hosts in $=R as well as possibly
+###			$* $=m or the access database.
+###			Check user portion for host separators.
+###
+###	Parameters:
+###		$1 -- full recipient address
+###
+###	Returns:
+###		parsed, non-local-relaying address
+######################################################################
+
+SParseRecipient
+R$*				$: <?> $>CanonAddr $1
+R<?> $* < @@ $* . >		<?> $1 < @@ $2 >			strip trailing dots
+R<?> $- < @@ $* >		$: <?> $(dequote $1 $) < @@ $2 >	dequote local part
+
+# if no $=O character, no host in the user portion, we are done
+R<?> $* $=O $* < @@ $* >		$: <NO> $1 $2 $3 < @@ $4>
+R<?> $*				$@@ $1
+
+
+
+R<NO> $* < @@ $* $=R >		$: <RELAY> $1 < @@ $2 $3 >
+R<NO> $* < @@ $+ >		$: $>LookUpDomain <$2> <NO> <$1 < @@ $2 >> <+To>
+R<$+> <$+>			$: <$1> $2
+
+
+R<RELAY> $* < @@ $* >		$@@ $>ParseRecipient $1
+R<$-> $*			$@@ $2
+
+
+######################################################################
+###  check_relay -- check hostname/address on SMTP startup
+######################################################################
+
+SLocal_check_relay
+Scheck_relay
+R$*			$: $1 $| $>"Local_check_relay" $1
+R$* $| $* $| $#$*	$#$3
+R$* $| $* $| $*		$@@ $>"Basic_check_relay" $1 $| $2
+
+SBasic_check_relay
+# check for deferred delivery mode
+R$*			$: < ${deliveryMode} > $1
+R< d > $*		$@@ deferred
+R< $* > $*		$: $2
+
+R$+ $| $+		$: $>LookUpDomain < $1 > <?> < $2 > <+Connect>
+R<?> <$+>		$: $>LookUpAddress < $1 > <?> < $1 > <+Connect>	no: another lookup
+R<?> < $+ >		$: $1					found nothing
+R<$={Accept}> < $* >	$@@ $1				return value of lookup
+R<REJECT> $*		$#error $@@ 5.7.1 $: "550 Access denied"
+R<DISCARD> $*		$#discard $: discard
+R<ERROR:$-.$-.$-:$+> <$*>	$#error $@@ $1.$2.$3 $: $4
+R<ERROR:$+> <$*>		$#error $: $1
+R<$+> <$*>		$#error $: $1
+
+
+# DNS based IP address spam list list.dsbl.org
+R$*			$: $&{client_addr}
+R::ffff:$-.$-.$-.$-	$: <?> $(host $4.$3.$2.$1.list.dsbl.org. $: OK $)
+R$-.$-.$-.$-		$: <?> $(host $4.$3.$2.$1.list.dsbl.org. $: OK $)
+R<?>OK			$: OKSOFAR
+R<?>$+			$#error $@@ 5.7.1 $: "550 Mail from " $&{client_addr} " refused by blackhole site list.dsbl.org"
+
+# DNS based IP address spam list bl.spamcop.net
+R$*			$: $&{client_addr}
+R::ffff:$-.$-.$-.$-	$: <?> $(host $4.$3.$2.$1.bl.spamcop.net. $: OK $)
+R$-.$-.$-.$-		$: <?> $(host $4.$3.$2.$1.bl.spamcop.net. $: OK $)
+R<?>OK			$: OKSOFAR
+R<?>$+			$#error $@@ 5.7.1 $: "550 Mail from " $&{client_addr} " refused by blackhole site bl.spamcop.net"
+
+# DNS based IP address spam list sbl.spamhaus.org
+R$*			$: $&{client_addr}
+R::ffff:$-.$-.$-.$-	$: <?> $(host $4.$3.$2.$1.sbl.spamhaus.org. $: OK $)
+R$-.$-.$-.$-		$: <?> $(host $4.$3.$2.$1.sbl.spamhaus.org. $: OK $)
+R<?>OK			$: OKSOFAR
+R<?>$+			$#error $@@ 5.7.1 $: "550 Mail from " $&{client_addr} " refused by blackhole site sbl.spamhaus.org"
+
+# DNS based IP address spam list relays.ordb.org
+R$*			$: $&{client_addr}
+R::ffff:$-.$-.$-.$-	$: <?> $(host $4.$3.$2.$1.relays.ordb.org. $: OK $)
+R$-.$-.$-.$-		$: <?> $(host $4.$3.$2.$1.relays.ordb.org. $: OK $)
+R<?>OK			$: OKSOFAR
+R<?>$+			$#error $@@ 5.7.1 $: "550 Mail from " $&{client_addr} " refused by blackhole site relays.ordb.org"
+
+
+######################################################################
+###  check_mail -- check SMTP `MAIL FROM:' command argument
+######################################################################
+
+SLocal_check_mail
+Scheck_mail
+R$*			$: $1 $| $>"Local_check_mail" $1
+R$* $| $#$*		$#$2
+R$* $| $*		$@@ $>"Basic_check_mail" $1
+
+SBasic_check_mail
+# check for deferred delivery mode
+R$*			$: < ${deliveryMode} > $1
+R< d > $*		$@@ deferred
+R< $* > $*		$: $2
+
+# authenticated?
+R$*			$: $1 $| $>"tls_client" $&{verify} $| MAIL
+R$* $| $#$+		$#$2
+R$* $| $*		$: $1
+
+R<>			$@@ <OK>			we MUST accept <> (RFC 1123)
+R$+			$: <?> $1
+R<?><$+>		$: <@@> <$1>
+R<?>$+			$: <@@> <$1>
+R$*			$: $&{daemon_flags} $| $1
+R$* f $* $| <@@> < $* @@ $- >	$: < ? $&{client_name} > < $3 @@ $4 >
+R$* u $* $| <@@> < $* >	$: <?> < $3 >
+R$* $| $*		$: $2
+# handle case of @@localhost on address
+R<@@> < $* @@ localhost >	$: < ? $&{client_name} > < $1 @@ localhost >
+R<@@> < $* @@ localhost.localdomain >	$: < ? $&{client_name} > < $1 @@ localhost.localdomain >
+R<@@> < $* @@ [127.0.0.1] >
+			$: < ? $&{client_name} > < $1 @@ [127.0.0.1] >
+R<@@> < $* @@ localhost.$m >
+			$: < ? $&{client_name} > < $1 @@ localhost.$m >
+R<@@> < $* @@ localhost.UUCP >
+			$: < ? $&{client_name} > < $1 @@ localhost.UUCP >
+R<@@> $*			$: $1			no localhost as domain
+R<? $=w> $*		$: $2			local client: ok
+R<? $+> <$+>		$#error $@@ 5.5.4 $: "553 Real domain name required for sender address"
+R<?> $*			$: $1
+R$*			$: <?> $>CanonAddr $1		canonify sender address and mark it
+R<?> $* < @@ $+ . >	<?> $1 < @@ $2 >			strip trailing dots
+# handle non-DNS hostnames (*.bitnet, *.decnet, *.uucp, etc)
+R<?> $* < @@ $* $=P >	$: <OK> $1 < @@ $2 $3 >
+R<?> $* < @@ $+ >	$: <OK> $1 < @@ $2 >		... unresolvable OK
+
+# check sender address: user@@address, user@@, address
+R<$+> $+ < @@ $* >	$: @@<$1> <$2 < @@ $3 >> $| <F:$2@@$3> <U:$2@@> <H:$3>
+R<$+> $+		$: @@<$1> <$2> $| <U:$2@@>
+R@@ <$+> <$*> $| <$+>	$: <@@> <$1> <$2> $| $>SearchList <+From> $| <$3> <>
+R<@@> <$+> <$*> $| <$*>	$: <$3> <$1> <$2>		reverse result
+# retransform for further use
+R<?> <$+> <$*>		$: <$1> $2	no match
+R<$+> <$+> <$*>		$: <$1> $3	relevant result, keep it
+
+# handle case of no @@domain on address
+R<?> $*			$: $&{daemon_flags} $| <?> $1
+R$* u $* $| <?> $*	$: <OK> $3
+R$* $| $*		$: $2
+R<?> $*			$: < ? $&{client_name} > $1
+R<?> $*			$@@ <OK>				...local unqualed ok
+R<? $+> $*		$#error $@@ 5.5.4 $: "553 Domain name required for sender address " $&f
+							...remote is not
+# check results
+R<?> $*			$: @@ $1		mark address: nothing known about it
+R<OK> $*		$@@ <OK>
+R<TEMP> $*		$#error $@@ 4.1.8 $: "451 Domain of sender address " $&f " does not resolve"
+R<PERM> $*		$#error $@@ 5.1.8 $: "553 Domain of sender address " $&f " does not exist"
+R<$={Accept}> $*	$# $1
+R<DISCARD> $*		$#discard $: discard
+R<REJECT> $*		$#error $@@ 5.7.1 $: "550 Access denied"
+R<ERROR:$-.$-.$-:$+> $*		$#error $@@ $1.$2.$3 $: $4
+R<ERROR:$+> $*		$#error $: $1
+R<$+> $*		$#error $: $1		error from access db
+
+######################################################################
+###  check_rcpt -- check SMTP `RCPT TO:' command argument
+######################################################################
+
+SLocal_check_rcpt
+Scheck_rcpt
+R$*			$: $1 $| $>"Local_check_rcpt" $1
+R$* $| $#$*		$#$2
+R$* $| $*		$@@ $>"Basic_check_rcpt" $1
+
+SBasic_check_rcpt
+# check for deferred delivery mode
+R$*			$: < ${deliveryMode} > $1
+R< d > $*		$@@ deferred
+R< $* > $*		$: $2
+
+
+R$*			$: $>ParseRecipient $1		strip relayable hosts
+
+
+
+# blacklist local users or any host from receiving mail
+R$*			$: <?> $1
+R<?> $+ < @@ $=w >	$: <> <$1 < @@ $2 >> $| <F:$1@@$2> <U:$1@@> <H:$2>
+R<?> $+ < @@ $* >	$: <> <$1 < @@ $2 >> $| <F:$1@@$2> <H:$2>
+R<?> $+			$: <> <$1> $| <U:$1@@>
+R<> <$*> $| <$+>	$: <@@> <$1> $| $>SearchList <+To> $| <$2> <>
+R<@@> <$*> $| <$*>	$: <$2> <$1>		reverse result
+R<?> <$*>		$: @@ $1		mark address as no match
+R<$={Accept}> <$*>	$: @@ $2		mark address as no match
+
+R<REJECT> $*		$#error $@@ 5.2.1 $: "550 Mailbox disabled for this recipient"
+R<DISCARD> $*		$#discard $: discard
+R<ERROR:$-.$-.$-:$+> $*		$#error $@@ $1.$2.$3 $: $4
+R<ERROR:$+> $*		$#error $: $1
+R<$+> $*		$#error $: $1		error from access db
+R@@ $*			$1		remove mark
+
+
+# authenticated?
+R$*		$: $1 $| $>RelayAuth $1 $| $&{verify}	client authenticated?
+R$* $| $# $+		$# $2				error/ok?
+R$* $| $*		$: $1				no
+
+# authenticated by a trusted mechanism?
+R$*			$: $1 $| $&{auth_type}
+R$* $|			$: $1
+R$* $| $={TrustAuthMech}	$# RELAYAUTH
+R$* $| $*		$: $1
+# anything terminating locally is ok
+R$+ < @@ $=w >		$@@ RELAYTO
+R$+ < @@ $* $=R >	$@@ RELAYTO
+R$+ < @@ $+ >		$: $>LookUpDomain <$2> <?> <$1 < @@ $2 >> <+To>
+R<RELAY> $*		$@@ RELAYTO
+R<$*> <$*>		$: $2
+
+
+
+# check for local user (i.e. unqualified address)
+R$*			$: <?> $1
+R<?> $* < @@ $+ >	$: <REMOTE> $1 < @@ $2 >
+# local user is ok
+R<?> $+			$@@ RELAYTOLOCAL
+R<$+> $*		$: $2
+
+# anything originating locally is ok
+# check IP address
+R$*			$: $&{client_addr}
+R$@@			$@@ RELAYFROM		originated locally
+R0			$@@ RELAYFROM		originated locally
+R$=R $*			$@@ RELAYFROM		relayable IP address
+R$*			$: $>LookUpAddress <$1> <?> <$1> <+Connect>
+R<RELAY> $* 		$@@ RELAYFROM		relayable IP address
+R<$*> <$*>		$: $2
+R$*			$: [ $1 ]		put brackets around it...
+R$=w			$@@ RELAYFROM		... and see if it is local
+
+
+# check client name: first: did it resolve?
+R$*			$: < $&{client_resolve} >
+R<TEMP>			$#error $@@ 4.7.1 $: "450 Relaying temporarily denied. Cannot resolve PTR record for " $&{client_addr}
+R<FORGED>		$#error $@@ 5.7.1 $: "550 Relaying denied. IP name possibly forged " $&{client_name}
+R<FAIL>			$#error $@@ 5.7.1 $: "550 Relaying denied. IP name lookup failed " $&{client_name}
+R$*			$: <?> $&{client_name}
+# pass to name server to make hostname canonical
+R<?> $* $~P 		$:<?>  $[ $1 $2 $]
+R$* .			$1			strip trailing dots
+R<?>			$@@ RELAYFROM
+R<?> $=w		$@@ RELAYFROM
+R<?> $* $=R			$@@ RELAYFROM
+R<?> $*			$: $>LookUpDomain <$1> <?> <$1> <+Connect>
+R<RELAY> $*		$@@ RELAYFROM
+R<$*> <$*>		$: $2
+
+# anything else is bogus
+R$*			$#error $@@ 5.7.1 $: "550 Relaying denied"
+
+######################################################################
+###  SearchList: search a list of items in the access map
+###	Parameters:
+###		<exact tag> $| <mark:address> <mark:address> ... <>
+###	where "exact" is either "+" or "!":
+###	<+ TAG>	lookup with and w/o tag
+###	<! TAG>	lookup with tag
+###	possible values for "mark" are:
+###		H: recursive host lookup (LookUpDomain)
+###		E: exact lookup, no modifications
+###		F: full lookup, try user+ext@@domain and user@@domain
+###		U: user lookup, try user+ext and user (input must have trailing @@)
+###	return: <RHS of lookup> or <?> (not found)
+######################################################################
+
+# class with valid marks for SearchList
+C{src}E F H U
+SSearchList
+# mark H: lookup domain
+R<$+> $| <H:$+> <$*>		$: <$1> $| <@@> $>LookUpDomain <$2> <?> <$3> <$1>
+R<$+> $| <@@> <$+> <$*>		$: <$1> $| <$2> <$3>
+R<$- $-> $| <$={src}:$+> <$*>	$: <$1 $2> $| <$(access $2:$4 $: $3:$4 $)> <$5>
+R<+ $-> $| <$={src}:$+> <$*>	$: <+ $1> $| <$(access $3 $: $2:$3 $)> <$4>
+R<$- $-> $| <F:$* + $*@@$+> <$*>	$: <$1 $2> $| <$(access $2:$3@@$5 $: F:$3 + $4@@$5$)> <$6>
+R<+ $-> $| <F:$* + $*@@$+> <$*>	$: <+ $1> $| <$(access $2@@$4 $: F:$2 + $3@@$4$)> <$5>
+R<$- $-> $| <U:$* + $*> <$*>	$: <$1 $2> $| <$(access $2:$3@@ $: U:$3 + $4$)> <$5>
+R<+ $-> $| <U:$* + $*> <$*>	$: <+ $1> $| <$(access $2@@ $: U:$2 + $3$)> <$4>
+R<$+> $| <$={src}:$+> <$+>	$@@ $>SearchList <$1> $| <$4>
+R<$+> $| <$={src}:$+> <>	$@@ <?>
+R<$+> $| <$+> <$*>		$@@ <$2>
+R<$+> $| <$+>			$@@ <$2>
+
+# is user trusted to authenticate as someone else?
+Strust_auth
+R$*			$: $&{auth_type} $| $1
+# required by RFC 2554 section 4.
+R$@@ $| $*		$#error $@@ 5.7.1 $: "550 not authenticated"
+R$* $| $&{auth_authen}		$@@ identical
+R$* $| <$&{auth_authen}>	$@@ identical
+R$* $| $*		$: $1 $| $>"Local_trust_auth" $1
+R$* $| $#$*		$#$2
+R$*			$#error $@@ 5.7.1 $: "550 " $&{auth_authen} " not allowed to act as " $&{auth_author}
+
+SLocal_trust_auth
+
+
+# is connection with client "good" enough? (done in server)
+# input: ${verify} $| (MAIL|STARTTLS)
+Stls_client
+R$* $| $*	$: $1 $| $>LookUpDomain <$&{client_name}> <?> <> <! TLS_Clt>
+R$* $| <?>$*	$: $1 $| $>LookUpAddress <$&{client_addr}> <?> <> <! TLS_Clt>
+R$* $| <?>$*	$: $1 $| <$(access TLS_Clt: $: ? $)>
+R$*		$@@ $>"tls_connection" $1
+
+# is connection with server "good" enough? (done in client)
+# input: ${verify}
+Stls_server
+R$*		$: $1 $| $>LookUpDomain <$&{server_name}> <?> <> <! TLS_Srv>
+R$* $| <?>$*	$: $1 $| $>LookUpAddress <$&{server_addr}> <?> <> <! TLS_Srv>
+R$* $| <?>$*	$: $1 $| <$(access TLS_Srv: $: ? $)>
+R$*		$@@ $>"tls_connection" $1
+
+Stls_connection
+R$* $| <$*>$*			$: $1 $| <$2>
+R$* $| <PERM + $={tls} $*>	$: $1 $| <503:5.7.0> <$2 $3>
+R$* $| <TEMP + $={tls} $*>	$: $1 $| <403:4.7.0> <$2 $3>
+R$* $| <$={tls} $*>		$: $1 $| <403:4.7.0> <$2 $3>
+RSOFTWARE $| <$-:$+> $* 	$#error $@@ $2 $: $1 " TLS handshake failed."
+RSOFTWARE $| $* 		$#error $@@ 4.7.0 $: "403 TLS handshake failed."
+R$* $| <$*> <VERIFY>		$: <$2> <VERIFY> $1
+R$* $| <$*> <$={tls}:$->$*	$: <$2> <$3:$4> $1
+R$* $| $*			$@@ OK
+# authentication required: give appropriate error
+# other side did authenticate (via STARTTLS)
+R<$*><VERIFY> OK		$@@ OK
+R<$*><VERIFY:$-> OK		$: <$1> <REQ:$2>
+R<$*><ENCR:$-> $*		$: <$1> <REQ:$2>
+R<$-:$+><VERIFY $*>		$#error $@@ $2 $: $1 " authentication required"
+R<$-:$+><VERIFY $*> FAIL	$#error $@@ $2 $: $1 " authentication failed"
+R<$-:$+><VERIFY $*> NO		$#error $@@ $2 $: $1 " not authenticated"
+R<$-:$+><VERIFY $*> NONE	$#error $@@ $2 $: $1 " other side does not support STARTTLS"
+R<$-:$+><VERIFY $*> $+		$#error $@@ $2 $: $1 " authentication failure " $4
+R<$*><REQ:$->			$: <$1> <REQ:$2> $>max $&{cipher_bits} : $&{auth_ssf}
+R<$*><REQ:$-> $-		$: <$1> <$2:$3> $(arith l $@@ $3 $@@ $2 $)
+R<$-:$+><$-:$-> TRUE		$#error $@@ $2 $: $1 " encryption too weak " $4 " less than " $3
+
+Smax
+R:		$: 0
+R:$-		$: $1
+R$-:		$: $1
+R$-:$-		$: $(arith l $@@ $1 $@@ $2 $) : $1 : $2
+RTRUE:$-:$-	$: $2
+R$-:$-:$-	$: $2
+
+SRelayAuth
+# authenticated?
+R$* $| OK		$: $1
+R$* $| $*		$@@ NO		not authenticated
+R$*			$: $1 $| $&{cert_issuer}
+R$* $| $+		$: $1 $| $(access CERTISSUER:$2 $)
+R$* $| RELAY		$# RELAYCERTISSUER
+R$* $| SUBJECT		$: $1 $| <@@> $&{cert_subject}
+R$* $| <@@> $+		$: $1 $| <@@> $(access CERTSUBJECT:$2 $)
+R$* $| <@@> RELAY	$# RELAYCERTSUBJECT
+R$* $| $*		$: $1
+
+
+#
+######################################################################
+######################################################################
+#####
+#####			MAILER DEFINITIONS
+#####
+######################################################################
+######################################################################
+
+#####################################
+###   SMTP Mailer specification   ###
+#####################################
+
+#####  $Id: smtp.m4,v 8.56.2.1.2.3 2000/09/25 13:53:27 ca Exp $  #####
+
+#
+#  common sender and masquerading recipient rewriting
+#
+SMasqSMTP=61
+R$* < @@ $* > $*		$@@ $1 < @@ $2 > $3		already fully qualified
+R$+			$@@ $1 < @@ *LOCAL* >		add local qualification
+
+#
+#  convert pseudo-domain addresses to real domain addresses
+#
+SPseudoToReal=51
+
+# pass <route-addr>s through
+R< @@ $+ > $*		$@@ < @@ $1 > $2			resolve <route-addr>
+
+# output fake domains as user%fake@@relay
+
+# do UUCP heuristics; note that these are shared with UUCP mailers
+R$+ < @@ $+ .UUCP. >	$: < $2 ! > $1			convert to UUCP form
+R$+ < @@ $* > $*		$@@ $1 < @@ $2 > $3		not UUCP form
+
+# leave these in .UUCP form to avoid further tampering
+R< $&h ! > $- ! $+	$@@ $2 < @@ $1 .UUCP. >
+R< $&h ! > $-.$+ ! $+	$@@ $3 < @@ $1.$2 >
+R< $&h ! > $+		$@@ $1 < @@ $&h .UUCP. >
+R< $+ ! > $+		$: $1 ! $2 < @@ $Y >		use UUCP_RELAY
+R$+ < @@ $+ : $+ >	$@@ $1 < @@ $3 >			strip mailer: part
+R$+ < @@ >		$: $1 < @@ *LOCAL* >		if no UUCP_RELAY
+
+
+#
+#  envelope sender rewriting
+#
+SEnvFromSMTP=11
+R$+			$: $>PseudoToReal $1		sender/recipient common
+R$* :; <@@>		$@@				list:; special case
+R$*			$: $>MasqSMTP $1		qualify unqual'ed names
+R$+			$: $>MasqEnv $1			do masquerading
+
+
+#
+#  envelope recipient rewriting --
+#  also header recipient if not masquerading recipients
+#
+SEnvToSMTP=21
+R$+			$: $>PseudoToReal $1		sender/recipient common
+R$+			$: $>MasqSMTP $1		qualify unqual'ed names
+R$* < @@ *LOCAL* > $*	$: $1 < @@ $j . > $2
+
+#
+#  header sender and masquerading header recipient rewriting
+#
+SHdrFromSMTP=31
+R$+			$: $>PseudoToReal $1		sender/recipient common
+R:; <@@>			$@@				list:; special case
+
+# do special header rewriting
+R$* <@@> $*		$@@ $1 <@@> $2			pass null host through
+R< @@ $* > $*		$@@ < @@ $1 > $2			pass route-addr through
+R$*			$: $>MasqSMTP $1		qualify unqual'ed names
+R$+			$: $>MasqHdr $1			do masquerading
+
+
+#
+#  relay mailer header masquerading recipient rewriting
+#
+SMasqRelay=71
+R$+			$: $>MasqSMTP $1
+R$+			$: $>MasqHdr $1
+
+Msmtp,		P=[IPC], F=mDFMuX, S=EnvFromSMTP/HdrFromSMTP, R=EnvToSMTP, E=\r\n, L=990,
+		T=DNS/RFC822/SMTP,
+		A=TCP $h
+Mesmtp,		P=[IPC], F=mDFMuXa, S=EnvFromSMTP/HdrFromSMTP, R=EnvToSMTP, E=\r\n, L=990,
+		T=DNS/RFC822/SMTP,
+		A=TCP $h
+Msmtp8,		P=[IPC], F=mDFMuX8, S=EnvFromSMTP/HdrFromSMTP, R=EnvToSMTP, E=\r\n, L=990,
+		T=DNS/RFC822/SMTP,
+		A=TCP $h
+Mdsmtp,		P=[IPC], F=mDFMuXa%, S=EnvFromSMTP/HdrFromSMTP, R=EnvToSMTP, E=\r\n, L=990,
+		T=DNS/RFC822/SMTP,
+		A=TCP $h
+Mrelay,		P=[IPC], F=mDFMuXa8, S=EnvFromSMTP/HdrFromSMTP, R=MasqSMTP, E=\r\n, L=2040,
+		T=DNS/RFC822/SMTP,
+		A=TCP $h
+
+
+######################*****##############
+###   PROCMAIL Mailer specification   ###
+##################*****##################
+
+#####  $Id: procmail.m4,v 8.20 1999/10/18 04:57:54 gshapiro Exp $  #####
+
+Mprocmail,	P=/usr/bin/procmail, F=DFMSPhnu9, S=EnvFromSMTP/HdrFromSMTP, R=EnvToSMTP/HdrFromSMTP,
+		T=DNS/RFC822/X-Unix,
+		A=procmail -Y -m $h $f $u
+
+
+##################################################
+###   Local and Program Mailer specification   ###
+##################################################
+
+#####  $Id: local.m4,v 8.50.16.2 2000/09/17 17:04:22 gshapiro Exp $  #####
+
+#
+#  Envelope sender rewriting
+#
+SEnvFromL=10
+R<@@>			$n			errors to mailer-daemon
+R@@ <@@ $*>		$n			temporarily bypass Sun bogosity
+R$+			$: $>AddDomain $1	add local domain if needed
+R$*			$: $>MasqEnv $1		do masquerading
+
+#
+#  Envelope recipient rewriting
+#
+SEnvToL=20
+R$+ < @@ $* >		$: $1			strip host part
+
+#
+#  Header sender rewriting
+#
+SHdrFromL=30
+R<@@>			$n			errors to mailer-daemon
+R@@ <@@ $*>		$n			temporarily bypass Sun bogosity
+R$+			$: $>AddDomain $1	add local domain if needed
+R$*			$: $>MasqHdr $1		do masquerading
+
+#
+#  Header recipient rewriting
+#
+SHdrToL=40
+R$+			$: $>AddDomain $1	add local domain if needed
+R$* < @@ *LOCAL* > $*	$: $1 < @@ $j . > $2
+
+#
+#  Common code to add local domain name (only if always-add-domain)
+#
+SAddDomain=50
+R$* < @@ $* > $* 	$@@ $1 < @@ $2 > $3	already fully qualified
+R$+			$@@ $1 < @@ *LOCAL* >	add local qualification
+
+Mlocal,		P=/usr/bin/procmail, F=lsDFMAw5:/|@@qSPfhn9, S=EnvFromL/HdrFromL, R=EnvToL/HdrToL,
+		T=DNS/RFC822/X-Unix,
+		A=procmail -t -Y -a $h -d $u
+Mprog,		P=/usr/sbin/smrsh, F=lsDFMoqeu9, S=EnvFromL/HdrFromL, R=EnvToL/HdrToL, D=$z:/,
+		T=X-Unix/X-Unix/X-Unix,
+		A=smrsh -c $u
+
+@
+
+
+1.16
+log
+@Added new monkeys dnsbl
+@
+text
+@d19 1
+a19 1
+##### built by root@@host1.lunarhosting.net on Thu Aug 7 09:52:08 CDT 2003
+a64 1
+
+a1081 7
+# DNS based IP address spam list proxies.relays.monkeys.com
+R$*			$: $&{client_addr}
+R::ffff:$-.$-.$-.$-	$: <?> $(host $4.$3.$2.$1.proxies.relays.monkeys.com. $: OK $)
+R$-.$-.$-.$-		$: <?> $(host $4.$3.$2.$1.proxies.relays.monkeys.com. $: OK $)
+R<?>OK			$: OKSOFAR
+R<?>$+			$#error $@@ 5.7.1 $: "550 Mail from " $&{client_addr} " refused by blackhole site proxies.relays.monkeys.com"
+
+@
+
+
+1.15
+log
+@increased max message to 10M
+@
+text
+@d19 1
+a19 1
+##### built by root@@host1.lunarhosting.net on Tue Jul 8 16:42:27 CDT 2003
+d26 2
+a27 2
+#####  $Id: sendmail.cf,v 1.14 2003/07/08 21:43:01 root Exp root $  #####
+#####  $Id: sendmail.cf,v 1.14 2003/07/08 21:43:01 root Exp root $  #####
+d30 1
+a30 1
+#####  $Id: sendmail.cf,v 1.14 2003/07/08 21:43:01 root Exp root $  #####
+d34 1
+a34 1
+#####  $Id: sendmail.cf,v 1.14 2003/07/08 21:43:01 root Exp root $  #####
+d39 1
+a39 1
+#####  $Id: sendmail.cf,v 1.14 2003/07/08 21:43:01 root Exp root $  #####
+d41 1
+a41 1
+#####  $Id: sendmail.cf,v 1.14 2003/07/08 21:43:01 root Exp root $  #####
+d43 1
+a43 1
+#####  $Id: sendmail.cf,v 1.14 2003/07/08 21:43:01 root Exp root $  #####
+d45 1
+a45 1
+#####  $Id: sendmail.cf,v 1.14 2003/07/08 21:43:01 root Exp root $  #####
+d47 1
+a47 1
+#####  $Id: sendmail.cf,v 1.14 2003/07/08 21:43:01 root Exp root $  #####
+d49 1
+a49 1
+#####  $Id: sendmail.cf,v 1.14 2003/07/08 21:43:01 root Exp root $  #####
+d51 1
+a51 1
+#####  $Id: sendmail.cf,v 1.14 2003/07/08 21:43:01 root Exp root $  #####
+d54 1
+a54 1
+#####  $Id: sendmail.cf,v 1.14 2003/07/08 21:43:01 root Exp root $  #####
+d57 1
+a57 1
+#####  $Id: sendmail.cf,v 1.14 2003/07/08 21:43:01 root Exp root $  #####
+d59 1
+a59 1
+#####  $Id: sendmail.cf,v 1.14 2003/07/08 21:43:01 root Exp root $  #####
+a64 1
+#####  $Id: sendmail.cf,v 1.14 2003/07/08 21:43:01 root Exp root $  #####
+d66 3
+a68 1
+#####  $Id: sendmail.cf,v 1.14 2003/07/08 21:43:01 root Exp root $  #####
+d72 1
+a72 1
+#####  $Id: sendmail.cf,v 1.14 2003/07/08 21:43:01 root Exp root $  #####
+d1083 7
+d1385 1
+a1385 1
+#####  $Id: sendmail.cf,v 1.14 2003/07/08 21:43:01 root Exp root $  #####
+d1478 1
+a1478 1
+#####  $Id: sendmail.cf,v 1.14 2003/07/08 21:43:01 root Exp root $  #####
+d1489 1
+a1489 1
+#####  $Id: sendmail.cf,v 1.14 2003/07/08 21:43:01 root Exp root $  #####
+@
+
+
+1.14
+log
+@removed multihop
+@
+text
+@d26 2
+a27 2
+#####  $Id: cfhead.m4,v 8.76.4.16 2001/03/06 22:56:36 ca Exp $  #####
+#####  $Id: cf.m4,v 8.32 1999/02/07 07:26:14 gshapiro Exp $  #####
+d30 1
+a30 1
+#####  $Id: linux.m4,v 8.11.16.2 2000/09/17 17:04:22 gshapiro Exp $  #####
+d34 1
+a34 1
+#####  $Id: local_procmail.m4,v 8.21 1999/11/18 05:06:23 ca Exp $  #####
+d39 1
+a39 1
+#####  $Id: no_default_msa.m4,v 8.1.10.1 2000/09/17 17:04:22 gshapiro Exp $  #####
+d41 1
+a41 1
+#####  $Id: smrsh.m4,v 8.14 1999/11/18 05:06:23 ca Exp $  #####
+d43 1
+a43 1
+#####  $Id: mailertable.m4,v 8.18 1999/07/22 17:55:35 gshapiro Exp $  #####
+d45 1
+a45 1
+#####  $Id: virtusertable.m4,v 8.16 1999/07/22 17:55:36 gshapiro Exp $  #####
+d47 1
+a47 1
+#####  $Id: redirect.m4,v 8.15 1999/08/06 01:47:36 gshapiro Exp $  #####
+d49 1
+a49 1
+#####  $Id: always_add_domain.m4,v 8.9 1999/02/07 07:26:08 gshapiro Exp $  #####
+d51 1
+a51 1
+#####  $Id: use_cw_file.m4,v 8.9 1999/02/07 07:26:13 gshapiro Exp $  #####
+d54 1
+a54 1
+#####  $Id: use_ct_file.m4,v 8.9 1999/02/07 07:26:13 gshapiro Exp $  #####
+d57 1
+a57 1
+#####  $Id: local_procmail.m4,v 8.21 1999/11/18 05:06:23 ca Exp $  #####
+d59 1
+a59 1
+#####  $Id: access_db.m4,v 8.15 1999/07/22 17:55:34 gshapiro Exp $  #####
+d65 1
+a65 1
+#####  $Id: blacklist_recipients.m4,v 8.13 1999/04/02 02:25:13 gshapiro Exp $  #####
+d67 1
+a67 1
+#####  $Id: accept_unresolvable_domains.m4,v 8.10 1999/02/07 07:26:07 gshapiro Exp $  #####
+d71 1
+a71 1
+#####  $Id: proto.m4,v 8.446.2.5.2.44 2001/07/31 22:25:49 gshapiro Exp $  #####
+d186 1
+a186 1
+O MaxMessageSize=5000000
+d1377 1
+a1377 1
+#####  $Id: smtp.m4,v 8.56.2.1.2.3 2000/09/25 13:53:27 ca Exp $  #####
+d1470 1
+a1470 1
+#####  $Id: procmail.m4,v 8.20 1999/10/18 04:57:54 gshapiro Exp $  #####
+d1481 1
+a1481 1
+#####  $Id: local.m4,v 8.50.16.2 2000/09/17 17:04:22 gshapiro Exp $  #####
+@
+
+
+1.13
+log
+@Added another rbl
+@
+text
+@d19 1
+a19 1
+##### built by root@@host1.lunarhosting.net on Thu Jul 3 15:22:39 CDT 2003
+a64 1
+
+d186 1
+a186 1
+O MaxMessageSize=10000000
+a1053 7
+# DNS based IP address spam list multihop.dsbl.org
+R$*			$: $&{client_addr}
+R::ffff:$-.$-.$-.$-	$: <?> $(host $4.$3.$2.$1.multihop.dsbl.org. $: OK $)
+R$-.$-.$-.$-		$: <?> $(host $4.$3.$2.$1.multihop.dsbl.org. $: OK $)
+R<?>OK			$: OKSOFAR
+R<?>$+			$#error $@@ 5.7.1 $: "550 Mail from " $&{client_addr} " refused by blackhole site multihop.dsbl.org"
+
+@
+
+
+1.12
+log
+@typo
+@
+text
+@d19 1
+a19 1
+##### built by root@@host1.lunarhosting.net on Mon Jun 23 20:30:05 CDT 2003
+d65 1
+d1055 7
+@
+
+
+1.11
+log
+@removed sendmail version from telnet login
+@
+text
+@d19 1
+a19 1
+##### built by root@@host1.lunarhosting.net on Mon Jun 23 20:26:10 CDT 2003
+d401 1
+a401 1
+O SmtpGreetingMessage=$j ESMTP
+@
+
+
+1.10
+log
+@Added 3 more DNS blacklists
+@
+text
+@d19 1
+a19 1
+##### built by root@@host1.lunarhosting.net on Fri Jun 20 16:22:25 CDT 2003
+d401 1
+a401 1
+O SmtpGreetingMessage=$j Sendmail $v/$Z; $b
+@
+
+
+1.9
+log
+@lowered max message size to 3M
+@
+text
+@d19 2
+a20 2
+##### built by root@@host1.lunarhosting.net on Mon Jan 6 10:36:08 CST 2003
+##### in /etc/mail/mc
+d26 2
+a27 2
+#####  $Id: sendmail.cf,v 1.8 2003/03/25 17:45:22 root Exp root $  #####
+#####  $Id: sendmail.cf,v 1.8 2003/03/25 17:45:22 root Exp root $  #####
+d30 1
+a30 1
+#####  $Id: sendmail.cf,v 1.8 2003/03/25 17:45:22 root Exp root $  #####
+d34 1
+a34 1
+#####  $Id: sendmail.cf,v 1.8 2003/03/25 17:45:22 root Exp root $  #####
+d39 1
+a39 1
+#####  $Id: sendmail.cf,v 1.8 2003/03/25 17:45:22 root Exp root $  #####
+d41 1
+a41 1
+#####  $Id: sendmail.cf,v 1.8 2003/03/25 17:45:22 root Exp root $  #####
+d43 1
+a43 1
+#####  $Id: sendmail.cf,v 1.8 2003/03/25 17:45:22 root Exp root $  #####
+d45 1
+a45 1
+#####  $Id: sendmail.cf,v 1.8 2003/03/25 17:45:22 root Exp root $  #####
+d47 1
+a47 1
+#####  $Id: sendmail.cf,v 1.8 2003/03/25 17:45:22 root Exp root $  #####
+d49 1
+a49 1
+#####  $Id: sendmail.cf,v 1.8 2003/03/25 17:45:22 root Exp root $  #####
+d51 1
+a51 1
+#####  $Id: sendmail.cf,v 1.8 2003/03/25 17:45:22 root Exp root $  #####
+d54 1
+a54 1
+#####  $Id: sendmail.cf,v 1.8 2003/03/25 17:45:22 root Exp root $  #####
+d57 1
+a57 1
+#####  $Id: sendmail.cf,v 1.8 2003/03/25 17:45:22 root Exp root $  #####
+d59 1
+a59 1
+#####  $Id: sendmail.cf,v 1.8 2003/03/25 17:45:22 root Exp root $  #####
+a61 1
+#####  $Id: sendmail.cf,v 1.8 2003/03/25 17:45:22 root Exp root $  #####
+d63 5
+a67 1
+#####  $Id: sendmail.cf,v 1.8 2003/03/25 17:45:22 root Exp root $  #####
+d71 1
+a71 1
+#####  $Id: sendmail.cf,v 1.8 2003/03/25 17:45:22 root Exp root $  #####
+d186 1
+a186 1
+O MaxMessageSize=3000000
+d1054 14
+d1075 7
+d1377 1
+a1377 1
+#####  $Id: sendmail.cf,v 1.8 2003/03/25 17:45:22 root Exp root $  #####
+d1470 1
+a1470 1
+#####  $Id: sendmail.cf,v 1.8 2003/03/25 17:45:22 root Exp root $  #####
+d1481 1
+a1481 1
+#####  $Id: sendmail.cf,v 1.8 2003/03/25 17:45:22 root Exp root $  #####
+@
+
+
+1.8
+log
+@*** empty log message ***
+@
+text
+@d26 2
+a27 2
+#####  $Id: sendmail.cf,v 1.7 2003/03/25 17:13:39 root Exp root $  #####
+#####  $Id: sendmail.cf,v 1.7 2003/03/25 17:13:39 root Exp root $  #####
+d30 1
+a30 1
+#####  $Id: sendmail.cf,v 1.7 2003/03/25 17:13:39 root Exp root $  #####
+d34 1
+a34 1
+#####  $Id: sendmail.cf,v 1.7 2003/03/25 17:13:39 root Exp root $  #####
+d39 1
+a39 1
+#####  $Id: sendmail.cf,v 1.7 2003/03/25 17:13:39 root Exp root $  #####
+d41 1
+a41 1
+#####  $Id: sendmail.cf,v 1.7 2003/03/25 17:13:39 root Exp root $  #####
+d43 1
+a43 1
+#####  $Id: sendmail.cf,v 1.7 2003/03/25 17:13:39 root Exp root $  #####
+d45 1
+a45 1
+#####  $Id: sendmail.cf,v 1.7 2003/03/25 17:13:39 root Exp root $  #####
+d47 1
+a47 1
+#####  $Id: sendmail.cf,v 1.7 2003/03/25 17:13:39 root Exp root $  #####
+d49 1
+a49 1
+#####  $Id: sendmail.cf,v 1.7 2003/03/25 17:13:39 root Exp root $  #####
+d51 1
+a51 1
+#####  $Id: sendmail.cf,v 1.7 2003/03/25 17:13:39 root Exp root $  #####
+d54 1
+a54 1
+#####  $Id: sendmail.cf,v 1.7 2003/03/25 17:13:39 root Exp root $  #####
+d57 1
+a57 1
+#####  $Id: sendmail.cf,v 1.7 2003/03/25 17:13:39 root Exp root $  #####
+d59 1
+a59 1
+#####  $Id: sendmail.cf,v 1.7 2003/03/25 17:13:39 root Exp root $  #####
+d62 1
+a62 1
+#####  $Id: sendmail.cf,v 1.7 2003/03/25 17:13:39 root Exp root $  #####
+d64 1
+a64 1
+#####  $Id: sendmail.cf,v 1.7 2003/03/25 17:13:39 root Exp root $  #####
+d68 1
+a68 1
+#####  $Id: sendmail.cf,v 1.7 2003/03/25 17:13:39 root Exp root $  #####
+d183 1
+a183 1
+O MaxMessageSize=20000000
+d1353 1
+a1353 1
+#####  $Id: sendmail.cf,v 1.7 2003/03/25 17:13:39 root Exp root $  #####
+d1446 1
+a1446 1
+#####  $Id: sendmail.cf,v 1.7 2003/03/25 17:13:39 root Exp root $  #####
+d1457 1
+a1457 1
+#####  $Id: sendmail.cf,v 1.7 2003/03/25 17:13:39 root Exp root $  #####
+@
+
+
+1.7
+log
+@*** empty log message ***
+@
+text
+@d26 2
+a27 2
+#####  $Id: sendmail.cf,v 1.6 2003/03/25 14:29:20 root Exp root $  #####
+#####  $Id: sendmail.cf,v 1.6 2003/03/25 14:29:20 root Exp root $  #####
+d30 1
+a30 1
+#####  $Id: sendmail.cf,v 1.6 2003/03/25 14:29:20 root Exp root $  #####
+d34 1
+a34 1
+#####  $Id: sendmail.cf,v 1.6 2003/03/25 14:29:20 root Exp root $  #####
+d39 1
+a39 1
+#####  $Id: sendmail.cf,v 1.6 2003/03/25 14:29:20 root Exp root $  #####
+d41 1
+a41 1
+#####  $Id: sendmail.cf,v 1.6 2003/03/25 14:29:20 root Exp root $  #####
+d43 1
+a43 1
+#####  $Id: sendmail.cf,v 1.6 2003/03/25 14:29:20 root Exp root $  #####
+d45 1
+a45 1
+#####  $Id: sendmail.cf,v 1.6 2003/03/25 14:29:20 root Exp root $  #####
+d47 1
+a47 1
+#####  $Id: sendmail.cf,v 1.6 2003/03/25 14:29:20 root Exp root $  #####
+d49 1
+a49 1
+#####  $Id: sendmail.cf,v 1.6 2003/03/25 14:29:20 root Exp root $  #####
+d51 1
+a51 1
+#####  $Id: sendmail.cf,v 1.6 2003/03/25 14:29:20 root Exp root $  #####
+d54 1
+a54 1
+#####  $Id: sendmail.cf,v 1.6 2003/03/25 14:29:20 root Exp root $  #####
+d57 1
+a57 1
+#####  $Id: sendmail.cf,v 1.6 2003/03/25 14:29:20 root Exp root $  #####
+d59 1
+a59 1
+#####  $Id: sendmail.cf,v 1.6 2003/03/25 14:29:20 root Exp root $  #####
+d62 1
+a62 1
+#####  $Id: sendmail.cf,v 1.6 2003/03/25 14:29:20 root Exp root $  #####
+d64 1
+a64 1
+#####  $Id: sendmail.cf,v 1.6 2003/03/25 14:29:20 root Exp root $  #####
+d68 1
+a68 1
+#####  $Id: sendmail.cf,v 1.6 2003/03/25 14:29:20 root Exp root $  #####
+d183 1
+a183 1
+O MaxMessageSize=15000000
+d1353 1
+a1353 1
+#####  $Id: sendmail.cf,v 1.6 2003/03/25 14:29:20 root Exp root $  #####
+d1446 1
+a1446 1
+#####  $Id: sendmail.cf,v 1.6 2003/03/25 14:29:20 root Exp root $  #####
+d1457 1
+a1457 1
+#####  $Id: sendmail.cf,v 1.6 2003/03/25 14:29:20 root Exp root $  #####
+@
+
+
+1.6
+log
+@increase max message size
+@
+text
+@d26 2
+a27 2
+#####  $Id: sendmail.cf,v 1.5 2003/01/06 16:36:39 root Exp root $  #####
+#####  $Id: sendmail.cf,v 1.5 2003/01/06 16:36:39 root Exp root $  #####
+d30 1
+a30 1
+#####  $Id: sendmail.cf,v 1.5 2003/01/06 16:36:39 root Exp root $  #####
+d34 1
+a34 1
+#####  $Id: sendmail.cf,v 1.5 2003/01/06 16:36:39 root Exp root $  #####
+d39 1
+a39 1
+#####  $Id: sendmail.cf,v 1.5 2003/01/06 16:36:39 root Exp root $  #####
+d41 1
+a41 1
+#####  $Id: sendmail.cf,v 1.5 2003/01/06 16:36:39 root Exp root $  #####
+d43 1
+a43 1
+#####  $Id: sendmail.cf,v 1.5 2003/01/06 16:36:39 root Exp root $  #####
+d45 1
+a45 1
+#####  $Id: sendmail.cf,v 1.5 2003/01/06 16:36:39 root Exp root $  #####
+d47 1
+a47 1
+#####  $Id: sendmail.cf,v 1.5 2003/01/06 16:36:39 root Exp root $  #####
+d49 1
+a49 1
+#####  $Id: sendmail.cf,v 1.5 2003/01/06 16:36:39 root Exp root $  #####
+d51 1
+a51 1
+#####  $Id: sendmail.cf,v 1.5 2003/01/06 16:36:39 root Exp root $  #####
+d54 1
+a54 1
+#####  $Id: sendmail.cf,v 1.5 2003/01/06 16:36:39 root Exp root $  #####
+d57 1
+a57 1
+#####  $Id: sendmail.cf,v 1.5 2003/01/06 16:36:39 root Exp root $  #####
+d59 1
+a59 1
+#####  $Id: sendmail.cf,v 1.5 2003/01/06 16:36:39 root Exp root $  #####
+d62 1
+a62 1
+#####  $Id: sendmail.cf,v 1.5 2003/01/06 16:36:39 root Exp root $  #####
+d64 1
+a64 1
+#####  $Id: sendmail.cf,v 1.5 2003/01/06 16:36:39 root Exp root $  #####
+d68 1
+a68 1
+#####  $Id: sendmail.cf,v 1.5 2003/01/06 16:36:39 root Exp root $  #####
+d183 1
+a183 1
+O MaxMessageSize=12000000
+d1353 1
+a1353 1
+#####  $Id: sendmail.cf,v 1.5 2003/01/06 16:36:39 root Exp root $  #####
+d1446 1
+a1446 1
+#####  $Id: sendmail.cf,v 1.5 2003/01/06 16:36:39 root Exp root $  #####
+d1457 1
+a1457 1
+#####  $Id: sendmail.cf,v 1.5 2003/01/06 16:36:39 root Exp root $  #####
+@
+
+
+1.5
+log
+@added ident no lookups
+@
+text
+@d26 2
+a27 2
+#####  $Id: cfhead.m4,v 8.76.4.16 2001/03/06 22:56:36 ca Exp $  #####
+#####  $Id: cf.m4,v 8.32 1999/02/07 07:26:14 gshapiro Exp $  #####
+d30 1
+a30 1
+#####  $Id: linux.m4,v 8.11.16.2 2000/09/17 17:04:22 gshapiro Exp $  #####
+d34 1
+a34 1
+#####  $Id: local_procmail.m4,v 8.21 1999/11/18 05:06:23 ca Exp $  #####
+d39 1
+a39 1
+#####  $Id: no_default_msa.m4,v 8.1.10.1 2000/09/17 17:04:22 gshapiro Exp $  #####
+d41 1
+a41 1
+#####  $Id: smrsh.m4,v 8.14 1999/11/18 05:06:23 ca Exp $  #####
+d43 1
+a43 1
+#####  $Id: mailertable.m4,v 8.18 1999/07/22 17:55:35 gshapiro Exp $  #####
+d45 1
+a45 1
+#####  $Id: virtusertable.m4,v 8.16 1999/07/22 17:55:36 gshapiro Exp $  #####
+d47 1
+a47 1
+#####  $Id: redirect.m4,v 8.15 1999/08/06 01:47:36 gshapiro Exp $  #####
+d49 1
+a49 1
+#####  $Id: always_add_domain.m4,v 8.9 1999/02/07 07:26:08 gshapiro Exp $  #####
+d51 1
+a51 1
+#####  $Id: use_cw_file.m4,v 8.9 1999/02/07 07:26:13 gshapiro Exp $  #####
+d54 1
+a54 1
+#####  $Id: use_ct_file.m4,v 8.9 1999/02/07 07:26:13 gshapiro Exp $  #####
+d57 1
+a57 1
+#####  $Id: local_procmail.m4,v 8.21 1999/11/18 05:06:23 ca Exp $  #####
+d59 1
+a59 1
+#####  $Id: access_db.m4,v 8.15 1999/07/22 17:55:34 gshapiro Exp $  #####
+d62 1
+a62 1
+#####  $Id: blacklist_recipients.m4,v 8.13 1999/04/02 02:25:13 gshapiro Exp $  #####
+d64 1
+a64 1
+#####  $Id: accept_unresolvable_domains.m4,v 8.10 1999/02/07 07:26:07 gshapiro Exp $  #####
+d68 1
+a68 1
+#####  $Id: proto.m4,v 8.446.2.5.2.44 2001/07/31 22:25:49 gshapiro Exp $  #####
+d183 1
+a183 1
+O MaxMessageSize=10000000
+d1353 1
+a1353 1
+#####  $Id: smtp.m4,v 8.56.2.1.2.3 2000/09/25 13:53:27 ca Exp $  #####
+d1446 1
+a1446 1
+#####  $Id: procmail.m4,v 8.20 1999/10/18 04:57:54 gshapiro Exp $  #####
+d1457 1
+a1457 1
+#####  $Id: local.m4,v 8.50.16.2 2000/09/17 17:04:22 gshapiro Exp $  #####
+@
+
+
+1.4
+log
+@reverting to version 1.2
+@
+text
+@a0 4
+# $Id: sendmail.cf,v 1.2 2002/12/31 13:02:23 root Exp root $
+
+# THIS FILE IS MASTERREF GUARDED
+
+d19 3
+d26 2
+a27 2
+#####  $Id: sendmail.cf,v 1.2 2002/12/31 13:02:23 root Exp root $  #####
+#####  $Id: sendmail.cf,v 1.2 2002/12/31 13:02:23 root Exp root $  #####
+d30 1
+a30 1
+#####  $Id: sendmail.cf,v 1.2 2002/12/31 13:02:23 root Exp root $  #####
+d34 1
+a34 1
+#####  $Id: sendmail.cf,v 1.2 2002/12/31 13:02:23 root Exp root $  #####
+d39 1
+a39 1
+#####  $Id: sendmail.cf,v 1.2 2002/12/31 13:02:23 root Exp root $  #####
+d41 1
+a41 1
+#####  $Id: sendmail.cf,v 1.2 2002/12/31 13:02:23 root Exp root $  #####
+d43 1
+a43 1
+#####  $Id: sendmail.cf,v 1.2 2002/12/31 13:02:23 root Exp root $  #####
+d45 1
+a45 1
+#####  $Id: sendmail.cf,v 1.2 2002/12/31 13:02:23 root Exp root $  #####
+d47 1
+a47 1
+#####  $Id: sendmail.cf,v 1.2 2002/12/31 13:02:23 root Exp root $  #####
+d49 1
+a49 1
+#####  $Id: sendmail.cf,v 1.2 2002/12/31 13:02:23 root Exp root $  #####
+d51 1
+a51 1
+#####  $Id: sendmail.cf,v 1.2 2002/12/31 13:02:23 root Exp root $  #####
+d54 1
+a54 1
+#####  $Id: sendmail.cf,v 1.2 2002/12/31 13:02:23 root Exp root $  #####
+d57 1
+a57 1
+#####  $Id: sendmail.cf,v 1.2 2002/12/31 13:02:23 root Exp root $  #####
+d59 1
+a59 1
+#####  $Id: sendmail.cf,v 1.2 2002/12/31 13:02:23 root Exp root $  #####
+d62 1
+a62 1
+#####  $Id: sendmail.cf,v 1.2 2002/12/31 13:02:23 root Exp root $  #####
+d64 1
+a64 1
+#####  $Id: sendmail.cf,v 1.2 2002/12/31 13:02:23 root Exp root $  #####
+d68 1
+a68 1
+#####  $Id: sendmail.cf,v 1.2 2002/12/31 13:02:23 root Exp root $  #####
+d87 1
+a87 1
+Cwlocalhost
+d294 1
+a294 1
+#O Timeout.ident=5s
+d619 1
+d1090 1
+d1353 1
+a1353 1
+#####  $Id: sendmail.cf,v 1.2 2002/12/31 13:02:23 root Exp root $  #####
+d1446 1
+a1446 1
+#####  $Id: sendmail.cf,v 1.2 2002/12/31 13:02:23 root Exp root $  #####
+d1457 1
+a1457 1
+#####  $Id: sendmail.cf,v 1.2 2002/12/31 13:02:23 root Exp root $  #####
+@
+
+
+1.3
+log
+@new mc file used to create this config
+no longer uses ident lookups
+@
+text
+@d1 4
+d6 1
+a6 1
+# Copyright (c) 1998-2002 Sendmail, Inc. and its suppliers.
+a22 7
+##### built by root@@name2.lunarhosting.net on Mon Jan 6 10:26:42 CST 2003
+##### in /masterref/etc/mail
+##### using /usr/share/sendmail-cf/ as configuration include directory
+#####
+######################################################################
+#####
+#####	DO NOT EDIT THIS FILE!  Only edit the source .mc file.
+d27 2
+a28 2
+#####  $Id: cfhead.m4,v 8.108 2002/06/13 18:53:24 ca Exp $  #####
+#####  $Id: cf.m4,v 8.32 1999/02/07 07:26:14 gshapiro Exp $  #####
+d30 2
+a31 2
+#####  RH Sendmail edited for Lunar Hosting  #####
+#####  $Id: linux.m4,v 8.13 2000/09/17 17:30:00 gshapiro Exp $  #####
+d35 1
+a35 1
+#####  $Id: local_procmail.m4,v 8.21 1999/11/18 05:06:23 ca Exp $  #####
+a38 1
+#####  $Id: no_default_msa.m4,v 8.2 2001/02/14 05:03:22 gshapiro Exp $  #####
+d40 1
+a40 1
+#####  $Id: smrsh.m4,v 8.14 1999/11/18 05:06:23 ca Exp $  #####
+d42 1
+a42 1
+#####  $Id: mailertable.m4,v 8.23 2001/03/16 00:51:26 gshapiro Exp $  #####
+d44 1
+a44 1
+#####  $Id: virtusertable.m4,v 8.21 2001/03/16 00:51:26 gshapiro Exp $  #####
+d46 1
+a46 1
+#####  $Id: redirect.m4,v 8.15 1999/08/06 01:47:36 gshapiro Exp $  #####
+d48 1
+a48 1
+#####  $Id: always_add_domain.m4,v 8.11 2000/09/12 22:00:53 ca Exp $  #####
+d50 1
+a50 1
+#####  $Id: use_cw_file.m4,v 8.11 2001/08/26 20:58:57 gshapiro Exp $  #####
+d52 1
+a53 1
+#####  $Id: use_ct_file.m4,v 8.11 2001/08/26 20:58:57 gshapiro Exp $  #####
+d55 1
+a56 1
+#####  $Id: local_procmail.m4,v 8.21 1999/11/18 05:06:23 ca Exp $  #####
+d58 1
+a58 1
+#####  $Id: access_db.m4,v 8.24 2002/03/06 21:50:25 ca Exp $  #####
+d60 1
+a60 1
+#####  $Id: dnsbl.m4,v 8.28 2002/05/19 21:22:40 gshapiro Exp $  #####
+d63 1
+a63 1
+#####  $Id: blacklist_recipients.m4,v 8.13 1999/04/02 02:25:13 gshapiro Exp $  #####
+d65 2
+a67 2
+#####  $Id: accept_unresolvable_domains.m4,v 8.10 1999/02/07 07:26:07 gshapiro Exp $  #####
+Cwlocalhost.localdomain
+d69 1
+a70 1
+#####  $Id: proto.m4,v 8.649 2002/06/13 18:53:24 ca Exp $  #####
+d72 2
+a73 2
+# level 10 config file format
+V10/Berkeley
+a87 4
+# my LDAP cluster
+# need to set this before any LDAP lookups are done (including classes)
+#D{sendmailMTACluster}$m
+
+a114 1
+C{ResOk}OKR
+d122 1
+a122 3
+# macro storage map
+Kmacro macro
+# possible values for TLS_connection in access map
+d125 2
+d128 2
+a129 2
+
+
+d139 1
+d142 2
+a143 1
+
+d158 1
+a158 4
+Kaccess hash -T<TMPF> -o /etc/mail/access.db
+
+# map for DNS based blacklist lookups
+Kdnsbl host -T<TMP>
+d161 1
+a161 1
+DZ8.12.5
+d198 5
+a211 3
+# queue file mode (qf files)
+#O QueueFileMode=0600
+
+d219 1
+a219 1
+#O MaxHopCount=25
+d264 1
+a264 2
+
+O DaemonPortOptions=Port=smtp,Addr=127.0.0.1, Name=MTA
+d267 1
+a267 7
+#O ClientPortOptions=Family=inet, Address=0.0.0.0
+
+# Modifiers to define {daemon_flags} for direct submissions
+#O DirectSubmissionModifiers
+
+# Use as mail submission program? See sendmail/SECURITY
+#O UseMSP
+a277 21
+# limit on number of concurrent queue runners
+#O MaxQueueChildren
+
+# maximum number of queue-runners per queue-grouping with multiple queues
+#O MaxRunnersPerQueue=1
+
+# priority of queue runners (nice(3))
+#O NiceQueueRun
+
+# shall we sort the queue by hostname first?
+#O QueueSortOrder=priority
+
+# minimum time in queue before retry
+#O MinQueueAge=30m
+
+# how many jobs can you process in the queue?
+#O MaxQueueRunSize=10000
+
+# perform initial split of envelope without checking MX records
+#O FastSplit=1
+
+a280 5
+# key for shared memory; 0 to turn off
+#O SharedMemoryKey=0
+
+
+
+a283 1
+#O Timeout.aconnect=0s
+d295 1
+a295 1
+O Timeout.ident=0s
+a312 6
+#O Timeout.lhlo=2m
+#O Timeout.auth=10m
+#O Timeout.starttls=1h
+
+# time for DeliverBy; extension disabled if less than 0
+#O DeliverByMin=0
+a346 3
+# load average at which we delay connections; 0 means no limit
+#O DelayLA=0
+
+d348 1
+a348 1
+#O MaxDaemonChildren=0
+d365 6
+d374 1
+a374 1
+# service switch file (name hardwired on Solaris, Ultrix, OSF/1, others)
+d392 3
+a419 1
+# True (the default) means they are not trustworthy.
+a421 1
+
+a433 4
+# limit the rate recipients per SMTP envelope are accepted
+# once the threshold number of recipients have been rejected
+#O BadRcptThrottle=20
+
+a469 3
+# lookup type to find information about local mailboxes
+#O MailboxDatabase=pw
+
+d471 1
+a471 1
+#O AuthMechanisms=EXTERNAL GSSAPI KERBEROS_V4 DIGEST-MD5 CRAM-MD5
+a478 8
+# SMTP AUTH maximum encryption strength
+#O AuthMaxBits
+
+# SMTP STARTTLS server options
+#O TLSSrvOptions
+
+# Input mail filters
+#O InputMailFilters
+a497 3
+############################
+# QUEUE GROUP DEFINITIONS  #
+############################
+d526 1
+a526 1
+	$.$?{auth_type}(authenticated$?{auth_ssf} bits=${auth_ssf}$.)
+d528 1
+a528 1
+	(version=${tls_version} cipher=${cipher} bits=${cipher_bits} verify=${verify})$.$?u
+a561 1
+R$* [ IPv6 : $+ ] <@@>	$: $1 [ IPv6 : $2 ]		unmark IPv6 addr
+d564 1
+a583 1
+R@@ [ $* ] : $+		$2
+d595 2
+d623 7
+a629 2
+# check for IPv4/IPv6 domain literal
+R$* < @@ [ $+ ] > $*		$: $1 < @@@@ [ $2 ] > $3		mark [addr]
+a718 1
+R$+ <@@>			$#error $@@ 5.1.3 $: "553 Hostname required"
+d720 1
+a720 4
+R<> $* < @@ [ $* ] : $+ > $*	$1 < @@ [ $2 ] : $3 > $4
+R<> $* < @@ [ $* ] , $+ > $*	$1 < @@ [ $2 ] , $3 > $4
+R<> $* < @@ [ $* ] $+ > $*	$#error $@@ 5.1.2 $: "553 Invalid address"
+R<> $* < @@ [ $+ ] > $*		$1 < @@ [ $2 ] > $3
+d725 1
+a725 4
+R$* < @@ $* @@ > $*	$#error $@@ 5.1.2 $: "553 Invalid route address"
+R$* @@ $* < @@ $* > $*	$#error $@@ 5.1.3 $: "553 Invalid route address"
+R$* , $~O $*		$#error $@@ 5.1.3 $: "553 Invalid route address"
+
+d748 3
+a750 1
+R$* < @@ [ $+ ] : > $*		$#esmtp $@@ [$2] $: $1 < @@ [$2] > $3	no smarthost: send
+a757 2
+R<@@> $+ + $+ < @@ $* . >
+			$: < $(virtuser $1 + + @@ $3 $@@ $1 $@@ $2 $@@ +$2 $: @@ $) > $1 + $2 < @@ $3 . >
+d759 1
+a759 1
+			$: < $(virtuser $1 + * @@ $3 $@@ $1 $@@ $2 $@@ +$2 $: @@ $) > $1 + $2 < @@ $3 . >
+d761 3
+a763 4
+			$: < $(virtuser $1 @@ $3 $@@ $1 $@@ $2 $@@ +$2 $: @@ $) > $1 + $2 < @@ $3 . >
+R<@@> $+ + $+ < @@ $+ . >	$: < $(virtuser + + @@ $3 $@@ $1 $@@ $2 $@@ +$2 $: @@ $) > $1 + $2 < @@ $3 . >
+R<@@> $+ + $* < @@ $+ . >	$: < $(virtuser + * @@ $3 $@@ $1 $@@ $2 $@@ +$2 $: @@ $) > $1 + $2 < @@ $3 . >
+R<@@> $+ + $* < @@ $+ . >	$: < $(virtuser @@ $3 $@@ $1 $@@ $2 $@@ +$2 $: ! $) > $1 + $2 < @@ $3 . >
+a806 1
+R$+ $| $#ok		$@@ $1			no change
+d821 3
+a825 1
+
+a831 1
+
+d836 1
+a836 3
+
+R< $~[ : $+ > $+	$: $>MailerToTriple < $1 : $2 > $3 < @@ $2 >
+
+a838 1
+
+d860 2
+a861 2
+R< $~[ : $+ @@ $+ > $*<$*>$*	$# $1 $@@ $3 $: $2<@@$3>	use literal user
+R< $~[ : $+ > $*		$# $1 $@@ $2 $: $3	try qualified mailer
+d863 1
+d899 11
+a909 1
+R$* < @@ *LOCAL* >	$@@ $1 < @@ $j . >
+d933 1
+a933 1
+###  D: LookUpDomain -- search for domain in access database
+d938 2
+a939 1
+###		<$3> -- mark (must be <(!|+) single-token>)
+a941 1
+###		<$4> -- passthru (additional data passed unchanged through)
+d944 10
+a953 10
+SD
+R<$*> <$+> <$- $-> <$*>		$: < $(access $4:$1 $: ? $) > <$1> <$2> <$3 $4> <$5>
+R<?> <$+> <$+> <+ $-> <$*>	$: < $(access $1 $: ? $) > <$1> <$2> <+ $3> <$4>
+R<?> <[$+.$-]> <$+> <$- $-> <$*>	$@@ $>D <[$1]> <$3> <$4 $5> <$6>
+R<?> <[$+::$-]> <$+> <$- $-> <$*>	$: $>D <[$1]> <$3> <$4 $5> <$6>
+R<?> <[$+:$-]> <$+> <$- $-> <$*>	$: $>D <[$1]> <$3> <$4 $5> <$6>
+R<?> <$+.$+> <$+> <$- $-> <$*>	$@@ $>D <$2> <$3> <$4 $5> <$6>
+R<?> <$+> <$+> <$- $-> <$*>	$@@ <$2> <$5>
+R<$* <TMPF>> <$+> <$+> <$- $-> <$*>	$@@ <<TMPF>> <$6>
+R<$*> <$+> <$+> <$- $-> <$*>	$@@ <$1> <$6>
+d956 1
+a956 1
+###  A: LookUpAddress -- search for host address in access database
+d961 2
+a962 1
+###		<$3> -- mark (must be <(!|+) single-token>)
+a964 1
+###		<$4> -- passthru (additional data passed through)
+d967 8
+a974 9
+SA
+R<$+> <$+> <$- $-> <$*>		$: < $(access $4:$1 $: ? $) > <$1> <$2> <$3 $4> <$5>
+R<?> <$+> <$+> <+ $-> <$*>	$: < $(access $1 $: ? $) > <$1> <$2> <+ $3> <$4>
+R<?> <$+::$-> <$+> <$- $-> <$*>		$@@ $>A <$1> <$3> <$4 $5> <$6>
+R<?> <$+:$-> <$+> <$- $-> <$*>		$@@ $>A <$1> <$3> <$4 $5> <$6>
+R<?> <$+.$-> <$+> <$- $-> <$*>		$@@ $>A <$1> <$3> <$4 $5> <$6>
+R<?> <$+> <$+> <$- $-> <$*>	$@@ <$2> <$5>
+R<$* <TMPF>> <$+> <$+> <$- $-> <$*>	$@@ <<TMPF>> <$6>
+R<$*> <$+> <$+> <$- $-> <$*>	$@@ <$1> <$6>
+d1014 1
+d1016 1
+a1016 1
+R<NO> $* < @@ $+ >		$: $>D <$2> <NO> <+ To> <$1 < @@ $2 >>
+a1019 1
+
+d1021 1
+a1021 1
+R<$+> $*			$@@ $2
+d1036 1
+a1036 1
+R$*			$: < $&{deliveryMode} > $1
+d1040 6
+a1045 6
+R$+ $| $+		$: $>D < $1 > <?> <+ Connect> < $2 >
+R<?> <$+>		$: $>A < $1 > <?> <+ Connect> <>	no: another lookup
+R<?> <$*>		$: OK				found nothing
+R<$={Accept}> <$*>	$@@ $1				return value of lookup
+R<REJECT> <$*>		$#error $@@ 5.7.1 $: "550 Access denied"
+R<DISCARD> <$*>		$#discard $: discard
+a1047 1
+R<$* <TMPF>> <$*>		$#error $@@ 4.3.0 $: "451 Temporary system failure. Please try again later."
+d1053 2
+a1054 1
+R$-.$-.$-.$-		$: <?> $(dnsbl $4.$3.$2.$1.sbl.spamhaus.org. $: OK $)
+d1056 1
+a1056 2
+R<?>$+<TMP>		$: TMPOK
+R<?>$+			$#error $@@ 5.7.1 $: "550 Rejected: " $&{client_addr} " listed at sbl.spamhaus.org"
+d1071 1
+a1071 1
+R$*			$: < $&{deliveryMode} > $1
+d1104 1
+a1104 2
+R<?> $* < @@ $j >	$: <OK> $1 < @@ $j >
+R<?> $* < @@ $+ >	$: <OKR> $1 < @@ $2 >		... unresolvable OK
+d1107 1
+a1107 1
+R<$+> $+ < @@ $* >	$: @@<$1> <$2 < @@ $3 >> $| <F:$2@@$3> <U:$2@@> <D:$3>
+d1109 1
+a1109 1
+R@@ <$+> <$*> $| <$+>	$: <@@> <$1> <$2> $| $>SearchList <+ From> $| <$3> <>
+d1117 1
+a1117 1
+R$* u $* $| <?> $*	$: <OKR> $3
+d1125 1
+a1125 1
+R<$={ResOk}> $*		$@@ <OKR>	domain ok: stop
+d1128 1
+a1128 1
+R<$={Accept}> $*	$# $1		accept from access map
+a1132 1
+R<<TMPF>> $*		$#error $@@ 4.3.0 $: "451 Temporary system failure. Please try again later."
+a1145 3
+# empty address?
+R<>			$#error $@@ nouser $: "553 User address required"
+R$@@			$#error $@@ nouser $: "553 User address required"
+d1147 1
+a1147 1
+R$*			$: < $&{deliveryMode} > $1
+a1151 19
+######################################################################
+R$*			$: $1 $| @@ $>"Rcpt_ok" $1
+R$* $| @@ $#TEMP $+	$: $1 $| T $2
+R$* $| @@ $#$*		$#$2
+R$* $| @@ RELAY		$@@ RELAY
+R$* $| @@ $*		$: O $| $>"Relay_ok" $1
+R$* $| T $+		$: T $2 $| $>"Relay_ok" $1
+R$* $| $#TEMP $+	$#error $2
+R$* $| $#$*		$#$2
+R$* $| RELAY		$@@ RELAY
+R T $+ $| $*		$#error $1
+# anything else is bogus
+R$*			$#error $@@ 5.7.1 $: "550 Relaying denied"
+
+
+######################################################################
+### Rcpt_ok: is the recipient ok?
+######################################################################
+SRcpt_ok
+d1158 2
+a1159 2
+R<?> $+ < @@ $=w >	$: <> <$1 < @@ $2 >> $| <F:$1@@$2> <U:$1@@> <D:$2>
+R<?> $+ < @@ $* >	$: <> <$1 < @@ $2 >> $| <F:$1@@$2> <D:$2>
+d1161 1
+a1161 1
+R<> <$*> $| <$+>	$: <@@> <$1> $| $>SearchList <+ To> $| <$2> <>
+a1169 1
+R<<TMPF>> $*		$#error $@@ 4.3.0 $: "451 Temporary system failure. Please try again later."
+d1173 8
+a1180 9
+# authenticated via TLS?
+R$*			$: $1 $| $>RelayTLS	client authenticated?
+R$* $| $# $+		$# $2			error/ok?
+R$* $| $*		$: $1			no
+
+R$*			$: $1 $| $>"Local_Relay_Auth" $&{auth_type}
+R$* $| $# $*		$# $2
+R$* $| NO		$: $1
+R$* $| $*		$: $1 $| $&{auth_type}
+d1182 1
+a1182 1
+R$* $| $={TrustAuthMech}	$# RELAY
+d1185 4
+a1188 5
+R$+ < @@ $=w >		$@@ RELAY
+R$+ < @@ $* $=R >	$@@ RELAY
+R$+ < @@ $+ >		$: $>D <$2> <?> <+ To> <$1 < @@ $2 >>
+R<RELAY> $*		$@@ RELAY
+R<$* <TMPF>> $*		$#TEMP $@@ 4.3.0 $: "451 Temporary system failure. Please try again later."
+d1197 1
+a1197 1
+R<?> $+			$@@ RELAY
+a1199 4
+######################################################################
+### Relay_ok: is the relay/sender ok?
+######################################################################
+SRelay_ok
+d1203 5
+a1207 7
+R$@@			$@@ RELAY		originated locally
+R0			$@@ RELAY		originated locally
+R$=R $*			$@@ RELAY		relayable IP address
+R$*			$: $>A <$1> <?> <+ Connect> <$1>
+R<RELAY> $* 		$@@ RELAY		relayable IP address
+R<REJECT> $* 		$@@ REJECT		rejected IP address
+R<<TMPF>> $*		$#TEMP $@@ 4.3.0 $: "451 Temporary system failure. Please try again later."
+d1210 1
+a1210 1
+R$=w			$@@ RELAY		... and see if it is local
+d1215 1
+a1215 1
+R<TEMP>			$#TEMP $@@ 4.7.1 $: "450 Relaying temporarily denied. Cannot resolve PTR record for " $&{client_addr}
+d1218 1
+a1218 2
+R$*			$: <@@> $&{client_name}
+R<@@>			$@@ RELAY
+d1220 1
+a1220 2
+R<@@> $* $=P 		$:<?>  $1 $2
+R<@@> $+			$:<?>  $[ $1 $]
+d1222 5
+a1226 5
+R<?> $=w		$@@ RELAY
+R<?> $* $=R			$@@ RELAY
+R<?> $*			$: $>D <$1> <?> <+ Connect> <$1>
+R<RELAY> $*		$@@ RELAY
+R<$* <TMPF>> $*		$#TEMP $@@ 4.3.0 $: "451 Temporary system failure. Please try again later."
+d1229 2
+a1230 79
+
+######################################################################
+###  F: LookUpFull -- search for an entry in access database
+###
+###	lookup of full key (which should be an address) and
+###	variations if +detail exists: +* and without +detail
+###
+###	Parameters:
+###		<$1> -- key
+###		<$2> -- default (what to return if not found in db)
+###		<$3> -- mark (must be <(!|+) single-token>)
+###			! does lookup only with tag
+###			+ does lookup with and without tag
+###		<$4> -- passthru (additional data passed unchanged through)
+######################################################################
+
+SF
+R<$+> <$*> <$- $-> <$*>		$: <$(access $4:$1 $: ? $)> <$1> <$2> <$3 $4> <$5>
+R<?> <$+> <$*> <+ $-> <$*>	$: <$(access $1 $: ? $)> <$1> <$2> <+ $3> <$4>
+R<?> <$+ + $* @@ $+> <$*> <$- $-> <$*>
+			$: <$(access $6:$1+*@@$3 $: ? $)> <$1+$2@@$3> <$4> <$5 $6> <$7>
+R<?> <$+ + $* @@ $+> <$*> <+ $-> <$*>
+			$: <$(access $1+*@@$3 $: ? $)> <$1+$2@@$3> <$4> <+ $5> <$6>
+R<?> <$+ + $* @@ $+> <$*> <$- $-> <$*>
+			$: <$(access $6:$1@@$3 $: ? $)> <$1+$2@@$3> <$4> <$5 $6> <$7>
+R<?> <$+ + $* @@ $+> <$*> <+ $-> <$*>
+			$: <$(access $1@@$3 $: ? $)> <$1+$2@@$3> <$4> <+ $5> <$6>
+R<?> <$+> <$*> <$- $-> <$*>	$@@ <$2> <$5>
+R<$+ <TMPF>> <$*> <$- $-> <$*>	$@@ <<TMPF>> <$5>
+R<$+> <$*> <$- $-> <$*>		$@@ <$1> <$5>
+
+######################################################################
+###  E: LookUpExact -- search for an entry in access database
+###
+###	Parameters:
+###		<$1> -- key
+###		<$2> -- default (what to return if not found in db)
+###		<$3> -- mark (must be <(!|+) single-token>)
+###			! does lookup only with tag
+###			+ does lookup with and without tag
+###		<$4> -- passthru (additional data passed unchanged through)
+######################################################################
+
+SE
+R<$*> <$*> <$- $-> <$*>		$: <$(access $4:$1 $: ? $)> <$1> <$2> <$3 $4> <$5>
+R<?> <$+> <$*> <+ $-> <$*>	$: <$(access $1 $: ? $)> <$1> <$2> <+ $3> <$4>
+R<?> <$+> <$*> <$- $-> <$*>	$@@ <$2> <$5>
+R<$+ <TMPF>> <$*> <$- $-> <$*>	$@@ <<TMPF>> <$5>
+R<$+> <$*> <$- $-> <$*>		$@@ <$1> <$5>
+
+######################################################################
+###  U: LookUpUser -- search for an entry in access database
+###
+###	lookup of key (which should be a local part) and
+###	variations if +detail exists: +* and without +detail
+###
+###	Parameters:
+###		<$1> -- key (user@@)
+###		<$2> -- default (what to return if not found in db)
+###		<$3> -- mark (must be <(!|+) single-token>)
+###			! does lookup only with tag
+###			+ does lookup with and without tag
+###		<$4> -- passthru (additional data passed unchanged through)
+######################################################################
+
+SU
+R<$+> <$*> <$- $-> <$*>		$: <$(access $4:$1 $: ? $)> <$1> <$2> <$3 $4> <$5>
+R<?> <$+> <$*> <+ $-> <$*>	$: <$(access $1 $: ? $)> <$1> <$2> <+ $3> <$4>
+R<?> <$+ + $* @@> <$*> <$- $-> <$*>
+			$: <$(access $5:$1+*@@ $: ? $)> <$1+$2@@> <$3> <$4 $5> <$6>
+R<?> <$+ + $* @@> <$*> <+ $-> <$*>
+			$: <$(access $1+*@@ $: ? $)> <$1+$2@@> <$3> <+ $4> <$5>
+R<?> <$+ + $* @@> <$*> <$- $-> <$*>
+			$: <$(access $5:$1@@ $: ? $)> <$1+$2@@> <$3> <$4 $5> <$6>
+R<?> <$+ + $* @@> <$*> <+ $-> <$*>
+			$: <$(access $1@@ $: ? $)> <$1+$2@@> <$3> <+ $4> <$5>
+R<?> <$+> <$*> <$- $-> <$*>	$@@ <$2> <$5>
+R<$+ <TMPF>> <$*> <$- $-> <$*>	$@@ <<TMPF>> <$5>
+R<$+> <$*> <$- $-> <$*>		$@@ <$1> <$5>
+d1240 1
+a1240 1
+###		D: recursive host lookup (LookUpDomain)
+d1248 1
+a1248 1
+C{src}E F D U 
+d1250 12
+a1261 5
+# just call the ruleset with the name of the tag... nice trick...
+R<$+> $| <$={src}:$*> <$*>	$: <$1> $| <$4> $| $>$2 <$3> <?> <$1> <>
+R<$+> $| <> $| <?> <>		$@@ <?>
+R<$+> $| <$+> $| <?> <>		$@@ $>SearchList <$1> $| <$2>
+R<$+> $| <$*> $| <$+> <>	$@@ <$3>
+d1264 1
+a1264 9
+
+######################################################################
+###  trust_auth: is user trusted to authenticate as someone else?
+###
+###	Parameters:
+###		$1: AUTH= parameter from MAIL command
+######################################################################
+
+SLocal_trust_auth
+d1275 1
+a1275 7
+######################################################################
+###  Relay_Auth: allow relaying based on authentication?
+###
+###	Parameters:
+###		$1: ${auth_type}
+######################################################################
+SLocal_Relay_Auth
+a1276 11
+######################################################################
+###  srv_features: which features to offer to a client?
+###	(done in server)
+######################################################################
+Ssrv_features
+R$*		$: $>D <$&{client_name}> <?> <! "Srv_Features"> <>
+R<?>$*		$: $>A <$&{client_addr}> <?> <! "Srv_Features"> <>
+R<?>$*		$: <$(access "Srv_Features": $: ? $)>
+R<?>$*		$@@ OK
+R<$* <TMPF>>$*	$#temp
+R<$+>$*		$# $1
+d1278 2
+a1279 37
+######################################################################
+###  try_tls: try to use STARTTLS?
+###	(done in client)
+######################################################################
+Stry_tls
+R$*		$: $>D <$&{server_name}> <?> <! "Try_TLS"> <>
+R<?>$*		$: $>A <$&{server_addr}> <?> <! "Try_TLS"> <>
+R<?>$*		$: <$(access "Try_TLS": $: ? $)>
+R<?>$*		$@@ OK
+R<$* <TMPF>>$*	$#error $@@ 4.3.0 $: "451 Temporary system failure. Please try again later."
+R<NO>$*		$#error $@@ 5.7.1 $: "550 do not try TLS with " $&{server_name} " ["$&{server_addr}"]"
+  
+######################################################################
+###  tls_rcpt: is connection with server "good" enough?
+###	(done in client, per recipient)
+###
+###	Parameters:
+###		$1: recipient
+######################################################################
+Stls_rcpt
+R$*			$: $(macro {TLS_Name} $@@ $&{server_name} $) $1
+R$+			$: <?> $>CanonAddr $1
+R<?> $+ < @@ $+ . >	<?> $1 <@@ $2 >
+R<?> $+ < @@ $+ >	$: $1 <@@ $2 > $| <F:$1@@$2> <U:$1@@> <D:$2> <E:>
+R<?> $+			$: $1 $| <U:$1@@> <E:>
+R$* $| $+	$: $1 $| $>SearchList <! "TLS_Rcpt"> $| $2 <>
+R$* $| <?>	$@@ OK
+R$* $| <$* <TMPF>>	$#error $@@ 4.3.0 $: "451 Temporary system failure. Please try again later."
+R$* $| <$+>	$@@ $>"TLS_connection" $&{verify} $| <$2>
+
+######################################################################
+###  tls_client: is connection with client "good" enough?
+###	(done in server)
+###
+###	Parameters:
+###		${verify} $| (MAIL|STARTTLS)
+######################################################################
+d1281 4
+a1284 6
+R$*		$: $(macro {TLS_Name} $@@ $&{server_name} $) $1
+R$* $| $*	$: $1 $| $>D <$&{client_name}> <?> <! "TLS_Clt"> <>
+R$* $| <?>$*	$: $1 $| $>A <$&{client_addr}> <?> <! "TLS_Clt"> <>
+R$* $| <?>$*	$: $1 $| <$(access "TLS_Clt": $: ? $)>
+R$* $| <$* <TMPF>>	$#error $@@ 4.3.0 $: "451 Temporary system failure. Please try again later."
+R$*		$@@ $>"TLS_connection" $1
+d1286 2
+a1287 7
+######################################################################
+###  tls_server: is connection with server "good" enough?
+###	(done in client)
+###
+###	Parameter:
+###		${verify}
+######################################################################
+d1289 4
+a1292 6
+R$*		$: $(macro {TLS_Name} $@@ $&{server_name} $) $1
+R$*		$: $1 $| $>D <$&{server_name}> <?> <! "TLS_Srv"> <>
+R$* $| <?>$*	$: $1 $| $>A <$&{server_addr}> <?> <! "TLS_Srv"> <>
+R$* $| <?>$*	$: $1 $| <$(access "TLS_Srv": $: ? $)>
+R$* $| <$* <TMPF>>	$#error $@@ 4.3.0 $: "451 Temporary system failure. Please try again later."
+R$*		$@@ $>"TLS_connection" $1
+d1294 1
+a1294 8
+######################################################################
+###  TLS_connection: is TLS connection "good" enough?
+###
+###	Parameters:
+###		${verify} $| <Requirement> [<>]
+###		Requirement: RHS from access map, may be ? for none.
+######################################################################
+STLS_connection
+a1295 1
+# create the appropriate error codes
+a1298 1
+# deal with TLS handshake failures: abort
+d1301 2
+a1302 4
+R$* $| <$*> <VERIFY>		$: <$2> <VERIFY> <> $1
+R$* $| <$*> <VERIFY + $+>	$: <$2> <VERIFY> <$3> $1
+R$* $| <$*> <$={tls}:$->$*	$: <$2> <$3:$4> <> $1
+R$* $| <$*> <$={tls}:$- + $+>$*	$: <$2> <$3:$4> <$5> $1
+d1306 11
+a1316 18
+R<$*><VERIFY> <> OK		$@@ OK
+R<$*><VERIFY> <$+> OK		$: <$1> <REQ:0> <$2>
+R<$*><VERIFY:$-> <$*> OK	$: <$1> <REQ:$2> <$3>
+R<$*><ENCR:$-> <$*> $*		$: <$1> <REQ:$2> <$3>
+R<$-:$+><VERIFY $*> <$*>	$#error $@@ $2 $: $1 " authentication required"
+R<$-:$+><VERIFY $*> <$*> FAIL	$#error $@@ $2 $: $1 " authentication failed"
+R<$-:$+><VERIFY $*> <$*> NO	$#error $@@ $2 $: $1 " not authenticated"
+R<$-:$+><VERIFY $*> <$*> NOT	$#error $@@ $2 $: $1 " no authentication requested"
+R<$-:$+><VERIFY $*> <$*> NONE	$#error $@@ $2 $: $1 " other side does not support STARTTLS"
+R<$-:$+><VERIFY $*> <$*> $+	$#error $@@ $2 $: $1 " authentication failure " $4
+R<$*><REQ:$-> <$*>		$: <$1> <REQ:$2> <$3> $>max $&{cipher_bits} : $&{auth_ssf}
+R<$*><REQ:$-> <$*> $-		$: <$1> <$2:$4> <$3> $(arith l $@@ $4 $@@ $2 $)
+R<$-:$+><$-:$-> <$*> TRUE	$#error $@@ $2 $: $1 " encryption too weak " $4 " less than " $3
+R<$-:$+><$-:$-> <$*> $*		$: <$1:$2 ++ $5>
+R<$-:$+ ++ >			$@@ OK
+R<$-:$+ ++ $+ >			$: <$1:$2> <$3>
+R<$-:$+> < $+ ++ $+ >		<$1:$2> <$3> <$4>
+R<$-:$+> $+			$@@ $>"TLS_req" $3 $| <$1:$2>
+a1317 23
+######################################################################
+###  TLS_req: check additional TLS requirements
+###
+###	Parameters: [<list> <of> <req>] $| <$-:$+>
+###		$-: SMTP reply code
+###		$+: Enhanced Status Code
+######################################################################
+STLS_req
+R $| $+		$@@ OK
+R<CN> $* $| <$+>		$: <CN:$&{TLS_Name}> $1 $| <$2>
+R<CN:$&{cn_subject}> $* $| <$+>		$@@ $>"TLS_req" $1 $| <$2>
+R<CN:$+> $* $| <$-:$+>	$#error $@@ $4 $: $3 " CN " $&{cn_subject} " does not match " $1
+R<CS:$&{cert_subject}> $* $| <$+>	$@@ $>"TLS_req" $1 $| <$2>
+R<CS:$+> $* $| <$-:$+>	$#error $@@ $4 $: $3 " CERT Subject " $&{cert_subject} " does not match " $1
+R<CI:$&{cert_issuer}> $* $| <$+>	$@@ $>"TLS_req" $1 $| <$2>
+R<CI:$+> $* $| <$-:$+>	$#error $@@ $4 $: $3 " CERT Issuer " $&{cert_issuer} " does not match " $1
+ROK			$@@ OK
+
+######################################################################
+###  max: return the maximum of two values separated by :
+###
+###	Parameters: [$-]:[$-]
+######################################################################
+d1326 1
+a1326 8
+
+######################################################################
+###  RelayTLS: allow relaying based on TLS authentication
+###
+###	Parameters:
+###		none
+######################################################################
+SRelayTLS
+d1328 9
+a1336 24
+R$*			$: <?> $&{verify}
+R<?> OK			$: OK		authenticated: continue
+R<?> $*			$@@ NO		not authenticated
+R$*			$: $&{cert_issuer}
+R$+			$: $(access CERTISSUER:$1 $)
+RRELAY			$# RELAY
+RSUBJECT		$: <@@> $&{cert_subject}
+R<@@> $+			$: <@@> $(access CERTSUBJECT:$1 $)
+R<@@> RELAY		$# RELAY
+R$*			$: NO
+
+######################################################################
+###  authinfo: lookup authinfo in the access map
+###
+###	Parameters:
+###		$1: {server_name}
+###		$2: {server_addr}
+######################################################################
+Sauthinfo
+R$*		$: $1 $| $>D <$&{server_name}> <?> <! AuthInfo> <>
+R$* $| <?>$*	$: $1 $| $>A <$&{server_addr}> <?> <! AuthInfo> <>
+R$* $| <?>$*	$: $1 $| <$(access AuthInfo: $: ? $)> <>
+R$* $| <?>$*	$@@ no				no authinfo available
+R$* $| <$*> <>	$# $2
+a1337 8
+#
+######################################################################
+######################################################################
+#####
+#####			MAIL FILTER DEFINITIONS
+#####
+######################################################################
+######################################################################
+d1352 1
+a1352 1
+#####  $Id: smtp.m4,v 8.64 2001/04/03 01:52:54 gshapiro Exp $  #####
+d1357 1
+a1357 1
+SMasqSMTP
+d1364 1
+a1364 1
+SPseudoToReal
+d1380 1
+a1380 1
+R$+ < @@ $~[ $* : $+ >	$@@ $1 < @@ $4 >			strip mailer: part
+d1387 1
+a1387 1
+SEnvFromSMTP
+d1398 1
+a1398 1
+SEnvToSMTP
+d1406 1
+a1406 1
+SHdrFromSMTP
+d1420 1
+a1420 1
+SMasqRelay
+d1445 1
+a1445 1
+#####  $Id: procmail.m4,v 8.22 2001/11/12 23:11:34 ca Exp $  #####
+d1456 1
+a1456 1
+#####  $Id: local.m4,v 8.58 2000/10/26 01:58:29 ca Exp $  #####
+d1461 1
+a1461 1
+SEnvFromL
+d1470 1
+a1470 1
+SEnvToL
+d1476 1
+a1476 1
+SHdrFromL
+d1485 1
+a1485 1
+SHdrToL
+d1492 1
+a1492 1
+SAddDomain
+a1493 1
+
+@
+
+
+1.2
+log
+@*** empty log message ***
+@
+text
+@a0 4
+# $Id: sendmail.cf,v 1.1 2002/12/30 19:44:23 root Exp root $
+
+# THIS FILE IS MASTERREF GUARDED
+
+d2 1
+a2 1
+# Copyright (c) 1998-2001 Sendmail, Inc. and its suppliers.
+d19 7
+d30 5
+a34 2
+#####  $Id: sendmail.cf,v 1.1 2002/12/30 19:44:23 root Exp root $  #####
+#####  $Id: sendmail.cf,v 1.1 2002/12/30 19:44:23 root Exp root $  #####
+a35 2
+#####  linux setup for Red Hat Linux and edited for SASL support by Charles  #####
+#####  $Id: sendmail.cf,v 1.1 2002/12/30 19:44:23 root Exp root $  #####
+d38 1
+a39 1
+#####  $Id: sendmail.cf,v 1.1 2002/12/30 19:44:23 root Exp root $  #####
+d42 1
+d44 1
+d46 1
+a46 1
+#####  $Id: sendmail.cf,v 1.1 2002/12/30 19:44:23 root Exp root $  #####
+d48 1
+a48 1
+#####  $Id: sendmail.cf,v 1.1 2002/12/30 19:44:23 root Exp root $  #####
+d50 1
+a50 1
+#####  $Id: sendmail.cf,v 1.1 2002/12/30 19:44:23 root Exp root $  #####
+d52 1
+a52 1
+#####  $Id: sendmail.cf,v 1.1 2002/12/30 19:44:23 root Exp root $  #####
+d54 1
+a54 1
+#####  $Id: sendmail.cf,v 1.1 2002/12/30 19:44:23 root Exp root $  #####
+a55 1
+#####  $Id: sendmail.cf,v 1.1 2002/12/30 19:44:23 root Exp root $  #####
+d57 1
+a57 1
+#####  $Id: sendmail.cf,v 1.1 2002/12/30 19:44:23 root Exp root $  #####
+d60 1
+a60 1
+#####  $Id: sendmail.cf,v 1.1 2002/12/30 19:44:23 root Exp root $  #####
+d62 1
+d64 1
+a64 1
+#####  $Id: sendmail.cf,v 1.1 2002/12/30 19:44:23 root Exp root $  #####
+a65 1
+#####  $Id: sendmail.cf,v 1.1 2002/12/30 19:44:23 root Exp root $  #####
+d67 1
+a68 1
+#####  $Id: sendmail.cf,v 1.1 2002/12/30 19:44:23 root Exp root $  #####
+d70 1
+a70 1
+#####  $Id: sendmail.cf,v 1.1 2002/12/30 19:44:23 root Exp root $  #####
+d74 1
+a74 1
+#####  $Id: sendmail.cf,v 1.1 2002/12/30 19:44:23 root Exp root $  #####
+d76 2
+a77 3
+
+# level 9 config file format
+V9/Berkeley
+d92 4
+d123 1
+d131 3
+a133 1
+# possible values for tls_connect in access map
+a135 2
+# who I send unqualified names to (null means deliver locally)
+DR
+d137 2
+a138 2
+# who gets all local email traffic ($R has precedence for unqualified names)
+DH
+a147 1
+C{TrustAuthMech}PLAIN LOGIN
+d150 1
+a150 2
+# who I masquerade as (null for no masquerading) (see also $=M)
+DM
+d165 4
+a168 1
+Kaccess hash -o /etc/mail/access.db
+d171 1
+a171 1
+DZ8.11.6
+a207 5
+# automatically rebuild the alias database?
+# NOTE: There is a potential for a denial of service attack if this is set.
+#       This option is deprecated and will be removed from a future version.
+O AutoRebuildAliases
+
+d217 3
+d227 1
+a227 1
+#O MaxHopCount=17
+d272 2
+a273 1
+O DaemonPortOptions=Name=MTA
+d276 7
+a282 1
+#O ClientPortOptions=Address=0.0.0.0
+d293 21
+d317 5
+d325 1
+d337 1
+a337 1
+#O Timeout.ident=5s
+d355 6
+d395 3
+d399 1
+a399 1
+#O MaxDaemonChildren=12
+a415 6
+# shall we sort the queue by hostname first?
+#O QueueSortOrder=priority
+
+# minimum time in queue before retry
+#O MinQueueAge=30m
+
+d419 1
+a419 1
+# service switch file (ignored on Solaris, Ultrix, OSF/1, others)
+a436 3
+# how many jobs can you process in the queue?
+#O MaxQueueRunSize=10000
+
+d462 1
+d465 1
+d478 4
+d518 3
+d522 1
+a522 1
+O AuthMechanisms=PLAIN LOGIN
+d530 8
+d557 3
+d588 1
+a588 1
+	$.$?{auth_type}(authenticated$?{auth_ssf} (${auth_ssf} bits)$.)
+d590 1
+a590 1
+	(using ${tls_version} with cipher ${cipher} (${cipher_bits} bits) verified ${verify})$.$?u
+d624 1
+a626 1
+R$* [ IPv6 : $+ ] <@@>	$: $1 [ IPv6 : $2 ]		unmark IPv6 addr
+d646 1
+a657 2
+# do some sanity checking
+R$* < @@ $* : $* > $*	$1 < @@ $2 $3 > $4		nix colons in addrs
+d684 2
+a685 7
+# check for IPv6 domain literal (save quoted form)
+R$* < @@ [ IPv6 : $+ ] > $*	$: $2 $| $1 < @@@@ [ $(dequote $2 $) ] > $3	mark IPv6 addr
+R$+ $| $* < @@@@ $=w > $*		$: $2 < @@ $j . > $4		self-literal
+R$+ $| $* < @@@@ [ $+ ] > $*	$@@ $2 < @@ [ IPv6 : $1 ] > $4	canon IP addr
+
+# check for IPv4 domain literal
+R$* < @@ [ $+ ] > $*		$: $1 < @@@@ [ $2 ] > $3		mark [a.b.c.d]
+d775 1
+d777 4
+a780 1
+R<> $* < @@ [ $+ ] > $*	$1 < @@ [ $2 ] > $3
+d785 4
+a788 1
+R$* , $~O $*		$#error $@@ 5.1.2 $: "553 Invalid route address"
+d811 1
+a811 3
+R$* < @@ [ IPv6 : $+ ] : > $*
+		$#esmtp $@@ [ $(dequote $2 $) ] $: $1 < @@ [IPv6 : $2 ] > $3	no smarthost: send
+R$* < @@ [ $+ ] : > $*	$#esmtp $@@ [$2] $: $1 < @@ [$2] > $3	no smarthost: send
+d819 2
+d822 1
+a822 1
+			$: < $(virtuser $1 + * @@ $3 $@@ $1 $@@ $2 $: @@ $) > $1 + $2 < @@ $3 . >
+d824 4
+a827 3
+			$: < $(virtuser $1 @@ $3 $@@ $1 $: @@ $) > $1 + $2 < @@ $3 . >
+R<@@> $+ + $+ < @@ $+ . >	$: < $(virtuser + * @@ $3 $@@ $1 $@@ $2 $: @@ $) > $1 + $2 < @@ $3 . >
+R<@@> $+ + $* < @@ $+ . >	$: < $(virtuser @@ $3 $@@ $1 $@@ $2 $: @@ $) > $1 + $2 < @@ $3 . >
+d871 1
+a885 3
+# see if we have a relay or a hub
+R< > $+			$: < $H > $1			try hub
+R< > $+			$: < $R > $1			try relay
+d888 1
+d895 1
+d900 3
+a902 1
+R< $- : $+ > $+		$: $>MailerToTriple < $1 : $2 > $3 < @@ $2 >
+d905 1
+d927 2
+a928 2
+R< $- : $+ @@ $+ > $*<$*>$*	$# $1 $@@ $3 $: $2<@@$3>	use literal user
+R< $- : $+ > $*			$# $1 $@@ $2 $: $3	try qualified mailer
+a929 1
+R< [ IPv6 : $+ ] > $*		$#relay $@@ $(dequote $1 $) $: $2	use unqualified mailer
+d965 1
+a965 11
+# special case the users that should be exposed
+R$=E < @@ *LOCAL* >	$@@ $1 < @@ $j . >		leave exposed
+R$=E < @@ $=M . >	$@@ $1 < @@ $2 . >
+R$=E < @@ $=w . >	$@@ $1 < @@ $2 . >
+
+# handle domain-specific masquerading
+R$* < @@ $=M . > $*	$: $1 < @@ $2 . @@ $M > $3	convert masqueraded doms
+R$* < @@ $=w . > $*	$: $1 < @@ $2 . @@ $M > $3
+R$* < @@ *LOCAL* > $*	$: $1 < @@ $j . @@ $M > $2
+R$* < @@ $+ @@ > $*	$: $1 < @@ $2 > $3		$M is null
+R$* < @@ $+ @@ $+ > $*	$: $1 < @@ $3 . > $4		$M is not null
+d989 1
+a989 1
+###  LookUpDomain -- search for domain in access database
+d994 1
+a994 2
+###		<$3> -- passthru (additional data passed unchanged through)
+###		<$4> -- mark (must be <(!|+) single-token>)
+d997 1
+d1000 10
+a1009 10
+SLookUpDomain
+R<[IPv6 : $+]> <$+> <$*> <$*>	$: <[$(dequote $1 $)]> <$2> <$3> <$4>
+R<$*> <$+> <$*> <$- $->		$: < $(access $5:$1 $: ? $) > <$1> <$2> <$3> <$4 $5>
+R<?> <$+> <$+> <$*> <+ $*>	$: < $(access $1 $: ? $) > <$1> <$2> <$3> <+ $4>
+R<?> <[$+.$-]> <$+> <$*> <$*>	$@@ $>LookUpDomain <[$1]> <$3> <$4> <$5>
+R<?> <[$+::$-]> <$+> <$*> <$*>	$: $>LookUpDomain <[$1]> <$3> <$4> <$5>
+R<?> <[$+:$-]> <$+> <$*> <$*>	$: $>LookUpDomain <[$1]> <$3> <$4> <$5>
+R<?> <$+.$+> <$+> <$*> <$*>	$@@ $>LookUpDomain <$2> <$3> <$4> <$5>
+R<?> <$+> <$+> <$*> <$*>	$@@ <$2> <$3>
+R<$*> <$+> <$+> <$*> <$*>	$@@ <$1> <$4>
+d1012 1
+a1012 1
+###  LookUpAddress -- search for host address in access database
+d1017 1
+a1017 2
+###		<$3> -- passthru (additional data passed through)
+###		<$4> -- mark (must be <(!|+) single-token>)
+d1020 1
+d1023 9
+a1031 8
+SLookUpAddress
+R<$+> <$+> <$*> <$- $+>		$: < $(access $5:$1 $: ? $) > <$1> <$2> <$3> <$4 $5>
+R<?> <$+> <$+> <$*> <+ $+>	$: < $(access $1 $: ? $) > <$1> <$2> <$3> <+ $4>
+R<?> <$+::$-> <$+> <$*> <$*>	$@@ $>LookUpAddress <$1> <$3> <$4> <$5>
+R<?> <$+:$-> <$+> <$*> <$*>	$@@ $>LookUpAddress <$1> <$3> <$4> <$5>
+R<?> <$+.$-> <$+> <$*> <$*>	$@@ $>LookUpAddress <$1> <$3> <$4> <$5>
+R<?> <$+> <$+> <$*> <$*>	$@@ <$2> <$3>
+R<$*> <$+> <$+> <$*> <$*>	$@@ <$1> <$4>
+a1070 1
+
+d1072 1
+a1072 1
+R<NO> $* < @@ $+ >		$: $>LookUpDomain <$2> <NO> <$1 < @@ $2 >> <+To>
+d1076 1
+d1078 1
+a1078 1
+R<$-> $*			$@@ $2
+d1093 1
+a1093 1
+R$*			$: < ${deliveryMode} > $1
+d1097 6
+a1102 6
+R$+ $| $+		$: $>LookUpDomain < $1 > <?> < $2 > <+Connect>
+R<?> <$+>		$: $>LookUpAddress < $1 > <?> < $1 > <+Connect>	no: another lookup
+R<?> < $+ >		$: $1					found nothing
+R<$={Accept}> < $* >	$@@ $1				return value of lookup
+R<REJECT> $*		$#error $@@ 5.7.1 $: "550 Access denied"
+R<DISCARD> $*		$#discard $: discard
+d1105 1
+d1111 1
+a1111 2
+R::ffff:$-.$-.$-.$-	$: <?> $(host $4.$3.$2.$1.sbl.spamhaus.org. $: OK $)
+R$-.$-.$-.$-		$: <?> $(host $4.$3.$2.$1.sbl.spamhaus.org. $: OK $)
+d1113 2
+a1114 1
+R<?>$+			$#error $@@ 5.7.1 $: "550 Mail from " $&{client_addr} " refused by blackhole site sbl.spamhaus.org"
+d1129 1
+a1129 1
+R$*			$: < ${deliveryMode} > $1
+d1162 2
+a1163 1
+R<?> $* < @@ $+ >	$: <OK> $1 < @@ $2 >		... unresolvable OK
+d1166 1
+a1166 1
+R<$+> $+ < @@ $* >	$: @@<$1> <$2 < @@ $3 >> $| <F:$2@@$3> <U:$2@@> <H:$3>
+d1168 1
+a1168 1
+R@@ <$+> <$*> $| <$+>	$: <@@> <$1> <$2> $| $>SearchList <+From> $| <$3> <>
+d1176 1
+a1176 1
+R$* u $* $| <?> $*	$: <OK> $3
+d1184 1
+a1184 1
+R<OK> $*		$@@ <OK>
+d1187 1
+a1187 1
+R<$={Accept}> $*	$# $1
+d1192 1
+d1206 3
+d1210 1
+a1210 1
+R$*			$: < ${deliveryMode} > $1
+d1215 19
+d1240 2
+a1241 2
+R<?> $+ < @@ $=w >	$: <> <$1 < @@ $2 >> $| <F:$1@@$2> <U:$1@@> <H:$2>
+R<?> $+ < @@ $* >	$: <> <$1 < @@ $2 >> $| <F:$1@@$2> <H:$2>
+d1243 1
+a1243 1
+R<> <$*> $| <$+>	$: <@@> <$1> $| $>SearchList <+To> $| <$2> <>
+d1252 1
+d1256 9
+a1264 8
+
+# authenticated?
+R$*		$: $1 $| $>RelayAuth $1 $| $&{verify}	client authenticated?
+R$* $| $# $+		$# $2				error/ok?
+R$* $| $*		$: $1				no
+
+# authenticated by a trusted mechanism?
+R$*			$: $1 $| $&{auth_type}
+d1266 1
+a1266 1
+R$* $| $={TrustAuthMech}	$# RELAYAUTH
+d1269 5
+a1273 4
+R$+ < @@ $=w >		$@@ RELAYTO
+R$+ < @@ $* $=R >	$@@ RELAYTO
+R$+ < @@ $+ >		$: $>LookUpDomain <$2> <?> <$1 < @@ $2 >> <+To>
+R<RELAY> $*		$@@ RELAYTO
+d1282 1
+a1282 1
+R<?> $+			$@@ RELAYTOLOCAL
+d1285 4
+d1292 7
+a1298 5
+R$@@			$@@ RELAYFROM		originated locally
+R0			$@@ RELAYFROM		originated locally
+R$=R $*			$@@ RELAYFROM		relayable IP address
+R$*			$: $>LookUpAddress <$1> <?> <$1> <+Connect>
+R<RELAY> $* 		$@@ RELAYFROM		relayable IP address
+d1301 1
+a1301 1
+R$=w			$@@ RELAYFROM		... and see if it is local
+d1306 1
+a1306 1
+R<TEMP>			$#error $@@ 4.7.1 $: "450 Relaying temporarily denied. Cannot resolve PTR record for " $&{client_addr}
+d1309 2
+a1310 1
+R$*			$: <?> $&{client_name}
+d1312 2
+a1313 1
+R<?> $* $~P 		$:<?>  $[ $1 $2 $]
+d1315 5
+a1319 5
+R<?>			$@@ RELAYFROM
+R<?> $=w		$@@ RELAYFROM
+R<?> $* $=R			$@@ RELAYFROM
+R<?> $*			$: $>LookUpDomain <$1> <?> <$1> <+Connect>
+R<RELAY> $*		$@@ RELAYFROM
+d1322 79
+a1400 2
+# anything else is bogus
+R$*			$#error $@@ 5.7.1 $: "550 Relaying denied"
+d1410 1
+a1410 1
+###		H: recursive host lookup (LookUpDomain)
+d1418 1
+a1418 1
+C{src}E F H U
+d1420 5
+a1424 12
+# mark H: lookup domain
+R<$+> $| <H:$+> <$*>		$: <$1> $| <@@> $>LookUpDomain <$2> <?> <$3> <$1>
+R<$+> $| <@@> <$+> <$*>		$: <$1> $| <$2> <$3>
+R<$- $-> $| <$={src}:$+> <$*>	$: <$1 $2> $| <$(access $2:$4 $: $3:$4 $)> <$5>
+R<+ $-> $| <$={src}:$+> <$*>	$: <+ $1> $| <$(access $3 $: $2:$3 $)> <$4>
+R<$- $-> $| <F:$* + $*@@$+> <$*>	$: <$1 $2> $| <$(access $2:$3@@$5 $: F:$3 + $4@@$5$)> <$6>
+R<+ $-> $| <F:$* + $*@@$+> <$*>	$: <+ $1> $| <$(access $2@@$4 $: F:$2 + $3@@$4$)> <$5>
+R<$- $-> $| <U:$* + $*> <$*>	$: <$1 $2> $| <$(access $2:$3@@ $: U:$3 + $4$)> <$5>
+R<+ $-> $| <U:$* + $*> <$*>	$: <+ $1> $| <$(access $2@@ $: U:$2 + $3$)> <$4>
+R<$+> $| <$={src}:$+> <$+>	$@@ $>SearchList <$1> $| <$4>
+R<$+> $| <$={src}:$+> <>	$@@ <?>
+R<$+> $| <$+> <$*>		$@@ <$2>
+d1427 9
+a1435 1
+# is user trusted to authenticate as someone else?
+d1446 7
+a1452 1
+SLocal_trust_auth
+d1454 11
+d1466 37
+a1502 2
+# is connection with client "good" enough? (done in server)
+# input: ${verify} $| (MAIL|STARTTLS)
+d1504 6
+a1509 4
+R$* $| $*	$: $1 $| $>LookUpDomain <$&{client_name}> <?> <> <! TLS_Clt>
+R$* $| <?>$*	$: $1 $| $>LookUpAddress <$&{client_addr}> <?> <> <! TLS_Clt>
+R$* $| <?>$*	$: $1 $| <$(access TLS_Clt: $: ? $)>
+R$*		$@@ $>"tls_connection" $1
+d1511 7
+a1517 2
+# is connection with server "good" enough? (done in client)
+# input: ${verify}
+d1519 6
+a1524 4
+R$*		$: $1 $| $>LookUpDomain <$&{server_name}> <?> <> <! TLS_Srv>
+R$* $| <?>$*	$: $1 $| $>LookUpAddress <$&{server_addr}> <?> <> <! TLS_Srv>
+R$* $| <?>$*	$: $1 $| <$(access TLS_Srv: $: ? $)>
+R$*		$@@ $>"tls_connection" $1
+d1526 8
+a1533 1
+Stls_connection
+d1535 1
+d1539 1
+d1542 4
+a1545 2
+R$* $| <$*> <VERIFY>		$: <$2> <VERIFY> $1
+R$* $| <$*> <$={tls}:$->$*	$: <$2> <$3:$4> $1
+d1549 18
+a1566 11
+R<$*><VERIFY> OK		$@@ OK
+R<$*><VERIFY:$-> OK		$: <$1> <REQ:$2>
+R<$*><ENCR:$-> $*		$: <$1> <REQ:$2>
+R<$-:$+><VERIFY $*>		$#error $@@ $2 $: $1 " authentication required"
+R<$-:$+><VERIFY $*> FAIL	$#error $@@ $2 $: $1 " authentication failed"
+R<$-:$+><VERIFY $*> NO		$#error $@@ $2 $: $1 " not authenticated"
+R<$-:$+><VERIFY $*> NONE	$#error $@@ $2 $: $1 " other side does not support STARTTLS"
+R<$-:$+><VERIFY $*> $+		$#error $@@ $2 $: $1 " authentication failure " $4
+R<$*><REQ:$->			$: <$1> <REQ:$2> $>max $&{cipher_bits} : $&{auth_ssf}
+R<$*><REQ:$-> $-		$: <$1> <$2:$3> $(arith l $@@ $3 $@@ $2 $)
+R<$-:$+><$-:$-> TRUE		$#error $@@ $2 $: $1 " encryption too weak " $4 " less than " $3
+d1568 23
+d1599 8
+a1606 1
+SRelayAuth
+d1608 24
+a1631 9
+R$* $| OK		$: $1
+R$* $| $*		$@@ NO		not authenticated
+R$*			$: $1 $| $&{cert_issuer}
+R$* $| $+		$: $1 $| $(access CERTISSUER:$2 $)
+R$* $| RELAY		$# RELAYCERTISSUER
+R$* $| SUBJECT		$: $1 $| <@@> $&{cert_subject}
+R$* $| <@@> $+		$: $1 $| <@@> $(access CERTSUBJECT:$2 $)
+R$* $| <@@> RELAY	$# RELAYCERTSUBJECT
+R$* $| $*		$: $1
+d1633 8
+d1655 1
+a1655 1
+#####  $Id: sendmail.cf,v 1.1 2002/12/30 19:44:23 root Exp root $  #####
+d1660 1
+a1660 1
+SMasqSMTP=61
+d1667 1
+a1667 1
+SPseudoToReal=51
+d1683 1
+a1683 1
+R$+ < @@ $+ : $+ >	$@@ $1 < @@ $3 >			strip mailer: part
+d1690 1
+a1690 1
+SEnvFromSMTP=11
+d1701 1
+a1701 1
+SEnvToSMTP=21
+d1709 1
+a1709 1
+SHdrFromSMTP=31
+d1723 1
+a1723 1
+SMasqRelay=71
+d1748 1
+a1748 1
+#####  $Id: sendmail.cf,v 1.1 2002/12/30 19:44:23 root Exp root $  #####
+d1759 1
+a1759 1
+#####  $Id: sendmail.cf,v 1.1 2002/12/30 19:44:23 root Exp root $  #####
+d1764 1
+a1764 1
+SEnvFromL=10
+d1773 1
+a1773 1
+SEnvToL=20
+d1779 1
+a1779 1
+SHdrFromL=30
+d1788 1
+a1788 1
+SHdrToL=40
+d1795 1
+a1795 1
+SAddDomain=50
+d1797 1
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 3
+a3 1
+# $Id:$
+d27 2
+a28 2
+#####  $Id: sendmail.cf,v 1.6 2002/12/20 16:27:12 root Exp $  #####
+#####  $Id: sendmail.cf,v 1.6 2002/12/20 16:27:12 root Exp $  #####
+d31 1
+a31 1
+#####  $Id: sendmail.cf,v 1.6 2002/12/20 16:27:12 root Exp $  #####
+d35 1
+a35 1
+#####  $Id: sendmail.cf,v 1.6 2002/12/20 16:27:12 root Exp $  #####
+d40 1
+a40 1
+#####  $Id: sendmail.cf,v 1.6 2002/12/20 16:27:12 root Exp $  #####
+d42 1
+a42 1
+#####  $Id: sendmail.cf,v 1.6 2002/12/20 16:27:12 root Exp $  #####
+d44 1
+a44 1
+#####  $Id: sendmail.cf,v 1.6 2002/12/20 16:27:12 root Exp $  #####
+d46 1
+a46 1
+#####  $Id: sendmail.cf,v 1.6 2002/12/20 16:27:12 root Exp $  #####
+d48 1
+a48 1
+#####  $Id: sendmail.cf,v 1.6 2002/12/20 16:27:12 root Exp $  #####
+d50 1
+a50 1
+#####  $Id: sendmail.cf,v 1.6 2002/12/20 16:27:12 root Exp $  #####
+d52 1
+a52 1
+#####  $Id: sendmail.cf,v 1.6 2002/12/20 16:27:12 root Exp $  #####
+d55 1
+a55 1
+#####  $Id: sendmail.cf,v 1.6 2002/12/20 16:27:12 root Exp $  #####
+d58 1
+a58 1
+#####  $Id: sendmail.cf,v 1.6 2002/12/20 16:27:12 root Exp $  #####
+d60 1
+a60 1
+#####  $Id: sendmail.cf,v 1.6 2002/12/20 16:27:12 root Exp $  #####
+d63 1
+a63 1
+#####  $Id: sendmail.cf,v 1.6 2002/12/20 16:27:12 root Exp $  #####
+d65 1
+a65 1
+#####  $Id: sendmail.cf,v 1.6 2002/12/20 16:27:12 root Exp $  #####
+d69 1
+a69 1
+#####  $Id: sendmail.cf,v 1.6 2002/12/20 16:27:12 root Exp $  #####
+d1352 1
+a1352 1
+#####  $Id: sendmail.cf,v 1.6 2002/12/20 16:27:12 root Exp $  #####
+d1445 1
+a1445 1
+#####  $Id: sendmail.cf,v 1.6 2002/12/20 16:27:12 root Exp $  #####
+d1456 1
+a1456 1
+#####  $Id: sendmail.cf,v 1.6 2002/12/20 16:27:12 root Exp $  #####
+@

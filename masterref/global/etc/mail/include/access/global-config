@@ -1,0 +1,20 @@
+# $Id: global-confg,v 1.2 2003/05/07 04:13:48 root Exp $
+
+# http://www.sendmail.org/m4/anti-spam.html
+
+localhost.localdomain	RELAY
+localhost		RELAY
+127.0.0.1		RELAY
+
+# fastmonster networks
+208.16.140		RELAY
+65.172.1		RELAY
+
+# known bad
+big@boss.com			550	Your mail has been rejected.
+@websalesjet.com		550	Your mail has been rejected.
+anonymous@flashfire.bgci.net	550	Your mail has been rejected.
+anna@4realswingers.com		550	Your mail has been rejected.
+
+#####################################################################
+

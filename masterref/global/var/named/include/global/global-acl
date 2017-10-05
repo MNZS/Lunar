@@ -1,0 +1,21 @@
+// $Id: global-acl,v 1.5 2004/01/19 22:32:05 root Exp $
+
+// hosts
+acl ns1 	{ 208.16.140.132; };
+acl ns2		{ 65.172.1.132; };
+acl host1	{ 208.16.140.130; };
+acl host2	{ 65.172.1.130; };
+
+// on-networks
+acl xfernets		{ 65.172.1.128/29; 208.16.140.128/29; };
+acl lunarhosting	{ 65.172.1.128/25; 208.16.140.128/25; };
+acl hostnet1		{ 208.16.140.128/25; };
+acl hostnet2		{ 65.172.1.128/25; };
+
+// off-networks
+acl fastmonster		{ 208.16.140/24; 65.172.1/24; };
+acl lunarchicago	{ 24.148.19/24; };
+acl brainwave           { 216.8.69/24; 216.8.70/24; };
+
+// private networks
+acl rfc1918		{ 10.31.0/24; 10.10.0/24; 10.12.71/24; };

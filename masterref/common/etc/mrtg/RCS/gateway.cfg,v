@@ -1,0 +1,233 @@
+head	1.2;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.2
+date	2003.04.15.15.34.24;	author root;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2003.04.15.12.46.20;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.2
+log
+@changed workdir
+@
+text
+@# Created by 
+# /usr/local/mrtg/bin/cfgmaker --ifdesc=descr --no-down --descint --global 'Options[_]: bits,growright' --global 'WorkDir: /usr/local/mrtg/routers/bandwidth' Menzes71@@gateway.lunarhosting.net
+
+
+### Global Config Options
+
+#  for UNIX
+# WorkDir: /home/http/mrtg
+
+#  or for NT
+# WorkDir: c:\mrtgdata
+
+### Global Defaults
+
+#  to get bits instead of bytes and graphs growing to the right
+# Options[_]: growright, bits
+
+Options[_]: bits,growright
+WorkDir: /usr/local/mrtg/routers/gateway/bandwidth
+
+######################################################################
+# System: gateway.lunarhosting.net
+# Description: Cisco Internetwork Operating System Software 
+#          IOS (tm) C2600 Software (C2600-I-M), Version 12.0(7)T,  RELEASE SOFTWARE (fc2)
+#          Copyright (c) 1986-1999 by cisco Systems, Inc.
+#          Compiled Tue 07-Dec-99 02:12 by phanguye
+# Contact: 
+# Location: 
+######################################################################
+
+
+### Interface 1 >> Descr: 'Serial0/0' | Name: 'Se0/0' | Ip: '144.232.215.238' | Eth: '' ###
+
+Target[gateway.lunarhosting.net_1]: 1:Menzes71@@gateway.lunarhosting.net:
+SetEnv[gateway.lunarhosting.net_1]: MRTG_INT_IP="144.232.215.238" MRTG_INT_DESCR="Serial0/0"
+MaxBytes[gateway.lunarhosting.net_1]: 192000
+Title[gateway.lunarhosting.net_1]: Serial0/0 -- gateway.lunarhosting.net
+PageTop[gateway.lunarhosting.net_1]: <H1>Serial0/0 -- gateway.lunarhosting.net</H1>
+ <TABLE>
+   <TR><TD>System:</TD>     <TD>gateway.lunarhosting.net in </TD></TR>
+   <TR><TD>Maintainer:</TD> <TD></TD></TR>
+   <TR><TD>Description:</TD><TD>Serial0/0 PL#408013-002 </TD></TR>
+   <TR><TD>ifType:</TD>     <TD>propPointToPointSerial (22)</TD></TR>
+   <TR><TD>ifName:</TD>     <TD>Se0/0</TD></TR>
+   <TR><TD>Max Speed:</TD>  <TD>1536.0 kbits/s</TD></TR>
+   <TR><TD>Ip:</TD>         <TD>144.232.215.238 (sl-dba-3-1.sprintlink.net)</TD></TR>
+ </TABLE>
+
+
+### Interface 2 >> Descr: 'Serial0/1' | Name: 'Se0/1' | Ip: '144.232.215.230' | Eth: '' ###
+
+Target[gateway.lunarhosting.net_2]: 2:Menzes71@@gateway.lunarhosting.net:
+SetEnv[gateway.lunarhosting.net_2]: MRTG_INT_IP="144.232.215.230" MRTG_INT_DESCR="Serial0/1"
+MaxBytes[gateway.lunarhosting.net_2]: 192000
+Title[gateway.lunarhosting.net_2]: Serial0/1 -- gateway.lunarhosting.net
+PageTop[gateway.lunarhosting.net_2]: <H1>Serial0/1 -- gateway.lunarhosting.net</H1>
+ <TABLE>
+   <TR><TD>System:</TD>     <TD>gateway.lunarhosting.net in </TD></TR>
+   <TR><TD>Maintainer:</TD> <TD></TD></TR>
+   <TR><TD>Description:</TD><TD>Serial0/1 PL#408013-001 </TD></TR>
+   <TR><TD>ifType:</TD>     <TD>propPointToPointSerial (22)</TD></TR>
+   <TR><TD>ifName:</TD>     <TD>Se0/1</TD></TR>
+   <TR><TD>Max Speed:</TD>  <TD>1536.0 kbits/s</TD></TR>
+   <TR><TD>Ip:</TD>         <TD>144.232.215.230 (sl-dba-3-0.sprintlink.net)</TD></TR>
+ </TABLE>
+
+
+### Interface 3 >> Descr: 'FastEthernet0/0' | Name: 'Fa0/0' | Ip: '65.172.1.129' | Eth: '00-02-fd-8e-d4-a0' ###
+
+Target[gateway.lunarhosting.net_3]: 3:Menzes71@@gateway.lunarhosting.net:
+SetEnv[gateway.lunarhosting.net_3]: MRTG_INT_IP="65.172.1.129" MRTG_INT_DESCR="FastEthernet0/0"
+MaxBytes[gateway.lunarhosting.net_3]: 1250000
+Title[gateway.lunarhosting.net_3]: FastEthernet0/0 -- gateway.lunarhosting.net
+PageTop[gateway.lunarhosting.net_3]: <H1>FastEthernet0/0 -- gateway.lunarhosting.net</H1>
+ <TABLE>
+   <TR><TD>System:</TD>     <TD>gateway.lunarhosting.net in </TD></TR>
+   <TR><TD>Maintainer:</TD> <TD></TD></TR>
+   <TR><TD>Description:</TD><TD>FastEthernet0/0 Feth 0/0 host2.lunarhosting.net </TD></TR>
+   <TR><TD>ifType:</TD>     <TD>ethernetCsmacd (6)</TD></TR>
+   <TR><TD>ifName:</TD>     <TD>Fa0/0</TD></TR>
+   <TR><TD>Max Speed:</TD>  <TD>10.0 Mbits/s</TD></TR>
+   <TR><TD>Ip:</TD>         <TD>65.172.1.129 (gateway.feth-0-0.lunarhosting.net)</TD></TR>
+ </TABLE>
+
+
+### Interface 4 >> Descr: 'Ethernet1/0' | Name: 'Et1/0' | Ip: '208.16.140.129' | Eth: '00-02-fd-8e-d4-b0' ###
+
+Target[gateway.lunarhosting.net_4]: 4:Menzes71@@gateway.lunarhosting.net:
+SetEnv[gateway.lunarhosting.net_4]: MRTG_INT_IP="208.16.140.129" MRTG_INT_DESCR="Ethernet1/0"
+MaxBytes[gateway.lunarhosting.net_4]: 1250000
+Title[gateway.lunarhosting.net_4]: Ethernet1/0 -- gateway.lunarhosting.net
+PageTop[gateway.lunarhosting.net_4]: <H1>Ethernet1/0 -- gateway.lunarhosting.net</H1>
+ <TABLE>
+   <TR><TD>System:</TD>     <TD>gateway.lunarhosting.net in </TD></TR>
+   <TR><TD>Maintainer:</TD> <TD></TD></TR>
+   <TR><TD>Description:</TD><TD>Ethernet1/0 Eth 1/0 host1.lunarhosting.net </TD></TR>
+   <TR><TD>ifType:</TD>     <TD>ethernetCsmacd (6)</TD></TR>
+   <TR><TD>ifName:</TD>     <TD>Et1/0</TD></TR>
+   <TR><TD>Max Speed:</TD>  <TD>10.0 Mbits/s</TD></TR>
+   <TR><TD>Ip:</TD>         <TD>208.16.140.129 (gateway.eth-1-0.lunarhosting.net)</TD></TR>
+ </TABLE>
+
+
+### Interface 5 >> Descr: 'Ethernet1/1' | Name: 'Et1/1' | Ip: '10.100.100.1' | Eth: '00-02-fd-8e-d4-b1' ###
+
+Target[gateway.lunarhosting.net_5]: 5:Menzes71@@gateway.lunarhosting.net:
+SetEnv[gateway.lunarhosting.net_5]: MRTG_INT_IP="10.100.100.1" MRTG_INT_DESCR="Ethernet1/1"
+MaxBytes[gateway.lunarhosting.net_5]: 1250000
+Title[gateway.lunarhosting.net_5]: Ethernet1/1 -- gateway.lunarhosting.net
+PageTop[gateway.lunarhosting.net_5]: <H1>Ethernet1/1 -- gateway.lunarhosting.net</H1>
+ <TABLE>
+   <TR><TD>System:</TD>     <TD>gateway.lunarhosting.net in </TD></TR>
+   <TR><TD>Maintainer:</TD> <TD></TD></TR>
+   <TR><TD>Description:</TD><TD>Ethernet1/1 Eth 1/1 mwii transmitter </TD></TR>
+   <TR><TD>ifType:</TD>     <TD>ethernetCsmacd (6)</TD></TR>
+   <TR><TD>ifName:</TD>     <TD>Et1/1</TD></TR>
+   <TR><TD>Max Speed:</TD>  <TD>10.0 Mbits/s</TD></TR>
+   <TR><TD>Ip:</TD>         <TD>10.100.100.1 ()</TD></TR>
+ </TABLE>
+
+
+### Interface 6 >> Descr: 'Ethernet1/2' | Name: 'Et1/2' | Ip: '' | Eth: '00-02-fd-8e-d4-b2' ###
+
+Target[gateway.lunarhosting.net_6]: 6:Menzes71@@gateway.lunarhosting.net:
+SetEnv[gateway.lunarhosting.net_6]: MRTG_INT_IP="" MRTG_INT_DESCR="Ethernet1/2"
+MaxBytes[gateway.lunarhosting.net_6]: 1250000
+Title[gateway.lunarhosting.net_6]: Ethernet1/2 -- gateway.lunarhosting.net
+PageTop[gateway.lunarhosting.net_6]: <H1>Ethernet1/2 -- gateway.lunarhosting.net</H1>
+ <TABLE>
+   <TR><TD>System:</TD>     <TD>gateway.lunarhosting.net in </TD></TR>
+   <TR><TD>Maintainer:</TD> <TD></TD></TR>
+   <TR><TD>Description:</TD><TD>Ethernet1/2 Eth 1/2 Unused </TD></TR>
+   <TR><TD>ifType:</TD>     <TD>ethernetCsmacd (6)</TD></TR>
+   <TR><TD>ifName:</TD>     <TD>Et1/2</TD></TR>
+   <TR><TD>Max Speed:</TD>  <TD>10.0 Mbits/s</TD></TR>
+ </TABLE>
+
+
+### Interface 7 >> Descr: 'Ethernet1/3' | Name: 'Et1/3' | Ip: '' | Eth: '00-02-fd-8e-d4-b3' ###
+
+Target[gateway.lunarhosting.net_7]: 7:Menzes71@@gateway.lunarhosting.net:
+SetEnv[gateway.lunarhosting.net_7]: MRTG_INT_IP="" MRTG_INT_DESCR="Ethernet1/3"
+MaxBytes[gateway.lunarhosting.net_7]: 1250000
+Title[gateway.lunarhosting.net_7]: Ethernet1/3 -- gateway.lunarhosting.net
+PageTop[gateway.lunarhosting.net_7]: <H1>Ethernet1/3 -- gateway.lunarhosting.net</H1>
+ <TABLE>
+   <TR><TD>System:</TD>     <TD>gateway.lunarhosting.net in </TD></TR>
+   <TR><TD>Maintainer:</TD> <TD></TD></TR>
+   <TR><TD>Description:</TD><TD>Ethernet1/3 Eth 1/3 Unused </TD></TR>
+   <TR><TD>ifType:</TD>     <TD>ethernetCsmacd (6)</TD></TR>
+   <TR><TD>ifName:</TD>     <TD>Et1/3</TD></TR>
+   <TR><TD>Max Speed:</TD>  <TD>10.0 Mbits/s</TD></TR>
+ </TABLE>
+
+
+### Interface 8 >> Descr: 'Null0' | Name: 'Nu0' | Ip: '' | Eth: '' ###
+### The following interface is commented out because:
+### * it is a cisco Null0 interface
+# 
+# Target[gateway.lunarhosting.net_8]: 8:Menzes71@@gateway.lunarhosting.net:
+# SetEnv[gateway.lunarhosting.net_8]: MRTG_INT_IP="" MRTG_INT_DESCR="Null0"
+# MaxBytes[gateway.lunarhosting.net_8]: 536870911
+# Title[gateway.lunarhosting.net_8]: Null0 -- gateway.lunarhosting.net
+# PageTop[gateway.lunarhosting.net_8]: <H1>Null0 -- gateway.lunarhosting.net</H1>
+#  <TABLE>
+#    <TR><TD>System:</TD>     <TD>gateway.lunarhosting.net in </TD></TR>
+#    <TR><TD>Maintainer:</TD> <TD></TD></TR>
+#    <TR><TD>Description:</TD><TD>Null0  </TD></TR>
+#    <TR><TD>ifType:</TD>     <TD>Other (1)</TD></TR>
+#    <TR><TD>ifName:</TD>     <TD>Nu0</TD></TR>
+#    <TR><TD>Max Speed:</TD>  <TD>4295.0 Mbits/s</TD></TR>
+#  </TABLE>
+
+
+### Interface 9 >> Descr: 'Loopback0' | Name: 'Lo0' | Ip: '10.12.71.1' | Eth: '' ###
+### The following interface is commented out because:
+### * it is a Software Loopback interface
+# 
+# Target[gateway.lunarhosting.net_9]: 9:Menzes71@@gateway.lunarhosting.net:
+# SetEnv[gateway.lunarhosting.net_9]: MRTG_INT_IP="10.12.71.1" MRTG_INT_DESCR="Loopback0"
+# MaxBytes[gateway.lunarhosting.net_9]: 536870911
+# Title[gateway.lunarhosting.net_9]: Loopback0 -- gateway.lunarhosting.net
+# PageTop[gateway.lunarhosting.net_9]: <H1>Loopback0 -- gateway.lunarhosting.net</H1>
+#  <TABLE>
+#    <TR><TD>System:</TD>     <TD>gateway.lunarhosting.net in </TD></TR>
+#    <TR><TD>Maintainer:</TD> <TD></TD></TR>
+#    <TR><TD>Description:</TD><TD>Loopback0  </TD></TR>
+#    <TR><TD>ifType:</TD>     <TD>softwareLoopback (24)</TD></TR>
+#    <TR><TD>ifName:</TD>     <TD>Lo0</TD></TR>
+#    <TR><TD>Max Speed:</TD>  <TD>4295.0 Mbits/s</TD></TR>
+#    <TR><TD>Ip:</TD>         <TD>10.12.71.1 ()</TD></TR>
+#  </TABLE>
+
+
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d19 1
+a19 1
+WorkDir: /usr/local/mrtg/routers/bandwidth
+@

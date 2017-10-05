@@ -1,0 +1,49 @@
+License Terms: Single Site License (Multiple Site License for Members)
+Copyright: © 2001 UPDN Network Sdn Bhd. 
+Provided By: www.upoint.net
+
+SOFTWARE LICENSE AGREEMENT 
+
+READ THE TERMS AND CONDITIONS OF THIS LICENSE AGREEMENT CAREFULLY BEFORE USING THE SOFTWARE LICENSED TO YOU. THE SOFTWARE COVERED BY THIS AGREEMENT IS COPYRIGHTED AND IS LICENSED. THIS LICENSE AGREEMENT REPRESENTS THE ENTIRE AGREEMENT CONCERNING THE LICENSED SOFTWARE BETWEEN YOU AND UPDN NETWORK SDN BHD, AND IT SUPERSEDES ANY PRIOR PROPOSAL, REPRESENTATION, OR UNDERSTANDING BETWEEN THE PARTIES. BY TAKING POSSESSION OF THE "UPDN NETWORK SDN BHD LICENSED SOFTWARE," YOU AND YOUR COMPANY (COLLECTIVELY "YOU") ARE ACCEPTING AND AGREEING TO THE TERMS OF THIS LICENSE AGREEMENT. IF YOU ARE NOT WILLING TO BE BOUND BY THE TERMS OF THIS LICENSE AGREEMENT, YOU SHOULD PROMPTLY DELETE THE LICENSED SOFTWARE PROGRAMS FROM YOUR SYSTEM AND ADVISE US OF THE SAME. 
+
+UPDN Network Sdn Bhd "Product" License Agreement 
+
+By installing our product ("Software") or setting the permissions so it is executable or altering the Software in any way, Licensee agrees to be bound by the terms of this License Agreement ("Agreement"). 
+
+If Licensee does not agree to all terms of this Agreement, Licensee must promptly destroy all copies of the Software and accompanying documentation and files ("Documentation"). 
+
+I. GRANT OF LICENSE 
+
+UPDN Network Sdn Bhd ("UPOINT") hereby grants to Licensee a non-exclusive license to use the Software and Documentation on the following terms: 
+
+A. No part of the software package can be reproduced or transmitted in any form or by any means: electronic, mechanical, or otherwise, without prior written permission of UPOINT. You are allowed to upload the Software to your server for use as designated. The script may not be uploaded such that the script itself is readable to the world. 
+
+B. No part of the programming can be altered unless permission is granted by UPOINT. (Ask Us about Any changes you would want). Exceptions to this include the variables documented as editable in the enclosed scripts. 
+
+C. The product can not be used in any unlawful manner or in a way that would be construed as unlawful by the government or equivalent. 
+
+D. No part of the program can be copied and re-sold under another name. 
+
+E. Licensee can not run other copies of the licensed program on another machine unless prior arrangements have been made with UPOINT. 
+
+
+II. TITLE 
+
+Title, ownership rights and intellectual property rights in and to the Software and Documentation shall remain in UPOINT. This Software is protected by the copyright laws of Malaysia and international copyright treaties. 
+
+
+III. LIMITED WARRANTY 
+
+UPOINT warrants that for a period of thirty (30) days from the date of acquisition, the Software, if operated as directed, will substantially achieve the functionality described in the Documentation. UPOINT does not warrant, however, that the Licensee's use of the Software will be uninterrupted or that operation of Software will be error-free or secure. 
+
+
+IV. CUSTOMER REMEDIES 
+
+UPOINT's sole liability for any breach of this warranty shall be, in UPOINT's sole discretion: (i) to advise Licensee how to achieve substantially the same functionality with the Software as described in the Documentation or through a procedure different than set forth in the Documentation. (ii) if the above remedy is impracticable, to refund the license fee Licensee paid for the Software. 
+
+NO OTHER WARRANTIES: TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, UPOINT DISCLAIMS ALL OTHER WARRANTIES, EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE WITH REGARD TO THE SOFTWARE, AND THE ACCOMPANYING WRITTEN MATERIALS. 
+
+------------------------------------------------------------------ 
+
+Our Product , as well as the accompanying files may only be used in accordance with the terms of this license granted. 
+

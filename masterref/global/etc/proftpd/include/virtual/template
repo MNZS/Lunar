@@ -1,0 +1,40 @@
+# $Id: template,v 1.3 2003/04/21 19:38:16 root Exp $
+
+<VirtualHost www.DOMAIN>
+  ServerIdent on " "
+
+  DisplayConnect /etc/proftpd/connect
+  DefaultRoot /www/DOMAIN/pub/
+  AllowOverwrite on
+
+    <Limit Login>
+      Order allow,deny
+      AllowGroup adm_GROUP
+      AllowGroup ftp_GROUP
+      #AllowGroup tmp_GROUP
+      AllowGroup lunarhosting
+      AllowGroup consultants
+      #RESELLER
+      Deny All
+    </Limit>
+
+    <Directory /*>
+      GroupOwner hosting
+    </Directory>
+
+  MaxClients 5
+  ShowSymLinks on
+  Umask 002
+  TransferLog /var/log/ftp/ftp-xfer.DOMAIN
+  RequireValidShell off
+
+  # anonymous ftp
+  # Include "/etc/proftpd/anonymous/anon.DOMAIN"
+
+  # shopzone
+  # Include "/etc/proftpd/include/commerce/shopzone/sz.DOMAIN"
+
+  # miva
+  # Include "/etc/proftpd/include/commerce/miva/miva.DOMAIN"
+
+</VirtualHost>

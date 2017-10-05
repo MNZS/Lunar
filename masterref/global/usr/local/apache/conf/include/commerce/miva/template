@@ -1,0 +1,30 @@
+## $Id: template,v 1.6 2003/08/27 00:46:11 root Exp $
+
+ScriptAlias /miva-bin/ /usr/local/miva/cgi-bin/
+
+## file handler
+AddType application/x-miva-compiled .mvc
+Action application/x-miva-compiled /miva-bin/mivavm
+
+## add a file handler for miva specific files
+AddType application/x-miva .mv
+Action application/x-miva /cgi-bin/miva
+
+## global settings for mivavm-4.x
+SetEnv MvCONFIG_LIBRARY /usr/local/miva/lib/config/env.so
+SetEnv MvCONFIG_DIR_BUILTIN /usr/local/miva/lib/builtins
+SetEnv MVCONFIG_DIR_CA /usr/local/miva/certs
+SetEnv MVCONFIG_SSL_OPENSSL /usr/lib/libssl.so
+SetEnv MVCONFIG_SSL_CRYPTOP /usr/lib/libcrypto.so
+
+## per domain settings
+SetEnv MvCONFIG_DIR_MIVA /usr/hosting/DOMAIN/pub/public_html
+#SetEnv MvCONFIG_DIR_MIVA /www/DOMAIN/pub/public_html
+SetEnv MvCONFIG_DIR_DATA /usr/hosting/DOMAIN/pub/mivadata
+#SetEnv MvCONFIG_DIR_DATA /www/DOMAIN/pub/mivadata
+
+## commerce libraries
+## SetEnv MvCONFIG_COMMERCE_<method> /home/user/lib/commerce/library.so
+
+## icb includes for commerce libraries and such
+#include "/usr/local/apache/conf/include/commerce/icb/icb.DOMAIN"

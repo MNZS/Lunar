@@ -1,0 +1,37 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.1
+date	2003.01.04.16.24.40;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@Alias /webmail /www/DOMAIN/webmail/html
+Alias /mime /www/DOMAIN/webmail/mime
+
+## ignore the configuration file for display
+<Files "w3mail.conf">
+  Order allow,deny
+  Deny from All
+  Satisfy All
+</Files>
+
+## do not allow directory listing in /mime/
+<Directory /www/DOMAIN/webmail/mime>
+  Options -Indexes
+</Directory>
+@

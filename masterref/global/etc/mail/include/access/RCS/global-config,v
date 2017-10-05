@@ -1,0 +1,68 @@
+head	1.2;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.2
+date	2003.05.07.04.13.48;	author root;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2003.05.07.04.12.12;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.2
+log
+@*** empty log message ***
+@
+text
+@# $Id: global-confg,v 1.1 2003/05/07 04:12:12 root Exp root $
+
+# http://www.sendmail.org/m4/anti-spam.html
+
+localhost.localdomain	RELAY
+localhost		RELAY
+127.0.0.1		RELAY
+
+# fastmonster networks
+208.16.140		RELAY
+65.172.1		RELAY
+
+# known bad
+big@@boss.com			550	Your mail has been rejected.
+@@websalesjet.com		550	Your mail has been rejected.
+anonymous@@flashfire.bgci.net	550	Your mail has been rejected.
+anna@@4realswingers.com		550	Your mail has been rejected.
+
+#####################################################################
+
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 1
+a1 1
+# $Id: access,v 1.4 2003/03/27 19:45:21 root Exp $
+a2 5
+# Check the /usr/share/doc/sendmail-8.11.6/README.cf file for a description
+# of the format of this file. (search for access_db in that file)
+# The /usr/share/doc/sendmail-8.11.6/README.cf is part of the sendmail-doc
+# package.
+#
+d19 2
+a20 1
+lunarmedia.net		RELAY
+@

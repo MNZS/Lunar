@@ -1,0 +1,25 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.1
+date	2003.05.23.15.35.30;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@mx1.lunarhosting.net
+ns1.lunarhosting.net
+@

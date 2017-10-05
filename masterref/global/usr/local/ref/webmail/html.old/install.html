@@ -1,0 +1,249 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta name="GENERATOR" content="Microsoft FrontPage 5.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Installation of W3Mail 1</title>
+<style>
+<!--
+div.Section1
+	{page:Section1;}
+ p.MsoNormal
+	{mso-style-parent:"";
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	margin-left:0in; margin-right:0in; margin-top:0in}
+ li.MsoNormal
+	{mso-style-parent:"";
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	margin-left:0in; margin-right:0in; margin-top:0in}
+span.SpellE
+	{}
+span.GramE
+	{}
+-->
+</style>
+</head>
+
+<body>
+
+<div class="Section1" style="width: 844; height: 1645">
+  <p class="MsoNormal"><span style="font-family: Arial Black">Installation of 
+  W3Mail 1.0 (Windows)</span></p>
+  <p class="MsoNormal"><span style="font-family: Arial">&nbsp;</span></p>
+  <p class="MsoNormal"><span style="font-family: Arial">System Requirements:</span></p>
+  <ul style="margin-top: 0in; margin-bottom: 0in" type="square">
+    <li class="MsoNormal"><span style="font-family: Arial">Pentium class 
+    computer running Windows NT 4.0 or later</span> </li>
+    <li class="MsoNormal"><span style="font-family: Arial">256mb memory</span>
+    </li>
+  </ul>
+  <p class="MsoNormal"><span class="SpellE">
+  <span style="font-family: Arial Black">Webserver</span></span></p>
+  <p class="MsoNormal" style="margin-left: 0.5in">
+  <span style="font-family: Arial">If you do not yet have a <span class="SpellE">
+  webserver</span> installed on your server, download and install the latest 
+  version of Apache from:
+  <a href="http://www.apache.org/dist/httpd/binaries/win32" style="color: blue; text-decoration: underline; text-underline: single">
+  http://www.apache.org/dist/httpd/binaries/win32</a>.</span></p>
+  <p class="MsoNormal"><span class="SpellE">
+  <span style="font-family: Arial Black">Perl</span></span><span style="font-family: Arial Black"> 
+  (5.005 or later)</span></p>
+  <p class="MsoNormal" style="margin-left: 0.5in">
+  <span style="font-family: Arial">W3Mail is written in <span class="SpellE">
+  Perl</span>, a highly popular language for web applications.&nbsp; You can download
+  <span class="SpellE">Perl</span> for Windows at:</span></p>
+  <p class="MsoNormal" style="margin-left: 0.5in">
+  <span style="font-family: Arial">
+  <a href="http://www.activestate.com/Products/ActivePerl/" style="color: blue; text-decoration: underline; text-underline: single">
+  http://www.activestate.com/Products/ActivePerl/</a></span></p>
+  <p class="MsoNormal"><span class="SpellE">
+  <span style="font-family: Arial Black">Perl</span></span><span style="font-family: Arial Black"> 
+  Modules</span></p>
+  <p class="MsoNormal" style="margin-left: 0.5in">
+  <span style="font-family: Arial">The following modules are required by W3Mail:</span></p>
+  <p class="MsoNormal" style="text-indent: -0.25in; margin-left: 0.75in">
+  <span style="font-family: Wingdings">§<span style="font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; font-family: Times New Roman">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><span style="font-family: Arial">Digest-MD5</span></p>
+  <p class="MsoNormal" style="text-indent: -0.25in; margin-left: 0.75in">
+  <span style="font-family: Wingdings">§<span style="font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; font-family: Times New Roman">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><span style="font-family: Arial">IO-stringy</span></p>
+  <p class="MsoNormal" style="text-indent: -0.25in; margin-left: 0.75in">
+  <span style="font-family: Wingdings">§<span style="font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; font-family: Times New Roman">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><span style="font-family: Arial">MIME-tools</span></p>
+  <p class="MsoNormal" style="text-indent: -0.25in; margin-left: 0.75in">
+  <span style="font-family: Wingdings">§<span style="font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; font-family: Times New Roman">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><span class="SpellE"><span style="font-family: Arial">MailTools</span></span></p>
+  <p class="MsoNormal" style="text-indent: -0.25in; margin-left: 0.75in">
+  <span style="font-family: Wingdings">§<span style="font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; font-family: Times New Roman">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><span style="font-family: Arial">MIME-Base64</span></p>
+  <p class="MsoNormal" style="text-indent: -0.25in; margin-left: 0.75in">
+  <span style="font-family: Wingdings">§<span style="font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; font-family: Times New Roman">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><span style="font-family: Arial">Mail-Sender</span></p>
+  <p class="MsoNormal" style="text-indent: -0.25in; margin-left: 0.75in">
+  <span style="font-family: Wingdings">§<span style="font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; font-family: Times New Roman">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><span style="font-family: Arial">Mail-POP3Client</span></p>
+  <p class="MsoNormal" style="margin-left: 0.5in">
+  <span style="font-family: Arial">You may automatically install these modules 
+  by running </span><span class="SpellE"><span style="font-family: Courier New">
+  installModules.bat</span></span><span style="font-family: Arial"> from the 
+  command line.</span></p>
+  <p class="MsoNormal" style="margin-left: 0.5in">
+  <span style="font-family: Arial">&nbsp;</span></p>
+  <p class="MsoNormal"><span class="GramE"><span style="font-family: Arial">Once 
+  your system meets the requirements, run </span><span class="SpellE">
+  <span style="font-family: Courier New">perl</span></span><span style="font-family: Courier New"> 
+  install.pl</span><span style="font-family: Arial"> from the command line to 
+  install W3Mail.</span></span></p>
+  <p class="MsoNormal"><span style="font-family: Arial">&nbsp;</span></p>
+  <p class="MsoNormal"><span style="font-family: Arial">This program will walk 
+  you through installation step by step, creating required directories and 
+  copying files to their appropriate directories.&nbsp; In addition it will configure 
+  W3Mail for your settings by automatically generating w3mail.conf.&nbsp; You may 
+  edit w3mail.conf to change your settings at any time.</span></p>
+  <p class="MsoNormal"><span style="font-family: Arial">&nbsp;</span></p>
+  <p class="MsoNormal"><span style="font-family: Arial">Directories install.pl 
+  creates:</span></p>
+  <ul style="margin-top: 0in; margin-bottom: 0in" type="square">
+    <li class="MsoNormal"><b><span style="font-family: Arial">Installation 
+    Directory</span></b><span style="font-family: Arial"> – This is the 
+    directory where W3Mail is to be installed.&nbsp; This needs to be in the CGI-BIN 
+    portion of your <span class="SpellE">webserver</span>, typically C:\Program 
+    Files\Apache Group\Apache\cgi-bin\w3mail</span> </li>
+    <li class="MsoNormal"><b><span style="font-family: Arial">Data Directory</span></b><span style="font-family: Arial"> 
+    – This directory holds all user data including preferences, attachments, and 
+    outgoing messages.&nbsp; This directory does not need to reside in your
+    <span class="SpellE">httpd</span> documents section, and can be located 
+    anywhere on your system.</span> </li>
+    <li class="MsoNormal"><b><span style="font-family: Arial">Mime Directory</span></b><span style="font-family: Arial"> 
+    – This directory temporarily holds sent and received MIME file attachments.&nbsp; 
+    It must be located the documents portion of your <span class="SpellE">
+    webserver</span>, typically C:\Program Files\Apache Group\Apache\<span class="SpellE">htdocs</span>\mime</span>
+    </li>
+    <li class="MsoNormal"><b><span style="font-family: Arial">Images Directory</span></b><span style="font-family: Arial"> 
+    – This directory contains images used by W3Mail, and must be in the 
+    documents section of your <span class="SpellE">webserver</span> as well.</span>
+    </li>
+  </ul>
+  <p><span style="font-size: 12pt; font-family: Arial">
+  <br style="page-break-before: always" clear="all">
+&nbsp;</span></p>
+  <p class="MsoNormal"><span style="font-family: Arial Black">Installation of 
+  W3Mail 1.0 (<span class="GramE">Unix</span>)</span></p>
+  <p class="MsoNormal"><span style="font-family: Arial">&nbsp;</span></p>
+  <p class="MsoNormal"><span style="font-family: Arial">System Requirements:</span></p>
+  <ul style="margin-top: 0in; margin-bottom: 0in" type="square">
+    <li class="MsoNormal"><span style="font-family: Arial">Pentium class 
+    computer running Unix or Linux</span> </li>
+    <li class="MsoNormal"><span style="font-family: Arial">256mb memory</span>
+    </li>
+  </ul>
+  <p class="MsoNormal"><span class="SpellE">
+  <span style="font-family: Arial Black">Webserver</span></span></p>
+  <p class="MsoNormal" style="margin-left: 0.5in">
+  <span style="font-family: Arial">Most <span class="SpellE">
+  <span class="GramE">unix</span></span> distributions come preinstalled with a
+  <span class="SpellE">webserver</span>.&nbsp; If you do not yet have a
+  <span class="SpellE">webserver</span> installed on your server, download and 
+  install the latest version of Apache from: </span></p>
+  <p class="MsoNormal" style="margin-left: 0.5in">
+  <span style="font-family: Arial">
+  <a href="http://www.apache.org/dist/httpd/binaries/win32" style="color: blue; text-decoration: underline; text-underline: single">
+  http://www.apache.org/dist/httpd/</a>.</span></p>
+  <p class="MsoNormal"><span class="SpellE">
+  <span style="font-family: Arial Black">Perl</span></span><span style="font-family: Arial Black"> 
+  (5.005 or later)</span></p>
+  <p class="MsoNormal" style="margin-left: 0.5in">
+  <span style="font-family: Arial">W3Mail is written in <span class="SpellE">
+  Perl</span>, a highly popular language for web applications.&nbsp; If you do not 
+  have <span class="SpellE">Perl</span>, download it at:</span></p>
+  <p class="MsoNormal" style="margin-left: 0.5in">
+  <span style="font-family: Arial">http://www.perl.com</span></p>
+  <p class="MsoNormal"><span class="SpellE">
+  <span style="font-family: Arial Black">Perl</span></span><span style="font-family: Arial Black"> 
+  Modules</span></p>
+  <p class="MsoNormal" style="margin-left: 0.5in">
+  <span style="font-family: Arial">The following modules are required by W3Mail:</span></p>
+  <p class="MsoNormal" style="text-indent: -0.25in; margin-left: 0.75in">
+  <span style="font-family: Wingdings">§<span style="font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; font-family: Times New Roman">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><span style="font-family: Arial">Digest-MD5</span></p>
+  <p class="MsoNormal" style="text-indent: -0.25in; margin-left: 0.75in">
+  <span style="font-family: Wingdings">§<span style="font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; font-family: Times New Roman">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><span style="font-family: Arial">IO-stringy</span></p>
+  <p class="MsoNormal" style="text-indent: -0.25in; margin-left: 0.75in">
+  <span style="font-family: Wingdings">§<span style="font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; font-family: Times New Roman">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><span style="font-family: Arial">MIME-tools</span></p>
+  <p class="MsoNormal" style="text-indent: -0.25in; margin-left: 0.75in">
+  <span style="font-family: Wingdings">§<span style="font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; font-family: Times New Roman">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><span class="SpellE"><span style="font-family: Arial">MailTools</span></span></p>
+  <p class="MsoNormal" style="text-indent: -0.25in; margin-left: 0.75in">
+  <span style="font-family: Wingdings">§<span style="font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; font-family: Times New Roman">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><span style="font-family: Arial">MIME-Base64</span></p>
+  <p class="MsoNormal" style="text-indent: -0.25in; margin-left: 0.75in">
+  <span style="font-family: Wingdings">§<span style="font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; font-family: Times New Roman">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><span style="font-family: Arial">Mail-Sender</span></p>
+  <p class="MsoNormal" style="text-indent: -0.25in; margin-left: 0.75in">
+  <span style="font-family: Wingdings">§<span style="font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; font-family: Times New Roman">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><span style="font-family: Arial">Mail-POP3Client</span></p>
+  <p class="MsoNormal" style="margin-left: 0.5in">
+  <span style="font-family: Arial">To install these modules, download
+  <a style="color: blue; text-decoration: underline; text-underline: single" href="../download/modules.tgz">
+  http://www.cascadesoft.com/download/modules.tgz</a>.</span></p>
+  <p class="MsoNormal" style="margin-left: 0.5in">
+  <span style="font-family: Arial">&nbsp;</span></p>
+  <p class="MsoNormal" style="margin-left: 0.5in">
+  <span style="font-family: Arial">Extract the contents of this file, and run
+  </span><span class="SpellE"><span style="font-family: Courier New">
+  install_modules.sh</span></span></p>
+  <p class="MsoNormal" style="margin-left: 0.5in">
+  <span style="font-family: Arial">&nbsp;</span></p>
+  <p class="MsoNormal"><span class="GramE"><span style="font-family: Arial">Once 
+  your system meets the requirements, run </span><span class="SpellE">
+  <span style="font-family: Courier New">perl</span></span><span style="font-family: Courier New"> 
+  install.pl</span><span style="font-family: Arial"> from the command line to 
+  install W3Mail.</span></span></p>
+  <p class="MsoNormal"><span style="font-family: Arial">&nbsp;</span></p>
+  <p class="MsoNormal"><span style="font-family: Arial">This program will walk 
+  you through installation step by step, creating required <span class="GramE">
+  directories</span> and copying files to their appropriate directories.&nbsp; In 
+  addition it will configure W3Mail for your settings by automatically 
+  generating w3mail.conf.&nbsp; You may edit w3mail.conf to change your settings at 
+  any time.</span></p>
+  <p class="MsoNormal"><span style="font-family: Arial">&nbsp;</span></p>
+  <p class="MsoNormal"><span style="font-family: Arial">Directories install.pl 
+  creates:</span></p>
+  <ul style="margin-top: 0in; margin-bottom: 0in" type="square">
+    <li class="MsoNormal"><b><span style="font-family: Arial">Installation 
+    Directory</span></b><span style="font-family: Arial"> – This is the 
+    directory where W3Mail is to be installed.&nbsp; This needs to be in the CGI-BIN 
+    portion of your <span class="SpellE">webserver</span>, typically C:\Program 
+    Files\Apache Group\Apache\cgi-bin\w3mail</span> </li>
+    <li class="MsoNormal"><b><span style="font-family: Arial">Data Directory</span></b><span style="font-family: Arial"> 
+    – This directory holds all user data including preferences, attachments, and 
+    outgoing messages.&nbsp; This directory does not need to reside in your
+    <span class="SpellE">httpd</span> documents section, and can be located 
+    anywhere on your system.&nbsp; This directory needs to be owned by the user 
+    running the <span class="SpellE">webserver</span> and needs permissions of 
+    0700.</span> </li>
+    <li class="MsoNormal"><b><span style="font-family: Arial">Mime Directory</span></b><span style="font-family: Arial"> 
+    – This directory temporarily holds sent and received MIME file attachments.&nbsp; 
+    It must be located the documents portion of your <span class="SpellE">
+    webserver</span>, typically C:\Program Files\Apache Group\Apache\<span class="SpellE">htdocs</span>\mime. 
+    &nbsp;This directory needs to be owned by the user running the
+    <span class="SpellE">webserver</span> and needs permissions of 0700.</span>
+    </li>
+    <li class="MsoNormal"><b><span style="font-family: Arial">Images Directory</span></b><span style="font-family: Arial"> 
+    – This directory contains images used by W3Mail, and must be in the 
+    documents section of your <span class="SpellE">webserver</span> as well.</span>
+    </li>
+  </ul>
+  <p class="MsoNormal"><span style="font-family: Arial">&nbsp;</span></div>
+
+</body>
+
+</html>

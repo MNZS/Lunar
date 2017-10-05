@@ -1,0 +1,63 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.1
+date	2003.06.05.16.15.14;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@$Id: named_update-howto,v 1.2 2003/04/29 14:03:47 root Exp $
+
+When a new client has been added or removed from hostX server, the following
+scripts MUST be ran on the hostX server:
+
+  sudo /usr/local/lunarbin/mkslave
+  sudo /usr/local/lunarbin/zoneupdate
+
+These script should be ran in THAT order. 
+
+mkslave
+This script creates a slave named.<hostname> file that is appropriate 
+for the nameX servers. It is held on the hostX machine in /var/named
+with the filename slave_<hostname>.
+
+zoneupdate
+This script sends the local slave_<hostname> file to name1 and name2. The
+file is copied on the remote machine as /var/named/named.<hostname>.
+This script also creates the files /var/named/run/named.go and /etc/named/
+run/relay.go on the remote nameX server.
+
+named.go
+This file is created on the nameX server and is looked for by the script
+named_update.pl. 
+
+named_update.pl
+This script looks in /var/named/run for a file called named.go
+If this file is present, named_update.pl will restart named in order
+to read in the new named.hostX files
+
+relay.go
+This file is create on the nameX server and is looked for by the script 
+mkrelay.pl
+
+mkrelay.pl
+This script looks in /var/named/run for a file called relay.go
+If this file is present, the script will create a new /etc/mail/relay-domains
+file to ensure the nameserver can provide backup mail services for a current
+list of hosted domain. The script then restarts Sendmail using the mkmail.pl
+script.
+@

@@ -1,0 +1,250 @@
+head	1.3;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.3
+date	2003.06.05.05.47.57;	author root;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2003.06.05.05.42.05;	author root;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2003.06.05.05.03.03;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.3
+log
+@*** empty log message ***
+@
+text
+@<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+    <TITLE>Traffic Graphing for BACKBONE.LUNARHOSTING.NET</TITLE>
+    <META HTTP-EQUIV="Refresh" CONTENT="300">
+    <META HTTP-EQUIV="Cache-Control" content="no-cache">
+    <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+    <META HTTP-EQUIV="Expires" CONTENT="Thu, 05 Jun 2003 04:48:27 GMT">
+</HEAD>
+
+<BODY bgcolor="#ffffff" text="#000000" link="#000000" vlink="#000000" alink="#000000">
+<!-- commandline was: /usr/bin/indexmaker --output=backbone.bandwidth.html "--title=Traffic Graphing for BACKBONE.LUNARHOSTING.NET" --columns=1 --sort=descr --section=descr /masterref/common/etc/mrtg/backbone.cfg -->
+
+<b>Traffic Graphing for BACKBONE.LUNARHOSTING.NET</b>
+
+<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=10>
+<TR>
+<TD><DIV><B>Feth 0/1 gateway.eth-1-0.lunarhosting.net</B></DIV>
+<DIV><A HREF="switches/backbone/bandwidth/backbone.lunarhosting.net_2.html"><IMG BORDER=1 ALT="backbone.lunarhosting.net_2 Traffic Graph" SRC="switches/backbone/bandwidth/backbone.lunarhosting.net_2-day.png"></A>
+<BR>
+<SMALL><!--#flastmod file="backbone.lunarhosting.net_2.html" --></SMALL></DIV>
+</TD></TR>
+<TR>
+<TD><DIV><B>Feth 0/2 host1.lunarhosting.net</B></DIV>
+<DIV><A HREF="switches/backbone/bandwidth/backbone.lunarhosting.net_3.html"><IMG BORDER=1 ALT="backbone.lunarhosting.net_3 Traffic Graph" SRC="switches/backbone/bandwidth/backbone.lunarhosting.net_3-day.png"></A>
+<BR>
+<SMALL><!--#flastmod file="backbone.lunarhosting.net_3.html" --></SMALL></DIV>
+</TD></TR>
+<TR>
+<TD><DIV><B>Feth 0/3 name1.lunarhosting.net</B></DIV>
+<DIV><A HREF="switches/backbone/bandwidth/backbone.lunarhosting.net_4.html"><IMG BORDER=1 ALT="backbone.lunarhosting.net_4 Traffic Graph" SRC="switches/backbone/bandwidth/backbone.lunarhosting.net_4-day.png"></A>
+<BR>
+<SMALL><!--#flastmod file="backbone.lunarhosting.net_4.html" --></SMALL></DIV>
+</TD></TR>
+<TR>
+<TD><DIV><B>Feth 0/7 gateway.feth-0-0.lunarhosting.net</B></DIV>
+<DIV><A HREF="switches/backbone/bandwidth/backbone.lunarhosting.net_8.html"><IMG BORDER=1 ALT="backbone.lunarhosting.net_8 Traffic Graph" SRC="switches/backbone/bandwidth/backbone.lunarhosting.net_8-day.png"></A>
+<BR>
+<SMALL><!--#flastmod file="backbone.lunarhosting.net_8.html" --></SMALL></DIV>
+</TD></TR>
+<TR>
+<TD><DIV><B>Feth 0/8 host2.lunarhosting.net</B></DIV>
+<DIV><A HREF="switches/backbone/bandwidth/backbone.lunarhosting.net_9.html"><IMG BORDER=1 ALT="backbone.lunarhosting.net_9 Traffic Graph" SRC="switches/backbone/bandwidth/backbone.lunarhosting.net_9-day.png"></A>
+<BR>
+<SMALL><!--#flastmod file="backbone.lunarhosting.net_9.html" --></SMALL></DIV>
+</TD></TR>
+<TR>
+<TD><DIV><B>Feth 0/9 name2.lunarhosting.net</B></DIV>
+<DIV><A HREF="switches/backbone/bandwidth/backbone.lunarhosting.net_10.html"><IMG BORDER=1 ALT="backbone.lunarhosting.net_10 Traffic Graph" SRC="switches/backbone/bandwidth/backbone.lunarhosting.net_10-day.png"></A>
+<BR>
+<SMALL><!--#flastmod file="backbone.lunarhosting.net_10.html" --></SMALL></DIV>
+</TD></TR>
+<TR>
+<TD><DIV><B>Unused Interface</B></DIV>
+<DIV><A HREF="switches/backbone/bandwidth/backbone.lunarhosting.net_5.html"><IMG BORDER=1 ALT="backbone.lunarhosting.net_5 Traffic Graph" SRC="switches/backbone/bandwidth/backbone.lunarhosting.net_5-day.png"></A>
+<BR>
+<SMALL><!--#flastmod file="backbone.lunarhosting.net_5.html" --></SMALL></DIV>
+</TD></TR>
+<TR>
+<TD><DIV><B>Unused Interface</B></DIV>
+<DIV><A HREF="switches/backbone/bandwidth/backbone.lunarhosting.net_6.html"><IMG BORDER=1 ALT="backbone.lunarhosting.net_6 Traffic Graph" SRC="switches/backbone/bandwidth/backbone.lunarhosting.net_6-day.png"></A>
+<BR>
+<SMALL><!--#flastmod file="backbone.lunarhosting.net_6.html" --></SMALL></DIV>
+</TD></TR>
+<TR>
+<TD><DIV><B>Unused Interface</B></DIV>
+<DIV><A HREF="switches/backbone/bandwidth/backbone.lunarhosting.net_7.html"><IMG BORDER=1 ALT="backbone.lunarhosting.net_7 Traffic Graph" SRC="switches/backbone/bandwidth/backbone.lunarhosting.net_7-day.png"></A>
+<BR>
+<SMALL><!--#flastmod file="backbone.lunarhosting.net_7.html" --></SMALL></DIV>
+</TD></TR>
+<TR>
+<TD><DIV><B>Unused Interface</B></DIV>
+<DIV><A HREF="switches/backbone/bandwidth/backbone.lunarhosting.net_11.html"><IMG BORDER=1 ALT="backbone.lunarhosting.net_11 Traffic Graph" SRC="switches/backbone/bandwidth/backbone.lunarhosting.net_11-day.png"></A>
+<BR>
+<SMALL><!--#flastmod file="backbone.lunarhosting.net_11.html" --></SMALL></DIV>
+</TD></TR>
+<TR>
+<TD><DIV><B>Unused Interface</B></DIV>
+<DIV><A HREF="switches/backbone/bandwidth/backbone.lunarhosting.net_12.html"><IMG BORDER=1 ALT="backbone.lunarhosting.net_12 Traffic Graph" SRC="switches/backbone/bandwidth/backbone.lunarhosting.net_12-day.png"></A>
+<BR>
+<SMALL><!--#flastmod file="backbone.lunarhosting.net_12.html" --></SMALL></DIV>
+</TD></TR>
+<TR>
+<TD><DIV><B>Unused Interface</B></DIV>
+<DIV><A HREF="switches/backbone/bandwidth/backbone.lunarhosting.net_13.html"><IMG BORDER=1 ALT="backbone.lunarhosting.net_13 Traffic Graph" SRC="switches/backbone/bandwidth/backbone.lunarhosting.net_13-day.png"></A>
+<BR>
+<SMALL><!--#flastmod file="backbone.lunarhosting.net_13.html" --></SMALL></DIV>
+</TD></TR>
+<TR>
+<TD><DIV><B>Unused Interface</B></DIV>
+<DIV><A HREF="switches/backbone/bandwidth/backbone.lunarhosting.net_14.html"><IMG BORDER=1 ALT="backbone.lunarhosting.net_14 Traffic Graph" SRC="switches/backbone/bandwidth/backbone.lunarhosting.net_14-day.png"></A>
+<BR>
+<SMALL><!--#flastmod file="backbone.lunarhosting.net_14.html" --></SMALL></DIV>
+</TD></TR>
+<TR>
+<TD><DIV><B>Unused Interface</B></DIV>
+<DIV><A HREF="switches/backbone/bandwidth/backbone.lunarhosting.net_15.html"><IMG BORDER=1 ALT="backbone.lunarhosting.net_15 Traffic Graph" SRC="switches/backbone/bandwidth/backbone.lunarhosting.net_15-day.png"></A>
+<BR>
+<SMALL><!--#flastmod file="backbone.lunarhosting.net_15.html" --></SMALL></DIV>
+</TD></TR>
+<TR>
+<TD><DIV><B>Unused Interface</B></DIV>
+<DIV><A HREF="switches/backbone/bandwidth/backbone.lunarhosting.net_16.html"><IMG BORDER=1 ALT="backbone.lunarhosting.net_16 Traffic Graph" SRC="switches/backbone/bandwidth/backbone.lunarhosting.net_16-day.png"></A>
+<BR>
+<SMALL><!--#flastmod file="backbone.lunarhosting.net_16.html" --></SMALL></DIV>
+</TD></TR>
+<TR>
+<TD><DIV><B>Unused Interface</B></DIV>
+<DIV><A HREF="switches/backbone/bandwidth/backbone.lunarhosting.net_17.html"><IMG BORDER=1 ALT="backbone.lunarhosting.net_17 Traffic Graph" SRC="switches/backbone/bandwidth/backbone.lunarhosting.net_17-day.png"></A>
+<BR>
+<SMALL><!--#flastmod file="backbone.lunarhosting.net_17.html" --></SMALL></DIV>
+</TD></TR>
+<TR>
+<TD><DIV><B>Unused Interface</B></DIV>
+<DIV><A HREF="switches/backbone/bandwidth/backbone.lunarhosting.net_18.html"><IMG BORDER=1 ALT="backbone.lunarhosting.net_18 Traffic Graph" SRC="switches/backbone/bandwidth/backbone.lunarhosting.net_18-day.png"></A>
+<BR>
+<SMALL><!--#flastmod file="backbone.lunarhosting.net_18.html" --></SMALL></DIV>
+</TD></TR>
+<TR>
+<TD><DIV><B>Unused Interface</B></DIV>
+<DIV><A HREF="switches/backbone/bandwidth/backbone.lunarhosting.net_19.html"><IMG BORDER=1 ALT="backbone.lunarhosting.net_19 Traffic Graph" SRC="switches/backbone/bandwidth/backbone.lunarhosting.net_19-day.png"></A>
+<BR>
+<SMALL><!--#flastmod file="backbone.lunarhosting.net_19.html" --></SMALL></DIV>
+</TD></TR>
+<TR>
+<TD><DIV><B>Unused Interface</B></DIV>
+<DIV><A HREF="switches/backbone/bandwidth/backbone.lunarhosting.net_20.html"><IMG BORDER=1 ALT="backbone.lunarhosting.net_20 Traffic Graph" SRC="switches/backbone/bandwidth/backbone.lunarhosting.net_20-day.png"></A>
+<BR>
+<SMALL><!--#flastmod file="backbone.lunarhosting.net_20.html" --></SMALL></DIV>
+</TD></TR>
+<TR>
+<TD><DIV><B>Unused Interface</B></DIV>
+<DIV><A HREF="switches/backbone/bandwidth/backbone.lunarhosting.net_21.html"><IMG BORDER=1 ALT="backbone.lunarhosting.net_21 Traffic Graph" SRC="switches/backbone/bandwidth/backbone.lunarhosting.net_21-day.png"></A>
+<BR>
+<SMALL><!--#flastmod file="backbone.lunarhosting.net_21.html" --></SMALL></DIV>
+</TD></TR>
+<TR>
+<TD><DIV><B>Unused Interface</B></DIV>
+<DIV><A HREF="switches/backbone/bandwidth/backbone.lunarhosting.net_22.html"><IMG BORDER=1 ALT="backbone.lunarhosting.net_22 Traffic Graph" SRC="switches/backbone/bandwidth/backbone.lunarhosting.net_22-day.png"></A>
+<BR>
+<SMALL><!--#flastmod file="backbone.lunarhosting.net_22.html" --></SMALL></DIV>
+</TD></TR>
+<TR>
+<TD><DIV><B>Unused Interface</B></DIV>
+<DIV><A HREF="switches/backbone/bandwidth/backbone.lunarhosting.net_23.html"><IMG BORDER=1 ALT="backbone.lunarhosting.net_23 Traffic Graph" SRC="switches/backbone/bandwidth/backbone.lunarhosting.net_23-day.png"></A>
+<BR>
+<SMALL><!--#flastmod file="backbone.lunarhosting.net_23.html" --></SMALL></DIV>
+</TD></TR>
+<TR>
+<TD><DIV><B>Unused Interface</B></DIV>
+<DIV><A HREF="switches/backbone/bandwidth/backbone.lunarhosting.net_24.html"><IMG BORDER=1 ALT="backbone.lunarhosting.net_24 Traffic Graph" SRC="switches/backbone/bandwidth/backbone.lunarhosting.net_24-day.png"></A>
+<BR>
+<SMALL><!--#flastmod file="backbone.lunarhosting.net_24.html" --></SMALL></DIV>
+</TD></TR>
+<TR>
+<TD><DIV><B>Unused Interface</B></DIV>
+<DIV><A HREF="switches/backbone/bandwidth/backbone.lunarhosting.net_25.html"><IMG BORDER=1 ALT="backbone.lunarhosting.net_25 Traffic Graph" SRC="switches/backbone/bandwidth/backbone.lunarhosting.net_25-day.png"></A>
+<BR>
+<SMALL><!--#flastmod file="backbone.lunarhosting.net_25.html" --></SMALL></DIV>
+</TD></TR>
+<TR>
+</TR>
+</TABLE>
+<BR>
+</TABLE>
+</BODY>
+</HTML>
+@
+
+
+1.2
+log
+@*** empty log message ***
+@
+text
+@a164 24
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+  <TR>
+    <TD WIDTH=63><A
+    HREF="http://www.ee.ethz.ch/~oetiker/webtools/mrtg/"><IMG
+    BORDER=0 SRC="mrtg-l.png" WIDTH=63 HEIGHT=25 ALT="MRTG"></A></TD>
+    <TD WIDTH=25><A
+    HREF="http://www.ee.ethz.ch/~oetiker/webtools/mrtg/"><IMG
+    BORDER=0 SRC="mrtg-m.png" WIDTH=25 HEIGHT=25 ALT=""></A></TD>
+    <TD WIDTH=388><A
+    HREF="http://www.ee.ethz.ch/~oetiker/webtools/mrtg/"><IMG
+    BORDER=0 SRC="mrtg-r.png" WIDTH=388 HEIGHT=25
+    ALT="Multi Router Traffic Grapher"></A></TD>
+  </TR>
+</TABLE>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+  <TR VALIGN=top>
+  <TD WIDTH=88 ALIGN=RIGHT><FONT FACE="Arial,Helvetica" SIZE=2>
+  version 2.9.17</FONT></TD>
+  <TD WIDTH=388 ALIGN=RIGHT><FONT FACE="Arial,Helvetica" SIZE=2>
+  <A HREF="http://www.ee.ethz.ch/~oetiker/">Tobias Oetiker</A>
+  <A HREF="mailto:oetiker@@ee.ethz.ch">&lt;oetiker@@ee.ethz.ch&gt;</A>
+  and&nbsp;<A HREF="http://www.bungi.com/">Dave&nbsp;Rand</A>&nbsp;<A HREF="mailto:dlr@@bungi.com">&lt;dlr@@bungi.com&gt;</A></FONT>
+  </TD>
+</TR>
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d4 1
+a4 1
+    <TITLE>Traffic Graphing for GATEWAY.LUNARHOSTING.NET</TITLE>
+d12 1
+a12 1
+<!-- commandline was: /usr/bin/indexmaker --output=backbone.bandwidth.html "--title=Traffic Graphing for GATEWAY.LUNARHOSTING.NET" --columns=1 --sort=descr --section=descr /masterref/common/etc/mrtg/backbone.cfg -->
+d14 1
+a14 1
+<H1>Traffic Graphing for GATEWAY.LUNARHOSTING.NET</H1>
+@

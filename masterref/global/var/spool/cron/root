@@ -1,0 +1,128 @@
+# $Id: root,v 1.52 2003/08/20 05:35:36 root Exp $
+
+##########################################################################
+
+## "minute" "hour" "day of month" "month" "day of week"
+
+## "0-59"   "0-23" "0-31"         "0-12"  "0-7"
+
+## 0-SUN 1-MON 2-TUE 3-WED 4-THU 5-FRI 6-SAT 7-SUN
+
+#######################################################################
+
+## SERVER SYNCHRONIZATION
+
+## password sync
+#*/15 * * * *	/usr/local/lunarbin/passwd_sync.pl
+## build htaccess files
+15 * * * *	/usr/local/lunarbin/panelpasswd.pl
+
+#######################################################################
+
+## HOST MONITORING
+
+## monitor server load
+*/5 * * * *	/usr/local/lunarbin/notify.pl
+## monitor server services
+*/15 * * * *	/usr/local/lunarbin/daemonwatch.pl
+## graph rbl statistics
+15 1 * * *	/usr/local/lunarbin/reportRBL.pl
+
+######################################################################
+
+## ARCHIVAL SERVICES
+
+## mysqldump
+0 7 * * *       /usr/local/lunarbin/archive-sql.pl >/dev/null 2>&1
+## clean up backup repositories to only hold 3 days of archives 
+10 2 * * 2,3,4,5,6    /usr/local/lunarbin/archive-cleanse.pl
+## backup the server offsite 
+30 2 * * 2,3,4,5,6    /usr/local/lunarbin/archive-system.pl
+
+######################################################################
+
+## URCHIN STATISTICS AND LOGGING
+
+## urchin config creation
+30 23 * * *     /usr/local/lunarbin/urchin_mkconfig.pl >/dev/null 2>&1
+## urchin log analyzation
+0 0 * * *       /usr/local/lunarbin/urchin_run.pl >/dev/null 2>&1
+## keep urchin archived logs for only 5 days
+45 0 * * *	/usr/local/lunarbin/urchin_logrotate.pl
+## rotate the ftp/www logs for the month
+00 1 1 * *      /usr/local/lunarbin/logrotate.pl
+
+######################################################################
+
+## E-MAIL SERVICES
+
+## restart sendmail and rebuild the virtusertable
+00 5,11,17,23 * * *   /usr/local/lunarbin/mkmail.pl >/dev/null 2>&1
+## clear out procmail.log files
+#30 06 * * 7     /usr/local/lunarbin/clearProcmailLog.pl
+
+######################################################################
+
+## BIND SERVICES
+
+## check for named updates and reload accordingly
+*/20 * * * *	/usr/local/lunarbin/named_update.pl
+## clear out all zone files for a fresh copy
+0 6 1 * *	/usr/local/lunarbin/named_refresh.pl
+
+######################################################################
+
+## SNMP MONITORING
+
+## trend bandwidth utilization
+*/5 * * * *	/usr/local/lunarbin/snmpBandwidth.pl
+## graph current disk utilization
+*/15 * * * *	/usr/local/lunarbin/snmpDiskUsage.pl
+## trend free memory
+*/5 * * * *	/usr/local/lunarbin/snmpMemLoad.pl
+## trend cpu load
+*/5 * * * *	/usr/local/lunarbin/snmpCpuLoad.pl
+
+######################################################################
+
+## CONTROL PANEL SERVICES
+
+## update the search engine indexes
+25 03 * * *     /usr/local/lunarbin/searchindex.pl >/dev/null 2>&1
+## calculate disk usage for hosting clients
+20 */4 * * *	/usr/local/lunarbin/adddisk.pl
+
+######################################################################
+
+## BANDWIDTH AND BILLING
+
+## calculate bandwidth for hosting clients
+45 23 * * *  	/usr/local/lunarbin/addband.pl
+## on first day of each month create a billing report 
+30 00 1 * *  	/usr/local/lunarbin/billing.pl
+## on first day of each month clear out previous total and send email
+00 01 1 * *    	/usr/local/lunarbin/addband.pl --summary
+ 
+######################################################################
+
+## MAIL ARCHIVES
+
+## script to create html-ized version of mail sent to archives@
+15,45 */1 * * * /usr/local/lunarbin/mailarchive-update.pl
+01 00 1 * *     /usr/local/lunarbin/mailarchive-monthly.pl
+
+######################################################################
+
+## CUSTOMER SPECIFICS
+
+## script to create html-ized version of pancho-discuss
+17,47 */1 * * * /usr/local/lunarbin/pancho-archive.pl
+## script to backup pancho cvs logs
+*/1 * * * *	/usr/local/lunarbin/pancho-cvs.pl
+## script to backup pancho discuss search archive
+*/1 * * * *	/usr/local/lunarbin/pancho-file-archive.pl
+## kna-pacific.com
+0 9,17 * * *	/usr/local/lunarbin/getquote.pl
+
+######################################################################
+

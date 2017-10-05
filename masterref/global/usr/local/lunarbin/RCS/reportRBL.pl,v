@@ -1,0 +1,1227 @@
+head	1.53;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.53
+date	2003.08.07.14.39.46;	author root;	state Exp;
+branches;
+next	1.52;
+
+1.52
+date	2003.07.29.18.40.26;	author root;	state Exp;
+branches;
+next	1.51;
+
+1.51
+date	2003.07.03.20.37.24;	author root;	state Exp;
+branches;
+next	1.50;
+
+1.50
+date	2003.07.03.20.31.53;	author root;	state Exp;
+branches;
+next	1.49;
+
+1.49
+date	2003.06.28.13.35.27;	author root;	state Exp;
+branches;
+next	1.48;
+
+1.48
+date	2003.06.28.13.34.26;	author root;	state Exp;
+branches;
+next	1.47;
+
+1.47
+date	2003.06.28.13.29.45;	author root;	state Exp;
+branches;
+next	1.46;
+
+1.46
+date	2003.06.27.14.46.55;	author root;	state Exp;
+branches;
+next	1.45;
+
+1.45
+date	2003.06.27.14.45.39;	author root;	state Exp;
+branches;
+next	1.44;
+
+1.44
+date	2003.06.27.14.43.17;	author root;	state Exp;
+branches;
+next	1.43;
+
+1.43
+date	2003.06.27.14.39.02;	author root;	state Exp;
+branches;
+next	1.42;
+
+1.42
+date	2003.06.27.14.29.52;	author root;	state Exp;
+branches;
+next	1.41;
+
+1.41
+date	2003.06.27.14.28.53;	author root;	state Exp;
+branches;
+next	1.40;
+
+1.40
+date	2003.06.26.04.29.36;	author root;	state Exp;
+branches;
+next	1.39;
+
+1.39
+date	2003.06.25.23.17.45;	author root;	state Exp;
+branches;
+next	1.38;
+
+1.38
+date	2003.06.25.23.13.01;	author root;	state Exp;
+branches;
+next	1.37;
+
+1.37
+date	2003.06.25.20.22.04;	author root;	state Exp;
+branches;
+next	1.36;
+
+1.36
+date	2003.06.25.20.18.01;	author root;	state Exp;
+branches;
+next	1.35;
+
+1.35
+date	2003.06.25.20.14.04;	author root;	state Exp;
+branches;
+next	1.34;
+
+1.34
+date	2003.06.25.19.52.51;	author root;	state Exp;
+branches;
+next	1.33;
+
+1.33
+date	2003.06.25.19.47.03;	author root;	state Exp;
+branches;
+next	1.32;
+
+1.32
+date	2003.06.25.19.41.18;	author root;	state Exp;
+branches;
+next	1.31;
+
+1.31
+date	2003.06.25.19.39.44;	author root;	state Exp;
+branches;
+next	1.30;
+
+1.30
+date	2003.06.25.19.35.38;	author root;	state Exp;
+branches;
+next	1.29;
+
+1.29
+date	2003.06.25.19.11.33;	author root;	state Exp;
+branches;
+next	1.28;
+
+1.28
+date	2003.06.25.19.10.22;	author root;	state Exp;
+branches;
+next	1.27;
+
+1.27
+date	2003.06.25.18.53.22;	author root;	state Exp;
+branches;
+next	1.26;
+
+1.26
+date	2003.06.25.15.01.23;	author root;	state Exp;
+branches;
+next	1.25;
+
+1.25
+date	2003.06.25.14.54.50;	author root;	state Exp;
+branches;
+next	1.24;
+
+1.24
+date	2003.06.25.14.51.04;	author root;	state Exp;
+branches;
+next	1.23;
+
+1.23
+date	2003.06.25.14.49.40;	author root;	state Exp;
+branches;
+next	1.22;
+
+1.22
+date	2003.06.25.14.48.12;	author root;	state Exp;
+branches;
+next	1.21;
+
+1.21
+date	2003.06.25.14.47.10;	author root;	state Exp;
+branches;
+next	1.20;
+
+1.20
+date	2003.06.25.14.46.25;	author root;	state Exp;
+branches;
+next	1.19;
+
+1.19
+date	2003.06.25.14.45.23;	author root;	state Exp;
+branches;
+next	1.18;
+
+1.18
+date	2003.06.25.14.44.24;	author root;	state Exp;
+branches;
+next	1.17;
+
+1.17
+date	2003.06.25.14.43.15;	author root;	state Exp;
+branches;
+next	1.16;
+
+1.16
+date	2003.06.25.14.40.39;	author root;	state Exp;
+branches;
+next	1.15;
+
+1.15
+date	2003.06.25.14.39.05;	author root;	state Exp;
+branches;
+next	1.14;
+
+1.14
+date	2003.06.25.14.36.43;	author root;	state Exp;
+branches;
+next	1.13;
+
+1.13
+date	2003.06.25.14.35.54;	author root;	state Exp;
+branches;
+next	1.12;
+
+1.12
+date	2003.06.25.14.35.28;	author root;	state Exp;
+branches;
+next	1.11;
+
+1.11
+date	2003.06.24.18.42.03;	author root;	state Exp;
+branches;
+next	1.10;
+
+1.10
+date	2003.06.24.18.37.53;	author root;	state Exp;
+branches;
+next	1.9;
+
+1.9
+date	2003.06.24.18.37.38;	author root;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	2003.06.24.18.37.04;	author root;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2003.06.24.18.29.08;	author root;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2003.06.24.18.27.26;	author root;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2003.06.24.15.02.27;	author root;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2003.06.24.13.57.12;	author root;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2003.06.24.13.48.14;	author root;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2003.06.24.13.44.03;	author root;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2003.06.24.13.39.40;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@Graph Daily number of e-mail blocked by RBL within Sendmail Config.
+@
+
+
+1.53
+log
+@Added a new list to tally
+proxies.relays.monkeys.com
+@
+text
+@#!/usr/bin/perl -w
+
+use strict;
+use RRDs;
+use Sys::Hostname;
+use Date::Manip;
+use POSIX qw(strftime);
+
+if (hostname() ne 'name2.lunarhosting.net') {
+  exit 1;
+}
+
+my @@nodes = qw(	host1 host2 );
+
+my $rrd = 'rblReport.rrd';
+my $mrtgDir = '/usr/local/mrtg/servers';
+                                                                                
+my $end = time();
+                                                                                
+my $targetDate =  &ParseDateDelta("1 day ago");
+$targetDate = &UnixDate("$targetDate","%b %e");
+                                                                                
+for my $node(@@nodes) {
+
+  my %rbl = (	
+     	  # 'listname as it appears in maillog' => {
+  	  #	'placeholder for tally' => '0',
+  	  #	'color for graph line' = '',
+  	  #	}, 
+  	  'dsbl' => {
+	  	  'count' => '0',
+		  'color' => '',
+		  'id' => 'list.dsbl.org',
+		  },
+	  'multihop' => {
+		  'count' => '0',
+		  'color' => '',
+		  'id' => 'multihop.dsbl.org',
+		  },
+	  'spamcop' => {
+		  'count' => '0',
+		  'color' => '',
+		  'id' => 'bl.spamcop.net',
+		  },
+	  'spamhaus' => {
+	  	  'count' => '0',
+		  'color' => '',
+		  'id' => 'sbl.spamhaus.org',
+		  },
+	  'ordb' => {
+		  'count' => '0',
+		  'color' => '',
+		  'id' => 'relays.ordb.org',
+		  },
+	  'monkey' => {
+		  'count' => '0',
+		  'color' => '',
+		  'id' => 'proxies.relays.monkeys.com',
+		  },
+  );
+
+  my $rrd_dir = "$mrtgDir/$node/mail";
+  my $img_dir = $rrd_dir;
+
+  &test_if_complete($rrd_dir);
+
+  my $scp = `which scp`; chomp $scp;
+  $scp .= " $node:";
+  $scp .= '/var/log/maillog ';
+  $scp .= "/tmp/$node.maillog";
+
+  system("$scp");
+
+  open(LOG,"/tmp/$node.maillog")
+    or die "Can't open $node.maillog : $!\n";
+  while(my $line = <LOG>) {
+    chomp $line;
+    for my $rbl(keys %rbl) {
+      next unless ($line =~ /^$targetDate/);
+      if ($line =~ /$rbl{$rbl}{id}$/) {
+        $rbl{$rbl}{count} = $rbl{$rbl}{count} + 1;
+      }
+    }
+  }
+  close(LOG);
+
+  unlink("/tmp/$node.maillog") if (-e "/tmp/$node.maillog");
+                                                                                
+  &update_rrd($rrd_dir,\%rbl);
+  &logStats($node,\%rbl);
+  &make_graph('7',$node,$rrd_dir);
+  &make_graph('28',$node,$rrd_dir);
+}
+
+sub test_if_complete {
+                                                                                
+  my $dir = shift;
+                                                                                
+if ( !$dir ) {
+                                                                                
+print <<RRD;
+                                                                                
+You need to define your RRD repository!
+This is the directory on your server where
+your .rrd database will reside. It should
+be outside of web accessible space.
+                                                                                
+You can define this value by editing the
+\$rrd_dir variable in this script.
+This value should be an absolute path but
+not include a trailing slash.
+                                                                                
+RRD
+                                                                                
+return 1;
+
+} elsif ( !$dir ) {
+                                                                                
+print <<IMG;
+                                                                                
+You need to define your Image repository!
+This should be a directory that is accesible
+via the web.
+                                                                                
+You can define this value by editing the
+\$img_dir variable in this script.
+This value should be an absolute path but
+not include a trailing slash.
+                                                                                
+IMG
+                                                                                
+return 1;
+
+} elsif ( ! -e "$dir/$rrd" ) {
+                                                                                
+print <<CREATE;
+                                                                                
+Hang on, your RRD database is being created!
+This will only need to be done once, so you
+shouldn't see this messsage again.
+                                                                                
+CREATE
+
+RRDs::create("$dir/$rrd",
+             "DS:spamcop:GAUGE:172800:U:U",
+             "DS:spamhaus:GAUGE:172800:U:U",
+             "DS:ordb:GAUGE:172800:U:U",
+             "DS:dsbl:GAUGE:172800:U:U",
+             "DS:multihop:GAUGE:172800:U:U",
+             "RRA:AVERAGE:0.5:1:5000" );
+             #"RRA:AVERAGE:0.5:1:365" );
+my $ERR=RRDs::error;
+die "ERROR while creating $dir/$rrd: $ERR\n" if $ERR;
+
+print <<DONE;
+                                                                                
+Congratulations! Your RRD database has been
+created! You should now be able to start
+adding data and creating graphs.
+Try running this script by hand now to make
+sure that no errors occur.
+To automate data collection, you can add an
+entry to your crontab that should look something
+like this
+                                                                                
+0 6 * * *     /path/to/this/script >/dev/null 2>&1
+                                                                                
+DONE
+                                                                                
+return 1;
+                                                                                
+}
+                                                                                
+## end of subroutine
+}
+
+sub update_rrd {
+                                                                                
+  my $dir = shift;
+  my $rbl = shift;
+
+  RRDs::update("$dir/$rrd","N:$rbl->{'spamcop'}{'count'}:$rbl->{'spamhaus'}{'count'}:$rbl->{'ordb'}{'count'}:$rbl->{'dsbl'}{'count'}:$rbl->{'multihop'}{'count'}");
+  my $ERR=RRDs::error;
+  die "ERROR while updating $rrd: $ERR\n" if $ERR;
+}
+
+sub make_graph {
+                                                                                
+  my $interval = shift;
+  my $hostname = shift;
+  my $dir = shift;
+  
+  # 86400 = number of seconds in a day
+  my $range = $interval * 86400;                                                                              
+  my $start = $end - $range;
+
+  RRDs::graph("$dir/spam-$interval.gif",
+              "--start","$start",
+              "--end","$end",
+              "--title","Blacklist report for $hostname over $interval days",
+              "--vertical-label","Messages Blocked",
+         #     "-x","MINUTE:60:HOUR:$print_hour:HOUR:$print_hour:0:%k",
+              "-l","0",
+              "--units-exponent","0",
+              "DEF:spamhaus=$dir/rblReport.rrd:spamhaus:AVERAGE",
+              "DEF:spamcop=$dir/rblReport.rrd:spamcop:AVERAGE",
+              "DEF:dsbl=$dir/rblReport.rrd:dsbl:AVERAGE",
+              "DEF:ordb=$dir/rblReport.rrd:ordb:AVERAGE",
+              "DEF:multihop=$dir/rblReport.rrd:multihop:AVERAGE",
+              "LINE1:spamhaus#FF0000:sbl.spamhaus.org", 
+              "LINE1:spamcop#00FF00:bl.spamcop.net", 
+              "LINE1:dsbl#0000FF:list.dsbl.org", 
+              "LINE1:ordb#000000:relays.ordb.org", 
+              "LINE1:ordb#FFFF00:multihop.dsbl.org", 
+  );
+
+  my $ERR=RRDs::error;
+  die "ERROR while graphing $rrd: $ERR\n" if $ERR;
+                                                                                
+}
+
+sub showReport {
+  my $node = shift;
+  my $rbl = shift;
+
+  print "RBL Statistics for $node\n";
+  for my $i(keys %{$rbl}) {
+    print "\t$rbl->{$i}{id} -> $rbl->{$i}{count}\n";
+  }
+  print "\n";
+}                                                                                
+sub logStats {
+  my $node = shift;
+  my $rbl = shift;
+
+  open(LOG,'>>/var/log/rbl.log');
+  print LOG strftime("%b %d",localtime);
+  print LOG " - $node\n";
+  for my $i (keys %{$rbl}) {
+    print LOG "  $rbl->{$i}{id}($rbl->{$i}{count})\n";
+  }
+  print "\n";
+  close(LOG);
+}
+exit 0;
+
+@
+
+
+1.52
+log
+@Updated the Archive size
+@
+text
+@d55 5
+@
+
+
+1.51
+log
+@changed multihop to yellow
+@
+text
+@d145 2
+a146 1
+             "RRA:AVERAGE:0.5:1:365" );
+@
+
+
+1.50
+log
+@Added multihop.dsbl.org
+@
+text
+@d208 1
+a208 1
+              "LINE1:ordb#555555:multihop.dsbl.org", 
+@
+
+
+1.49
+log
+@*** empty log message ***
+@
+text
+@d35 5
+d144 1
+d176 1
+a176 1
+  RRDs::update("$dir/$rrd","N:$rbl->{'spamcop'}{'count'}:$rbl->{'spamhaus'}{'count'}:$rbl->{'ordb'}{'count'}:$rbl->{'dsbl'}{'count'}");
+d203 1
+d208 1
+@
+
+
+1.48
+log
+@*** empty log message ***
+@
+text
+@a134 1
+	     "--steps 86400",
+@
+
+
+1.47
+log
+@Trying to get accurate daily graphs
+@
+text
+@d135 1
+a135 1
+	     "--steps","86400",
+@
+
+
+1.46
+log
+@added a return to the test routine
+@
+text
+@d135 5
+a139 4
+             "DS:spamcop:GAUGE:86400:U:U",
+             "DS:spamhaus:GAUGE:86400:U:U",
+             "DS:ordb:GAUGE:86400:U:U",
+             "DS:dsbl:GAUGE:86400:U:U",
+@
+
+
+1.45
+log
+@*** empty log message ***
+@
+text
+@d105 1
+a105 1
+exit 1;
+d122 1
+a122 1
+exit 1;
+d158 1
+a158 1
+exit 0;
+@
+
+
+1.44
+log
+@incorrect order in update statement
+@
+text
+@d222 1
+a222 1
+  open(LOG,'>>/var/log/rblReport.log');
+@
+
+
+1.43
+log
+@*** empty log message ***
+@
+text
+@d170 1
+a170 1
+  RRDs::update("$dir/$rrd","N:$rbl->{'dsbl'}{'count'}:$rbl->{'spamcop'}{'count'}:$rbl->{'spamhaus'}{'count'}:$rbl->{'ordb'}{'count'}");
+@
+
+
+1.42
+log
+@*** empty log message ***
+@
+text
+@d223 2
+a224 2
+  print LOG strftime("%b",localtime);
+  print LOG "\n";
+@
+
+
+1.41
+log
+@added a log file
+@
+text
+@d7 1
+d222 1
+a222 1
+  open(LOG,'>>/var/log/rblReport.log')
+d226 1
+a226 1
+    print LOG "  $rbl{$i}{id}($rbl{$i}{count})\n";
+@
+
+
+1.40
+log
+@changed to weekly and 4 week graphs
+@
+text
+@d79 1
+d217 13
+@
+
+
+1.39
+log
+@*** empty log message ***
+@
+text
+@d79 2
+a80 2
+  &make_graph('14',$node,$rrd_dir);
+  &make_graph('31',$node,$rrd_dir);
+@
+
+
+1.38
+log
+@*** empty log message ***
+@
+text
+@d186 1
+a186 1
+              "--title","Blacklist report for $hostname over past week",
+@
+
+
+1.37
+log
+@*** empty log message ***
+@
+text
+@d79 2
+a80 2
+  &make_graph('168',$node,$rrd_dir);
+#  &showReport($node,\%rbl);
+d178 4
+a181 4
+                                                                                
+  my $print_hour = $interval / 8;
+                                                                                
+  my $start = $end - '1209600';
+@
+
+
+1.36
+log
+@*** empty log message ***
+@
+text
+@d186 2
+a187 2
+              "--title","RBL report for $hostname over past week",
+              "--vertical-label","Total Messages Blocked",
+@
+
+
+1.35
+log
+@changed graph to show 2 weeks
+@
+text
+@d187 1
+a187 1
+              "--vertical-label","Number of Messages Blocked",
+@
+
+
+1.34
+log
+@changed colors
+@
+text
+@d181 1
+a181 1
+  my $start = $end - '604800';
+@
+
+
+1.33
+log
+@*** empty log message ***
+@
+text
+@d195 4
+a198 4
+              "LINE1:spamhaus#999999:sbl.spamhaus.org", 
+              "LINE1:spamcop#999999:bl.spamcop.net", 
+              "LINE1:dsbl#999999:list.dsbl.org", 
+              "LINE1:ordb#999999:relays.ordb.org", 
+@
+
+
+1.32
+log
+@removed -grph
+@
+text
+@d188 1
+a188 1
+              "-x","MINUTE:60:HOUR:$print_hour:HOUR:$print_hour:0:%k",
+@
+
+
+1.31
+log
+@*** empty log message ***
+@
+text
+@d191 8
+a198 8
+              "DEF:spamhaus-graph=$dir/rblReport.rrd:spamhaus:AVERAGE",
+              "DEF:spamcop-graph=$dir/rblReport.rrd:spamcop:AVERAGE",
+              "DEF:dsbl-graph=$dir/rblReport.rrd:dsbl:AVERAGE",
+              "DEF:ordb-graph=$dir/rblReport.rrd:ordb:AVERAGE",
+              "LINE1:spamhaus-graph#999999:sbl.spamhaus.org", 
+              "LINE1:spamcop-graph#999999:bl.spamcop.net", 
+              "LINE1:dsbl-graph#999999:list.dsbl.org", 
+              "LINE1:ordb-graph#999999:relays.ordb.org", 
+@
+
+
+1.30
+log
+@*** empty log message ***
+@
+text
+@d191 4
+a194 4
+              "DEF:spamhaus-graph=$dir/rblReport.rrd:spamhaus:GAUGE",
+              "DEF:spamcop-graph=$dir/rblReport.rrd:spamcop:GAUGE",
+              "DEF:dsbl-graph=$dir/rblReport.rrd:dsbl:GAUGE",
+              "DEF:ordb-graph=$dir/rblReport.rrd:ordb:GAUGE",
+d196 3
+a198 3
+              "LINE2:spamcop-graph#999999:bl.spamcop.net", 
+              "LINE3:dsbl-graph#999999:list.dsbl.org", 
+              "LINE4:ordb-graph#999999:relays.ordb.org", 
+@
+
+
+1.29
+log
+@*** empty log message ***
+@
+text
+@d191 4
+a194 4
+              "DEF:spamhaus-graph=$dir/rblReport.rrd:spamhaus:AVERAGE",
+              "DEF:spamcop-graph=$dir/rblReport.rrd:spamcop:AVERAGE",
+              "DEF:dsbl-graph=$dir/rblReport.rrd:dsbl:AVERAGE",
+              "DEF:ordb-graph=$dir/rblReport.rrd:ordb:AVERAGE",
+@
+
+
+1.28
+log
+@*** empty log message ***
+@
+text
+@d181 1
+a181 1
+  my $start = '604800';
+@
+
+
+1.27
+log
+@reworked how rrd was created.
+@
+text
+@d79 2
+a80 2
+#  &make_graph('168',$node,$rrd_dir);
+  &showReport($node,\%rbl);
+d181 1
+a181 1
+  my $start = $end - ($interval * 3600);
+d186 2
+a187 2
+              "--title","System Load for $hostname over past $interval hours",
+              "--vertical-label","5 Minute Average",
+d191 10
+a200 3
+              "DEF:mycpu=$dir/rblReport.rrd:sysload:AVERAGE",
+              "AREA:mycpu#999999:5 Minute Average", );
+                                                                                
+@
+
+
+1.26
+log
+@*** empty log message ***
+@
+text
+@d133 5
+a137 5
+             "DS:spamcop:GAUGE:2400:U:U",
+             "DS:spamhaus:GAUGE:2400:U:U",
+             "DS:ordb:GAUGE:2400:U:U",
+             "DS:dsbl:GAUGE:2400:U:U",
+             "RRA:AVERAGE:0.5:1:3000" );
+@
+
+
+1.25
+log
+@Added showReport
+@
+text
+@d75 2
+@
+
+
+1.24
+log
+@*** empty log message ***
+@
+text
+@d77 2
+a78 1
+  &make_graph('168',$node,$rrd_dir);
+d196 11
+a206 1
+                                                                                
+@
+
+
+1.23
+log
+@*** empty log message ***
+@
+text
+@d77 1
+a77 1
+  &make_graph('168');
+@
+
+
+1.22
+log
+@*** empty log message ***
+@
+text
+@d180 1
+a180 1
+  RRDs::graph("$dir/sysload-$interval.gif",
+d188 1
+a188 1
+              "DEF:mycpu=$dir/cpu_trend.rrd:sysload:AVERAGE",
+@
+
+
+1.21
+log
+@*** empty log message ***
+@
+text
+@d77 1
+a77 1
+#  &make_graph('168');
+@
+
+
+1.20
+log
+@*** empty log message ***
+@
+text
+@d165 1
+a165 1
+  RRDs::update("$dir/$rrd","N:$rbl->{'list.dsbl.org'}{'count'}:$rbl->{'bl.spamcop.net'}{'count'}:$rbl->{'sbl.spamhaus.org'}{'count'}:$rbl->{'relays.ordb.org'}{'count'}");
+@
+
+
+1.19
+log
+@changed hash to reference
+@
+text
+@d165 3
+a167 6
+  for my $i (keys %{$rbl}) {
+    print "$i\n";
+  }
+  #RRDs::update("$dir/$rrd","N:$rbl->{'list.dsbl.org'}{'count'}:$rbl->{'bl.spamcop.net'}{'count'}:$rbl->{'sbl.spamhaus.org'}{'count'}:$rbl->{'relays.ordb.org'}{'count'}");
+  #my $ERR=RRDs::error;
+  #die "ERROR while updating $rrd: $ERR\n" if $ERR;
+@
+
+
+1.18
+log
+@*** empty log message ***
+@
+text
+@d76 1
+a76 1
+  &update_rrd($rrd_dir,%rbl);
+@
+
+
+1.17
+log
+@*** empty log message ***
+@
+text
+@d69 1
+a69 1
+      if ($line =~ /$rbl{rbl}{id}$/) {
+@
+
+
+1.16
+log
+@*** empty log message ***
+@
+text
+@d29 1
+a29 1
+  	  'list.dsbl.org' => {
+d32 1
+d34 1
+a34 1
+	  'bl.spamcop.net' => {
+d37 1
+d39 1
+a39 1
+	  'sbl.spamhaus.org' => {
+d42 1
+d44 1
+a44 1
+	  'relays.ordb.org' => {
+d47 1
+d69 1
+a69 1
+      if ($line =~ /$rbl$/) {
+@
+
+
+1.15
+log
+@*** empty log message ***
+@
+text
+@d161 6
+a166 3
+  RRDs::update("$dir/$rrd","N:$rbl->{'list.dsbl.org'}{'count'}:$rbl->{'bl.spamcop.net'}{'count'}:$rbl->{'sbl.spamhaus.org'}{'count'}:$rbl->{'relays.ordb.org'}{'count'}");
+  my $ERR=RRDs::error;
+  die "ERROR while updating $rrd: $ERR\n" if $ERR;
+@
+
+
+1.14
+log
+@*** empty log message ***
+@
+text
+@a49 1
+  print "testing $rrd_dir \n";
+d72 1
+a72 1
+#  &update_rrd($rrd_dir,%rbl);
+d159 1
+a159 1
+  my %rbl = shift;
+d161 1
+a161 1
+  RRDs::update("$dir/$rrd","N:$rbl{'list.dsbl.org'}{'count'}:$rbl{'bl.spamcop.net'}{'count'}:$rbl{'sbl.spamhaus.org'}{'count'}:$rbl{'relays.ordb.org'}{'count'}");
+@
+
+
+1.13
+log
+@*** empty log message ***
+@
+text
+@d73 2
+a74 2
+  &update_rrd($rrd_dir,%rbl);
+  &make_graph('168');
+@
+
+
+1.12
+log
+@*** empty log message ***
+@
+text
+@d58 2
+@
+
+
+1.11
+log
+@*** empty log message ***
+@
+text
+@d53 8
+a60 3
+## need to get remote maillog
+
+  for my $line(@@maillog) {
+d69 1
+@
+
+
+1.10
+log
+@*** empty log message ***
+@
+text
+@d53 1
+a53 8
+  my $ssh = `which ssh`; chomp $ssh;
+  $ssh .= " -p 9490 $node";
+  my $showLog = 'grep ' ;
+  $showLog .= qq|"$targetDate" |;
+  $showLog .= '/var/log/maillog; exit;';
+ 
+  my @@maillog = system("$ssh $showLog");
+  $ssh->cmd('logout');
+@
+
+
+1.9
+log
+@*** empty log message ***
+@
+text
+@d53 1
+a53 1
+  my $ssh = `which ssh`;
+@
+
+
+1.8
+log
+@*** empty log message ***
+@
+text
+@d54 1
+a54 1
+  $ssh .= " -p9490 $node";
+@
+
+
+1.7
+log
+@*** empty log message ***
+@
+text
+@a6 1
+use Net::SSH::Perl;
+d53 2
+a54 1
+  my $user = 'root';
+d57 1
+a57 3
+  $showLog .= '/var/log/maillog';
+  my %params = ( port     => '9490', );
+  my $ssh = Net::SSH::Perl->new($node, %params);
+d59 1
+a59 2
+  $ssh->login($user);
+  my @@maillog = $ssh->cmd($showLog);
+@
+
+
+1.6
+log
+@*** empty log message ***
+@
+text
+@d164 1
+a164 1
+  RRDs::update("$dir/$rrd","N:$rbl{list.dsbl.org}{count}:$rbl{bl.spamcop.net}{count}:$rbl{sbl.spamhaus.org}{count}:$rbl{relays.ordb.org}{count}");
+@
+
+
+1.5
+log
+@*** empty log message ***
+@
+text
+@d59 1
+a59 1
+  my $ssh = Net::SSH::Perl->new($host, %params);
+@
+
+
+1.4
+log
+@new method of getting maillog through grep
+@
+text
+@d162 3
+a164 3
+  my $avg = shift;
+                                                                                
+  RRDs::update("$dir/$rrd","N:$avg");
+@
+
+
+1.3
+log
+@new method of getting maillog
+@
+text
+@d55 3
+a57 1
+  my $showLog = 'cat /var/log/maillog';
+@
+
+
+1.2
+log
+@added ssh perl module
+@
+text
+@a22 2
+my $maillog = 'maillog';
+                                                                                
+d54 10
+a63 3
+  open(LOG,$maillog);
+                                                                                
+  while(my $line = <LOG>) {
+a72 2
+ close(LOG);
+
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d7 1
+@

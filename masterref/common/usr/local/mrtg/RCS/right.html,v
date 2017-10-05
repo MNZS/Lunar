@@ -1,0 +1,43 @@
+head	1.2;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.2
+date	2003.04.15.18.18.52;	author root;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2003.04.15.18.13.11;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.2
+log
+@*** empty log message ***
+@
+text
+@<html>
+ <!-- $Id:$ -->
+ <body>
+  This is a test
+ </body>
+</html>
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 6
+@

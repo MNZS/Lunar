@@ -1,0 +1,1412 @@
+head	1.11;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.11
+date	2003.07.30.17.05.30;	author root;	state Exp;
+branches;
+next	1.10;
+
+1.10
+date	2003.07.24.16.48.47;	author root;	state Exp;
+branches;
+next	1.9;
+
+1.9
+date	2003.07.24.16.48.23;	author root;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	2003.06.27.20.59.11;	author root;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2003.06.25.23.58.27;	author root;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2003.06.19.18.10.13;	author root;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2003.06.19.15.02.32;	author root;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2003.04.21.16.09.57;	author root;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2003.04.18.08.20.13;	author root;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2003.04.15.00.34.09;	author root;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2003.04.02.19.08.41;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.11
+log
+@*** empty log message ***
+@
+text
+@#!/usr/bin/perl -w
+
+
+#todo
+
+# send an email notifying people a domain has been added
+# or removed along with any pertinant info about things 
+# needing to be completed/cleaned up
+
+# create additional include files for apache
+#  miva, shopzone, etc...
+
+# also be sure to remove them
+
+# remove any equivalent related files
+
+# remove the virt and alias files for domain
+
+# remove other mail related files like mailing lists
+#  and auto responders
+
+# $Id: newclient,v 1.10 2003/07/24 16:48:47 root Exp root $
+
+# this script will add a new customer to the server.
+# it has numerous steps and requires some user input when prompted.
+
+use strict;
+use Fcntl ':flock';
+use File::NCopy;
+use File::Copy qw(move);
+use POSIX qw(strftime);
+use Getopt::Long;
+use Sys::Hostname;
+use Socket;
+
+if (hostname() !~ /^host/) {
+  exit 1;
+}
+
+## command line options
+my $add;
+my $remove;
+my $domain;
+my $reseller;
+
+GetOptions (    
+                'add'         	=> \$add,
+                'remove'      	=> \$remove,
+                'domain=s'	=> \$domain,
+		'reseller=s'	=> \$reseller,
+           );
+
+## verify that input is in the correct format
+die "\nThe domain must be in the format: DOMAIN.COM\n\n"
+  if (!$domain);
+
+if ($add) {
+
+  ## verify that domain doesnt already exist on the system
+  open(FH,"/etc/mail/local-host-names");
+
+  my @@existing_customers = <FH>;
+
+  close(FH);
+
+  for my $i (@@existing_customers) {
+
+    chomp $i;
+
+    die "\n  That domain appears to already be set up.\n  Please double check your information.\n\n"
+      if ($i eq $domain);
+
+  }
+
+}
+
+############## EDIT THESE ##############
+
+## mode on apache-only directories
+my $apacheMode = 0700;
+
+## mode on client directories
+my $hostMode = 0775;
+
+## account that apache runs as
+my $apacheUser = "nobody";
+
+## group name of hosting clients
+my $hosting = "hosting";
+
+## file holding reverse PTR records
+my $reversedns = "/var/named/corp/db.reverse";
+
+##############################################################
+##############################################################
+
+## verify that input is in the correct format
+die "\nThe domain must be in the format: DOMAIN.COM\n\n"
+  unless ($domain =~ /^[\-\w]+\.\w{2,6}$/);
+
+## extract the two portions of the domain name
+my $tld = $domain; $tld =~ s/^[\-\w]+\.(\w{2,6})/$1/;
+my $id = $domain; $id =~ s/^([\-\w]+)\.\w{2,6}/$1/;
+
+## get uid for account running apache
+my ($apacheUid) = (getpwnam($apacheUser))[3];
+
+## hosting group id;
+my $hostingGid = "1000";
+
+my $initial_checkin = "ci -q -u -t-string\"$domain\"";
+
+###########################################
+
+## verify information
+
+print "\nYou are about to make major changes to the system!\n";
+print "You can safely type in the letter \"N\" and no changes will be made.\n\n";
+
+if ($add) {
+  print "Are you sure you want to create an account for \"$id\.$tld\"? (y/N) ";
+
+} elsif ($remove) {
+  print "Are you sure you want to remove the accounts for \"$id\.$tld\"? (y/N) ";
+
+}
+
+my $answer = <STDIN>;
+
+chomp $answer;
+
+$answer =~ tr/A-Z/a-z/;
+$answer =~ s/ //g;
+$answer = (substr($answer,0,1,0));
+
+unless ($answer eq "y") {
+
+  print "\nNo changes were made for \"$id\.$tld\"\n\n";
+
+  exit 1;
+
+}
+
+############## RCS TAGS ###################
+
+my $checkout = "co -q -l";
+my $checkin = "ci -u -q -m\"Modification of $domain\"";
+
+############## DIR STRUCTURE ##############
+
+if ($add) {
+  print "\n\nBeginning directory structure creation...\n\n";
+
+} elsif ($remove) {
+  print "\n\nRemoving directory structure...\n\n";
+
+}
+
+sleep 5;
+
+if ($add) {
+
+  ## make directory for users
+  mkdir "/home/clients/$domain"
+    or warn "Cant make users directory! : $!\n";
+
+  ## create a new group consisting of the client's id
+  system(`groupadd $id`)
+    or warn "Could not add new group! : $!\n";
+
+  ## create a new group consisting of the client's id for panel access
+  system(`groupadd adm_$id`)
+    or warn "Could not add new ADM group! : $!\n";
+
+  ## create a new group consisting of the client's id for ftp access
+  system(`groupadd ftp_$id`)
+    or warn "Could not add new FTP group! : $!\n";
+
+  ## create a new group consisting of the client's id for tmp access
+  system(`groupadd tmp_$id`)
+    or warn "Could not add new TMP group! : $!\n";
+
+  ## create a new group consisting of the client's id for tmp access
+  system(`groupadd sql_$id`)
+    or warn "Could not add new SQL group! : $!\n";
+
+  ## make directory /etc/hosting-options/$domain
+  mkdir "/etc/hosting-options/$domain"
+    or warn "Could not creating hosting-options directory! : $!\n";
+
+  chown "$apacheUid","$apacheUid","/etc/hosting-options/$domain"
+    or warn "Could not change ownership on hosting-options directory! : $!\n";
+
+  chmod $apacheMode, "/etc/hosting-options/$domain"
+    or warn "Could not change mode on hosting-options directory! : $!\n";
+
+  ## touch the basic hosting options
+  system("touch /etc/hosting-options/$domain/pop3");
+
+  chown "$apacheUid","$apacheUid","/etc/hosting-options/$domain/pop3";
+
+  ## bronze customer by default
+  open(FH, ">/etc/hosting-options/$domain/plan");
+
+  print FH "bronze";
+
+  close(FH);
+
+  chown "$apacheUid","$apacheUid","/etc/hosting-options/$domain/plan";
+
+  ## if this site is a reseller, create the reseller file
+  if ($reseller) {
+
+    chomp $reseller;
+
+    open(FH,">/etc/hosting-options/$domain/$reseller");
+
+    close(FH);
+
+    open(FH,">/etc/hosting-options/$domain/reseller");
+
+    print FH $reseller;
+
+    close(FH);
+
+  }
+
+  ## make directory /www/$domain
+  mkdir "/www/$domain"
+    or warn "Cant make /www/DOMAIN : $!\n";
+
+  ## make directory /www/$domain/options
+  mkdir "/www/$domain/options"
+    or warn "Cant make options directory : $!\n";
+
+  ## chown dir to nobody 700
+  chown "$apacheUid","$apacheUid","/www/$domain/options"
+    or warn "Cant change ownership on options dir : $!\n";
+
+  ## make directory /www/$domain/options/passwd
+  mkdir "/www/$domain/options/passwd"
+    or warn "Cant make passwd directory : $!\n";
+
+  ## chown dir to nobody 700
+  chown "$apacheUid","$apacheUid","/www/$domain/options/passwd"
+    or warn "Cant change ownership on passwd dir : $!\n";
+
+  chmod $apacheMode, "/www/$domain/options/passwd"
+    or warn "Cant change permissions on passwd dir : $!\n";
+
+  ## make directory /www/$domain/options/my
+  system("/usr/local/luanrbin/ref.pl --my --domain $domain");
+
+  ## make directory /www/$domain/options/mysqldump
+  my $mysqlUser = 'mysql';
+  my ($mysqlUid) = (getpwnam($apacheUser))[3];
+  mkdir "/www/$domain/options/mysqldump"
+    or warn "Cant make mysqldump : $!\n";
+  chown "$mysqlUid","$mysqlUid","/www/$domain/options/mysqldump"
+    or warn "Can't change ownership of mysqldump : $!\n";
+  chmod $apacheMode, "/www/$domain/options/mysqldump"
+    or warn "Can't change perms on mysqldump : $!\n";
+ 
+  ## make directory /www/$domain/options/secure
+  mkdir "/www/$domain/options/secure"
+    or warn "Can't make secure : $!\n"; 
+  chown "$apacheUid","$apacheUid","/www/$domain/options/secure"
+    or warn "Cant change ownership on secure dir : $!\n";
+
+  ## make directory /www/$domain/cgi-bin
+  mkdir "/www/$domain/cgi-bin"
+    or warn "Cant make cgi-bin : $!\n";
+
+  chown "$apacheUid","$apacheUid","/www/$domain/cgi-bin"
+    or warn "Cant change ownership on cgi-bin : $!\n";
+
+  chmod $apacheMode, "/www/$domain/cgi-bin"
+    or warn "Cant change perms on cgi-bin : $!\n";
+
+  ## populate cgi-in using ref.pl
+  system(`/usr/local/lunarbin/ref.pl --cgi-bin --domain $domain`)
+    or warn "Cant run ref --cgi-bin --domain $domain : $!\n";
+
+  ## make directory /www/$domain/urchin
+  mkdir "/www/$domain/urchin"
+    or warn "Cant make urchin directory : $!\n";
+
+  ## make directory /www/$domain/webpublisher
+  mkdir "/www/$domain/webpublisher"
+    or warn "Cant make webpublisher dir : $!\n";
+
+  chown "$apacheUid","$apacheUid","/www/$domain/webpublisher"
+    or warn "Cant change ownership on webpublisher : $!\n";
+
+  chmod $apacheMode, "/www/$domain/webpublisher"
+    or warn "Cant change perms on webpublisher : $!\n";
+
+  ## make the webmail directories
+  my $copy_file = File::NCopy->new (
+        'recursive'     => 1,
+        'preserve'      => 1,
+        'force-write'   => 1,
+  );
+
+  $copy_file->copy("/ref/webmail","/www/$domain");
+
+  ## make the configuration files for the domain
+  system("/usr/local/lunarbin/ref.pl --domain $domain --webmail");
+
+  ## make directories /www/$domain/pub/(public|private)_html/
+
+  mkdir "/www/$domain/pub"
+    or warn "Cant make /pub/ directory : $!\n";
+
+  mkdir "/www/$domain/pub/search"
+    or warn "Cant make /search/ directory : $!\n";
+
+  mkdir "/www/$domain/pub/public_html"
+    or warn "Cant make /public_html/ directory : $!\n";
+
+  ## chmod directories to 775 and group hosting
+
+  chmod $hostMode, "/www/$domain/pub"
+    or warn "Cant change mode on /pub/\n";
+
+  chmod $hostMode, "/www/$domain/pub/search"
+    or warn "Cant change mode on /search/\n";
+
+  chmod $hostMode, "/www/$domain/pub/public_html"
+    or warn "Cant change mode on /public_html/\n";
+
+  chown "0","1000","/www/$domain/pub"
+    or warn "Cant chown /pub/\n";
+
+  chown "0","1000","/www/$domain/pub/search"
+    or warn "Cant chown /search/\n";
+
+  chown "0","1000","/www/$domain/pub/public_html"
+    or warn "Cant chown /public_html/\n";
+
+} elsif ($remove) {
+
+  system("rm -rf /www/$id\.$tld");
+
+  system("rm -rf /home/clients/$domain");
+
+  system("rm -rf /etc/hosting-options/$domain");
+
+  system("groupdel $id");
+
+  system("groupdel adm_$id");
+
+  system("groupdel ftp_$id");
+
+  system("groupdel tmp_$id");
+ 
+  system("groupdel sql_$id");
+
+}
+
+
+############## DNS ##############
+
+if ($add) {
+  print "Beginning DNS creation...\n\n";
+
+} elsif ($remove) {
+  print "Remove DNS entries...\n\n";
+
+}
+
+sleep 5;
+
+if ($add) {
+
+  ## add client to named.clients
+  system("/usr/local/lunarbin/dnsmod --add $domain --file clients");
+
+  ## add client to reverse dns records
+
+  my $revdns = "/var/named/corp/db.reverse";
+  my $tmp_revdns = "/var/named/corp/db.reverse.tmp";
+
+  open(FH, "$revdns")
+    or die "Cant open the reverse dns file! : $!\n";
+
+  open(TMP, ">$tmp_revdns")
+    or die "Cant open the tmp reverse dns file! : $!\n";
+
+  my $dns_tag;
+  my $dns_ip;
+
+  while(my $i = <FH>) {
+
+    ## remove a trailing newline
+    chomp $i;
+
+    if (!$dns_tag) {
+
+      ## match on the first unused ip address
+      if ($i =~ /^\d{1,3}\sIN\sPTR\shas.no.reverse.lunarhosting.net.$/) {
+
+        ## grab the ip address
+        $dns_ip = $i;
+ 
+        $dns_ip =~ s/^(\d{1,3})\sIN\sPTR\shas.no.reverse.lunarhosting.net.$/$1/;
+
+        ## replace the no reverse with the valid domain
+        $i =~ s/has.no.reverse.lunarhosting.net./www\.$domain./;
+
+        print TMP "$i\n";
+
+        ## set the flag
+        $dns_tag = "1";
+
+      } elsif ($i =~ /^\s+\d{10}\s+\; Serial$/) {
+ 
+        ## increment the serial number by one
+        my $dns_date = $i;
+        $dns_date =~ s/^\s+(\d{10})\s+\;\s+Serial$/$1/;
+        $dns_date = $dns_date + 1;
+
+        $i =~ s/\d{10}/$dns_date/;
+
+        print TMP "$i\n";
+
+      } else {
+
+        print TMP "$i\n";
+
+      }
+
+    } else {
+
+      print TMP "$i\n";
+
+    }
+
+  }
+
+  close(FH);
+
+  close(TMP);
+
+  ## put inverse file into production
+
+  ## check out file from rcs
+  system("$checkout $revdns");
+
+  ## move the tmp file into its place
+  move("$tmp_revdns","$revdns")
+    or die "Problems moving $tmp_revdns to $revdns : $!\n";
+
+  ## check the new file into rcs
+  system("$checkin $revdns");
+
+  ## create client forward dns records
+
+  open(FH, "/var/named/db.template");
+  open(TMP, ">/var/named/clients/db.$domain");
+
+  my $serial = strftime("%Y%m%d", localtime);
+  my $hostname = hostname();
+
+  my $prefix = gethostbyname("$hostname");
+  $prefix = inet_ntoa("$prefix");
+  my @@prefix = split(/\./,$prefix);
+
+  while(my $i = <FH>) {
+    next if ($i =~ /^CJM/);
+    chomp $i;
+    $i =~ s/YYYYMMDD/$serial/;
+    $i =~ s/SERVER/$hostname/;
+    $i =~ s/PREFIX/$prefix[0].$prefix[1].$prefix[2].$dns_ip/;
+    $i =~ s/DOMAIN/$domain/;
+    print TMP "$i\n";
+  }
+
+  close(FH);
+  close(TMP);
+
+  system("$initial_checkin /var/named/clients/db.$domain");
+
+} elsif ($remove) {
+
+  ## add client to named.clients
+  system("/usr/local/lunarbin/dnsmod --remove $domain --file clients");
+
+  my $revdns = "/var/named/corp/db.reverse";
+  my $tmp_revdns = "/var/named/corp/db.reverse.tmp";
+
+  open(FH, "$revdns")
+    or die "Cant open the reverse dns file! : $!\n";
+
+  open(TMP, ">$tmp_revdns")
+    or die "Cant open the tmp reverse dns file! : $!\n";
+
+  while(my $i = <FH>) {
+
+    chomp $i;
+
+    if ($i =~ /^\d{1,3}\sIN\sPTR\swww\.$domain\.$/) {
+
+      $i =~ s/www.$domain/has\.no\.reverse\.lunarhosting\.net/;
+
+      print TMP "$i\n";
+
+    } elsif ($i =~ /^\s+\d{10}\s+\; Serial$/) {
+
+      ## increment the serial number by one
+      my $dns_date = $i;
+      $dns_date =~ s/^\s+(\d{10})\s+\;\s+Serial$/$1/;
+      $dns_date = $dns_date + 1;
+
+      $i =~ s/\d{10}/$dns_date/;
+
+      print TMP "$i\n";
+
+    } else {
+
+      print TMP "$i\n";
+
+    }
+
+  }
+
+  close(FH);
+
+  close(TMP);
+
+  ## put inverse file into production
+
+  ## check out file from rcs
+  system("$checkout $revdns");
+
+  ## move the tmp file into its place
+  move("$tmp_revdns","$revdns")
+    or die "Problems moving $tmp_revdns to $revdns : $!\n";
+
+  ## check the new file into rcs
+  system("$checkin $revdns");
+
+  ## remove forward files
+  system("rm -f /var/named/clients/db.$domain");
+
+  ## remove forward rcs files
+  system("rm -f /var/named/clients/RCS/db.$domain,v");
+
+
+}
+
+
+############## SENDMAIL ##############
+
+if ($add) {
+  print "Beginning Sendmail creation...\n\n";
+
+} elsif ($remove) {
+  print "Removing Sendmail entries...\n\n";
+
+}
+sleep 5;
+
+if ($add) {
+  ## add domain to /etc/mail/local-host-names
+
+  system("$checkout /etc/mail/local-host-names");
+
+  open(FH, "/etc/mail/local-host-names");
+
+  my @@localhostnames = <FH>;
+
+  close(FH);
+
+  push @@localhostnames, $domain;
+
+  open(FH, ">/etc/mail/local-host-names");
+
+  for my $i(sort @@localhostnames) {
+
+    chomp $i;
+
+    print FH "$i\n";
+
+  }
+
+  close(FH);
+
+  system("$checkin /etc/mail/local-host-names");
+
+  ## create a virtuser file
+  open(FH,">/etc/mail/include/virtuser/virt.$domain");
+
+  close(FH);
+
+  chown "$apacheUid","$apacheUid","/etc/mail/include/virtuser/virt.$domain";
+
+  ## create an aliases file
+  open(FH,">/etc/mail/include/aliases/alias.$domain");
+
+  close(FH);
+
+  chown "$apacheUid","$apacheUid","/etc/mail/include/aliases/alias.$domain";
+
+  
+} elsif ($remove) {
+
+  ## add domain to /etc/mail/local-host-names
+
+  system("$checkout /etc/mail/local-host-names");
+
+  open(FH, "/etc/mail/local-host-names");
+
+  my @@localhostnames = <FH>;
+
+  close(FH);
+
+  open(FH, ">/etc/mail/local-host-names");
+
+  for my $i(sort @@localhostnames) {
+
+    chomp $i;
+
+    print FH "$i\n"
+      unless ($i =~ /^$domain$/);
+
+  }
+
+  close(FH);
+
+  system("$checkin /etc/mail/local-host-names");
+
+  ## remove the aliases file
+  unlink "/etc/mail/include/aliases/alias.$domain";
+
+  ## remove the virtuser file
+  unlink "/etc/mail/include/virtuser/virt.$domain";
+
+}
+
+if ($add) {
+  ## add tech contact to /etc/mail/lists/hosting
+
+  $/ = "\n\n";
+
+  open(FH, "/etc/mail/hosting/list.hosting");
+
+  my @@list_hosting = <FH>;
+
+  close(FH);
+
+  push @@list_hosting, "#$domain\ninfo\@@$domain\n\n";
+
+  @@list_hosting = sort @@list_hosting;
+
+  open(FH, ">/etc/mail/hosting/list.hosting");
+
+  print FH @@list_hosting;
+
+  close(FH);
+
+  $/ = "\n";
+
+} elsif ($remove) {
+  ## add tech contact to /etc/mail/lists/hosting
+
+  $/ = "\n\n";
+
+  open(FH, "/etc/mail/hosting/list.hosting");
+
+  my @@list_hosting = <FH>;
+
+  close(FH);
+
+  @@list_hosting = sort @@list_hosting;
+
+  open(FH, ">/etc/mail/hosting/list.hosting");
+
+  for my $i(sort @@list_hosting) {
+ 
+    print FH $i
+      unless ($i =~ /#$domain\ninfo\@@$domain\n\n/);
+
+  }
+
+
+  close(FH);
+
+  $/ = "\n";
+
+}
+
+############## PROFTPD ##############
+
+if ($add) {
+  print "Beginning FTP creation...\n\n";
+
+} elsif ($remove) {
+  print "Removing FTP include files...\n\n";
+
+}
+
+sleep 5;
+
+if ($add) {
+  ## create include file for domain
+
+  open(FH, "/etc/proftpd/include/virtual/template");
+
+  open(TMP, ">/etc/proftpd/include/virtual/ftp.$domain");
+
+  while(my $i = <FH>) {
+
+    chomp $i;
+
+    $i =~ s/DOMAIN/$domain/;
+    $i =~ s/GROUP/$id/;
+
+    if ($reseller) {
+
+      $i =~ s/\#RESELLER/AllowGroup $reseller/;
+
+    } else {
+
+      $i =~ s/\#RESELLER//g;
+
+    }
+
+    print TMP "$i\n";
+
+  }
+
+  close(FH);
+
+  close(TMP);
+
+} elsif ($remove) {
+
+  system("rm -f /etc/proftpd/include/virtual/ftp.$domain");
+
+}
+
+if ($add) {
+  ## add include to /etc/proftpd/domains.conf
+  open(FH, "/etc/proftpd/domains.conf");
+
+  my @@ftp_array = <FH>;
+
+  push @@ftp_array, qq|Include "/etc/proftpd/include/virtual/ftp.$domain"|;
+
+  close(FH);
+
+  system("$checkout /etc/proftpd/domains.conf");
+
+  open(FH, ">/etc/proftpd/domains.conf");
+
+  for my $i(sort @@ftp_array) {
+
+    chomp $i;
+
+    print FH "$i\n";
+
+  }
+
+  close(FH);
+
+  system("$checkin /etc/proftpd/domains.conf");
+
+} elsif ($remove) {
+
+  open(FH, "/etc/proftpd/domains.conf");
+
+  my @@ftp_array = <FH>;
+
+  close(FH);
+
+  system("$checkout /etc/proftpd/domains.conf");
+
+  open(FH, ">/etc/proftpd/domains.conf");
+
+  for my $i(sort @@ftp_array) {
+
+    chomp $i;
+
+    print FH "$i\n"
+      unless ($i =~ /^Include \"\/etc\/proftpd\/include\/virtual\/ftp.$domain$\"/);
+  }
+
+  close(FH);
+
+  system("$checkin /etc/proftpd/domains.conf");
+
+}
+
+############## APACHE ##############
+
+if ($add) {
+  print "Beginning Apache creation...\n\n";
+
+} elsif ($remove) {
+  print "Removing Apache include files and related entries...\n\n";
+
+}
+
+sleep 5;
+
+if ($add) {
+
+  ## create include files
+
+  open(FH, "/usr/local/apache/conf/include/virtual/template");
+
+  open(TMP, ">/usr/local/apache/conf/include/virtual/apache.$domain");
+
+  while(my $i = <FH>) {
+
+    chomp $i;
+
+    $i =~ s/DOMAIN/$domain/g;
+
+    print TMP "$i\n";
+
+  }
+
+  close(FH);
+  close(TMP);
+
+  #system("$initial_checkin /usr/local/apache/conf/include/virtual/apache.$domain");
+
+  ##### BEGIN FEATURE INCLUDE FILE CREATIONS #####
+
+  ## GLOBAL HTTP
+  open(FH, "/usr/local/apache/conf/include/features/global/http.template");
+  open(TMP, ">/usr/local/apache/conf/include/features/global/http.$domain");
+
+  while(my $i = <FH>) {
+
+    chomp $i;
+
+    $i =~ s/DOMAIN/$domain/g;
+
+    print TMP "$i\n";
+
+  }
+
+  close(FH);
+  close(TMP);
+
+  ## GLOBAL HTTPS
+  open(FH, "/usr/local/apache/conf/include/features/global/https.template");
+  open(TMP, ">/usr/local/apache/conf/include/features/global/https.$domain");
+
+  while(my $i = <FH>) {
+
+    chomp $i;
+
+    $i =~ s/DOMAIN/$domain/g;
+
+    print TMP "$i\n";
+
+  }
+
+  close(FH);
+  close(TMP);
+
+  ## WEBMAIL
+  open(FH, "/usr/local/apache/conf/include/features/webmail/template");
+  open(WEBTMP, ">/usr/local/apache/conf/include/features/webmail/webmail.$domain");
+
+  while(my $i = <FH>) {
+
+    chomp $i;
+
+    $i =~ s/DOMAIN/$domain/g;
+
+    print WEBTMP "$i\n";
+
+  }
+
+  close(FH);
+  close(WEBTMP);
+
+  ## CONTROL PANEL
+  open(FH, "/usr/local/apache/conf/include/features/controlpanel/template");
+  open(TMP, ">/usr/local/apache/conf/include/features/controlpanel/controlpanel.$domain");
+
+  while(my $i = <FH>) {
+
+    chomp $i;
+
+    $i =~ s/DOMAIN/$domain/g;
+
+    print TMP "$i\n";
+
+  }
+
+  close(FH);
+  close(TMP);
+
+  ## URCHIN
+  open(FH, "/usr/local/apache/conf/include/features/urchin/template");
+  open(TMP, ">/usr/local/apache/conf/include/features/urchin/urchin.$domain");
+
+  while(my $i = <FH>) {
+
+    chomp $i;
+
+    $i =~ s/DOMAIN/$domain/g;
+
+    print TMP "$i\n";
+  
+  }
+  
+  close(FH);
+  close(TMP);
+
+
+  ## WEBPUBLISHER
+  open(FH, "/usr/local/apache/conf/include/features/webpublisher/template");
+  open(TMP, ">/usr/local/apache/conf/include/features/webpublisher/webpublisher.$domain");
+
+  while(my $i = <FH>) {
+
+    chomp $i;
+
+    $i =~ s/DOMAIN/$domain/g;
+
+    print TMP "$i\n";
+ 
+  }
+ 
+  close(FH);
+  close(TMP);
+
+  ## MY 
+  open(FH, "/usr/local/apache/conf/include/features/my/template");
+  open(TMP, ">/usr/local/apache/conf/include/features/my/my.$domain");
+
+  while(my $i = <FH>) {
+
+    chomp $i;
+
+    $i =~ s/DOMAIN/$domain/g;
+
+    print TMP "$i\n";
+ 
+  }
+ 
+  close(FH);
+  close(TMP);
+
+} elsif ($remove) {
+
+  system("rm -f /usr/local/apache/conf/include/virtual/apache.$domain");
+
+  system("rm -f /usr/local/apache/conf/include/virtual/RCS/apache.$domain,v");
+
+  ##### BEGIN FEATURE INCLUDE FILE DELETION
+
+  ## global http
+  system("rm -f /usr/local/apache/conf/include/features/global/http.$domain");
+
+  ## global https
+  system("rm -f /usr/local/apache/conf/include/features/global/https.$domain");
+
+  ## webmail
+  system("rm -f /usr/local/apache/conf/include/features/webmail/mail.$domain");
+
+  ## control panel
+  system("rm -f /usr/local/apache/conf/include/features/webmail/controlpanel.$domain");
+
+  ## urchin
+  system("rm -f /usr/local/apache/conf/include/features/webmail/urchin.$domain");
+
+  ## webpublisher
+  system("rm -f /usr/local/apache/conf/include/features/webmail/webpublisher.$domain");
+
+  ## my 
+  system("rm -f /usr/local/apache/conf/include/features/webmail/my.$domain");
+
+}
+
+
+if ($add) {
+
+  ## add domain to /etc/httpd/domains.conf
+
+  open(FH, "/usr/local/apache/conf/domains.conf");
+
+  my @@domains_array = <FH>;
+
+  close(FH);
+
+  push @@domains_array, qq|Include "/usr/local/apache/conf/include/virtual/apache.$domain"|;
+
+  system("$checkout /usr/local/apache/conf/domains.conf");
+
+  open(TMP, ">/usr/local/apache/conf/domains.conf");
+
+  for my $i(sort @@domains_array) {
+
+    chomp $i;
+
+    print TMP "$i\n";
+
+  }
+
+  close(TMP);
+
+  system("$checkin /usr/local/apache/conf/domains.conf");
+
+} elsif ($remove) {
+
+  open(FH, "/usr/local/apache/conf/domains.conf");
+
+  my @@domains_array = <FH>;
+
+  close(FH);
+ 
+  system("$checkout /usr/local/apache/conf/domains.conf");
+
+  open(TMP, ">/usr/local/apache/conf/domains.conf");
+
+  for my $i(sort @@domains_array) {
+
+    chomp $i;
+
+    print TMP "$i\n"
+      unless ($i =~ /^\#?Include \"\/usr\/local\/apache\/conf\/include\/virtual\/apache\.$domain\"$/);
+
+  }
+
+  close(TMP);
+
+  system("$checkin /usr/local/apache/conf/domains.conf");
+
+} 
+
+############## CONTROLPANEL ##############
+
+if ($add) {
+  print "Creating Control Panel...\n\n";
+
+  sleep 5;
+
+  ## create control panel directory structure using ref.pl
+  system("/usr/local/lunarbin/ref.pl --panel --domain $domain");
+
+  ## run panelpasswd
+  system("/usr/local/lunarbin/panelpasswd.pl");
+
+}
+
+############## REMINDER ##############
+
+if ($add) {
+
+print <<EOF;
+
+
+The bulk of your work is done, however there are still
+a few things left that you need to do right away!
+
+  To complete the cleanup of this work, you'll need to do the following
+  items in the show order:
+                                                                                
+  1.  Make sure that the groups for this domain were all correctly
+      set up in /etc/group. If you saw any errors when running this
+      script that complained about a group not being added, you'll
+      need to add them manually using 'vi /etc/group'
+  2.  Restart named on the local server: /etc/rc3.d/S45named restart
+  3.  Restart proftpd on the local server: /etc/rc3.d/S51proftpd restart
+  4.  If this is a frontpage website, you'll need to follow the 
+      instructions listed in /howto/frontpage-howto
+  5.  Generate a temporary SSL certificate and csr for the client:
+        /usr/local/lunarbin/genssl --prod --host www.$domain
+  6.  Run '/usr/local/apache/bin/apachectl configtest' and make sure that
+      it returns an 'ok' for the new configuration. The apache server 
+      will need a hard 'stop' and then 'startssl' after hours. After Hours
+      means after 7PM and before Midnight.
+      Reference the /howto/apache_start-howto for specfic information
+  7.  Run '/usr/local/lunarbin/mkmail.pl'
+  8.  Add any users for the domain using '/usr/local/lunarbin/newuser'
+  9.  Run '/usr/local/lunarbin/panelpasswd.pl'
+  10. Run '/usr/local/lunarbin/mkslave'
+  11. Run '/usr/local/lunarbin/zoneupdate'
+
+EOF
+
+} elsif ($remove) {
+
+print <<EOF;
+
+  To complete the cleanup of this work, you'll need to do the following 
+  items in the show order:
+
+  1. Make sure that the groups for this domain were all correctly
+     set up in /etc/group
+  2. Restart named on the local server: /etc/rc3.d/S45named restart
+  3. Restart proftpd on the local server: /etc/rc3.d/S51proftpd restart
+  4. If this is a frontpage website, you'll need to manually rcedit
+     the httpd.conf file and remove the websites info.
+  5. Restart apache using /usr/local/apache/bin/apachectl 
+     Issue a 'stop' and then 'start'
+  6. Remove all of the users for this domain. They are held in
+
+    /home/clients/$domain
+
+  6. Run mkslave and zoneupdate
+
+EOF
+
+}
+  
+@
+
+
+1.10
+log
+@corrected typo for panelpasswd.pl
+@
+text
+@d22 1
+a22 1
+# $Id: newclient,v 1.9 2003/07/24 16:48:23 root Exp root $
+d99 1
+a99 1
+  unless ($domain =~ /^[\-\w]+\.\w{2,3}$/);
+d102 2
+a103 2
+my $tld = $domain; $tld =~ s/^[\-\w]+\.(\w{2,3})/$1/;
+my $id = $domain; $id =~ s/^([\-\w]+)\.\w{2,3}/$1/;
+@
+
+
+1.9
+log
+@added full path to ref.pl
+@
+text
+@d22 1
+a22 1
+# $Id: newclient,v 1.8 2003/06/27 20:59:11 root Exp root $
+d1084 1
+a1084 1
+  9.  Run '/usr/local/lunarbin/panelpassword.pl'
+@
+
+
+1.8
+log
+@Corrected paths to some scripts in postinstall
+@
+text
+@d22 1
+a22 1
+# $Id: newclient,v 1.7 2003/06/25 23:58:27 root Exp root $
+d252 1
+a252 1
+  system("ref.pl --my --domain $domain");
+d281 1
+a281 1
+  system(`/root/bin/ref.pl --cgi-bin --domain $domain`)
+d308 1
+a308 1
+  system("ref.pl --domain $domain --webmail");
+@
+
+
+1.7
+log
+@added new secure dir for password protecting directories
+@
+text
+@d22 1
+a22 1
+# $Id: newclient,v 1.6 2003/06/19 18:10:13 root Exp root $
+d1085 2
+a1086 2
+  10. Run '/usr/local/lunarbin/mkslave.pl'
+  11. Run '/usr/local/lunarbin/zoneupdate.pl'
+@
+
+
+1.6
+log
+@Updated the instructions on a new account
+@
+text
+@d22 1
+a22 1
+# $Id: newclient,v 1.5 2003/06/19 15:02:32 root Exp root $
+d263 7
+a269 1
+  
+@
+
+
+1.5
+log
+@changing the notes after the script is ran
+@
+text
+@d22 1
+a22 1
+# $Id: newclient,v 1.4 2003/04/21 16:09:57 root Exp root $
+d1058 23
+a1080 49
+  1. Create a temporary SSL certificate for the customer
+     Run the following command:
+
+       genssl --host www.$domain --prod
+
+  2. Restart named /etc/rc3.d/S45named restart
+
+  3. Restart proftpd /etc/rc3.d/S51proftpd restart
+
+  4. If this is a frontpage site, you'll need to run
+
+     mkfp --install $domain
+
+  5. Restart apache...
+
+       /usr/local/apache/bin/apachectl configtest
+
+     If this returns with OK then go ahead and do:
+
+       /usr/local/apache/bin/apachectl stop
+
+     and then
+ 
+       /usr/local/apache/bin/apachectl startssl
+
+  6. Create the virt file for the domain and then run mkmail
+
+  7. Add users for this domain to the system and to the
+     /etc/group set up for this domain. 
+
+       newuser
+
+  8. If this is a shopzone, miva or process enabled website, you'll
+     need a bit more configuring to do.
+
+  9. Once you've added all of the users that you need for
+     this domain, be sure to update the htaccess files for
+     the domain.
+
+       panelpasswd
+
+  10. Run mkslave and then zoneupdate. This will create a new slave zone
+      file for the secondary dns servers. zoneupdate spits out a LOT of 
+      garbage, but don't freak out about it. This script emails a copy of
+      the slave zone file to ILBBS.NET which is where the ns2 box lives.
+      It also copies the zone file to the ns3 box and restarts named on 
+      that remote server
+
+Good Luck! ;^)
+@
+
+
+1.4
+log
+@removed /etc/nameserver references
+@
+text
+@d22 1
+a22 1
+# $Id: newclient,v 1.3 2003/04/18 08:20:13 root Exp root $
+d1117 9
+a1125 14
+  1. Restart named /etc/rc3.d/S45named restart
+
+  2. Restart proftpd /etc/rc3.d/S51proftpd restart
+
+  3. If this is a frontpage site, you will need to do a
+
+      'rcedit /usr/local/apache/conf/httpd.conf'
+
+     and remove the entries for this domain from the main
+     apache configuration file. BE CAREFUL!
+
+  4. Restart apache /usr/local/apache/bin/apachectl graceful
+
+  5. Remove all of the users for this domain. They are held in
+a1130 2
+  Good Luck! ;^)
+
+@
+
+
+1.3
+log
+@added a check to only allow the script to be ran from hostX
+@
+text
+@d22 1
+a22 1
+# $Id: newclient,v 1.2 2003/04/15 00:34:09 root Exp root $
+d92 1
+a92 1
+my $reversedns = "/etc/nameserver/lunar/db.reverse";
+d453 2
+a454 2
+  open(FH, "/etc/nameserver/db.template");
+  open(TMP, ">/etc/nameserver/clients/db.$domain");
+d476 1
+a476 1
+  system("$initial_checkin /etc/nameserver/clients/db.$domain");
+d538 1
+a538 1
+  system("rm -f /etc/nameserver/clients/db.$domain");
+d541 1
+a541 1
+  system("rm -f /etc/nameserver/clients/RCS/db.$domain,v");
+@
+
+
+1.2
+log
+@setting up a new substitution in the db.template file for
+multiple mx records
+@
+text
+@d22 1
+a22 1
+# $Id: newclient,v 1.1 2003/04/02 19:08:41 root Exp root $
+d36 4
+@
+
+
+1.1
+log
+@initial checkin
+@
+text
+@d22 1
+a22 1
+# $Id: newclient,v 1.8 2003/03/18 16:02:39 root Exp $
+d465 1
+@

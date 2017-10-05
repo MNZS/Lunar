@@ -1,0 +1,71 @@
+head	1.2;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.2
+date	2003.01.23.01.29.55;	author root;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2003.01.05.05.34.17;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.2
+log
+@added a value for LANG
+@
+text
+@# $Id: .bash_profile,v 1.1 2003/01/05 05:34:17 root Exp root $
+
+# Get the aliases and functions
+if [ -f ~/.bashrc ]; then
+	. ~/.bashrc
+fi
+
+## set hostname for options
+HOSTNAME=`hostname`
+
+## configure path
+PATH=$PATH:$HOME/bin
+PATH=$PATH:/usr/local/apache/bin
+PATH=$PATH:/usr/local/lunarbin
+PATH=$PATH:/usr/local/rrdtool/bin
+if [ $HOSTNAME = 'name2.lunarhosting.net' ]; then
+  PATH=$PATH:/usr/local/masterbin
+fi
+
+BASH_ENV=$HOME/.bashrc
+USERNAME="root"
+
+## set LANG for perl compatibility
+LANG=en_US
+
+export USERNAME BASH_ENV PATH LANG
+
+## configure delete key for vi
+stty erase ^?
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 1
+a1 1
+# $Id:$
+d23 4
+a26 1
+export USERNAME BASH_ENV PATH
+@

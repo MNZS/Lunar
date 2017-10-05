@@ -1,0 +1,43 @@
+<HTML>
+<HEAD>
+  <!-- the following meta tag is important to avoid cross site scripting attacks: -->
+  <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+  <TITLE>No results found for '<!--cgi: query_str-->'</TITLE>
+</HEAD>
+<BODY bgcolor="white" text="black" link="blue" alink="red" vlink="purple">
+<font face="Arial,Helvetica,sans-serif" size="-1">
+<b>Your search for <FONT color="#999999"><B>&quot;<!--cgi: query_str-->&quot;</B></FONT> did not produce any results.</b>
+
+    <P>Here are some suggestions to improve your search:
+      <UL>
+        <LI>Select "Match ANY word"
+        <LI>Make sure you spelled the words correctly
+		<LI>If your word is a noun, try making it plural or singular such as "books" or "book"
+      </UL>
+    </P>
+
+    <FORM action="<!--cgi: search_url-->" method="GET">
+      <INPUT type="hidden" name="p" value="1">
+      <INPUT type="hidden" name="lang" value="<!--cgi: lang-->">
+      <b>Search again:</b>
+      <SELECT name="mode">
+	<OPTION value="all"<!--cgi: match_all-->>Match ALL words
+	<OPTION value="any"<!--cgi: match_any-->>Match ANY word
+      </SELECT>
+      <INPUT type="text" name="q" value="<!--cgi: query_str-->">
+      <INPUT type="submit" value="Search">
+    </FORM>
+
+    <script language="javascript1.1">
+    <!--
+      if( document.forms[0].q ) {
+        document.forms[0].q.focus();
+        document.forms[0].q.select();
+      }
+    // -->
+    </script>
+
+    <BR></font>
+
+</BODY>
+</HTML>

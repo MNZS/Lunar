@@ -1,0 +1,52 @@
+head	1.2;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.2
+date	2003.08.14.04.13.55;	author root;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2003.08.14.04.13.34;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.2
+log
+@*** empty log message ***
+@
+text
+@// $Id: local-config,v 1.1 2003/08/14 04:13:34 root Exp root $
+
+// hosting server includes
+include "/var/named/host1.lunarhosting.net";
+
+include "/var/named/host2.lunarhosting.net";
+
+// partners
+include "/var/named/named.partners";
+
+// ddns
+include "/var/named/named.ddns";
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 1
+a1 1
+// $Id: local-config,v 1.1 2002/12/31 12:35:45 root Exp $
+d10 3
+@

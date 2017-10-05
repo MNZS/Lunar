@@ -1,0 +1,46 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.1
+date	2003.08.21.01.53.47;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@#!/usr/bin/perl -w
+
+use strict;
+use Config::IniFiles;
+use Lunar::Restrict;
+use Lunar::Users; 
+
+&limitHost('host');
+
+my %users = getUsers('customer');
+
+my $cfgFile = '/etc/user-optiosn/users.conf';
+
+my $cfg = Config::IniFiles->new( 	
+		-file => $cfgFile 
+		-nocase => 1,
+		);
+
+for my $i($cfg->Sections) {
+  print "$i\n";
+}
+
+
+@

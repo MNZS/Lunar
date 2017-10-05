@@ -1,0 +1,32 @@
+$Id: reseller-howto,v 1.1 2003/06/05 16:15:14 root Exp $
+
+This document is a work in progress. Please check the edit date in the 
+above RCS tag. If it looks old, then go and talk to Charles since this
+information is probably outdated.
+
+Resellers for Lunar Hosting services are handled in a very manual method
+for the time being. A directory called, /etc/resellers has been created 
+to address the issue in a more dynamic method in the future.
+
+For now however, its best to read through the /etc/resellers/resellers.conf
+file to grab information on a particular group.
+
+Two important items that should be addressed are.
+
+ 1. Reseller IDs
+    A reseller id is what will identify this reseller in any scripts
+    ran on the server. Of most importance is the '--reseller' flag on
+    the 'newclient' script. If the domain being installed is NOT a
+    Lunar Hosting customer, the --reseller flag should be used and
+    have a value set to one of the entries held within the [brackets]
+    of the resellers.conf file. For example a domain set up for 
+    Donna's House of Type would use the syntax:
+
+      newclient --add --domain DOMAIN --reseller dhot
+
+ 2. Invoice E-Mail Addresses
+    Do NOT, DO NOT use these e-mail addresses. In the final version
+    of our billing script, these addresses will be used to send 
+    invoices to customers. These addresses will be send as BCC, so 
+    the reseller should NEVER be aware that they exist. Do NOT use
+    them!

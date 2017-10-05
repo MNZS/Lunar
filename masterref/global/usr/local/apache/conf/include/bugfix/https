@@ -1,0 +1,4 @@
+## fix for internet explorer keepalive problem
+SetEnvIf User-Agent ".*MSIE.*" \
+  nokeepalive ssl-unclean-shutdown \
+  downgrade-1.0 force-response-1.0

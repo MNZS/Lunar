@@ -1,0 +1,206 @@
+head	1.9;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.9
+date	2003.06.05.05.39.17;	author root;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	2003.06.05.04.49.29;	author root;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2003.06.05.04.46.44;	author root;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2003.04.15.13.00.49;	author root;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2003.04.15.12.41.26;	author root;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2003.04.15.12.41.04;	author root;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2003.04.15.12.39.34;	author root;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2003.04.15.12.35.15;	author root;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2003.04.02.19.08.41;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.9
+log
+@*** empty log message ***
+@
+text
+@#!/usr/bin/perl -w
+
+# MasterRef
+# $Id: snmpBandwidth.pl,v 1.8 2003/06/05 04:49:29 root Exp root $
+
+# Poll the gateway router for mrtg information
+
+use strict;
+use Sys::Hostname;
+
+if (hostname() !~ /^name/) {
+  exit 1;
+}
+
+my @@configFiles = (glob"/etc/mrtg/*.cfg");
+my $cli = `which mrtg`; chomp $cli;
+$cli .= ' --logging /var/log/mrtg ';
+
+for my $cfg(@@configFiles) {
+  system("$cli $cfg");
+}
+@
+
+
+1.8
+log
+@*** empty log message ***
+@
+text
+@d4 1
+a4 1
+# $Id: snmpBandwidth.pl,v 1.7 2003/06/05 04:46:44 root Exp root $
+d15 1
+a15 1
+my @@configFiles = ("glob /etc/mrtg/*.cfg");
+@
+
+
+1.7
+log
+@now poll all cfg files
+@
+text
+@d4 1
+a4 1
+# $Id: snmpBandwidth.pl,v 1.6 2003/04/15 13:00:49 root Exp root $
+d17 1
+a17 1
+$cli .= '--logging /var/log/mrtg ';
+@
+
+
+1.6
+log
+@changed logging to /var/log/mrtg rather than subdir
+@
+text
+@d4 1
+a4 1
+# $Id: snmpBandwidth.pl,v 1.5 2003/04/15 12:41:26 root Exp root $
+d15 1
+a16 1
+$cli .= ' /etc/mrtg/gateway.cfg ';
+d19 3
+a21 1
+system("$cli");
+@
+
+
+1.5
+log
+@added chomp to correct problem
+@
+text
+@d4 1
+a4 1
+# $Id: snmpBandwidth.pl,v 1.4 2003/04/15 12:41:04 root Exp root $
+d17 1
+a17 1
+$cli .= '--logging /var/log/mrtg/mrtg.log ';
+@
+
+
+1.4
+log
+@*** empty log message ***
+@
+text
+@d4 1
+a4 1
+# $Id: snmpBandwidth.pl,v 1.3 2003/04/15 12:39:34 root Exp root $
+d15 1
+a15 1
+my $cli = `which mrtg`;
+d19 1
+a19 2
+print $cli;
+#system("$cli");
+@
+
+
+1.3
+log
+@changed restriction from only name1 to name*
+@
+text
+@d4 1
+a4 1
+# $Id: snmpBandwidth.pl,v 1.2 2003/04/15 12:35:15 root Exp root $
+d19 2
+a20 1
+system("$cli");
+@
+
+
+1.2
+log
+@changing over to using rpm mrtg
+and name1/name2 redundant environment
+@
+text
+@d4 1
+a4 1
+# $Id: mrtg_router.pl,v 1.1 2003/04/02 19:08:41 root Exp root $
+d11 1
+a11 1
+if (hostname() !~ /^name1/) {
+@
+
+
+1.1
+log
+@initial checkin
+@
+text
+@d4 1
+a4 1
+# $Id: mrtg_router.pl,v 1.2 2003/01/03 07:36:55 root Exp $
+d15 3
+a17 3
+my $cli = '/usr/local/mrtg/bin/mrtg ';
+$cli .= '/usr/local/mrtg/conf/mrtg.cfg ';
+$cli .= '--logging /usr/local/mrtg/log/mrtg.log ';
+@

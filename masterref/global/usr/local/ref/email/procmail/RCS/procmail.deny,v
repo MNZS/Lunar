@@ -1,0 +1,167 @@
+head	1.9;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.9
+date	2003.10.01.19.24.37;	author root;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	2003.09.30.23.37.55;	author root;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2003.09.30.23.33.54;	author root;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2003.08.26.02.31.56;	author root;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2003.08.25.20.37.54;	author root;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2003.08.22.21.33.31;	author root;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2003.08.22.20.56.18;	author root;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2003.08.22.17.01.10;	author root;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2003.08.22.16.56.11;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.9
+log
+@*** empty log message ***
+@
+text
+@## block windows executables
+:0 B
+* ^TVqQAAMAAAAEAAAA//8AALgAAAAAAAAAQA+$
+/dev/null
+
+@
+
+
+1.8
+log
+@added a drop for SA tagged spam of high levels
+@
+text
+@a5 7
+# Mails with a score of 15 or higher are almost certainly spam (with 0.05%
+# false positives according to rules/STATISTICS.txt). Let's put them in a
+# different mbox. (This one is optional.)
+:0:
+* ^X-Spam-Level: \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*
+/dev/null
+
+@
+
+
+1.7
+log
+@*** empty log message ***
+@
+text
+@a0 5
+## block common subject lines for sobig.f worm 
+:0 D
+* ^Subject:.(R(E|e): )?(R(E|e): )?((Thank you\!)|((Your )?(D|d)etails)|((Your|My).(D|d)etails)|(Approved)|(Your.application)|(Wicked.screensaver)|(That.movie))([ \t]+)?$ 
+/dev/null
+
+d6 3
+a8 1
+## /dev/null email that comes in with a HUGE spamassassin tag level
+d10 2
+@
+
+
+1.6
+log
+@blocking executables
+@
+text
+@d10 4
+@
+
+
+1.5
+log
+@added Your details to the list
+@
+text
+@d1 1
+a1 1
+## Global refusal
+d5 5
+@
+
+
+1.4
+log
+@added Your details
+@
+text
+@d3 1
+a3 1
+* ^Subject:.(R(E|e): )?(R(E|e): )?((Thank you\!)|(Details)|((Your|My).(D|d)etails)|(Approved)|(Your.application)|(Wicked.screensaver)|(That.movie))([ \t]+)?$ 
+@
+
+
+1.3
+log
+@added lowercase d for details
+@
+text
+@d3 1
+a3 1
+* ^Subject:.(R(E|e): )?(R(E|e): )?((Thank you\!)|(Details)|(My.(D|d)etails)|(Approved)|(Your.application)|(Wicked.screensaver)|(That.movie))([ \t]+)?$ 
+@
+
+
+1.2
+log
+@updated to accomodate trailing whitespace
+@
+text
+@d3 1
+a3 1
+* ^Subject:.(R(E|e): )?(R(E|e): )?((Thank you\!)|(Details)|(My.Details)|(Approved)|(Your.application)|(Wicked.screensaver)|(That.movie))([ \t]+)?$ 
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d3 1
+a3 1
+* ^Subject:.(R(E|e): )?(R(E|e): )?((Thank you\!)|(Details)|(My.Details)|(Approved)|(Your.application)|(Wicked.screensaver)|(That.movie))$ 
+@

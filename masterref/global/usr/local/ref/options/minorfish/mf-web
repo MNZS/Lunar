@@ -1,0 +1,468 @@
+#!/usr/bin/perl
+# Web management interface for Minorfish
+#
+# Jakob 'sparky' Kaivo <jkaivo@nodomainname.net>
+# Dan Debertin <airboss@nodewarrior.org>
+#
+# $Id: mf-web,v 1.6 2001/11/19 01:29:26 airboss Exp $
+
+use strict;
+use MF qw( &listconf &configure &htmlify &listlists
+	   &compose &sendmsg &getfile &num_messages
+	   &get_message &get_header &getaddress
+	   &getname &decode_base64 &decode_qp
+	   $version $configfile %m                  );
+
+
+my %config = %{&configure($configfile, ())};
+
+my $url = $ENV{SCRIPT_NAME};
+my $page = '';
+my $title = '';
+my $info = $ENV{PATH_INFO} || '/';
+my $action = $ENV{QUERY_STRING} || '';
+my $q = '';
+my (undef, $list, $data) = split(/\//, $info, 3);
+$list ||= '';
+$data ||= '';
+my %cgi = ();
+
+$list = '' if (! -d "$config{confdir}/$list" || $list =~ /^\./);
+%config = %{&listconf ($list, \%config)};
+
+if (length $action > 1)
+{
+    # parse the query string
+    my @query = split (/&/, $action);
+    foreach (@query)
+    {
+	my ($key, $value) = split (/=/, $_, 2);
+	$value =~ tr/+/ /;
+	$value =~ s/%([a-fA-F0-9][a-fA-F0-9])/pack("C", hex($1))/eg;
+	$cgi{$key} = $value;
+    }
+    $action = $cgi{A};
+    $data = $cgi{Q} || '';
+}
+
+if ($list && $data =~ /.+@.+\..+/ && 
+    $action eq 'subscribe' || $action eq 'unsubscribe')
+{
+    $title = "minorfish: $list: $action $data";
+    $page .= qq(
+		<P ALIGN="LEFT">
+		<FONT SIZE="1">
+		<A HREF="$url/">minorfish</A>:
+		<A HREF="$url/$list">$list</A>: $action $data
+		</FONT>
+		</P>
+		);
+    my $mail = &compose ($data, "$action $list $data", '',
+			 ("minorfish\@$config{domain}"));
+    my $err = &sendmsg($config{server}, $mail, $data, 
+		       ("minorfish\@$config{domain}"));
+    if ($err)
+    {
+	$page .= &getfile ($list, 'send-error', \%config);
+	$page .= '<PRE WIDTH="80">';
+	$page .= &htmlify($err);
+	$page .= '</PRE>';
+    }
+    else
+    {
+	$page .= &getfile ($list, "web-$action", \%config);
+    }
+}
+elsif ($list && $action eq 'search')
+{
+    $title = "minorfish: $list: $action for \"$data\"";
+    $q = $data;
+    $page .= qq(
+		<P ALIGN="LEFT">
+		<FONT SIZE="1">
+		<A HREF="$url/">minorfish</A>:
+		<A HREF="$url/$list">$list</A>: $action for \"$data\"
+		</FONT>
+		</P>
+		);
+    my $found = 0;
+    opendir DIR, "$config{libdir}/$list";
+    my @years = readdir (DIR);
+    closedir DIR;
+    foreach my $year (sort @years)
+    {
+	if ($year =~ /^\d*$/)
+	{
+	    foreach my $m (qw(01 02 03 04 05 06 07 08 09 10 11 12))
+	    {
+		my $mbox = "$config{libdir}/$list/$year/$m";
+		if (-f $mbox)
+		{
+		    for (my $i = 1; $i <= &num_messages ($mbox); $i++)
+		    {
+			my $mesg  = &get_message ($mbox, $i);
+			if ($mesg =~ /$data/)
+			{
+			    $found = 1;
+			    my $subj = &get_header ($mesg, 'subject') ||
+				'(none)';
+			    my $from = &get_header ($mesg, 'from');
+			    my $a = &getaddress ($from);
+			    my $n = &getname ($from);
+			    my @mdate = split (/ +/, &get_header ($mesg,
+								  'date'));
+			    $mdate[1] = "0$mdate[1]"
+				if (length $mdate[1] < 2);
+			    $mdate[4] =~ s/^(\d+\:\d+)\:.*/$1/;
+			    my $date = "$mdate[1] $mdate[2] $mdate[3] $mdate[4]";
+			    $date = &get_header ($mesg, 'date') if
+				($date !~ /^\d\d \w\w\w \d\d\d\d \d\d:\d\d$/);
+			    $page .= "<A HREF=\"$url/$list/$year/$m/$i\">";
+			    $page .= $subj;
+			    $page .= "</A> - <A HREF=\"mailto:$a\">$n</A>";
+			    $page .= " - $date<BR>\n";
+			}
+		    }
+		}
+	    }
+	}
+    }
+    $page .= "Sorry, no messages matched your search" if ! $found;
+}
+elsif ($list)
+{
+    # Read or list messages
+    my @info = split (/\//, $data);
+    my $mbox = '';
+    $mbox = "$config{libdir}/$list/$info[0]/$info[1]" if $#info > 0;
+    if ($#info >= 2 && -f $mbox && $info[2] eq "mbox")
+    {
+	print "Content-type: multipart/digest\n\n";
+	open MBOX, "<$mbox";
+	while (<MBOX>) { print $_; }
+	close MBOX;
+	exit 0;
+    }
+    elsif ($#info == 2 || $#info == 3 && -f $mbox &&
+	   $info[2] =~ /^\d+$/ && $info[2] <= &num_messages($mbox) &&
+	   $info[2] >= 1)
+    {
+	my $mesg = &get_message ($mbox, $info[2]);
+	my $subj = &get_header ($mesg, 'subject');
+	my $from = &get_header ($mesg, 'from');
+	my $date = &get_header ($mesg, 'date');
+	my $to = &get_header ($mesg, 'to');
+	my $cc = &get_header ($mesg, 'cc');
+	my $re_to = &get_header ($mesg, 'reply-to');
+	my $mime = &get_header ($mesg, 'mime-version');
+	my (undef, $body) = split (/\n\r*\n/, $mesg, 2);
+	my @parts;
+
+	my $subject = $subj || "(none)";
+	my $hdr = "";
+	my $bod = "";
+	$hdr .= "From: $from\n" if $from;
+	$hdr .= "Subject: $subj\n" if $subj;
+	$hdr .= "To: $to\n" if $to;
+	$hdr .= "Cc: $cc\n" if $cc;
+	$hdr .= "Date: $date\n" if $date;
+	$hdr .= "Reply-To: $re_to\n" if $re_to;
+
+	if ($mime)
+	{
+	    my @type = split (/\s+/, &get_header ($mesg, 'content-type'));
+	    my $here = "$url/$list/$info[0]/$info[1]/$info[2]";
+	    if ($type[0] =~ /^multipart\//)
+	    {
+		my $sub = $type[0];
+		$sub =~ s/.*\/(.*)\;.*/$1/;
+		my $bound = '';
+		foreach (@type)
+		{
+		    $bound = $_ if /boundary=/i;
+		}
+		$bound =~ s/^boundary=\"(.*)\".*/$1/i;
+		@parts = split (/\-\-$bound[\n|\-\-]/, $body);
+
+		if ($sub =~ /^mixed$/i)
+		{
+		    foreach my $part (1 .. $#parts-1)
+		    {
+			my ($header, $data) = split (/\n\r*\n/,
+						     $parts[$part], 2);
+			my $parttype = &get_header ($parts[$part],
+						    'content-type');
+			if ($parttype =~ /^text\/plain/i)
+			{
+			    $bod .= '<PRE ALIGN="LEFT">';
+			    $bod .= "<PRE WIDTH=\"80\">\n\n"; 
+			    $bod .= &htmlify ($data);
+			    $bod .= '</PRE></P>';
+			}
+			elsif ($parttype =~ /^text\/html/i)
+			{
+			    $bod .= $data;
+			}
+			elsif ($parttype =~ /^image/i)
+			{
+			    my $name = $header;
+			    $name =~ s/.*name=\"(.*)\".*/$1/igs;
+			    $bod .= qq(<IMG SRC="$here/$part"
+				       ALT="$name"</IMG>);
+			}
+			else
+			{
+			    my $name = $header;
+			    $name =~ s/.*name=\"(.*)\".*/$1/igs;
+			    $name ||= "Attachment $part";
+			    $bod .= qq(<A HREF="$here/$part">$name</A><BR>);
+			}
+		    }
+		}
+		elsif ($sub =~ /^alternative$/i)
+		{
+		    foreach my $part (@parts)
+		    {
+			my ($h, $b) = split (/\n\r*\n/, $part, 2);
+			my $parttype = &get_header ($part, 'content-type');
+			my $e = &get_header ($part,
+					     'content-transfer-encoding');
+			$b = &decode_base64 ($b) if ($e =~ /^base64/i);
+			$b = &decode_qp ($b) if ($e =~
+						 /^quoted-printable/i);
+			$bod = $b if ($parttype =~ /^text\/html/i);
+			$bod = $b if ($parttype =~ /^text\/plain/i &&
+				      $bod eq '');
+		    }
+		}
+		else
+		{
+		    $bod .= "<BR>This message contains unknown MIME data";
+		}
+	    }
+	    elsif ($type[0] =~ /^text\//i)
+	    {
+		if ($type[0] =~ /^text\/html/i)
+		{
+		    $bod = $body;
+		}
+		else
+		{
+		    $bod .= qq(<P ALIGN="LEFT"><PRE WIDTH="80">\n\n); 
+		    $bod .= &htmlify ($body);
+		    $bod .= '</PRE></P>';
+		}
+	    }
+	    else
+	    {
+		$bod .= "<BR>This message contains unknown MIME data";
+	    }
+	}
+	else
+	{
+	    $bod = &htmlify ($body);
+	}
+
+	if ($#info == 3 && $mime && $info[3] >= 1 && $info[3] < $#parts)
+	{
+	    my $enc = &get_header ($parts[$info[3]],
+				   'content-transfer-encoding');
+	    if ($enc =~ /^base64$/i || $enc =~ /^quoted-printable$/i)
+	    {
+		my ($header, $data) = split (/\n\r*\n/,
+					     $parts[$info[3]], 2);
+		print "$header\n\n";
+		if ($enc =~ /base64/i)
+		{
+		    print &decode_base64 ($data);
+		}
+		else
+		{
+		    print &decode_qp ($data);
+		}
+	    }
+	    else
+	    {
+		print $parts[$info[3]];
+	    }
+	    exit 0;
+	}
+
+	$title = "minorfish: $list: $m{$info[1]} $info[0]: $subject";
+	$page .= qq(
+		    <P ALIGN="LEFT">
+		    <FONT SIZE="1">
+		    <A HREF="$url/">minorfish</A>:
+		    <A HREF="$url/$list">$list</A>:
+		    <A HREF="$url/$list/$info[0]/$info[1]">$m{$info[1]}
+		    $info[0]</A>: $subject
+		    </FONT>
+		    </P>
+		    );
+
+	$page .= '<P ALIGN="LEFT"><PRE WIDTH="80">';
+	$page .= &htmlify ($hdr);
+	$page .= '</PRE></P>';
+	$page .= $bod;
+    }
+    elsif ($#info == 1 || $#info == 2 && -f $mbox)
+    {
+	$title = "minorfish: $list: $m{$info[1]} $info[0]";
+	$page .= qq(
+		    <P ALIGN="LEFT">
+		    <FONT SIZE="1">
+		    <A HREF="$url/">minorfish</A>:
+		    <A HREF="$url/$list">$list</A>: $m{$info[1]} $info[0]
+		    </FONT>
+		    </P>
+		    );
+	my $here = "$url/$list/$info[0]/$info[1]";
+	my $n = &num_messages ($mbox);
+	my $sort = $info[-1];
+	my @subj;
+	my @from;
+	my @date;
+	my @order = (1 .. $n);
+	my $i = 0;
+
+	foreach $i (1 .. $n)
+	{
+	    my $mesg  = &get_message ($mbox, $i);
+	    $subj[$i] = &get_header ($mesg, 'subject') || '(none)';
+	    $from[$i] = &get_header ($mesg, 'from');
+	    my @mdate = split (/ +/, &get_header ($mesg, 'date'));
+	    $mdate[1] = "0$mdate[1]" if (length $mdate[1] < 2);
+	    $mdate[4] =~ s/^(\d+\:\d+)\:.*/$1/;
+	    $date[$i] = "$mdate[1] $mdate[2] $mdate[3] $mdate[4]";
+	    $date[$i] = &get_header ($mesg, 'date') if
+		($date[$i] !~ /^\d\d \w\w\w \d\d\d\d \d\d:\d\d$/);
+	}
+	
+	my %tmp;
+	foreach my $num (1 .. $n)
+	{
+	    if ($sort eq 'subject')
+	    {
+		my $s = $subj[$num];
+		$s =~ s/^\s?//;
+		$s =~ s/^re: ?(.*)$/$1 $num/ig;
+		$tmp{"$s $num"} = $num;
+	    }
+	    elsif ($sort eq 'from')
+	    {
+		$tmp{&getname ($from[$num]) . " $num"} = $num;
+	    }
+	    elsif ($sort eq 'date')
+	    {
+		$tmp{"$date[$num] $num"} = $num;
+	    }
+	    my @o = sort keys %tmp;
+	    foreach (0 .. $#o) { $order[$_] = $tmp{$o[$_]}; }
+	}
+	my @o = sort keys %tmp;
+	foreach (0 ..$#o) { $order[$_] = $tmp{$o[$_]}; }
+
+	$page .= qq(
+		    <TABLE WIDTH="100%" BORDER="0">
+		    <TR><TH><A HREF="$here/subject">Subject</A></TH>
+		    <TH><A HREF="$here/from">From</A></TH>
+		    <TH><A HREF="$here/date">Date</A></TH></TR>
+		    );
+	foreach my $num (0 .. $#order)
+	{
+	    my $mn = $num + 1;
+	    $page .= qq(<TR><TD><A HREF="$here/$mn">);
+	    $page .= $subj[$order[$num]];
+	    $page .= '</A></TD><TD><A HREF="mailto:';
+	    $page .= &getaddress ($from[$order[$num]]);
+	    $page .= '">';
+	    $page .= &getname ($from[$order[$num]]) || "Unkown Author";
+	    $page .= '</A></TD><TD>';
+	    $page .= $date[$order[$num]];
+	    $page .= '</TD></TR>';
+	}
+	$page .= '</TABLE>';
+    }
+    else 
+    {
+	$title = "minorfish: $list";
+	$page .= qq(
+		    <P ALIGN="LEFT">
+		    <FONT SIZE="1">
+		    <A HREF="$url/">minorfish</A>: $list
+		    </FONT>
+		    </P>
+		    );
+	$page .= '<P ALIGN="LEFT"><PRE WIDTH="80">';
+	$page .= &htmlify (&getfile ($list, 'info', \%config));
+	$page .= '</PRE></P>';
+	opendir DIR, "$config{libdir}/$list";
+	my @years = readdir (DIR);
+	closedir DIR;
+	foreach my $year (sort @years)
+	{
+	    if ($year =~ /^\d*$/)
+	    {
+		$page .= "$year: ";
+		foreach my $mo (qw(01 02 03 04 05 06 07 08 09 10 11 12))
+		{
+		    my $month = "$config{libdir}/$list/$year/$mo";
+		    if (-f $month)
+		    {
+			my $u = "$url/$list/$year/$mo";
+			my $mu = "$u/mbox/$list-$year$mo";
+			$page .= qq(<A HREF="$u">$m{$mo}</A> );
+			$page .= qq[(<A HREF="$mu">mbox</A>) ];
+		    }
+		    else
+		    {
+			#$page .= "$m{$mo} (mbox) ";
+		    }
+		}
+		$page .= "<BR>";
+	    }
+	}
+    }
+}
+else
+{
+    # List the available lists
+    $title = "minorfish";
+    $page .= qq(<P ALIGN="LEFT"><FONT SIZE="1">minorfish</FONT></P>);
+    foreach my $lname ( &listlists ($config{confdir}) )
+    {
+	$page .= qq(<A HREF="$url/$lname">$lname</A> );
+	my $conf = &listconf ($lname, \%config);
+	$page .= &htmlify ($conf->{brief});
+	$page .= "<BR>";
+    }
+}
+
+if ($list)
+{
+    $page .= qq(<P ALIGN="CENTER">
+		<FORM METHOD="GET" ACTION="$url/$list">
+		<SELECT NAME="A" SIZE="1">
+		<OPTION VALUE="search" SELECTED>Search</OPTION>
+		<OPTION VALUE="subscribe">Subscribe</OPTION>
+		<OPTION VALUE="unsubscribe">Unsubscribe</OPTION>
+		</SELECT>
+		<INPUT TYPE="TEXT" NAME="Q" SIZE="40" VALUE="$q">
+		<INPUT TYPE="SUBMIT" VALUE="Submit">
+		</FORM>
+		</P>
+		);
+}
+
+my $template = &getfile ($list, 'template.html', \%config);
+my $powered = qq(<P ALIGN="CENTER"><FONT SIZE="1">Powered by
+		 <A HREF="http://www.ndn.net/minorfish">minorfish
+		 $version</A></FONT></P>);
+
+$template =~ s#<!--\s+?MINORFISH\s+?HIDE\s+?-->.+?<!--\s+?MINORFISH\s+?/HIDE\s+?-->##igs;
+$template =~ s#<!--\s+?MINORFISH\s+?TITLE\s+?-->#$title#igs;
+$template =~ s#<!--\s+?MINORFISH\s+?BODY\s+?-->#$page#igs;
+$template =~ s#<!--\s+?MINORFISH\s+?POWERED\s+?-->#$powered#igs;
+
+print "Content-type: text/html\n\n$template";
+exit 0;

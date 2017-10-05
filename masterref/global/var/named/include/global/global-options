@@ -1,0 +1,40 @@
+// $Id: global-options,v 1.11 2004/01/19 22:32:26 root Exp $
+
+// define global options
+options {
+
+  // version
+  version "Non-Disclosed";
+
+  // root directory
+  directory "/var/named";
+
+  //
+  // forwarders { 64.94.33.1; 64.94.33.33; };
+
+  // listen-on
+  listen-on {
+
+    localnet; 
+
+  };
+
+  // allow-query
+  allow-query {
+
+    127.0.0.1;
+    fastmonster;
+    rfc1918;
+    lunarchicago;
+    brainwave;
+
+  };
+
+  // allow-transfer
+  allow-transfer {
+
+    xfernets;
+
+  };
+
+};

@@ -1,0 +1,9 @@
+$Id: sendmail-howto,v 1.1 2003/06/05 16:15:14 root Exp $
+
+This file will server as a TOC for all sendmail related files
+
+ aliases-howto
+ autoresponders-howto
+ mailgroup-howto
+ mkmail-howto
+ virtuser-howto

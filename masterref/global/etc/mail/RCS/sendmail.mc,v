@@ -1,0 +1,179 @@
+head	1.6;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.6
+date	2003.01.06.16.26.31;	author root;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2003.01.06.16.21.47;	author root;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2003.01.06.16.21.00;	author root;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2003.01.06.16.20.27;	author root;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2003.01.06.16.15.42;	author root;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2003.01.06.16.10.35;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.6
+log
+@added max message as 10M
+@
+text
+@divert(-1)
+dnl
+dnl $Id: sendmail.mc,v 1.5 2003/01/06 16:21:47 root Exp root $
+dnl
+dnl This is the sendmail macro config file. If you make changes to this file,
+dnl you need the sendmail-cf rpm installed and then have to generate a
+dnl new /etc/sendmail.cf by running the following command:
+dnl
+dnl        m4 /etc/mail/sendmail.mc > /etc/sendmail.cf
+dnl
+include(`/usr/share/sendmail-cf/m4/cf.m4')
+VERSIONID(`RH Sendmail edited for Lunar Hosting')dnl
+OSTYPE(`linux')
+dnl Uncomment and edit the following line if your mail needs to be sent out
+dnl through an external mail server:
+dnl define(`SMART_HOST',`smtp.your.provider')
+define(`confDEF_USER_ID',``8:12'')dnl
+undefine(`UUCP_RELAY')dnl
+undefine(`BITNET_RELAY')dnl
+define(`confTO_CONNECT', `1m')dnl
+define(`confTO_IDENT', `0s')dnl
+define(`confTRY_NULL_MX_LIST',true)dnl
+define(`confDONT_PROBE_INTERFACES',true)dnl
+define(`PROCMAIL_MAILER_PATH',`/usr/bin/procmail')dnl
+define(`ALIAS_FILE', `/etc/aliases')dnl
+define(`confMAX_MESSAGE_SIZE', `10000000')dnl
+dnl define(`STATUS_FILE', `/etc/mail/statistics')dnl
+define(`UUCP_MAILER_MAX', `2000000')dnl
+define(`confUSERDB_SPEC', `/etc/mail/userdb.db')dnl
+define(`confPRIVACY_FLAGS', `authwarnings,novrfy,noexpn,restrictqrun')dnl
+define(`confAUTH_OPTIONS', `A')dnl
+dnl TRUST_AUTH_MECH(`DIGEST-MD5 CRAM-MD5 LOGIN PLAIN')dnl
+dnl define(`confAUTH_MECHANISMS', `DIGEST-MD5 CRAM-MD5 LOGIN PLAIN')dnl
+dnl define(`confTO_QUEUEWARN', `4h')dnl
+dnl define(`confTO_QUEUERETURN', `5d')dnl
+dnl define(`confQUEUE_LA', `12')dnl
+dnl define(`confREFUSE_LA', `18')dnl
+dnl FEATURE(delay_checks)dnl
+FEATURE(`no_default_msa',`dnl')dnl
+FEATURE(`smrsh',`/usr/sbin/smrsh')dnl
+FEATURE(`mailertable',`hash -o /etc/mail/mailertable.db')dnl
+FEATURE(`virtusertable',`hash -o /etc/mail/virtusertable.db')dnl
+FEATURE(redirect)dnl
+FEATURE(always_add_domain)dnl
+FEATURE(use_cw_file)dnl
+FEATURE(use_ct_file)dnl
+dnl The '-t' option will retry delivery if e.g. the user runs over his quota.
+FEATURE(local_procmail,`',`procmail -t -Y -a $h -d $u')dnl
+FEATURE(`access_db',`hash -T<TMPF> -o /etc/mail/access.db')dnl
+FEATURE(`dnsbl', `sbl.spamhaus.org')dnl
+FEATURE(`blacklist_recipients')dnl
+EXPOSED_USER(`root')dnl
+dnl This changes sendmail to only listen on the loopback device 127.0.0.1
+dnl and not on any other network devices. Comment this out if you want
+dnl to accept email over the network.
+DAEMON_OPTIONS(`Port=smtp,Addr=127.0.0.1, Name=MTA')
+dnl NOTE: binding both IPv4 and IPv6 daemon to the same port requires
+dnl       a kernel patch
+dnl DAEMON_OPTIONS(`port=smtp,Addr=::1, Name=MTA-v6, Family=inet6')
+dnl We strongly recommend to comment this one out if you want to protect
+dnl yourself from spam. However, the laptop and users on computers that do
+dnl not have 24x7 DNS do need this.
+FEATURE(`accept_unresolvable_domains')dnl
+dnl FEATURE(`relay_based_on_MX')dnl
+MAILER(smtp)dnl
+MAILER(procmail)dnl
+Cwlocalhost.localdomain
+@
+
+
+1.5
+log
+@removed auto rebuild
+@
+text
+@d3 1
+a3 1
+dnl $Id: sendmail.mc,v 1.4 2003/01/06 16:21:00 root Exp root $
+d26 1
+@
+
+
+1.4
+log
+@added spamhaus
+@
+text
+@d3 1
+a3 1
+dnl $Id: sendmail.mc,v 1.3 2003/01/06 16:20:27 root Exp root $
+a19 1
+define(`confAUTO_REBUILD')dnl
+@
+
+
+1.3
+log
+@added a new access_db line
+@
+text
+@d3 1
+a3 1
+dnl $Id: sendmail.mc,v 1.2 2003/01/06 16:15:42 root Exp root $
+d50 1
+@
+
+
+1.2
+log
+@Added disable of identd and rcs tag
+@
+text
+@d3 1
+a3 1
+dnl $Id:$
+d49 1
+a49 1
+FEATURE(`access_db',`hash -o /etc/mail/access.db')dnl
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d2 3
+d12 1
+a12 1
+VERSIONID(`linux setup for Red Hat Linux')dnl
+d22 1
+@

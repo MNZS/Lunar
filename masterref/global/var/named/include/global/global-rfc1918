@@ -1,0 +1,76 @@
+// $Id: global-rfc1918,v 1.3 2003/01/27 16:41:11 root Exp $
+
+// 10/8
+zone "10.in-addr.arpa" in {
+	type master;
+	file "corp/db.rfc1918"; };
+
+// 172.16/12
+zone "16.172.in-addr.arpa" in {
+	type master;
+	file "corp/db.rfc1918"; };
+
+zone "17.172.in-addr.arpa" in {
+	type master;
+	file "corp/db.rfc1918"; };
+
+zone "18.172.in-addr.arpa" in {
+	type master;
+	file "corp/db.rfc1918"; };
+
+zone "19.172.in-addr.arpa" in {
+	type master;
+	file "corp/db.rfc1918"; };
+
+zone "20.172.in-addr.arpa" in {
+	type master;
+	file "corp/db.rfc1918"; };
+
+zone "21.172.in-addr.arpa" in {
+	type master;
+	file "corp/db.rfc1918"; };
+
+zone "22.172.in-addr.arpa" in {
+	type master;
+	file "corp/db.rfc1918"; };
+
+zone "23.172.in-addr.arpa" in {
+	type master;
+	file "corp/db.rfc1918"; };
+
+zone "24.172.in-addr.arpa" in {
+	type master;
+	file "corp/db.rfc1918"; };
+
+zone "25.172.in-addr.arpa" in {
+	type master;
+	file "corp/db.rfc1918"; };
+
+zone "26.172.in-addr.arpa" in {
+	type master;
+	file "corp/db.rfc1918"; };
+
+zone "27.172.in-addr.arpa" in {
+	type master;
+	file "corp/db.rfc1918"; };
+
+zone "28.172.in-addr.arpa" in {
+	type master;
+	file "corp/db.rfc1918"; };
+
+zone "29.172.in-addr.arpa" in {
+	type master;
+	file "corp/db.rfc1918"; };
+
+zone "30.172.in-addr.arpa" in {
+	type master;
+	file "corp/db.rfc1918"; };
+
+zone "31.172.in-addr.arpa" in {
+	type master;
+	file "corp/db.rfc1918"; };
+
+// 192.168
+zone "168.192.in-addr.arpa" in {
+	type master;
+	file "corp/db.rfc1918"; };

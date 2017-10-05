@@ -1,0 +1,47 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.1
+date	2003.06.19.22.13.39;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@#!/usr/bin/perl -w
+
+use strict;
+use Sys::Hostname;
+
+## run only on hosting servers
+if (hostname() !~ /^host/) {
+  exit 0;
+}
+
+my @@inboxen = glob('/var/spool/mail/*');
+my @@violators;
+
+for my $inbox(@@inboxen) {
+  if (-s $inbox > 5000000) {
+    push @@violators, (split(/\//,$inbox))[-1];
+  } else {
+    next;
+  } 
+}
+
+for my $offender(@@violators) {
+  print $offender . "\n";
+}
+@

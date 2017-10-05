@@ -1,0 +1,30 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.1
+date	2003.04.20.07.20.41;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@set tls-support = alternate-port
+set tls-private-key-file = /etc/mail/certs/name2.lunarhosting.net.pem
+set tls-server-cert-file = /etc/mail/certs/name2.lunarhosting.net.pem
+set downcase-user
+set trim-domain
+set reverse-lookup
+set statistics
+@

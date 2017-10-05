@@ -1,0 +1,27 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.1
+date	2003.03.26.17.31.13;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@# $Id:$
+
+# needed to added rewritten subject line
+rewrite_subject 1
+@

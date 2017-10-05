@@ -1,0 +1,30 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.1
+date	2003.01.04.16.24.37;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@## alias an administrative point
+Alias /sqladmin/ /www/DOMAIN/options/mysql/
+
+## enable php 
+<Directory "/www/DOMAIN/options/mysql/">
+  AddType application/x-httpd-php .php
+</Directory>
+@

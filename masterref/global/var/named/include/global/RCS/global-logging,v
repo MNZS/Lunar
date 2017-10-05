@@ -1,0 +1,136 @@
+head	1.4;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.4
+date	2003.08.27.20.49.26;	author root;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2003.04.29.17.03.58;	author root;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2003.03.05.04.40.22;	author root;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2002.12.31.12.08.57;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.4
+log
+@added query log
+@
+text
+@// $Id: global-logging,v 1.3 2003/04/29 17:03:58 root Exp root $
+
+// define logging parameters
+logging {
+
+  channel null_log {
+    file "/dev/null";
+    severity info;
+  };
+
+  channel to_general_file {
+    file "/var/log/named/named.general" versions 5 size 5m;
+    severity info;
+    print-category yes;
+    print-severity yes;
+    print-time yes;
+  };
+
+  channel to_security_file {
+    file "/var/log/named/named.security" versions 5 size 5m;
+    severity warning;
+    print-category no;
+    print-severity yes;
+    print-time yes;
+  };
+
+  channel to_notify_file {
+    file "/var/log/named/named.notify" versions 5 size 5m;
+    severity info;
+    print-category no;
+    print-severity yes;
+    print-time yes;
+  };
+
+  channel to_query_file {
+    file "/var/log/named/named.query" versions 5 size 5m;
+    severity info;
+    print-category no;
+    print-severity yes;
+    print-time yes;
+  };
+
+  category default { to_general_file; };
+  category lame-servers { null_log; };
+  category notify { to_notify_file; };
+  category security { to_security_file; };
+  category queries { to_query_file; };
+
+};
+@
+
+
+1.3
+log
+@changed severity for security file
+@
+text
+@d1 1
+a1 1
+// $Id: global-logging,v 1.2 2003/03/05 04:40:22 root Exp root $
+d35 8
+d47 1
+a47 1
+  category queries { null_log; };
+@
+
+
+1.2
+log
+@limit number of versions and file size
+@
+text
+@d1 1
+a1 1
+// $Id: global-logging,v 1.1 2002/12/31 12:08:57 root Exp root $
+d21 1
+a21 1
+    severity info;
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 1
+a1 1
+// $Id:$
+d12 1
+a12 1
+    file "/var/log/named/named.general";
+d20 1
+a20 1
+    file "/var/log/named/named.security";
+d28 1
+a28 1
+    file "/var/log/named/named.notify";
+@

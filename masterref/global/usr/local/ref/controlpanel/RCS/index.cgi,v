@@ -1,0 +1,74 @@
+head	1.3;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.3
+date	2003.04.09.23.20.03;	author root;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2003.04.09.23.17.59;	author root;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2003.04.09.23.17.38;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.3
+log
+@*** empty log message ***
+@
+text
+@#!/usr/bin/perl -w
+
+# $Id: index.cgi,v 1.2 2003/04/09 23:17:59 root Exp root $
+
+use strict;
+use Cwd;
+
+my $rcs = (qw$Revision: 1.2 $)[-1];
+my $domain = (split(/\//,cwd()))[-2];
+
+print qq#Location: https://www.$domain/controlpanel/panel.cgi\n\n#;
+exit(0);
+@
+
+
+1.2
+log
+@changed method of getting $domain value
+@
+text
+@d3 1
+a3 1
+# $Id: index.cgi,v 1.1 2003/04/09 23:17:38 root Exp root $
+d8 2
+a9 2
+my $rcs = (qw$Revision: 1.1 $)[-1];
+my $domain = (split(/\//,$cwd))[-2];
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d3 1
+a3 1
+# $Id: index.cgi,v 1.2 2002/03/26 14:23:43 root Exp root $
+d8 2
+a9 1
+my $rcs = (qw$Revision: 1.2 $)[-1];
+@

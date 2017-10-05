@@ -1,0 +1,256 @@
+Miva Mia and Miva Empresa License Agreement
+(for the 4.x series of the Softwares)
+
+Subject to change without notice.
+
+NOTICE: THIS MIVA CORPORATION SOFTWARE (TOGETHER WITH ITS ACCOMPANYING 
+DOCUMENTATION, THE "SOFTWARE") IS THE PROPERTY OF MIVA CORPORATION 
+("MIVA"). THE SOFTWARE IS MADE AVAILABLE TO YOU, THE ORIGINAL 
+USER/DOWNLOADER/INSTALLER, SUBJECT TO THE FOLLOWING LICENSE AGREEMENT 
+("LICENSE"). PLEASE READ THIS LICENSE CAREFULLY BEFORE INSTALLING OR USING 
+THE SOFTWARE. A COPY OF THIS LICENSE IS AVAILABLE FOR YOUR FUTURE 
+REFERENCE IN THE "LICENSE.TXT" FILE PROVIDED WITH THE SOFTWARE.
+
+BY DOWNLOADING AND INSTALLING THE SOFTWARE DESCRIBED IN THIS LICENSE 
+AGREEMENT, YOU ARE CONSENTING TO BE BOUND BY AND ARE BECOMING A PARTY 
+TO THIS AGREEMENT.  IF YOU DO NOT AGREE TO ALL OF THE TERMS OF THIS 
+AGREEMENT, DO NOT INSTALL THE SOFTWARE. IF YOU DO NOT ACCEPT THIS 
+LICENSE, THEN YOU MAY NOT INSTALL OR USE THE SOFTWARE. ANY USE BY YOU OF 
+THIS SOFTWARE ALSO CONSTITUTES YOUR ACCEPTANCE OF THESE TERMS.
+
+MIVA is only willing to grant you this License if you obtained the Software from MIVA 
+Corporation or a MIVA Corporation authorized reseller or MIVA Corporation authorized 
+distributor. If you obtained the Software from any other source you may not install or use 
+the Software.
+
+Definitions:
+
+(i) "You" and "End-User" refers to the person, entity or organization that is using 
+the software covered by this License, and any successor or assignee of same.
+
+(ii) "Miva Script" refers to proprietary server side scripting language software 
+developed and distributed by Miva Corporation.
+
+(iii) "Miva Script Compiler" refers to a separately Licensed Software, developed 
+and distributed by Miva Corporation, which converts Miva Script into a binary 
+object code.  
+
+(iii) "Miva Empresa" refers to version 4 or later software named Miva Empresa, 
+developed and distributed by Miva Corporation, which executes binary object 
+code produced by Miva Script Compiler.
+
+(iv) "Miva Mia" refers to version 4 or later desktop web server software named 
+Miva Mia, developed and distributed by Miva Corporation, which executes binary 
+object code produced by Miva Script Compiler.
+
+(v) "Software" refers to copies of Miva Empresa or Miva Mia.
+
+(vi) "Miva" refers to Miva Corporation when it is not used as part of a Software 
+name.
+
+(vii) "License" refers to this document and the legally binding terms and 
+conditions contained herein.
+
+This License is between You and Miva.  You acknowledge that Miva is granting 
+and has granted this License in reliance upon representations made by You and 
+You warranty the truthfulness and accuracy of such representations.  Any breach 
+of this warranty of truthfulness and accuracy shall constitute a breach of this 
+License.  Miva has the sole and unqualified right to refuse to License any person 
+or entity for any reason, except for reasons which are specifically prohibited by 
+state and national laws and statutes.
+
+Subject to the terms and conditions of this License, Miva grants you the non-
+exclusive, non-transferable and limited License to make an exact copy of the 
+Software and install the copy as required for You to execute binary object code 
+created by the Miva Script Compiler.  You may make copies and distribute the 
+Software or provide access to the Software as long as a) the recipient of the copy 
+agrees to this License electronically or in writing; b) You record the contact 
+information of the recipient; and c) You clearly label the Software as the property 
+of Miva Corporation.
+
+The Software contains valuable proprietary rights of Miva. There is no transfer to 
+You of any title to or ownership of the Software or any copyright, trade name, 
+trade secret, source code, or other proprietary rights relating to the Software, 
+regardless of the form that The Software exists in. You may not violate these 
+rights, and You must take all appropriate steps to protect Miva's rights. You 
+acknowledge that the Software in source code form remains a confidential trade 
+secret of MIVA. You agree to hold this information in confidence, not disclose it to 
+any person, and not use it for any purpose other than the use and operation of 
+the Software as permitted under this License.
+
+Any License, right, or permission to use the Software is automatically revoked if 
+You breach any term or condition of this License.  You agree that in the event of 
+a breach of this License, and upon the demand thereof by Miva, You will 
+immediately cease any further use of the Software and You will cease any use 
+related to the claimed breach of this License. You agree that monetary damages 
+alone are not an adequate and just relief resulting from any breach of this 
+License, that a court order prohibiting any further breach of this License is 
+necessary to prevent further damages, and that You will not oppose any 
+reasonable request for a temporary restraining order, preliminary injunction, or 
+other relief sought by Miva in the event of a breach of this License. Miva shall not 
+be required to notify You of any breach, nor make any demand or claim against 
+You resulting from any such breach, or for a demand to stop any use or 
+distribution in violation of the terms of this License, and You agree that any 
+breach of this License and damages resulting therefrom shall relate back to the 
+first and earliest breach thereof.  Failure of Miva to enforce its rights pursuant to 
+this License shall not constitute a waiver of such rights, and shall not prejudice 
+Miva in any later enforcement of its rights or rights to seek damages therefrom. 
+
+THE SOFTWARE IS PROVIDED "AS IS" AND WITHOUT WARRANTY OF ANY KIND. MIVA 
+HEREBY EXCLUDES AND DISCLAIMS ALL IMPLIED OR STATUTORY WARRANTIES. 
+
+MIVA CORPORATION WILL NOT BE LIABLE FOR (A) ANY BUG, ERROR, 
+OMISSION, DEFECT, DEFICIENCY, OR NONCONFORMITY IN THE 
+SOFTWARE (B) IMPLIED WARRANTY OF MERCHANTABILITY, (C) IMPLIED 
+WARRANTY OF FITNESS FOR A PARTICULAR PURPOSE, (D) IMPLIED 
+WARRANTY OF QUALITY, NON-INFRINGEMENT, TITLE, RESULTS, 
+EFFORTS OR QUIET ENJOYMENT, (E) IMPLIED WARRANTY RELATING TO 
+COURSE OF PERFORMANCE, COURSE OF DEALING, OR USAGE OF 
+TRADE OR ANY OTHER IMPLIED WARRANTY OF ANY TYPE 
+WHATSOEVER, OR (F) ANY CLAIM OF INFRINGEMENT.
+
+THERE IS NO WARRANTY THAT THE SOFTWARE WILL BE ERROR-FREE OR WILL 
+FUNCTION WITHOUT INTERRUPTION. YOU ASSUME THE ENTIRE RISK FOR THE 
+RESULTS OBTAINED USING THE SOFTWARE. TO THE EXTENT THAT MIVA MAY NOT 
+DISCLAIM ANY WARRANTY AS A MATTER OF APPLICABLE LAW, THE SCOPE AND 
+DURATION OF SUCH WARRANTY WILL BE THE MINIMUM PERMITTED UNDER SUCH 
+LAW. SOME STATES DO NOT ALLOW THE EXCLUSION OF IMPLIED WARRANTIES, SO 
+THEABOVE EXCLUSION MAY NOT APPLY TO YOU. THIS LIMITED WARRANTY GIVES 
+YOU SPECIFIC LEGAL RIGHTS, AND YOU MAY ALSO HAVE OTHER LEGAL RIGHTS, 
+WHICH VARY FROM STATE TO STATE.
+
+IN NO EVENT WILL MIVA BE LIABLE TO ANY PARTY FOR ANY INDIRECT, INCIDENTAL, 
+CONSEQUENTIAL, EXEMPLARY, SPECIAL OR PUNITIVE DAMAGES, INCLUDING ANY 
+LOSS OF PROFIT, REVENUE, BUSINESS OPPORTUNITY, DATA OR USE, ARISING FROM 
+OR RELATING TO THIS LICENSE OR THE SOFTWARE, WHETHER IN CONTRACT, IN TORT 
+OR OTHERWISE, EVEN IF MIVA KNEW, SHOULD HAVE KNOWN OR HAS BEEN ADVISED 
+OF THE POSSIBILITY OF SUCH DAMAGES. MIVA'S TOTAL CUMULATIVE LIABILITY 
+ARISING FROM OR RELATED TO THIS LICENSE OR THE SOFTWARE, WHETHER IN 
+CONTRACT, IN TORT OR OTHERWISE, WILL NOT EXCEED THE FEES ACTUALLY PAID 
+BY YOU UNDER THIS LICENSE OR ONE HUNDRED U.S. DOLLARS, WHICHEVER IS LESS. 
+THIS SECTION WILL APPLY EVEN IF AN EXCLUSIVE REMEDY HEREUNDER HAS FAILED 
+OF ITS ESSENTIAL PURPOSE.
+
+SOME STATES DO NOT ALLOW THE EXCLUSION OR LIMITATION OF INCIDENTAL OR
+CONSEQUENTIAL DAMAGES, SO THE ABOVE LIMITATION OR EXCLUSION MAY NOT
+APPLY TO YOU.
+
+MIVA is not required under this License to provide any installation, training or 
+other services to you. Such services, if available, must be purchased separately. 
+If, pursuant to a separate support agreement or otherwise, MIVA provides you 
+with a new release, error correction, update, upgrade or other modification to the 
+Software, such modification will be deemed part of the Software, and subject to 
+the terms of this License, unless the modification is expressly provided subject to 
+a separate license agreement. MIVA reserves the right at any time not to release 
+or to discontinue release of any Software and to alter prices, features, 
+specifications, capabilities, functions, licensing terms, release dates, general 
+availability or other characteristics of any future releases of the Software. Miva 
+reserved all rights to, at any time, replace, modify, alter, improve, enhance, or 
+change the Software without prior notice.
+
+You must register the Software with MIVA as a condition to your rights to use the 
+Software. You will be prompted to register the Software at the time of your 
+installation or first use of the Software, at which time you will be notified (or 
+directed to online resources explaining) how registration information provided by 
+you may be used and you will be afforded the opportunity to opt out of certain 
+uses of such information.
+
+The term of this License will begin as of the date that you receive the Software 
+and will remain in effect perpetually unless terminated.
+
+You or Miva may terminate this License for any reason, or for no reason, by 
+giving MIVA five (5) days' written notice.
+
+MIVA may terminate this License if you breach your obligations hereunder. MIVA 
+will effect such termination by giving you notice of termination, specifying therein 
+the alleged breach. If your breach is curable, you will have a grace period of thirty 
+(30) days after such notice is served to cure the breach described therein. If the 
+breach is cured within the thirty (30) day grace period, then this License will 
+remain in effect; otherwise, this License will automatically terminate upon the 
+conclusion of the thirty (30) day grace period.
+
+Upon the termination of this License for any reason the following terms shall 
+apply: (a) all rights granted under this License will immediately terminate and you 
+must stop all use of the Software; (b) you must return to MIVA or destroy all 
+copies of the Software provided to or made by you, and will, within ten (10) days 
+after the effective date of termination, provide MIVA with written certification that 
+all such copies have been returned or destroyed; and (c) all provisions of this 
+License will survive termination of this License.
+
+If you are subject to Canadian law, you agree to the following: The parties hereto 
+have expressly required that the present License and its Exhibits be drawn up in 
+the English language. / Les parties aux présentes, ont expressément exigé que 
+la présente Convention et ses Annexes soient rédigées en langue anglaise.
+
+The Software is not intended for use, and you may not use or allow others to use 
+the Software, in connection with any application requiring fail-safe performance 
+such as the operation of nuclear power facilities, air traffic control or navigation 
+systems, weapons control systems, life support systems, or any other system 
+whose failure could lead to injury, death, environmental damage or mass 
+destruction. You agree that MIVA will have no liability of any nature, and you are 
+solely responsible, for any expense, loss, injury or damage incurred as a result of 
+such use of the Software.
+
+This License will be governed by and construed in accordance with the laws of 
+the United States and the State of California, without giving effect to any conflicts 
+or choice of laws principles that would require the application of the laws of a 
+different jurisdiction. The parties expressly exclude the application of the 1980 
+United Nations Convention on the International Sale of Goods (if applicable).
+
+This License constitutes the entire, final and exclusive agreement between you 
+and MIVA regarding the specific license transaction described herein. If any 
+provision of this License is held to be illegal, invalid or unenforceable for any 
+reason, then such provision will be enforced to the maximum extent permissible 
+and the remainder of the provisions of this License will remain in full force and 
+effect.
+
+You understand and agree that by agreeing to this License, You are "opting in" 
+to a mailing list.  Miva Corporation will use information supplied by You to contact
+You with marketing and technical information in a variety of ways including,
+but not limited to, electronic mail, postal mail, telephone and fax.  If You do not 
+wish to receive marketing and/or technical information from Miva Corporation, 
+you may use systems provided by Miva Corporation to "opt out" of the mailing list.
+
+You may not assign this License or assign any of your rights or delegate any of 
+your obligations under this License, by operation of law or otherwise (including by 
+merger, sale of assets or consolidation), without MIVA's prior written consent. 
+Any attempted assignment in violation of this Provision will be void.
+
+You may not directly or indirectly transfer the Software, including its 
+documentation, to any country if such transfer would be prohibited by applicable 
+law, including the U.S. Export Administration Act and the regulations issued 
+thereunder. You agree to the foregoing and you are representing and warranting 
+that you are not located in, under the control of, or a national or resident of any 
+such country. You will be solely responsible for identifying and complying with all 
+laws of any jurisdiction outside of the United States regarding the import, export 
+or use of Software and technical data supplied by MIVA. You will obtain at your 
+own expense all licenses, permits or approvals required by any government to 
+use the Software.
+
+The Software is a "commercial item" as that term is defined at 48 C.F.R. 2.101, 
+consisting of "commercial computer software" and "commercial computer 
+software documentation" as such terms are used in 48 C.F.R. 12.212. Consistent 
+with 48 C.F.R. 12.212 and 48 C.F.R. 227.7202-1 through 227.7202-4, all U.S. 
+Government end users acquire the Software with only those rights set forth in 
+this License.
+
+All waivers must be in writing. Any waiver or failure to enforce a provision of this 
+License on one occasion shall not be deemed a waiver of any other provision or 
+such provision on any other occasion. This License may only be amended by a 
+written document signed by both parties.
+
+If you have any questions about this License, please contact MIVA, Installing and 
+any use of the Software will be the legal equivalent of your signature on a written 
+contract and the terms of this license shall be a legally binding agreement 
+between you and MIVA. You must agree to these terms and conditions in order 
+to install and use the Software. If you do not agree with these terms and 
+conditions, you should press the "CANCEL" button below to exit this installation 
+process, as MIVA is unwilling to license the Software to you in such case, and 
+you may return the Software within ten (10) days after you first received it to 
+MIVA.
+
+MIVA Corporation
+5060 Santa Fe Drive
+San Diego, CA 92019
+
+###END###
