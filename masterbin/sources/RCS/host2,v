@@ -1,0 +1,205 @@
+head	1.9;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.9
+date	2003.08.26.04.50.56;	author root;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	2003.08.26.04.47.24;	author root;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2003.08.26.04.43.30;	author root;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2003.08.13.00.06.37;	author root;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2003.05.16.04.03.27;	author root;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2003.04.21.15.29.49;	author root;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2003.04.14.13.37.34;	author root;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2003.04.14.02.07.03;	author root;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2003.04.14.02.06.40;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.9
+log
+@*** empty log message ***
+@
+text
+@## $Id: host2,v 1.8 2003/08/26 04:47:24 root Exp root $
+
+## masterref sources 
+## list of files and directories held in global stasis on
+## masterref.lunarhosting.net which will be updated on remote
+## servers
+
+## syntax
+## lines beginning with a hash mark are comments
+## entries are composed of rsync syntax with source
+## followed by a space and then destination
+
+## warning!
+## by default masterref will delete any files on the dst 
+## directory that are not present in the reference system
+## when the src is a directory, ALL files in that directory
+## must be held by the reference system. 
+
+## warning!
+## be very careful how lines are written. directories should
+## be written with a trailing slash (/) in the src portion
+## and should reference the same name in the destination, but
+## without the slash.
+
+## warning!
+## files should be referenced in the src when there are other
+## files present in the destination directory that should NOT
+## be deleted by masterref.
+
+## example!
+## /usr/local/masterref/host2/root/from_masterref /root
+
+## /etc
+/usr/local/masterref/common/etc/init.d/mysqld /etc/init.d
+/usr/local/masterref/common/etc/proftpd/proftpd.conf /etc/proftpd
+
+## miva
+/usr/local/masterref/common/usr/local/mivavm-v4.10/ /usr/local/mivavm-v4.10
+/usr/local/masterref/common/usr/local/miva /usr/local/miva
+@
+
+
+1.8
+log
+@*** empty log message ***
+@
+text
+@d1 1
+a1 1
+## $Id: host2,v 1.7 2003/08/26 04:43:30 root Exp root $
+d39 1
+@
+
+
+1.7
+log
+@added miva4.10
+@
+text
+@d1 1
+a1 1
+## $Id: host2,v 1.6 2003/08/13 00:06:37 root Exp root $
+a38 1
+/usr/local/masterref/common/usr/local/miva /usr/local/miva
+@
+
+
+1.6
+log
+@upgraded miva
+@
+text
+@d1 1
+a1 1
+## $Id: host2,v 1.5 2003/05/16 04:03:27 root Exp root $
+d38 2
+a39 1
+/usr/local/masterref/common/usr/local/mivavm-v4.09/ /usr/local/mivavm-v4.09
+@
+
+
+1.5
+log
+@added mivavm-4.07
+@
+text
+@d1 1
+a1 1
+## $Id: host2,v 1.4 2003/04/21 15:29:49 root Exp root $
+d38 1
+a38 1
+/usr/local/masterref/common/usr/local/mivavm-v4.07/ /usr/local/mivavm-v4.07
+@
+
+
+1.4
+log
+@added proftpd.conf
+@
+text
+@d1 1
+a1 1
+## $Id: host2,v 1.3 2003/04/14 13:37:34 root Exp root $
+d36 3
+@
+
+
+1.3
+log
+@added mysqld init script
+@
+text
+@d1 1
+a1 1
+## $Id: host2,v 1.2 2003/04/14 02:07:03 root Exp root $
+d35 1
+@
+
+
+1.2
+log
+@*** empty log message ***
+@
+text
+@d1 1
+a1 1
+## $Id: host2,v 1.1 2003/04/14 02:06:40 root Exp root $
+d32 3
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 1
+a1 1
+## $Id: name1,v 1.2 2003/04/14 02:06:17 root Exp $
+d31 1
+a31 1
+## /usr/local/masterref/name1/root/from_masterref /root
+@

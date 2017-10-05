@@ -1,0 +1,79 @@
+## $Id: name1,v 1.24 2003/08/14 04:11:07 root Exp $
+
+## masterref sources 
+## list of files and directories held in global stasis on
+## masterref.lunarhosting.net which will be updated on remote
+## servers
+
+## syntax
+## lines beginning with a hash mark are comments
+## entries are composed of rsync syntax with source
+## followed by a space and then destination
+
+## warning!
+## by default masterref will delete any files on the dst 
+## directory that are not present in the reference system
+## when the src is a directory, ALL files in that directory
+## must be held by the reference system. 
+
+## warning!
+## be very careful how lines are written. directories should
+## be written with a trailing slash (/) in the src portion
+## and should reference the same name in the destination, but
+## without the slash.
+
+## warning!
+## files should be referenced in the src when there are other
+## files present in the destination directory that should NOT
+## be deleted by masterref.
+
+## example!
+## /usr/local/masterref/name1/root/from_masterref /root
+
+## /etc
+/usr/local/masterref/unique/name1/etc/mail/local-host-names /etc/mail
+
+## apache
+/usr/local/masterref/common/usr/local/apache/conf/httpd.conf /usr/local/apache/conf
+/usr/local/masterref/common/usr/local/apache/conf/domains.conf /usr/local/apache/conf
+/usr/local/masterref/common/usr/local/apache/conf/include/global/common /usr/local/apache/conf/include/global/
+/usr/local/masterref/unique/name1/usr/local/apache/conf/include/global/unique /usr/local/apache/conf/include/global/
+
+## mrtg
+/usr/local/masterref/common/etc/mrtg/gateway.cfg /etc/mrtg
+/usr/local/masterref/common/etc/mrtg/backbone.cfg /etc/mrtg
+/usr/local/masterref/common/usr/local/mrtg/.htaccess /usr/local/mrtg
+/usr/local/masterref/common/usr/local/mrtg/images/ /usr/local/mrtg/images
+/usr/local/masterref/common/usr/local/mrtg/index.html /usr/local/mrtg
+/usr/local/masterref/common/usr/local/mrtg/left.html /usr/local/mrtg
+/usr/local/masterref/common/usr/local/mrtg/gateway.cpu.html /usr/local/mrtg
+/usr/local/masterref/common/usr/local/mrtg/backbone.cpu.html /usr/local/mrtg
+/usr/local/masterref/common/usr/local/mrtg/gateway.bandwidth.html /usr/local/mrtg
+/usr/local/masterref/common/usr/local/mrtg/backbone.bandwidth.html /usr/local/mrtg
+/usr/local/masterref/common/usr/local/mrtg/host1.cpu.html /usr/local/mrtg
+/usr/local/masterref/common/usr/local/mrtg/host1.spam.html /usr/local/mrtg
+/usr/local/masterref/common/usr/local/mrtg/host1.mem.html /usr/local/mrtg
+/usr/local/masterref/common/usr/local/mrtg/host2.cpu.html /usr/local/mrtg
+/usr/local/masterref/common/usr/local/mrtg/host2.spam.html /usr/local/mrtg
+/usr/local/masterref/common/usr/local/mrtg/host2.mem.html /usr/local/mrtg
+/usr/local/masterref/common/usr/local/mrtg/name1.cpu.html /usr/local/mrtg
+/usr/local/masterref/common/usr/local/mrtg/name1.mem.html /usr/local/mrtg
+/usr/local/masterref/common/usr/local/mrtg/name2.cpu.html /usr/local/mrtg
+/usr/local/masterref/common/usr/local/mrtg/name2.mem.html /usr/local/mrtg
+
+## log rotation
+/usr/local/masterref/common/etc/logrotate.d/mrtg /etc/logrotate.d
+
+## password files
+/usr/local/masterref/common/password/.p ~scott/.p
+/usr/local/masterref/common/password/.p ~craig/.p
+/usr/local/masterref/common/password/.p ~cmenzes/.p
+
+## /var/named
+/usr/local/masterref/unique/name1/var/named/include/local/local-config /var/named/include/local/local-config
+/usr/local/masterref/common/var/named/named.ddns /var/named/named.ddns
+/usr/local/masterref/common/var/named/named.partners /var/named/named.partners
+/usr/local/masterref/common/var/named/include/keys/ /var/named/include/keys
+/usr/local/masterref/common/var/named/partners/db.elastname.com /var/named/partners/db.elastname.com
+/usr/local/masterref/common/var/named/partners/db.surenetworks.com /var/named/partners/db.surenetworks.com
+

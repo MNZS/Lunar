@@ -1,0 +1,1524 @@
+head	1.68;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.68
+date	2003.08.13.19.59.35;	author root;	state Exp;
+branches;
+next	1.67;
+
+1.67
+date	2003.08.13.19.53.15;	author root;	state Exp;
+branches;
+next	1.66;
+
+1.66
+date	2003.08.13.19.52.44;	author root;	state Exp;
+branches;
+next	1.65;
+
+1.65
+date	2003.08.13.19.46.54;	author root;	state Exp;
+branches;
+next	1.64;
+
+1.64
+date	2003.08.13.19.42.17;	author root;	state Exp;
+branches;
+next	1.63;
+
+1.63
+date	2003.08.13.19.20.48;	author root;	state Exp;
+branches;
+next	1.62;
+
+1.62
+date	2003.08.13.18.08.03;	author root;	state Exp;
+branches;
+next	1.61;
+
+1.61
+date	2003.08.07.00.36.38;	author root;	state Exp;
+branches;
+next	1.60;
+
+1.60
+date	2003.08.07.00.21.52;	author root;	state Exp;
+branches;
+next	1.59;
+
+1.59
+date	2003.08.07.00.08.18;	author root;	state Exp;
+branches;
+next	1.58;
+
+1.58
+date	2003.08.07.00.05.52;	author root;	state Exp;
+branches;
+next	1.57;
+
+1.57
+date	2003.08.07.00.05.06;	author root;	state Exp;
+branches;
+next	1.56;
+
+1.56
+date	2003.08.07.00.04.46;	author root;	state Exp;
+branches;
+next	1.55;
+
+1.55
+date	2003.08.06.23.59.41;	author root;	state Exp;
+branches;
+next	1.54;
+
+1.54
+date	2003.08.06.23.58.19;	author root;	state Exp;
+branches;
+next	1.53;
+
+1.53
+date	2003.08.06.23.53.11;	author root;	state Exp;
+branches;
+next	1.52;
+
+1.52
+date	2003.08.06.23.07.26;	author root;	state Exp;
+branches;
+next	1.51;
+
+1.51
+date	2003.08.06.23.06.58;	author root;	state Exp;
+branches;
+next	1.50;
+
+1.50
+date	2003.05.23.15.45.23;	author root;	state Exp;
+branches;
+next	1.49;
+
+1.49
+date	2003.04.15.13.30.45;	author root;	state Exp;
+branches;
+next	1.48;
+
+1.48
+date	2003.04.13.23.30.12;	author root;	state Exp;
+branches;
+next	1.47;
+
+1.47
+date	2003.04.13.23.23.34;	author root;	state Exp;
+branches;
+next	1.46;
+
+1.46
+date	2003.04.13.23.21.43;	author root;	state Exp;
+branches;
+next	1.45;
+
+1.45
+date	2003.04.13.23.21.09;	author root;	state Exp;
+branches;
+next	1.44;
+
+1.44
+date	2003.04.13.23.20.33;	author root;	state Exp;
+branches;
+next	1.43;
+
+1.43
+date	2003.04.13.23.08.31;	author root;	state Exp;
+branches;
+next	1.42;
+
+1.42
+date	2003.04.13.21.01.31;	author root;	state Exp;
+branches;
+next	1.41;
+
+1.41
+date	2003.04.08.17.49.05;	author root;	state Exp;
+branches;
+next	1.40;
+
+1.40
+date	2003.03.05.16.27.29;	author root;	state Exp;
+branches;
+next	1.39;
+
+1.39
+date	2003.01.04.21.16.00;	author root;	state Exp;
+branches;
+next	1.38;
+
+1.38
+date	2003.01.04.02.36.54;	author root;	state Exp;
+branches;
+next	1.37;
+
+1.37
+date	2002.12.31.23.22.00;	author root;	state Exp;
+branches;
+next	1.36;
+
+1.36
+date	2002.12.31.23.21.13;	author root;	state Exp;
+branches;
+next	1.35;
+
+1.35
+date	2002.12.31.23.20.02;	author root;	state Exp;
+branches;
+next	1.34;
+
+1.34
+date	2002.12.31.23.18.14;	author root;	state Exp;
+branches;
+next	1.33;
+
+1.33
+date	2002.12.31.12.25.29;	author root;	state Exp;
+branches;
+next	1.32;
+
+1.32
+date	2002.12.31.12.24.59;	author root;	state Exp;
+branches;
+next	1.31;
+
+1.31
+date	2002.12.31.12.23.52;	author root;	state Exp;
+branches;
+next	1.30;
+
+1.30
+date	2002.12.31.12.22.51;	author root;	state Exp;
+branches;
+next	1.29;
+
+1.29
+date	2002.12.31.12.20.51;	author root;	state Exp;
+branches;
+next	1.28;
+
+1.28
+date	2002.12.31.12.14.01;	author root;	state Exp;
+branches;
+next	1.27;
+
+1.27
+date	2002.12.31.12.04.05;	author root;	state Exp;
+branches;
+next	1.26;
+
+1.26
+date	2002.12.31.12.03.23;	author root;	state Exp;
+branches;
+next	1.25;
+
+1.25
+date	2002.12.31.11.56.16;	author root;	state Exp;
+branches;
+next	1.24;
+
+1.24
+date	2002.12.31.11.53.24;	author root;	state Exp;
+branches;
+next	1.23;
+
+1.23
+date	2002.12.31.11.52.59;	author root;	state Exp;
+branches;
+next	1.22;
+
+1.22
+date	2002.12.31.11.52.14;	author root;	state Exp;
+branches;
+next	1.21;
+
+1.21
+date	2002.12.31.11.48.50;	author root;	state Exp;
+branches;
+next	1.20;
+
+1.20
+date	2002.12.31.11.48.02;	author root;	state Exp;
+branches;
+next	1.19;
+
+1.19
+date	2002.12.31.11.46.54;	author root;	state Exp;
+branches;
+next	1.18;
+
+1.18
+date	2002.12.31.11.46.17;	author root;	state Exp;
+branches;
+next	1.17;
+
+1.17
+date	2002.12.31.11.46.00;	author root;	state Exp;
+branches;
+next	1.16;
+
+1.16
+date	2002.12.31.11.42.25;	author root;	state Exp;
+branches;
+next	1.15;
+
+1.15
+date	2002.12.31.11.41.20;	author root;	state Exp;
+branches;
+next	1.14;
+
+1.14
+date	2002.12.31.11.40.19;	author root;	state Exp;
+branches;
+next	1.13;
+
+1.13
+date	2002.12.31.11.38.57;	author root;	state Exp;
+branches;
+next	1.12;
+
+1.12
+date	2002.12.31.11.38.36;	author root;	state Exp;
+branches;
+next	1.11;
+
+1.11
+date	2002.12.31.11.30.00;	author root;	state Exp;
+branches;
+next	1.10;
+
+1.10
+date	2002.12.31.11.28.32;	author root;	state Exp;
+branches;
+next	1.9;
+
+1.9
+date	2002.12.31.11.27.35;	author root;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	2002.12.31.11.22.01;	author root;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2002.12.31.11.21.31;	author root;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2002.12.31.11.21.04;	author root;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2002.12.31.11.20.13;	author root;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2002.12.31.11.19.25;	author root;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2002.12.31.11.19.00;	author root;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2002.12.31.11.17.43;	author root;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2002.12.31.11.17.11;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.68
+log
+@*** empty log message ***
+@
+text
+@#!/usr/bin/perl -w
+
+# get a confirm before action takes place
+# go through guarded files and make sure they have rcs tags
+
+# $Id: masterref.pl,v 1.67 2003/08/13 19:53:15 root Exp root $
+
+# Keep global files on remote machines in sync
+
+use strict;
+use Sys::Hostname;
+use Getopt::Long;
+use POSIX qw(strftime);
+use Parallel::ForkManager;
+
+my @@hosts = qw(
+		host1
+		host2
+		name1
+		name2
+	      );
+
+# command line arguments
+my $host;
+my $list;
+my $regex;
+my $all;
+GetOptions (
+	'all'		=> \$all,
+	'host=s'	=> \$host,
+	'list'		=> \$list,
+	'regex=s'	=> \$regex,
+);
+
+
+# masterref sources
+my $sourceDir = '/usr/local/masterbin/sources';
+my $user = 'root@@';
+
+# rsync arguments
+my $sshPort = '9490';
+my $rsync = `which rsync`; chomp $rsync;
+my $ssh = `which ssh`; chomp $ssh;
+my $args = '-qavPH';
+#my $delete = '--partial --delete --delete-after';
+my $delete = '--delete';
+my $exclude = '--exclude=RCS*';
+my $shell = qq|-e "$ssh -p $sshPort"|; 
+my $cli = "$rsync $args $delete $exclude $shell";
+
+# ensure the script is being ran on masterref
+if (hostname() ne 'name2.lunarhosting.net') {
+  print "\nThis script may only be ran on masterref!\n\n";
+  exit 1;
+}
+
+if ($list) {
+  print "\n";
+  for my $server(@@hosts) {
+    print "$server\n";
+  }
+  print "\n";
+  exit 0;
+}
+
+if ($all) {
+  $regex = '.*';
+}
+
+## ensure the correct hosts are selected
+print "You have selected to push files to the following hosts:\n";
+for my $server(@@hosts) {
+  ## if host is specified, do filtering
+  if ($host) {
+    next if $server !~ /^$host$/;
+    print "  $server\n";
+  } elsif ($regex) {
+    next if $server !~ /$regex/;
+    print " $server\n";
+  } else {
+    exit 1;
+  }
+}
+print "\n";
+print "Would you like to continue? (y/N) ";
+my $answer = <STDIN>;
+chomp $answer;
+if ($answer ne 'y') { print "\nNo hosts were processed.\n\n"; exit 1; };
+
+open(SRC,"$sourceDir/global")
+  or die "Can't open Source File : $!\n";
+my @@sourceGlobal = <SRC>;
+close(SRC);
+
+# create start time
+my $startTime = strftime("%X",localtime);
+
+my $process = new Parallel::ForkManager('10');
+
+# push files out
+for my $server(@@hosts) {
+  ## if host is specified, do filtering
+  if ($host) {
+    next if $server !~ /^$host$/;
+  } elsif ($regex) {
+    next if $server !~ /$regex/;
+  } else {
+    exit 1;
+  }
+
+  $process->start and next;
+
+  ## 
+  print "Beginning ref for $server...\n";
+
+  ## go over the list
+  for my $line(@@sourceGlobal) {
+    chomp $line;
+    next if $line =~ /^$/;
+    next if $line =~ /^#/;
+    my ($src,$dst) = split(/ /,$line);
+    my $display = $src;
+    $display =~ s/^\/usr\/local\/masterref\/(?:global|common|unique)?(?:\/(?:host1|host2|name1|name2))?//g;
+    system("$cli $src $user$server:$dst");
+  }
+
+  if ( -e "$sourceDir/$server" ) {
+    open(HOST,"$sourceDir/$server")
+      or die "Can't open $sourceDir/$server : $!\n";
+    my @@sourceHost = <HOST>;
+    close(HOST);
+    for my $line(@@sourceHost) {
+      chomp $line;
+      next if $line =~ /^$/;
+      next if $line =~ /^#/;
+      my ($src,$dst) = split(/ /,$line);
+      my $display = $src;
+      $display =~ s/^\/usr\/local\/masterref\/(?:global|common|unique)?(?:\/(?:host1|host2|name1|name2))?//g;
+      system("$cli $src $user$server:$dst");
+    }
+  }
+
+  ##
+  print "End of ref for $server...\n";
+
+  $process->finish;
+}
+
+$process->wait_all_children;
+
+my $endTime = strftime("%X",localtime);
+
+print "MasterRef Session Summary\n  Start Time:\t$startTime\n  End Time:\t$endTime\n";
+
+exit;
+@
+
+
+1.67
+log
+@*** empty log message ***
+@
+text
+@d6 1
+a6 1
+# $Id: masterref.pl,v 1.66 2003/08/13 19:52:44 root Exp root $
+d114 1
+a114 1
+  print "\nBeginning ref for $server...\n";
+d144 1
+a144 1
+  print "\nEnd of ref for $server...\n\n";
+@
+
+
+1.66
+log
+@*** empty log message ***
+@
+text
+@d6 1
+a6 1
+# $Id: masterref.pl,v 1.65 2003/08/13 19:46:54 root Exp root $
+d153 1
+a153 1
+print "\n\nMasterRef Session Summary\n  Start Time:\t$startTime\n  End Time:\t$endTime\n\n";
+@
+
+
+1.65
+log
+@*** empty log message ***
+@
+text
+@d6 1
+a6 1
+# $Id: masterref.pl,v 1.64 2003/08/13 19:42:17 root Exp root $
+d114 1
+a114 1
+  print "\n\nBeginning ref for $server...\n\n";
+@
+
+
+1.64
+log
+@*** empty log message ***
+@
+text
+@d6 1
+a6 1
+# $Id: masterref.pl,v 1.63 2003/08/13 19:20:48 root Exp root $
+d149 2
+a154 2
+$process->wait_all_children;
+
+@
+
+
+1.63
+log
+@adding forking
+@
+text
+@d6 1
+a6 1
+# $Id: masterref.pl,v 1.62 2003/08/13 18:08:03 root Exp root $
+d111 1
+a111 1
+  process->start and next;
+@
+
+
+1.62
+log
+@removed print statement for each host
+@
+text
+@d6 1
+a6 1
+# $Id: masterref.pl,v 1.61 2003/08/07 00:36:38 root Exp root $
+d14 1
+d98 2
+d111 2
+d145 2
+d153 2
+@
+
+
+1.61
+log
+@*** empty log message ***
+@
+text
+@d6 1
+a6 1
+# $Id: masterref.pl,v 1.60 2003/08/07 00:21:52 root Exp root $
+a118 1
+    print "Processing...\n$display\n";
+a133 1
+      print "Processing...\n$display\n";
+@
+
+
+1.60
+log
+@*** empty log message ***
+@
+text
+@d6 1
+a6 1
+# $Id: masterref.pl,v 1.59 2003/08/07 00:08:18 root Exp root $
+d141 1
+a141 1
+  print "\nEnd of ref for $host...\n\n";
+@
+
+
+1.59
+log
+@*** empty log message ***
+@
+text
+@d6 1
+a6 1
+# $Id: masterref.pl,v 1.58 2003/08/07 00:05:52 root Exp root $
+d109 1
+a109 1
+  print "\n\nBeginning ref for $host...\n\n";
+@
+
+
+1.58
+log
+@*** empty log message ***
+@
+text
+@d6 1
+a6 1
+# $Id: masterref.pl,v 1.57 2003/08/07 00:05:06 root Exp root $
+d118 1
+a118 1
+    $display =~ s/^\/usr\/local\/masterref\/(?:global|common|unique)\/?(?:host1|host2|name1|name2)?//g;
+d133 3
+a135 1
+      print "Processing...\n$src\n";
+@
+
+
+1.57
+log
+@*** empty log message ***
+@
+text
+@d6 1
+a6 1
+# $Id: masterref.pl,v 1.56 2003/08/07 00:04:46 root Exp root $
+d118 1
+a118 1
+    $display =~ ms|^/usr/local/masterref/(?:global|common|unique)/?(?:host1|host2|name1|name2)?||g;
+@
+
+
+1.56
+log
+@*** empty log message ***
+@
+text
+@d6 1
+a6 1
+# $Id: masterref.pl,v 1.55 2003/08/06 23:59:41 root Exp root $
+d118 1
+a118 1
+    $display =~ sm|^/usr/local/masterref/(?:global|common|unique)/?(?:host1|host2|name1|name2)?||g;
+@
+
+
+1.55
+log
+@*** empty log message ***
+@
+text
+@d6 1
+a6 1
+# $Id: masterref.pl,v 1.54 2003/08/06 23:58:19 root Exp root $
+d117 3
+a119 1
+    print "Processing...\n$src\n";
+@
+
+
+1.54
+log
+@*** empty log message ***
+@
+text
+@d6 1
+a6 1
+# $Id: masterref.pl,v 1.53 2003/08/06 23:53:11 root Exp root $
+d109 1
+a109 1
+  print "Beginning ref for $host...\n\n";
+d117 1
+a117 1
+    print "Processing...\n$dst\n";
+d131 1
+a131 1
+      print "Processing...\n$dst\n";
+@
+
+
+1.53
+log
+@*** empty log message ***
+@
+text
+@d6 1
+a6 1
+# $Id: masterref.pl,v 1.52 2003/08/06 23:07:26 root Exp root $
+d43 1
+a43 1
+my $args = '-avPH';
+d107 4
+d117 1
+a117 1
+    #print "$cli $src $user$server:$dst\n";
+d131 1
+a131 1
+      #print "$cli $src $user$server:$dst\n";
+d135 3
+@
+
+
+1.52
+log
+@*** empty log message ***
+@
+text
+@d6 1
+a6 1
+# $Id: masterref.pl,v 1.51 2003/08/06 23:06:58 root Exp root $
+d135 1
+a135 1
+print "\n\nMasterRef Session Summary\n  Start Time: $startTime\n  End Time: $endTime\n\n";
+@
+
+
+1.51
+log
+@added an elapsed time feature
+@
+text
+@d6 1
+a6 1
+# $Id: masterref.pl,v 1.50 2003/05/23 15:45:23 root Exp root $
+d13 1
+@
+
+
+1.50
+log
+@added verbose option to args
+@
+text
+@d6 1
+a6 1
+# $Id: masterref.pl,v 1.49 2003/04/15 13:30:45 root Exp root $
+d93 3
+d131 6
+@
+
+
+1.49
+log
+@removed verbose
+@
+text
+@d6 1
+a6 1
+# $Id: masterref.pl,v 1.48 2003/04/13 23:30:12 root Exp root $
+d42 1
+a42 1
+my $args = '-aPH';
+@
+
+
+1.48
+log
+@added per host support
+@
+text
+@d6 1
+a6 1
+# $Id: masterref.pl,v 1.47 2003/04/13 23:23:34 root Exp root $
+d42 1
+a42 1
+my $args = '-avPH';
+@
+
+
+1.47
+log
+@*** empty log message ***
+@
+text
+@d6 1
+a6 1
+# $Id: masterref.pl,v 1.46 2003/04/13 23:21:43 root Exp root $
+d123 2
+a124 1
+      print "$cli $src $user$server:$dst\n";
+@
+
+
+1.46
+log
+@missing ""
+@
+text
+@d6 1
+a6 1
+# $Id: masterref.pl,v 1.45 2003/04/13 23:21:09 root Exp root $
+d111 13
+a123 12
+    if ( -e "$sourceDir/$server" ) {
+      open(HOST,"$sourceDir/$server")
+        or die "Can't open $sourceDir/$server : $!\n";
+      my @@sourceHost = <HOST>;
+      close(HOST);
+      for my $line(@@sourceHost) {
+        chomp $line;
+        next if $line =~ /^$/;
+        next if $line =~ /^#/;
+        my ($src,$dst) = split(/ /,$line);
+        print "$cli $src $user$server:$dst\n";
+      }
+@
+
+
+1.45
+log
+@missing } fixed!
+@
+text
+@d6 1
+a6 1
+# $Id: masterref.pl,v 1.44 2003/04/13 23:20:33 root Exp root $
+d111 1
+a111 1
+    if ( -e $sourceDir/$server ) {
+@
+
+
+1.44
+log
+@added per host source file reading
+@
+text
+@d6 1
+a6 1
+# $Id: masterref.pl,v 1.43 2003/04/13 23:08:31 root Exp root $
+d117 6
+a122 5
+      chomp $line;
+      next if $line =~ /^$/;
+      next if $line =~ /^#/;
+      my ($src,$dst) = split(/ /,$line);
+      print "$cli $src $user$server:$dst\n";
+@
+
+
+1.43
+log
+@prepping for per host source files
+@
+text
+@d6 1
+a6 1
+# $Id: masterref.pl,v 1.42 2003/04/13 21:01:31 root Exp root $
+d111 12
+@
+
+
+1.42
+log
+@changed source file
+@
+text
+@d6 1
+a6 1
+# $Id: masterref.pl,v 1.41 2003/04/08 17:49:05 root Exp root $
+d35 1
+a35 1
+my $sourceFile = '/usr/local/masterbin/sources/global';
+d88 1
+a88 1
+open(SRC,"$sourceFile")
+d90 1
+a90 1
+my @@sourceFile = <SRC>;
+d104 1
+a104 1
+  for my $line(@@sourceFile) {
+@
+
+
+1.41
+log
+@changed ssh port
+@
+text
+@d6 1
+a6 1
+# $Id: masterref.pl,v 1.40 2003/03/05 16:27:29 root Exp root $
+d35 1
+a35 1
+my $sourceFile = '/usr/local/masterbin/sources';
+@
+
+
+1.40
+log
+@changed to verbose
+@
+text
+@d6 1
+a6 1
+# $Id: masterref.pl,v 1.39 2003/01/04 21:16:00 root Exp root $
+d39 1
+a39 1
+my $sshPort = '8228';
+@
+
+
+1.39
+log
+@added --all
+@
+text
+@d6 1
+a6 1
+# $Id: masterref.pl,v 1.38 2003/01/04 02:36:54 root Exp root $
+d42 1
+a42 1
+my $args = '-aPH';
+@
+
+
+1.38
+log
+@added regex solution
+@
+text
+@d6 1
+a6 1
+# $Id: masterref.pl,v 1.37 2002/12/31 23:22:00 root Exp root $
+d25 1
+d27 1
+d64 4
+@
+
+
+1.37
+log
+@*** empty log message ***
+@
+text
+@d6 1
+a6 1
+# $Id: masterref.pl,v 1.36 2002/12/31 23:21:13 root Exp root $
+a15 1
+		host1.lunarhosting.net
+a16 1
+		host2.lunarhosting.net
+a17 1
+		name1.lunarhosting.net
+a18 1
+		name2.lunarhosting.net
+d24 1
+d28 1
+d68 6
+a74 1
+  print "  $server\n";
+d92 4
+@
+
+
+1.36
+log
+@missing $user:
+@
+text
+@d6 1
+a6 1
+# $Id: masterref.pl,v 1.35 2002/12/31 23:20:02 root Exp root $
+d96 2
+a97 2
+    print "$cli $src $user:$dst\n";
+    system("$cli $src $user:$dst");
+@
+
+
+1.35
+log
+@*** empty log message ***
+@
+text
+@d6 1
+a6 1
+# $Id: masterref.pl,v 1.34 2002/12/31 23:18:14 root Exp root $
+d96 2
+a97 2
+    print "$cli $src $dst\n";
+    system("$cli $src $dst");
+@
+
+
+1.34
+log
+@*** empty log message ***
+@
+text
+@d6 1
+a6 1
+# $Id: masterref.pl,v 1.33 2002/12/31 12:25:29 root Exp root $
+d96 1
+@
+
+
+1.33
+log
+@*** empty log message ***
+@
+text
+@d6 1
+a6 1
+# $Id: masterref.pl,v 1.32 2002/12/31 12:24:59 root Exp root $
+d16 1
+d18 1
+d20 1
+d22 1
+@
+
+
+1.32
+log
+@more formatting
+@
+text
+@d6 1
+a6 1
+# $Id: masterref.pl,v 1.31 2002/12/31 12:23:52 root Exp root $
+d73 1
+a73 1
+if ($answer ne 'y') { print "\nNo hosts were processed\n\n"; exit 1; };
+@
+
+
+1.31
+log
+@formatting ensure routine
+@
+text
+@d6 1
+a6 1
+# $Id: masterref.pl,v 1.30 2002/12/31 12:22:51 root Exp root $
+d67 1
+a67 1
+  print "$server\n";
+d73 1
+a73 1
+if ($answer ne 'y') { exit 1; };
+@
+
+
+1.30
+log
+@*** empty log message ***
+@
+text
+@d6 1
+a6 1
+# $Id: masterref.pl,v 1.29 2002/12/31 12:20:51 root Exp root $
+d67 1
+a67 1
+  print $server;
+@
+
+
+1.29
+log
+@*** empty log message ***
+@
+text
+@d6 1
+a6 1
+# $Id: masterref.pl,v 1.28 2002/12/31 12:14:01 root Exp root $
+d69 5
+a73 1
+exit 0;
+@
+
+
+1.28
+log
+@*** empty log message ***
+@
+text
+@d6 1
+a6 1
+# $Id: masterref.pl,v 1.27 2002/12/31 12:04:05 root Exp root $
+d60 11
+@
+
+
+1.27
+log
+@testing delete
+@
+text
+@d3 4
+a6 1
+# $Id: masterref.pl,v 1.26 2002/12/31 12:03:23 root Exp root $
+@
+
+
+1.26
+log
+@changed sources file
+@
+text
+@d3 1
+a3 1
+# $Id: masterref.pl,v 1.25 2002/12/31 11:56:16 root Exp root $
+d36 2
+a37 1
+my $delete = '--partial --delete --delete-after';
+@
+
+
+1.25
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+# $Id: masterref.pl,v 1.24 2002/12/31 11:53:24 root Exp root $
+d28 1
+a28 1
+my $sourceFile = '/usr/local/masterbin/masterref.sources';
+@
+
+
+1.24
+log
+@,
+@
+text
+@d3 1
+a3 1
+# $Id: masterref.pl,v 1.23 2002/12/31 11:52:59 root Exp root $
+a72 1
+    print "$cli $src $dst\n";
+@
+
+
+1.23
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+# $Id: masterref.pl,v 1.22 2002/12/31 11:52:14 root Exp root $
+d74 1
+a74 1
+    exec("$cli $src $dst");
+@
+
+
+1.22
+log
+@testing
+@
+text
+@d3 1
+a3 1
+# $Id: masterref.pl,v 1.21 2002/12/31 11:48:50 root Exp root $
+d74 1
+a74 1
+#    exec("$cli $src $dst");
+@
+
+
+1.21
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+# $Id: masterref.pl,v 1.20 2002/12/31 11:48:02 root Exp root $
+d74 1
+a74 1
+    exec("$cli $src $dst");
+@
+
+
+1.20
+log
+@bug squish
+@
+text
+@d3 1
+a3 1
+# $Id: masterref.pl,v 1.19 2002/12/31 11:46:54 root Exp root $
+d73 1
+a73 1
+    #print "$cli $src $dst\n";
+@
+
+
+1.19
+log
+@back to production!
+@
+text
+@d3 1
+a3 1
+# $Id: masterref.pl,v 1.18 2002/12/31 11:46:17 root Exp root $
+a66 3
+  ## open the list of sources
+  open(SRC,"$sourceFile")
+    or die "Can't open Source File : $!\n";
+@
+
+
+1.18
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+# $Id: masterref.pl,v 1.17 2002/12/31 11:46:00 root Exp root $
+d76 2
+a77 2
+    print "$cli $src $dst\n";
+    #exec("$cli $src $dst");
+@
+
+
+1.17
+log
+@changed access to source file to array
+@
+text
+@d3 1
+a3 1
+# $Id: masterref.pl,v 1.16 2002/12/31 11:42:25 root Exp root $
+a78 2
+  ## close sources file
+  close(SRC);
+@
+
+
+1.16
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+# $Id: masterref.pl,v 1.15 2002/12/31 11:41:20 root Exp root $
+d56 5
+d71 1
+a71 1
+  while (my $line=<SRC>) {
+@
+
+
+1.15
+log
+@back to production
+@
+text
+@d3 1
+a3 1
+# $Id: masterref.pl,v 1.14 2002/12/31 11:40:19 root Exp root $
+d71 2
+a72 2
+    #print "$cli $src $dst\n";
+    exec("$cli $src $dst");
+@
+
+
+1.14
+log
+@missing the rsync command :)
+@
+text
+@d3 1
+a3 1
+# $Id: masterref.pl,v 1.13 2002/12/31 11:38:57 root Exp root $
+d71 2
+a72 2
+    print "$cli $src $dst\n";
+    #exec("$cli $src $dst");
+@
+
+
+1.13
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+# $Id: masterref.pl,v 1.12 2002/12/31 11:38:36 root Exp root $
+d33 1
+d38 2
+a39 2
+my $shell = qq|-e "/usr/bin/ssh -p $sshPort"|; 
+my $cli = "$ssh $args $delete $exclude $shell";
+@
+
+
+1.12
+log
+@testing out bug
+@
+text
+@d3 1
+a3 1
+# $Id: masterref.pl,v 1.11 2002/12/31 11:30:00 root Exp root $
+d70 1
+a70 1
+    print "$cli $src $dst";
+@
+
+
+1.11
+log
+@ready to move files
+not completed, but should work
+@
+text
+@d3 1
+a3 1
+# $Id: masterref.pl,v 1.10 2002/12/31 11:28:32 root Exp root $
+d70 2
+a71 1
+    exec("$cli $src $dst");
+@
+
+
+1.10
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+# $Id: masterref.pl,v 1.9 2002/12/31 11:27:35 root Exp root $
+a60 1
+  print $server;
+d70 1
+@
+
+
+1.9
+log
+@adding cli options
+@
+text
+@d3 1
+a3 1
+# $Id: masterref.pl,v 1.8 2002/12/31 11:22:01 root Exp root $
+d61 1
+a70 1
+    print "$cli $src $user$server:$dst\n";
+@
+
+
+1.8
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+# $Id: masterref.pl,v 1.7 2002/12/31 11:21:31 root Exp root $
+d20 6
+d46 9
+d57 5
+d64 1
+a64 1
+
+d72 1
+a72 1
+
+@
+
+
+1.7
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+# $Id: masterref.pl,v 1.6 2002/12/31 11:21:04 root Exp root $
+a48 3
+
+    print "orig = $line\n";
+
+a49 1
+ 
+@
+
+
+1.6
+log
+@still working on it.
+@
+text
+@d3 1
+a3 1
+# $Id: masterref.pl,v 1.5 2002/12/31 11:20:13 root Exp root $
+d54 1
+a54 1
+    print "$cli $src $user$server$dst\n";
+@
+
+
+1.5
+log
+@still working on refining the command line
+@
+text
+@d3 1
+a3 1
+# $Id: masterref.pl,v 1.4 2002/12/31 11:19:25 root Exp root $
+d41 1
+a41 1
+for my $i(@@hosts) {
+d54 1
+a54 1
+    print "$cli $src $user$dst\n";
+@
+
+
+1.4
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+# $Id: masterref.pl,v 1.3 2002/12/31 11:19:00 root Exp root $
+d54 1
+a54 1
+    print "$cli $src $dst\n";
+@
+
+
+1.3
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+# $Id: masterref.pl,v 1.2 2002/12/31 11:17:43 root Exp root $
+d27 1
+a27 1
+my $ssh = `which ssh`;
+@
+
+
+1.2
+log
+@*** empty log message ***
+@
+text
+@d3 1
+a3 1
+# $Id: masterref.pl,v 1.1 2002/12/31 11:17:11 root Exp root $
+d53 2
+a54 2
+    print "src - $src\n";
+    print "dst - $user$i:$dst\n";
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d3 1
+a3 1
+# $Id: masterref.pl,v 1.11 2002/12/30 19:31:10 root Exp $
+d22 1
+a22 1
+my $sourceFile = '/usr/local/lunarbin/masterref.sources';
+@

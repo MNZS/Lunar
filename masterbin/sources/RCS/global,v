@@ -1,0 +1,1172 @@
+head	1.53;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.53
+date	2003.08.13.17.10.55;	author root;	state Exp;
+branches;
+next	1.52;
+
+1.52
+date	2003.08.10.22.22.20;	author root;	state Exp;
+branches;
+next	1.51;
+
+1.51
+date	2003.08.10.22.17.43;	author root;	state Exp;
+branches;
+next	1.50;
+
+1.50
+date	2003.08.05.18.12.40;	author root;	state Exp;
+branches;
+next	1.49;
+
+1.49
+date	2003.05.07.04.14.53;	author root;	state Exp;
+branches;
+next	1.48;
+
+1.48
+date	2003.04.14.02.28.28;	author root;	state Exp;
+branches;
+next	1.47;
+
+1.47
+date	2003.04.13.23.14.01;	author root;	state Exp;
+branches;
+next	1.46;
+
+1.46
+date	2003.04.03.16.30.48;	author root;	state Exp;
+branches;
+next	1.45;
+
+1.45
+date	2003.03.28.14.26.37;	author root;	state Exp;
+branches;
+next	1.44;
+
+1.44
+date	2003.03.26.17.31.45;	author root;	state Exp;
+branches;
+next	1.43;
+
+1.43
+date	2003.03.22.13.36.33;	author root;	state Exp;
+branches;
+next	1.42;
+
+1.42
+date	2003.03.11.17.23.22;	author root;	state Exp;
+branches;
+next	1.41;
+
+1.41
+date	2003.03.05.08.15.08;	author root;	state Exp;
+branches;
+next	1.40;
+
+1.40
+date	2003.03.05.08.02.44;	author root;	state Exp;
+branches;
+next	1.39;
+
+1.39
+date	2003.03.05.07.57.34;	author root;	state Exp;
+branches;
+next	1.38;
+
+1.38
+date	2003.03.05.07.54.05;	author root;	state Exp;
+branches;
+next	1.37;
+
+1.37
+date	2003.02.01.23.59.20;	author root;	state Exp;
+branches;
+next	1.36;
+
+1.36
+date	2003.02.01.16.27.28;	author root;	state Exp;
+branches;
+next	1.35;
+
+1.35
+date	2003.01.27.16.43.44;	author root;	state Exp;
+branches;
+next	1.34;
+
+1.34
+date	2003.01.26.15.41.57;	author root;	state Exp;
+branches;
+next	1.33;
+
+1.33
+date	2003.01.26.02.12.53;	author root;	state Exp;
+branches;
+next	1.32;
+
+1.32
+date	2003.01.25.16.14.23;	author root;	state Exp;
+branches;
+next	1.31;
+
+1.31
+date	2003.01.24.20.00.56;	author root;	state Exp;
+branches;
+next	1.30;
+
+1.30
+date	2003.01.23.00.40.28;	author root;	state Exp;
+branches;
+next	1.29;
+
+1.29
+date	2003.01.23.00.38.17;	author root;	state Exp;
+branches;
+next	1.28;
+
+1.28
+date	2003.01.15.15.51.18;	author root;	state Exp;
+branches;
+next	1.27;
+
+1.27
+date	2003.01.15.14.53.59;	author root;	state Exp;
+branches;
+next	1.26;
+
+1.26
+date	2003.01.08.18.18.54;	author root;	state Exp;
+branches;
+next	1.25;
+
+1.25
+date	2003.01.07.14.59.24;	author root;	state Exp;
+branches;
+next	1.24;
+
+1.24
+date	2003.01.07.14.57.41;	author root;	state Exp;
+branches;
+next	1.23;
+
+1.23
+date	2003.01.07.14.56.31;	author root;	state Exp;
+branches;
+next	1.22;
+
+1.22
+date	2003.01.06.22.42.06;	author root;	state Exp;
+branches;
+next	1.21;
+
+1.21
+date	2003.01.06.22.32.05;	author root;	state Exp;
+branches;
+next	1.20;
+
+1.20
+date	2003.01.06.19.35.43;	author root;	state Exp;
+branches;
+next	1.19;
+
+1.19
+date	2003.01.06.03.08.14;	author root;	state Exp;
+branches;
+next	1.18;
+
+1.18
+date	2003.01.05.05.57.51;	author root;	state Exp;
+branches;
+next	1.17;
+
+1.17
+date	2003.01.05.05.36.30;	author root;	state Exp;
+branches;
+next	1.16;
+
+1.16
+date	2003.01.04.17.01.33;	author root;	state Exp;
+branches;
+next	1.15;
+
+1.15
+date	2003.01.04.16.21.16;	author root;	state Exp;
+branches;
+next	1.14;
+
+1.14
+date	2003.01.04.16.20.03;	author root;	state Exp;
+branches;
+next	1.13;
+
+1.13
+date	2003.01.04.16.14.59;	author root;	state Exp;
+branches;
+next	1.12;
+
+1.12
+date	2003.01.04.16.06.24;	author root;	state Exp;
+branches;
+next	1.11;
+
+1.11
+date	2003.01.04.15.51.03;	author root;	state Exp;
+branches;
+next	1.10;
+
+1.10
+date	2003.01.03.18.49.36;	author root;	state Exp;
+branches;
+next	1.9;
+
+1.9
+date	2003.01.01.00.30.24;	author root;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	2002.12.31.12.59.42;	author root;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2002.12.31.12.36.05;	author root;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2002.12.31.12.07.41;	author root;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2002.12.31.12.05.51;	author root;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2002.12.31.12.00.02;	author root;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2002.12.31.11.41.00;	author root;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2002.12.31.11.22.38;	author root;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2002.12.31.11.17.11;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.53
+log
+@added resolv.conf
+@
+text
+@## $Id: global,v 1.52 2003/08/10 22:22:20 root Exp root $
+
+## masterref sources 
+## list of files and directories held in global stasis on
+## masterref.lunarhosting.net which will be updated on remote
+## servers
+
+## syntax
+## lines beginning with a hash mark are comments
+## entries are composed of rsync syntax with source
+## followed by a space and then destination
+
+## warning!
+## by default masterref will delete any files on the dst 
+## directory that are not present in the reference system
+## when the src is a directory, ALL files in that directory
+## must be held by the reference system. 
+
+## warning!
+## be very careful how lines are written. directories should
+## be written with a trailing slash (/) in the src portion
+## and should reference the same name in the destination, but
+## without the slash.
+
+## warning!
+## files should be referenced in the src when there are other
+## files present in the destination directory that should NOT
+## be deleted by masterref.
+
+## /home
+/usr/local/masterref/global/home/staff/cmenzes/.bash_profile ~cmenzes
+/usr/local/masterref/global/home/staff/cmenzes/.bashrc ~cmenzes
+
+## /root
+/usr/local/masterref/global/root/.bash_profile /root
+/usr/local/masterref/global/root/.bashrc /root
+/usr/local/masterref/global/root/.bash_logout /root
+/usr/local/masterref/global/root/.forward /root
+/usr/local/masterref/global/root/.ssh/config /root/.ssh
+
+## /etc
+/usr/local/masterref/global/etc/bash-aliases /etc
+/usr/local/masterref/global/etc/hosts /etc
+/usr/local/masterref/global/etc/log.d/conf/logwatch.conf /etc/log.d/conf
+/usr/local/masterref/global/etc/log.d/conf/logfiles/messages.conf /etc/log.d/conf/logfiles
+/usr/local/masterref/global/etc/motd /etc
+/usr/local/masterref/global/etc/ntp.conf /etc
+/usr/local/masterref/global/etc/profile /etc
+/usr/local/masterref/global/etc/resellers/ /etc/resellers
+/usr/local/masterref/global/etc/resolv.conf /etc
+/usr/local/masterref/global/etc/sendmail.cf /etc
+/usr/local/masterref/global/etc/snmp/snmpd.conf /etc/snmp
+/usr/local/masterref/global/etc/sudoers /etc
+/usr/local/masterref/global/etc/mail/include/access/ /etc/mail/include/access
+/usr/local/masterref/global/etc/mail/include/aliases/alias.Base /etc/mail/include/aliases
+/usr/local/masterref/global/etc/mail/spamassassin/blacklist.cf /etc/mail/spamassassin/blacklist.cf
+/usr/local/masterref/global/etc/mail/spamassassin/headers.cf /etc/mail/spamassassin/headers.cf
+/usr/local/masterref/global/etc/mail/spamassassin/local.cf /etc/mail/spamassassin/local.cf
+/usr/local/masterref/global/etc/proftpd/include/virtual/template /etc/proftpd/include/virtual
+
+## /howto
+/usr/local/masterref/global/howto/ /howto
+
+## /usr
+/usr/local/masterref/global/usr/local/lunarbin/ /usr/local/lunarbin
+/usr/local/masterref/global/usr/local/nobody/ /usr/local/nobody
+/usr/local/masterref/global/usr/local/ref/ /usr/local/ref
+/usr/local/masterref/global/usr/local/trends/.htaccess /usr/local/trends
+/usr/local/masterref/global/usr/local/trends/index.html /usr/local/trends
+/usr/local/masterref/global/usr/local/lunarhosting/tmp/ /usr/local/lunarhosting/tmp
+
+## Lunar Hosting Perl Modules
+/usr/local/masterref/global/usr/lib/perl5/site_perl/Lunar/ /usr/lib/perl5/site_perl/Lunar
+
+## /var
+/usr/local/masterref/global/var/spool/cron/root /var/spool/cron
+/usr/local/masterref/global/var/named/include/global/ /var/named/include/global
+/usr/local/masterref/global/var/named/named.conf /var/named
+/usr/local/masterref/global/var/named/db.template /var/named
+/usr/local/masterref/global/var/named/corp/db.rfc1918 /var/named/corp
+
+## apache templates
+
+## bugfix
+/usr/local/masterref/global/usr/local/apache/conf/include/bugfix/http /usr/local/apache/conf/include/bugfix
+/usr/local/masterref/global/usr/local/apache/conf/include/bugfix/https /usr/local/apache/conf/include/bugfix
+## commerce
+/usr/local/masterref/global/usr/local/apache/conf/include/commerce/miva/template /usr/local/apache/conf/include/commerce/miva
+/usr/local/masterref/global/usr/local/apache/conf/include/commerce/process/template /usr/local/apache/conf/include/commerce/process
+/usr/local/masterref/global/usr/local/apache/conf/include/commerce/shopzone/template /usr/local/apache/conf/include/commerce/shopzone
+## features
+/usr/local/masterref/global/usr/local/apache/conf/include/features/controlpanel/template /usr/local/apache/conf/include/features/controlpanel
+/usr/local/masterref/global/usr/local/apache/conf/include/features/global/http.template /usr/local/apache/conf/include/features/global
+/usr/local/masterref/global/usr/local/apache/conf/include/features/global/https.template /usr/local/apache/conf/include/features/global
+/usr/local/masterref/global/usr/local/apache/conf/include/features/local-bin/template /usr/local/apache/conf/include/features/local-bin
+/usr/local/masterref/global/usr/local/apache/conf/include/features/my/template /usr/local/apache/conf/include/features/my
+/usr/local/masterref/global/usr/local/apache/conf/include/features/mysql/template /usr/local/apache/conf/include/features/mysql
+/usr/local/masterref/global/usr/local/apache/conf/include/features/php/template /usr/local/apache/conf/include/features/php
+/usr/local/masterref/global/usr/local/apache/conf/include/features/urchin/template /usr/local/apache/conf/include/features/urchin
+/usr/local/masterref/global/usr/local/apache/conf/include/features/webmail/template /usr/local/apache/conf/include/features/webmail
+/usr/local/masterref/global/usr/local/apache/conf/include/features/webpublisher/template /usr/local/apache/conf/include/features/webpublisher
+## global
+/usr/local/masterref/global/usr/local/apache/conf/include/global/icons /usr/local/apache/conf/include/global
+/usr/local/masterref/global/usr/local/apache/conf/include/global/indexes /usr/local/apache/conf/include/global
+/usr/local/masterref/global/usr/local/apache/conf/include/global/mime-types /usr/local/apache/conf/include/global
+/usr/local/masterref/global/usr/local/apache/conf/include/global/modules /usr/local/apache/conf/include/global
+## virtual
+/usr/local/masterref/global/usr/local/apache/conf/include/virtual/template /usr/local/apache/conf/include/virtual
+
+@
+
+
+1.52
+log
+@*** empty log message ***
+@
+text
+@d1 1
+a1 1
+## $Id: global,v 1.51 2003/08/10 22:17:43 root Exp root $
+d50 1
+a50 1
+#/usr/local/masterref/global/etc/resolv.conf /etc
+@
+
+
+1.51
+log
+@Added entry for lunar perl modules
+@
+text
+@d1 1
+a1 1
+## $Id: global,v 1.50 2003/08/05 18:12:40 root Exp root $
+d73 1
+a73 1
+/usr/local/masterref/global/usr/lib/perl5/site_perl/5.8.0/Lunar/ /usr/lib/perl5/site_perl/5.8.0/Lunar
+@
+
+
+1.50
+log
+@moved lunarhosting/tmp to /usr/local
+@
+text
+@d1 1
+a1 1
+## $Id: global,v 1.49 2003/05/07 04:14:53 root Exp root $
+d72 3
+@
+
+
+1.49
+log
+@added the /etc/mail/include/access directory
+@
+text
+@d1 1
+a1 1
+## $Id: global,v 1.48 2003/04/14 02:28:28 root Exp root $
+d70 1
+a70 1
+/usr/local/masterref/global/usr/lunarhosting/tmp/ /usr/lunarhosting/tmp
+@
+
+
+1.48
+log
+@removed httpd.conf
+@
+text
+@d1 1
+a1 1
+## $Id: global,v 1.47 2003/04/13 23:14:01 root Exp root $
+d54 1
+a54 1
+/usr/local/masterref/global/etc/mail/access /etc/mail
+@
+
+
+1.47
+log
+@changed to use global source directory
+@
+text
+@d1 1
+a1 1
+## $Id: global,v 1.46 2003/04/03 16:30:48 root Exp root $
+a80 2
+## httpd.conf
+#/usr/local/masterref/global/usr/local/apache/conf/httpd.conf /usr/local/apache/conf
+@
+
+
+1.46
+log
+@added local.cf into the mix
+@
+text
+@d1 1
+a1 1
+## $Id: sources,v 1.45 2003/03/28 14:26:37 root Exp root $
+d31 2
+a32 2
+/usr/local/masterref/home/staff/cmenzes/.bash_profile ~cmenzes
+/usr/local/masterref/home/staff/cmenzes/.bashrc ~cmenzes
+d35 5
+a39 5
+/usr/local/masterref/root/.bash_profile /root
+/usr/local/masterref/root/.bashrc /root
+/usr/local/masterref/root/.bash_logout /root
+/usr/local/masterref/root/.forward /root
+/usr/local/masterref/root/.ssh/config /root/.ssh
+d42 18
+a59 18
+/usr/local/masterref/etc/bash-aliases /etc
+/usr/local/masterref/etc/hosts /etc
+/usr/local/masterref/etc/log.d/conf/logwatch.conf /etc/log.d/conf
+/usr/local/masterref/etc/log.d/conf/logfiles/messages.conf /etc/log.d/conf/logfiles
+/usr/local/masterref/etc/motd /etc
+/usr/local/masterref/etc/ntp.conf /etc
+/usr/local/masterref/etc/profile /etc
+/usr/local/masterref/etc/resellers/ /etc/resellers
+#/usr/local/masterref/etc/resolv.conf /etc
+/usr/local/masterref/etc/sendmail.cf /etc
+/usr/local/masterref/etc/snmp/snmpd.conf /etc/snmp
+/usr/local/masterref/etc/sudoers /etc
+/usr/local/masterref/etc/mail/access /etc/mail
+/usr/local/masterref/etc/mail/include/aliases/alias.Base /etc/mail/include/aliases
+/usr/local/masterref/etc/mail/spamassassin/blacklist.cf /etc/mail/spamassassin/blacklist.cf
+/usr/local/masterref/etc/mail/spamassassin/headers.cf /etc/mail/spamassassin/headers.cf
+/usr/local/masterref/etc/mail/spamassassin/local.cf /etc/mail/spamassassin/local.cf
+/usr/local/masterref/etc/proftpd/include/virtual/template /etc/proftpd/include/virtual
+d62 1
+a62 1
+/usr/local/masterref/howto/ /howto
+d65 6
+a70 6
+/usr/local/masterref/usr/local/lunarbin/ /usr/local/lunarbin
+/usr/local/masterref/usr/local/nobody/ /usr/local/nobody
+/usr/local/masterref/usr/local/ref/ /usr/local/ref
+/usr/local/masterref/usr/local/trends/.htaccess /usr/local/trends
+/usr/local/masterref/usr/local/trends/index.html /usr/local/trends
+/usr/local/masterref/usr/lunarhosting/tmp/ /usr/lunarhosting/tmp
+d73 5
+a77 5
+/usr/local/masterref/var/spool/cron/root /var/spool/cron
+/usr/local/masterref/var/named/include/global/ /var/named/include/global
+/usr/local/masterref/var/named/named.conf /var/named
+/usr/local/masterref/var/named/db.template /var/named
+/usr/local/masterref/var/named/corp/db.rfc1918 /var/named/corp
+d82 1
+a82 1
+#/usr/local/masterref/usr/local/apache/conf/httpd.conf /usr/local/apache/conf
+d84 2
+a85 2
+/usr/local/masterref/usr/local/apache/conf/include/bugfix/http /usr/local/apache/conf/include/bugfix
+/usr/local/masterref/usr/local/apache/conf/include/bugfix/https /usr/local/apache/conf/include/bugfix
+d87 3
+a89 3
+/usr/local/masterref/usr/local/apache/conf/include/commerce/miva/template /usr/local/apache/conf/include/commerce/miva
+/usr/local/masterref/usr/local/apache/conf/include/commerce/process/template /usr/local/apache/conf/include/commerce/process
+/usr/local/masterref/usr/local/apache/conf/include/commerce/shopzone/template /usr/local/apache/conf/include/commerce/shopzone
+d91 10
+a100 10
+/usr/local/masterref/usr/local/apache/conf/include/features/controlpanel/template /usr/local/apache/conf/include/features/controlpanel
+/usr/local/masterref/usr/local/apache/conf/include/features/global/http.template /usr/local/apache/conf/include/features/global
+/usr/local/masterref/usr/local/apache/conf/include/features/global/https.template /usr/local/apache/conf/include/features/global
+/usr/local/masterref/usr/local/apache/conf/include/features/local-bin/template /usr/local/apache/conf/include/features/local-bin
+/usr/local/masterref/usr/local/apache/conf/include/features/my/template /usr/local/apache/conf/include/features/my
+/usr/local/masterref/usr/local/apache/conf/include/features/mysql/template /usr/local/apache/conf/include/features/mysql
+/usr/local/masterref/usr/local/apache/conf/include/features/php/template /usr/local/apache/conf/include/features/php
+/usr/local/masterref/usr/local/apache/conf/include/features/urchin/template /usr/local/apache/conf/include/features/urchin
+/usr/local/masterref/usr/local/apache/conf/include/features/webmail/template /usr/local/apache/conf/include/features/webmail
+/usr/local/masterref/usr/local/apache/conf/include/features/webpublisher/template /usr/local/apache/conf/include/features/webpublisher
+d102 4
+a105 4
+/usr/local/masterref/usr/local/apache/conf/include/global/icons /usr/local/apache/conf/include/global
+/usr/local/masterref/usr/local/apache/conf/include/global/indexes /usr/local/apache/conf/include/global
+/usr/local/masterref/usr/local/apache/conf/include/global/mime-types /usr/local/apache/conf/include/global
+/usr/local/masterref/usr/local/apache/conf/include/global/modules /usr/local/apache/conf/include/global
+d107 1
+a107 1
+/usr/local/masterref/usr/local/apache/conf/include/virtual/template /usr/local/apache/conf/include/virtual
+@
+
+
+1.45
+log
+@Added messages.conf for logwatch to the list
+@
+text
+@d1 1
+a1 1
+## $Id: sources,v 1.44 2003/03/26 17:31:45 root Exp root $
+d58 1
+@
+
+
+1.44
+log
+@added headers.cf to the list of spamassassin files
+@
+text
+@d1 1
+a1 1
+## $Id: sources,v 1.43 2003/03/22 13:36:33 root Exp root $
+d45 1
+@
+
+
+1.43
+log
+@*** empty log message ***
+@
+text
+@d1 1
+a1 1
+## $Id: sources,v 1.42 2003/03/11 17:23:22 root Exp root $
+d56 1
+@
+
+
+1.42
+log
+@added snmpd.conf
+@
+text
+@d1 1
+a1 1
+## $Id: sources,v 1.41 2003/03/05 08:15:08 root Exp root $
+d47 1
+@
+
+
+1.41
+log
+@Added cmenzes home files
+@
+text
+@d1 1
+a1 1
+## $Id: sources,v 1.40 2003/03/05 08:02:44 root Exp root $
+d50 1
+@
+
+
+1.40
+log
+@*** empty log message ***
+@
+text
+@d1 1
+a1 1
+## $Id: sources,v 1.39 2003/03/05 07:57:34 root Exp root $
+d30 4
+@
+
+
+1.39
+log
+@*** empty log message ***
+@
+text
+@d1 1
+a1 1
+## $Id: sources,v 1.38 2003/03/05 07:54:05 root Exp root $
+d38 1
+a38 1
+#/usr/local/masterref/etc/bash-aliases /etc
+@
+
+
+1.38
+log
+@*** empty log message ***
+@
+text
+@d1 1
+a1 1
+## $Id: sources,v 1.37 2003/02/01 23:59:20 root Exp root $
+d38 1
+a38 1
+/usr/local/masterref/etc/bash-aliases /etc
+@
+
+
+1.37
+log
+@*** empty log message ***
+@
+text
+@d1 1
+a1 1
+## $Id: sources,v 1.36 2003/02/01 16:27:28 root Exp root $
+d38 1
+@
+
+
+1.36
+log
+@*** empty log message ***
+@
+text
+@d1 1
+a1 1
+## $Id: sources,v 1.35 2003/01/27 16:43:44 root Exp root $
+d60 1
+@
+
+
+1.35
+log
+@*** empty log message ***
+@
+text
+@d1 1
+a1 1
+## $Id: sources,v 1.34 2003/01/26 15:41:57 root Exp root $
+d35 1
+@
+
+
+1.34
+log
+@removed the rfc1918 addresses
+@
+text
+@d1 1
+a1 1
+## $Id: sources,v 1.33 2003/01/26 02:12:53 root Exp root $
+d65 1
+a65 1
+#/usr/local/masterref/var/named/corp/db.rfc1918 /var/named/corp
+@
+
+
+1.33
+log
+@added rfc1918
+@
+text
+@d1 1
+a1 1
+## $Id: sources,v 1.32 2003/01/25 16:14:23 root Exp root $
+d65 1
+a65 1
+/usr/local/masterref/var/named/corp/db.rfc1918 /var/named/corp
+@
+
+
+1.32
+log
+@added the logwatch.conf file
+@
+text
+@d1 1
+a1 1
+## $Id: sources,v 1.31 2003/01/24 20:00:56 root Exp root $
+d65 1
+@
+
+
+1.31
+log
+@removed resolv.conf
+@
+text
+@d1 1
+a1 1
+## $Id: sources,v 1.30 2003/01/23 00:40:28 root Exp root $
+d38 1
+@
+
+
+1.30
+log
+@messing with db.template
+@
+text
+@d1 1
+a1 1
+## $Id: sources,v 1.29 2003/01/23 00:38:17 root Exp root $
+d41 1
+a41 1
+/usr/local/masterref/etc/resolv.conf /etc
+@
+
+
+1.29
+log
+@changed the db.template file
+@
+text
+@d1 1
+a1 1
+## $Id: sources,v 1.28 2003/01/15 15:51:18 root Exp root $
+d63 1
+a63 1
+/usr/local/masterref/var/named/db.template-master /var/named
+@
+
+
+1.28
+log
+@added db.template
+@
+text
+@d1 1
+a1 1
+## $Id: sources,v 1.27 2003/01/15 14:53:59 root Exp root $
+d63 1
+a63 1
+/usr/local/masterref/var/named/db.template /var/named
+@
+
+
+1.27
+log
+@added blacklist.cf
+@
+text
+@d1 1
+a1 1
+## $Id: sources,v 1.26 2003/01/08 18:18:54 root Exp root $
+d63 1
+@
+
+
+1.26
+log
+@removed httpd.conf file
+@
+text
+@d1 1
+a1 1
+## $Id: sources,v 1.25 2003/01/07 14:59:24 root Exp root $
+d46 1
+@
+
+
+1.25
+log
+@added motd
+@
+text
+@d1 1
+a1 1
+## $Id: sources,v 1.24 2003/01/07 14:57:41 root Exp root $
+d66 1
+a66 1
+/usr/local/masterref/usr/local/apache/conf/httpd.conf /usr/local/apache/conf
+@
+
+
+1.24
+log
+@changed issue to issue.net
+@
+text
+@d1 1
+a1 1
+## $Id: sources,v 1.23 2003/01/07 14:56:31 root Exp root $
+d38 1
+a38 1
+/usr/local/masterref/etc/issue.net /etc
+@
+
+
+1.23
+log
+@added /etc/issue
+@
+text
+@d1 1
+a1 1
+## $Id: sources,v 1.22 2003/01/06 22:42:06 root Exp root $
+d38 1
+a38 1
+/usr/local/masterref/etc/issue /etc
+@
+
+
+1.22
+log
+@added httpd.conf
+@
+text
+@d1 1
+a1 1
+## $Id: sources,v 1.21 2003/01/06 22:32:05 root Exp root $
+d38 1
+@
+
+
+1.21
+log
+@added an index.html for trends
+@
+text
+@d1 1
+a1 1
+## $Id: sources,v 1.20 2003/01/06 19:35:43 root Exp root $
+d64 2
+@
+
+
+1.20
+log
+@added resolv.conf
+@
+text
+@d1 1
+a1 1
+## $Id: sources,v 1.19 2003/01/06 03:08:14 root Exp root $
+d55 1
+@
+
+
+1.19
+log
+@added the .htaccess file for trends
+@
+text
+@d1 1
+a1 1
+## $Id: sources,v 1.18 2003/01/05 05:57:51 root Exp root $
+d40 1
+@
+
+
+1.18
+log
+@added proftpd template
+@
+text
+@d1 1
+a1 1
+## $Id: sources,v 1.17 2003/01/05 05:36:30 root Exp root $
+d53 1
+@
+
+
+1.17
+log
+@keeping root's directory in order
+@
+text
+@d1 1
+a1 1
+## $Id: sources,v 1.16 2003/01/04 17:01:33 root Exp root $
+d44 1
+@
+
+
+1.16
+log
+@added alias.Base
+@
+text
+@d1 1
+a1 1
+## $Id: sources,v 1.15 2003/01/04 16:21:16 root Exp root $
+d30 6
+@
+
+
+1.15
+log
+@added topic headers for apache includes
+@
+text
+@d1 1
+a1 1
+## $Id: sources,v 1.14 2003/01/04 16:20:03 root Exp root $
+d37 1
+@
+
+
+1.14
+log
+@removed icb from apache config
+@
+text
+@d1 1
+a1 1
+## $Id: sources,v 1.13 2003/01/04 16:14:59 root Exp root $
+d51 3
+a53 1
+## templates
+d56 1
+a56 1
+
+d60 1
+a60 1
+
+d71 1
+a71 1
+
+d76 1
+a76 1
+
+@
+
+
+1.13
+log
+@added global http and https feature templates
+@
+text
+@d1 1
+a1 1
+## $Id: sources,v 1.12 2003/01/04 16:06:24 root Exp root $
+a61 1
+/usr/local/masterref/usr/local/apache/conf/include/features/icb/template /usr/local/apache/conf/include/features/icb
+@
+
+
+1.12
+log
+@Added the apache include files
+@
+text
+@d1 1
+a1 1
+## $Id: sources,v 1.11 2003/01/04 15:51:03 root Exp root $
+d60 2
+a61 1
+/usr/local/masterref/usr/local/apache/conf/include/features/global/template /usr/local/apache/conf/include/features/global
+@
+
+
+1.11
+log
+@Added /etc/mail/access to the list of guarded items
+@
+text
+@d1 1
+a1 1
+## $Id: sources,v 1.10 2003/01/03 18:49:36 root Exp root $
+d50 27
+@
+
+
+1.10
+log
+@put cron back in!
+@
+text
+@d1 1
+a1 1
+## $Id: sources,v 1.9 2003/01/01 00:30:24 root Exp root $
+d36 1
+@
+
+
+1.9
+log
+@added warnings
+@
+text
+@d1 1
+a1 1
+## $Id: sources,v 1.8 2002/12/31 12:59:42 root Exp root $
+d46 1
+a46 1
+#/usr/local/masterref/var/spool/cron/root /var/spool/cron
+@
+
+
+1.8
+log
+@added sudoers
+@
+text
+@d1 1
+a1 1
+## $Id: sources,v 1.7 2002/12/31 12:36:05 root Exp root $
+d13 17
+@
+
+
+1.7
+log
+@put named.conf back in
+@
+text
+@d1 1
+a1 1
+## $Id: sources,v 1.6 2002/12/31 12:07:41 root Exp root $
+d16 1
+d18 1
+a18 1
+/usr/local/masterref/etc/resellers/ /etc/resellers
+@
+
+
+1.6
+log
+@updated sources to not use * wildcard
+also moved include named files to global subdir
+@
+text
+@d1 1
+a1 1
+## $Id: sources,v 1.5 2002/12/31 12:05:51 root Exp root $
+d30 1
+a30 1
+#/usr/local/masterref/var/named/named.conf /var/named
+@
+
+
+1.5
+log
+@*** empty log message ***
+@
+text
+@d1 1
+a1 1
+## $Id: sources,v 1.4 2002/12/31 12:00:02 root Exp root $
+d17 1
+a17 1
+/usr/local/masterref/etc/resellers/* /etc/resellers
+d20 1
+a20 1
+/usr/local/masterref/howto/* /howto
+d24 2
+a25 2
+/usr/local/masterref/usr/local/nobody/* /usr/local/nobody
+/usr/local/masterref/usr/local/ref/* /usr/local/ref
+d29 1
+a29 1
+/usr/local/masterref/var/named/include/* /var/named/include
+@
+
+
+1.4
+log
+@removed named.conf
+@
+text
+@d1 1
+a1 1
+## $Id: sources,v 1.3 2002/12/31 11:41:00 root Exp root $
+d23 1
+a23 1
+/usr/local/masterref/usr/local/lunarbin/* /usr/local/lunarbin
+@
+
+
+1.3
+log
+@removed root cron
+@
+text
+@d1 1
+a1 1
+## $Id: masterref.sources,v 1.2 2002/12/31 11:22:38 root Exp root $
+d30 1
+a30 1
+/usr/local/masterref/var/named/named.conf /var/named
+@
+
+
+1.2
+log
+@*** empty log message ***
+@
+text
+@d1 1
+a1 1
+## $Id: masterref.sources,v 1.1 2002/12/31 11:17:11 root Exp root $
+d28 1
+a28 1
+/usr/local/masterref/var/spool/cron/root /var/spool/cron
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 1
+a1 1
+## $Id: masterref.sources,v 1.2 2002/12/30 19:20:27 root Exp $
+d25 1
+a25 1
+/usr/local/masterref/uar/local/ref/* /usr/local/ref
+@

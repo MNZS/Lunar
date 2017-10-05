@@ -1,0 +1,510 @@
+head	1.24;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.24
+date	2003.08.14.04.11.07;	author root;	state Exp;
+branches;
+next	1.23;
+
+1.23
+date	2003.08.14.04.07.47;	author root;	state Exp;
+branches;
+next	1.22;
+
+1.22
+date	2003.08.13.17.04.44;	author root;	state Exp;
+branches;
+next	1.21;
+
+1.21
+date	2003.08.13.16.43.22;	author root;	state Exp;
+branches;
+next	1.20;
+
+1.20
+date	2003.08.13.16.23.27;	author root;	state Exp;
+branches;
+next	1.19;
+
+1.19
+date	2003.08.11.18.57.49;	author root;	state Exp;
+branches;
+next	1.18;
+
+1.18
+date	2003.08.11.18.57.00;	author root;	state Exp;
+branches;
+next	1.17;
+
+1.17
+date	2003.08.08.20.08.09;	author root;	state Exp;
+branches;
+next	1.16;
+
+1.16
+date	2003.06.25.19.59.51;	author root;	state Exp;
+branches;
+next	1.15;
+
+1.15
+date	2003.06.06.17.15.59;	author root;	state Exp;
+branches;
+next	1.14;
+
+1.14
+date	2003.06.05.04.57.14;	author root;	state Exp;
+branches;
+next	1.13;
+
+1.13
+date	2003.06.05.04.47.40;	author root;	state Exp;
+branches;
+next	1.12;
+
+1.12
+date	2003.05.23.15.37.00;	author root;	state Exp;
+branches;
+next	1.11;
+
+1.11
+date	2003.04.15.18.36.40;	author root;	state Exp;
+branches;
+next	1.10;
+
+1.10
+date	2003.04.15.18.12.48;	author root;	state Exp;
+branches;
+next	1.9;
+
+1.9
+date	2003.04.15.15.47.53;	author root;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	2003.04.15.14.30.30;	author root;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2003.04.15.13.29.59;	author root;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2003.04.15.13.24.11;	author root;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2003.04.15.13.16.35;	author root;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2003.04.15.13.01.57;	author root;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2003.04.15.12.47.15;	author root;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2003.04.14.02.06.17;	author root;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2003.04.13.23.16.50;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@testing out per host files
+@
+
+
+1.24
+log
+@added local-config
+@
+text
+@## $Id: name1,v 1.23 2003/08/14 04:07:47 root Exp root $
+
+## masterref sources 
+## list of files and directories held in global stasis on
+## masterref.lunarhosting.net which will be updated on remote
+## servers
+
+## syntax
+## lines beginning with a hash mark are comments
+## entries are composed of rsync syntax with source
+## followed by a space and then destination
+
+## warning!
+## by default masterref will delete any files on the dst 
+## directory that are not present in the reference system
+## when the src is a directory, ALL files in that directory
+## must be held by the reference system. 
+
+## warning!
+## be very careful how lines are written. directories should
+## be written with a trailing slash (/) in the src portion
+## and should reference the same name in the destination, but
+## without the slash.
+
+## warning!
+## files should be referenced in the src when there are other
+## files present in the destination directory that should NOT
+## be deleted by masterref.
+
+## example!
+## /usr/local/masterref/name1/root/from_masterref /root
+
+## /etc
+/usr/local/masterref/unique/name1/etc/mail/local-host-names /etc/mail
+
+## apache
+/usr/local/masterref/common/usr/local/apache/conf/httpd.conf /usr/local/apache/conf
+/usr/local/masterref/common/usr/local/apache/conf/domains.conf /usr/local/apache/conf
+/usr/local/masterref/common/usr/local/apache/conf/include/global/common /usr/local/apache/conf/include/global/
+/usr/local/masterref/unique/name1/usr/local/apache/conf/include/global/unique /usr/local/apache/conf/include/global/
+
+## mrtg
+/usr/local/masterref/common/etc/mrtg/gateway.cfg /etc/mrtg
+/usr/local/masterref/common/etc/mrtg/backbone.cfg /etc/mrtg
+/usr/local/masterref/common/usr/local/mrtg/.htaccess /usr/local/mrtg
+/usr/local/masterref/common/usr/local/mrtg/images/ /usr/local/mrtg/images
+/usr/local/masterref/common/usr/local/mrtg/index.html /usr/local/mrtg
+/usr/local/masterref/common/usr/local/mrtg/left.html /usr/local/mrtg
+/usr/local/masterref/common/usr/local/mrtg/gateway.cpu.html /usr/local/mrtg
+/usr/local/masterref/common/usr/local/mrtg/backbone.cpu.html /usr/local/mrtg
+/usr/local/masterref/common/usr/local/mrtg/gateway.bandwidth.html /usr/local/mrtg
+/usr/local/masterref/common/usr/local/mrtg/backbone.bandwidth.html /usr/local/mrtg
+/usr/local/masterref/common/usr/local/mrtg/host1.cpu.html /usr/local/mrtg
+/usr/local/masterref/common/usr/local/mrtg/host1.spam.html /usr/local/mrtg
+/usr/local/masterref/common/usr/local/mrtg/host1.mem.html /usr/local/mrtg
+/usr/local/masterref/common/usr/local/mrtg/host2.cpu.html /usr/local/mrtg
+/usr/local/masterref/common/usr/local/mrtg/host2.spam.html /usr/local/mrtg
+/usr/local/masterref/common/usr/local/mrtg/host2.mem.html /usr/local/mrtg
+/usr/local/masterref/common/usr/local/mrtg/name1.cpu.html /usr/local/mrtg
+/usr/local/masterref/common/usr/local/mrtg/name1.mem.html /usr/local/mrtg
+/usr/local/masterref/common/usr/local/mrtg/name2.cpu.html /usr/local/mrtg
+/usr/local/masterref/common/usr/local/mrtg/name2.mem.html /usr/local/mrtg
+
+## log rotation
+/usr/local/masterref/common/etc/logrotate.d/mrtg /etc/logrotate.d
+
+## password files
+/usr/local/masterref/common/password/.p ~scott/.p
+/usr/local/masterref/common/password/.p ~craig/.p
+/usr/local/masterref/common/password/.p ~cmenzes/.p
+
+## /var/named
+/usr/local/masterref/unique/name1/var/named/include/local/local-config /var/named/include/local/local-config
+/usr/local/masterref/common/var/named/named.ddns /var/named/named.ddns
+/usr/local/masterref/common/var/named/named.partners /var/named/named.partners
+/usr/local/masterref/common/var/named/include/keys/ /var/named/include/keys
+/usr/local/masterref/common/var/named/partners/db.elastname.com /var/named/partners/db.elastname.com
+/usr/local/masterref/common/var/named/partners/db.surenetworks.com /var/named/partners/db.surenetworks.com
+
+@
+
+
+1.23
+log
+@added ddns and keys
+@
+text
+@d1 1
+a1 1
+## $Id: name1,v 1.22 2003/08/13 17:04:44 root Exp root $
+d73 1
+@
+
+
+1.22
+log
+@*** empty log message ***
+@
+text
+@d1 1
+a1 1
+## $Id: name1,v 1.21 2003/08/13 16:43:22 root Exp root $
+d73 1
+d75 1
+d78 1
+@
+
+
+1.21
+log
+@*** empty log message ***
+@
+text
+@d1 1
+a1 1
+## $Id: name1,v 1.20 2003/08/13 16:23:27 root Exp root $
+d74 2
+@
+
+
+1.20
+log
+@*** empty log message ***
+@
+text
+@d1 1
+a1 1
+## $Id: name1,v 1.19 2003/08/11 18:57:49 root Exp root $
+d73 1
+a73 1
+/usr/local/masterref/common/var/named/partners/named.wiechman /var/named/partners/named.wiechman
+@
+
+
+1.19
+log
+@removed right.html
+@
+text
+@d1 1
+a1 1
+## $Id: name1,v 1.18 2003/08/11 18:57:00 root Exp root $
+d71 3
+@
+
+
+1.18
+log
+@added mrtg images
+@
+text
+@d1 1
+a1 1
+## $Id: name1,v 1.17 2003/08/08 20:08:09 root Exp root $
+a48 1
+/usr/local/masterref/common/usr/local/mrtg/right.html /usr/local/mrtg
+@
+
+
+1.17
+log
+@added mem html
+@
+text
+@d1 1
+a1 1
+## $Id: name1,v 1.16 2003/06/25 19:59:51 root Exp root $
+d46 1
+@
+
+
+1.16
+log
+@added spam
+@
+text
+@d1 1
+a1 1
+## $Id: name1,v 1.15 2003/06/06 17:15:59 root Exp root $
+d55 1
+d58 1
+d60 1
+d62 1
+@
+
+
+1.15
+log
+@added .p
+@
+text
+@d1 1
+a1 1
+## $Id: name1,v 1.14 2003/06/05 04:57:14 root Exp root $
+d54 1
+d56 1
+@
+
+
+1.14
+log
+@added backbone html
+@
+text
+@d1 1
+a1 1
+## $Id: name1,v 1.13 2003/06/05 04:47:40 root Exp root $
+d61 4
+@
+
+
+1.13
+log
+@*** empty log message ***
+@
+text
+@d1 1
+a1 1
+## $Id: name1,v 1.12 2003/05/23 15:37:00 root Exp root $
+d50 1
+d52 1
+@
+
+
+1.12
+log
+@added local-host-names
+@
+text
+@d1 1
+a1 1
+## $Id: name1,v 1.11 2003/04/15 18:36:40 root Exp root $
+d44 1
+@
+
+
+1.11
+log
+@*** empty log message ***
+@
+text
+@d1 1
+a1 1
+## $Id: name1,v 1.10 2003/04/15 18:12:48 root Exp root $
+d33 3
+@
+
+
+1.10
+log
+@added frames
+@
+text
+@d1 1
+a1 1
+## $Id: name1,v 1.9 2003/04/15 15:47:53 root Exp root $
+d46 1
+@
+
+
+1.9
+log
+@added gateway
+@
+text
+@d1 1
+a1 1
+## $Id: name1,v 1.8 2003/04/15 14:30:30 root Exp root $
+d43 2
+@
+
+
+1.8
+log
+@added mrtg html
+@
+text
+@d1 1
+a1 1
+## $Id: name1,v 1.7 2003/04/15 13:29:59 root Exp root $
+d43 1
+@
+
+
+1.7
+log
+@added .htaccess for mrtg
+@
+text
+@d1 1
+a1 1
+## $Id: name1,v 1.6 2003/04/15 13:24:11 root Exp root $
+d42 5
+@
+
+
+1.6
+log
+@added the unique apache global include
+@
+text
+@d1 1
+a1 1
+## $Id: name1,v 1.5 2003/04/15 13:16:35 root Exp root $
+d41 1
+@
+
+
+1.5
+log
+@added apache include
+@
+text
+@d1 1
+a1 1
+## $Id: name1,v 1.4 2003/04/15 13:01:57 root Exp root $
+d37 1
+a37 1
+/usr/local/masterref/common/usr/local/apache/conf/include/global/unique /usr/local/apache/conf/include/
+@
+
+
+1.4
+log
+@added logrotate entry for mrtg
+@
+text
+@d1 1
+a1 1
+## $Id: name1,v 1.3 2003/04/15 12:47:15 root Exp root $
+d33 6
+d44 1
+@
+
+
+1.3
+log
+@added mrtg
+@
+text
+@d1 1
+a1 1
+## $Id: name1,v 1.2 2003/04/14 02:06:17 root Exp root $
+d35 3
+@
+
+
+1.2
+log
+@commented out line
+@
+text
+@d1 1
+a1 1
+## $Id: name1,v 1.1 2003/04/13 23:16:50 root Exp root $
+d32 3
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 1
+a1 1
+## $Id: global,v 1.47 2003/04/13 23:14:01 root Exp $
+d30 2
+a31 2
+## /root
+/usr/local/masterref/name1/root/from_masterref /root
+@

@@ -1,0 +1,109 @@
+## $Id: global,v 1.53 2003/08/13 17:10:55 root Exp $
+
+## masterref sources 
+## list of files and directories held in global stasis on
+## masterref.lunarhosting.net which will be updated on remote
+## servers
+
+## syntax
+## lines beginning with a hash mark are comments
+## entries are composed of rsync syntax with source
+## followed by a space and then destination
+
+## warning!
+## by default masterref will delete any files on the dst 
+## directory that are not present in the reference system
+## when the src is a directory, ALL files in that directory
+## must be held by the reference system. 
+
+## warning!
+## be very careful how lines are written. directories should
+## be written with a trailing slash (/) in the src portion
+## and should reference the same name in the destination, but
+## without the slash.
+
+## warning!
+## files should be referenced in the src when there are other
+## files present in the destination directory that should NOT
+## be deleted by masterref.
+
+## /home
+/usr/local/masterref/global/home/staff/cmenzes/.bash_profile ~cmenzes
+/usr/local/masterref/global/home/staff/cmenzes/.bashrc ~cmenzes
+
+## /root
+/usr/local/masterref/global/root/.bash_profile /root
+/usr/local/masterref/global/root/.bashrc /root
+/usr/local/masterref/global/root/.bash_logout /root
+/usr/local/masterref/global/root/.forward /root
+/usr/local/masterref/global/root/.ssh/config /root/.ssh
+
+## /etc
+/usr/local/masterref/global/etc/bash-aliases /etc
+/usr/local/masterref/global/etc/hosts /etc
+/usr/local/masterref/global/etc/log.d/conf/logwatch.conf /etc/log.d/conf
+/usr/local/masterref/global/etc/log.d/conf/logfiles/messages.conf /etc/log.d/conf/logfiles
+/usr/local/masterref/global/etc/motd /etc
+/usr/local/masterref/global/etc/ntp.conf /etc
+/usr/local/masterref/global/etc/profile /etc
+/usr/local/masterref/global/etc/resellers/ /etc/resellers
+/usr/local/masterref/global/etc/resolv.conf /etc
+/usr/local/masterref/global/etc/sendmail.cf /etc
+/usr/local/masterref/global/etc/snmp/snmpd.conf /etc/snmp
+/usr/local/masterref/global/etc/sudoers /etc
+/usr/local/masterref/global/etc/mail/include/access/ /etc/mail/include/access
+/usr/local/masterref/global/etc/mail/include/aliases/alias.Base /etc/mail/include/aliases
+/usr/local/masterref/global/etc/mail/spamassassin/blacklist.cf /etc/mail/spamassassin/blacklist.cf
+/usr/local/masterref/global/etc/mail/spamassassin/headers.cf /etc/mail/spamassassin/headers.cf
+/usr/local/masterref/global/etc/mail/spamassassin/local.cf /etc/mail/spamassassin/local.cf
+/usr/local/masterref/global/etc/proftpd/include/virtual/template /etc/proftpd/include/virtual
+
+## /howto
+/usr/local/masterref/global/howto/ /howto
+
+## /usr
+/usr/local/masterref/global/usr/local/lunarbin/ /usr/local/lunarbin
+/usr/local/masterref/global/usr/local/nobody/ /usr/local/nobody
+/usr/local/masterref/global/usr/local/ref/ /usr/local/ref
+/usr/local/masterref/global/usr/local/trends/.htaccess /usr/local/trends
+/usr/local/masterref/global/usr/local/trends/index.html /usr/local/trends
+/usr/local/masterref/global/usr/local/lunarhosting/tmp/ /usr/local/lunarhosting/tmp
+
+## Lunar Hosting Perl Modules
+/usr/local/masterref/global/usr/lib/perl5/site_perl/Lunar/ /usr/lib/perl5/site_perl/Lunar
+
+## /var
+/usr/local/masterref/global/var/spool/cron/root /var/spool/cron
+/usr/local/masterref/global/var/named/include/global/ /var/named/include/global
+/usr/local/masterref/global/var/named/named.conf /var/named
+/usr/local/masterref/global/var/named/db.template /var/named
+/usr/local/masterref/global/var/named/corp/db.rfc1918 /var/named/corp
+
+## apache templates
+
+## bugfix
+/usr/local/masterref/global/usr/local/apache/conf/include/bugfix/http /usr/local/apache/conf/include/bugfix
+/usr/local/masterref/global/usr/local/apache/conf/include/bugfix/https /usr/local/apache/conf/include/bugfix
+## commerce
+/usr/local/masterref/global/usr/local/apache/conf/include/commerce/miva/template /usr/local/apache/conf/include/commerce/miva
+/usr/local/masterref/global/usr/local/apache/conf/include/commerce/process/template /usr/local/apache/conf/include/commerce/process
+/usr/local/masterref/global/usr/local/apache/conf/include/commerce/shopzone/template /usr/local/apache/conf/include/commerce/shopzone
+## features
+/usr/local/masterref/global/usr/local/apache/conf/include/features/controlpanel/template /usr/local/apache/conf/include/features/controlpanel
+/usr/local/masterref/global/usr/local/apache/conf/include/features/global/http.template /usr/local/apache/conf/include/features/global
+/usr/local/masterref/global/usr/local/apache/conf/include/features/global/https.template /usr/local/apache/conf/include/features/global
+/usr/local/masterref/global/usr/local/apache/conf/include/features/local-bin/template /usr/local/apache/conf/include/features/local-bin
+/usr/local/masterref/global/usr/local/apache/conf/include/features/my/template /usr/local/apache/conf/include/features/my
+/usr/local/masterref/global/usr/local/apache/conf/include/features/mysql/template /usr/local/apache/conf/include/features/mysql
+/usr/local/masterref/global/usr/local/apache/conf/include/features/php/template /usr/local/apache/conf/include/features/php
+/usr/local/masterref/global/usr/local/apache/conf/include/features/urchin/template /usr/local/apache/conf/include/features/urchin
+/usr/local/masterref/global/usr/local/apache/conf/include/features/webmail/template /usr/local/apache/conf/include/features/webmail
+/usr/local/masterref/global/usr/local/apache/conf/include/features/webpublisher/template /usr/local/apache/conf/include/features/webpublisher
+## global
+/usr/local/masterref/global/usr/local/apache/conf/include/global/icons /usr/local/apache/conf/include/global
+/usr/local/masterref/global/usr/local/apache/conf/include/global/indexes /usr/local/apache/conf/include/global
+/usr/local/masterref/global/usr/local/apache/conf/include/global/mime-types /usr/local/apache/conf/include/global
+/usr/local/masterref/global/usr/local/apache/conf/include/global/modules /usr/local/apache/conf/include/global
+## virtual
+/usr/local/masterref/global/usr/local/apache/conf/include/virtual/template /usr/local/apache/conf/include/virtual
+
